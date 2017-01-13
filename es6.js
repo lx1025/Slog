@@ -179,7 +179,7 @@ function runAsync(){
 runAsync()
 .then(data=>{console.log(data)})
 .catch(data=>console.log(data))
-//6.使用catch还有一个好处，就是当then方法回调出错时，回执行catch回调方法
+//6.使用catch还有一个好处，就是当then方法回调出错时，会执行catch回调方法
 function runAsync(){
 	var p = new Promise(function(resolve, reject){
 		//一些异步操作
