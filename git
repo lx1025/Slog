@@ -1,1 +1,3 @@
 git commit -a -m 'update' 将所有修改放进版本库
+git diff 查看工作区与上次拉取版本的变化，commmit至版本库之后显示为空
+git status 查看目前版本库与origin master的版本对比
