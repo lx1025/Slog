@@ -197,6 +197,10 @@ runAsync()
 	console.log(asdf)
 })
 .catch(data => {
-	console.log('注意data为空')
+	console.log('data这里为出错原因')
 	console.log(data)
 })
+//7.Promis.all()方法，all接收一个数组参数，里面的值最终都算返回Promise对象。
+//这样，三个异步操作的并行执行的，等到它们都执行完后才会进到then里面，其中data是一个数组
+Promise.all([runAsync1(), runAsync2(), runAsync3()])
+.then(data => console.log(data))
