@@ -204,3 +204,6 @@ runAsync()
 //这样，三个异步操作的并行执行的，等到它们都执行完后才会进到then里面，其中data是一个数组
 Promise.all([runAsync1(), runAsync2(), runAsync3()])
 .then(data => console.log(data))
+//8.Promise.race()方法，race接受一个数组参数，谁执行最慢以谁为准
+Promise.race([runAsync1(), runAsync2(), runAsync3()])
+.then(data => console.log(data))
