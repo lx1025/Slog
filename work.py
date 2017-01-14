@@ -71,12 +71,14 @@ class DisOrderHandler(BaseHandler):
         try:
             order_id = self.get_argument('order_id')
             s_openid = self.get_argument('s_openid', '')
+            total_fee = int(self.get_argument('total_fee', ''))
         except Exception as e:
             logging.error(e)
             return self.render('custom/error.tpl')
 
         data = dict(payed=1)
         ctrl.custom.update_dis_order(order_id, data)
+        ctrl.custom.update_dis_user_earn_sum(s_openid, total_fee/10)
         if not s_openid:
             #发红包
             pass
