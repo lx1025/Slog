@@ -2,6 +2,21 @@ location.href = '//coupon.ktvsky.com/ktv/order/common?fee='+ (data.total_fee) +'
 
 class DisIndexHandler(BaseHandler):
 
+    # 购买会员卡按钮,跳转到公共支付页面
+    def post(self):
+        try:
+            phone_num = int(self.get_argument('phone_num'))
+            ktv_id = int(self.get_argument('ktv_id'))
+            total_fee = int(self.get_argument('total_fee'))
+            card_type = int(self.get_argument('card_type'))
+        except Exception as e:
+            logging.error(e)
+            raise utils.APIError(errcode=10001)
+        info = '会员卡分销'
+        order_id = 'SO' + str(phone_num) + 'D' + str(ktv_id)+ 'T' + datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+        self.send_json(dict(total_fee=total_fee, order_id=order_id, ktv_id=ktv_id, info=info))
+
+    # 分销首页
     @check_openid
     async def get(self):
         try:
@@ -14,7 +29,6 @@ class DisIndexHandler(BaseHandler):
         coupon_card_info = await ctrl.custom.get_ktv_coupon_info(ktv_id)
         coupon_create_his = await ctrl.custom.get_ktv_coupon_info()
         earn_sum_rank = ctrl.custom.get_earn_sum_rank()
-
         config = await utils.async_common_api('/wx/share/config', dict(url=self.request.full_url()))
 
         self.render('dis_index.tpl',
@@ -103,3 +117,5 @@ class DisOrderHandler(BaseHandler):
         logging.error(prepay_data)
         res = dict(order_id=order_id, pay_data=prepay_data)
         self.send_json(res)
+
+location.href = '//coupon.ktvsky.com/ktv/order/common?fee='+ (data.total_fee) +'&return_url='+ location.href +'&info=购买套餐&type=12&ktv_id='+ $('#ktv').val() +'&origin_oid='+data.order_id;
