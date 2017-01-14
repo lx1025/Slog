@@ -1,4 +1,3 @@
-location.href = '//coupon.ktvsky.com/ktv/order/common?fee='+ (data.total_fee) +'&return_url='+ location.href +'&info=购买套餐&type=12&ktv_id='+ $('#ktv').val() +'&origin_oid='+data.order_id;
 
 class DisIndexHandler(BaseHandler):
 
