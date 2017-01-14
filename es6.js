@@ -81,7 +81,7 @@ $('#result').append(`
 `)
 
 // destruction:
-//析构赋值表达式
+// 析构赋值表达式
 // es5:
 let cat = 'ken'
 let dog = 'lili'

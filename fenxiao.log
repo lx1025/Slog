@@ -1,11 +1,25 @@
-CREATE TABLE `` (
+CREATE TABLE `distribute_user` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`openid` varchar(64) NOT NULL DEFAULT '' COMMENT '',
-	`headimgurl` varchar(512) NOT NULL DEFAULT '' COMMENT '',
-	`nickname` varchar(128) NOT NULL DEFAULT '' COMMENT '',
 	`phone_num` int(11) NOT NULL DEFAULT '' COMMENT '电话号码',
 	`earn_sum` int(11) NOT NULL DEFAULT 0 COMMENT '赚取总金额',
 	`flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否第一次进入',
+	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `distribute_order` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`order_id` varchar(64) NOT NULL DEFAULT '' COMMENT '',
+	`openid` varchar(64) NOT NULL DEFAULT '' COMMENT '',
+	`phone_num` int(11) NOT NULL DEFAULT '' COMMENT '电话号码',
+	`s_openid` varchar(64) NOT NULL DEFAULT '' COMMENT '分享者openid',
+	`ktv_id` int(11) NOT NULL DEFAULT '' COMMENT '',
+	`card_type` int(11) NOT NULL DEFAULT '' COMMENT '',
+	`total_fee` int(11) NOT NULL DEFAULT 0 COMMENT '赚取总金额',
+	`payed` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:下单成功，1:支付成功',
+	`status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:没有或不需要发红包，1:发红包成功',
 	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
