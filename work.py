@@ -67,21 +67,44 @@ class DisOrderHandler(BaseHandler):
         self.send_json(dict(total_fee=total_fee, order_id=order_id, ktv_id=ktv_id, info=info, s_openid=s_openid))
 
     # 公共之父页面支付成功跳转
-    def get(self):
+    async def get(self):
         try:
             order_id = self.get_argument('order_id')
             s_openid = self.get_argument('s_openid', '')
-            total_fee = int(self.get_argument('total_fee', ''))
+            total_fee = int(self.get_argument('total_fee'))
         except Exception as e:
             logging.error(e)
             return self.render('custom/error.tpl')
 
-        data = dict(payed=1)
-        ctrl.custom.update_dis_order(order_id, data)
-        ctrl.custom.update_dis_user_earn_sum(s_openid, total_fee/10)
-        if not s_openid:
-            #发红包
-            pass
-        order_info = ctrl.custom.get_dis_order(order_id)
-        #发短信
-        self.send_json(dict(payed='success'))
+        try:
+            res = res = await self.pay_query(order_id)
+            if res['is_pay']:
+                data = dict(payed=1)
+                ctrl.custom.update_dis_order(order_id, data)
+                ctrl.custom.update_dis_user_earn_sum(s_openid, total_fee/10)
+                if not s_openid:
+                    # 发红包
+                    pass
+                order_info = ctrl.custom.get_dis_order(order_id)
+                # 发短信
+                self.send_json(dict(payed='success'))
+            else:
+                self.send_json(dict(payed='failed'))
+        except Exception as e:
+            logging.info(e)
+
+
+    async def pay_query(self, order_id, loop=1):
+        logging.info('query dis_order loop %s'%loop)
+        try:
+            http_client = utils.get_async_client()
+            request = utils.http_request(COMMON_ORDER_URL.format(order_id=order_id))
+            res = await utils.fetch(http_client, request)
+            res = json.loads(res.body.decode())
+            logging.info('query order result: %s'%res)
+            return res
+        except Exception as e:
+            logging.error(e)
+            if loop>0:
+                IOLoop.current().add_timeout(time.time()+60, self._pay_query, order_id, loop-1)
+            raise utils.APIError(errcode=19004, errmsg='查单失败')
