@@ -1,0 +1,108 @@
+什么是HTML语义化？
+基本上都是围绕着几个主要的标签，像标题（H1~H6）、列表（li）、强调（strong em）等等
+根据内容（内容语义化），选择合适的标签（代码语义化，便于开发者阅读和写出更优雅的代码的同时让浏览器的爬虫和机器很好地解析
+为了在没有CSS的情况下，页面也能呈现出很好地内容结构、代码结构
+用户体验：例如title、alt用于解释名词或解释图片信息、label标签的活用
+有利于SEO：和搜索引擎建立良好沟通，有助于爬虫抓取更多的有效信息：爬虫依赖于标签来确定上下文和各个关键字的权重
+方便其他设备解析（如屏幕阅读器、盲人阅读器、移动设备）以意义的方式来渲染网页；
+附：html标签语义http://wenku.baidu.com/link?url=Ak6zE7Ho6x8IiK6LAFY7hXQXVuP3VBohiXDnhlCUMIhmSGN0ZXqsznuIdsui7f0qSwoXhIb6wrE-K9P8KnQ5Q9fQaJA7KvHs5gol490sDB_
+
+写HTML代码时应注意什么？
+尽可能少的使用无语义的标签div和span；
+在语义不明显时，既可以使用div或者p时，尽量用p, 因为p在默认情况下有上下间距，对兼容特殊终端有利；
+不要使用纯样式标签，如：b、font、u等，改用css设置。
+需要强调的文本，可以包含在strong或者em标签中（浏览器预设样式，能用CSS指定就不用他们），strong默认样式是加粗（不要用b），em是斜体（不用i）；
+使用表格时，标题要用caption，表头用thead，主体部分用tbody包围，尾部用tfoot包围。表头和一般单元格要区分开，表头用th，单元格用td；
+表单域要用fieldset标签包起来，并用legend标签说明表单的用途；
+每个input标签对应的说明文本都需要使用label标签，并且通过为input设置id属性，在lable标签中设置for=someld来让说明文本和相对应的input关联起来。
+
+<a href="http://www.baidu.com">baidu</a>
+属性值应该始终被包括在引号内。双引号是最常用的，不过使用单引号也没有问题。
+<a href="http://www.baidu.com">baidu</a>
+<h1> 定义最大的标题。<h6> 定义最小的标题。
+<hr /> 创建水平线
+<br />换行
+<!--  -->
+如果您希望在不产生一个新段落的情况下进行换行（新行），请使用 <br /> 标签：
+<p>This is<br />a para<br />graph with line breaks</p>
+在 XHTML、XML 以及未来的 HTML 版本中，不允许使用没有结束标签（闭合标签）的 HTML 元素。
+当显示页面时，浏览器会移除源代码中多余的空格和空行。所有连续的空格或空行都会被算作一个空格。需要注意的是，HTML 代码中的所有连续的空行（换行）也被显示为一个空格。
+eg:下面的代码输出内容？
+<html>
+<body>
+<h1>春晓</h1>
+<p>
+    春眠不觉晓，
+      处处闻啼鸟。
+        夜来风雨声，
+          花落知多少。
+</p>
+<p>注意，浏览器忽略了源代码中的排版（省略了多余的空格和换行）。</p>
+</body>
+</html>
+
+<!-- font-famuly样式， 多样式用；隔开 -->
+<p style="font-family:arial;color:red;font-size:20px;">A paragraph.</p>
+This text is in Verdana and red</p>
+
+应该避免使用下面这些标签和属性：
+标签	描述
+<center>	定义居中的内容。
+<font> 和 <basefont>	定义 HTML 字体。
+<s> 和 <strike>	定义删除线文本
+<u>	定义下划线文本
+<s><center><p style="font-size:30px">This text is 30 pixels high</p></center></s>
+<font size="3" color="red">This is some text!</font>
+
+文字格式：
+<b>	定义粗体文本。
+<big>	定义大号字。
+<em>	定义着重文字。
+<i>	定义斜体字。
+<small>	定义小号字。
+<strong>	定义加重语气。
+<sub>	定义下标字。
+<sup>	定义上标字。
+<ins>	定义插入字。
+<del>	定义删除字。
+<s>	不赞成使用。使用 <del> 代替。
+<strike>	不赞成使用。使用 <del> 代替。
+<u>	下划线 不赞成使用。使用样式（style）代替。
+
+关于em和i的区别：
+<i>标签：
+显示斜体文本效果
+<i>标签告诉浏览器将包含其中的文本以斜体字（italic）或者倾斜（oblique）字体显示；
+<em>标签：
+<em>标签中的文本表示为强调的内容，对于所有浏览器的显示效果来说，是把这段文字用斜体来显示；
+
+引用标签：
+http://www.w3school.com.cn/html/html_quotation_elements.asp
+<q>引用短的内容，浏览器会自动加引号</q>
+<blockquote cite="http://">
+  表示引用长的内容，cite属性表示引用站点，浏览器会自动缩进本段内容。
+</blockquote>
+<abbr title="HELLO WORLD">HW(浏览器会加粗显示)</abbr> <!-- abbreviation缩写 -->
+
+关于注释：
+<!-- 此刻不显示图片：
+<img border="0" src="/i/tulip_ballade.jpg" alt="Tulip">
+-->
+条件注释
+您也许会在 HTML 中偶尔发现条件注释：
+<!--[if IE 8]>
+    .... some HTML here ....
+<![endif]-->
+
+<link rel="stylesheet" type="text/css" href="/html/csstest1.css" >
+<link rel="stylesheet" href="/css/master.css">
+
+<a href="http://www.baidu.com" style="text-decoration:none"></a>
+
+<span>定义文档中小块的空白区域。</span>
+
+<label> 标签为 input 元素定义标签（label）。
+label 元素不会向用户呈现任何特殊的样式。不过，它为鼠标用户改善了可用性，因为如果用户点击 label 元素内的文本，则会切换到控件本身。
+<label> 标签的 for 属性应该等于相关元素的 id 元素，以便将它们捆绑起来。
+
+如何在浏览器中命名一个锚：（id和name同样有效）
