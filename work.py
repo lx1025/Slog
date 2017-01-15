@@ -66,7 +66,7 @@ class DisOrderHandler(BaseHandler):
         ctrl.custom.update_dis_order(order_id, data)
         self.send_json(dict(total_fee=total_fee, order_id=order_id, ktv_id=ktv_id, info=info, s_openid=s_openid))
 
-    # 公共之父页面支付成功跳转
+    # 公共支付页面支付成功跳转
     async def get(self):
         try:
             order_id = self.get_argument('order_id')
