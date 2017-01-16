@@ -32,10 +32,10 @@ eg:下面的代码输出内容？
 <body>
 <h1>春晓</h1>
 <p>
-    春眠不觉晓，
-      处处闻啼鸟。
-        夜来风雨声，
-          花落知多少。
+		春眠不觉晓，
+			处处闻啼鸟。
+				夜来风雨声，
+					花落知多少。
 </p>
 <p>注意，浏览器忽略了源代码中的排版（省略了多余的空格和换行）。</p>
 </body>
@@ -80,7 +80,7 @@ This text is in Verdana and red</p>
 http://www.w3school.com.cn/html/html_quotation_elements.asp
 <q>引用短的内容，浏览器会自动加引号</q>
 <blockquote cite="http://">
-  表示引用长的内容，cite属性表示引用站点，浏览器会自动缩进本段内容。
+	表示引用长的内容，cite属性表示引用站点，浏览器会自动缩进本段内容。
 </blockquote>
 <abbr title="HELLO WORLD">HW(浏览器会加粗显示)</abbr> <!-- abbreviation缩写 -->
 
@@ -91,7 +91,7 @@ http://www.w3school.com.cn/html/html_quotation_elements.asp
 条件注释
 您也许会在 HTML 中偶尔发现条件注释：
 <!--[if IE 8]>
-    .... some HTML here ....
+		.... some HTML here ....
 <![endif]-->
 
 <link rel="stylesheet" type="text/css" href="/html/csstest1.css" >
@@ -106,14 +106,106 @@ label 元素不会向用户呈现任何特殊的样式。不过，它为鼠标�
 <label> 标签的 for 属性应该等于相关元素的 id 元素，以便将它们捆绑起来。
 eg:
 <form>
-  <label for="male">Male</label>
-  <input type="radio" name="sex" id="male" />
-  <br />
-  <label for="female">Female</label>
-  <input type="radio" name="sex" id="female" />
+	<label for="male">Male</label>
+	<input type="radio" name="sex" id="male" />
+	<br />
+	<label for="female">Female</label>
+	<input type="radio" name="sex" id="female" />
 </form>
 
 <a href="http://www.w3school.com.cn/" target="_blank">Visit W3School!</a>
 如何在浏览器中命名一个锚：（id和name同样有效）
 <a name='tips'>有用的提示</a>
 <a href='http://www.baidu.com/#tips'>跳转到有用的提示</a>
+
+<img src="img.jpg" alt="a substitute" />
+
+<!-- table中表示一个空的占位符 &nbsp; not block space不间断空格 -->
+<table border="1">
+	<tr>
+		<th>row 1, cell 1</th>
+		<th>row 1, cell 2</th>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>row 2, cell 2</td>
+	</tr>
+</table>
+
+<ul>标示点</ul>和<ol>数字</ol>
+
+<!-- 关于div和span标签 -->
+可以通过 <div> 和 <span> 将 HTML 元素组合起来。
+一个是块级元素，一个是内联元素
+大多数 HTML 元素被定义为块级元素或内联元素。
+“块级元素”译为 block level element，“内联元素”译为 inline element。
+块级元素在浏览器显示时，通常会以新行来开始（和结束）。
+内联元素在显示时通常不会以新行开始。
+块元素：
+<div></div>,<form action=""></form>,<h></h>,<p></p>,
+<ol></ol><ul></ul><table></table>
+内联元素：
+<span></span>
+<a href=""></a>
+各种文本格式化元素
+<br><!-- br竟然是内联元素 -->
+<img src="" alt="">
+<label for=""></label>
+<input type="text">
+可变元素：
+<button></button>
+
+<iframe src="" frameborder="0"></iframe> <!-- 内联元素 -->
+
+<!-- 关于heml文档的head -->
+<head>
+	<title>Title of the document</title><!-- 标题 -->
+	<meta name="description" content="HTML, CSS, XML" /><!-- 关键字 -->
+	<base href="http://www.w3school.com.cn/images/" /><!-- 定义默认链接和默认mubiao -->
+	<base target="_blank" />
+	<link rel="stylesheet" type="text/css" href="mystyle.css" /><!-- 样式表或者脚本文件 -->
+</head>
+
+<!-- 彻底掌握表单last time -->
+HTML 表单用于搜集不同类型的用户输入。
+<form action=""></form>定义一个表单
+表单包含表单元素表单元素指的是不同类型的 input元素、复选框、单选按钮、提交按钮等等
+<input> 元素是最重要的表单元素，根据不同的 type 属性，它有多种类型
+类型  描述
+text  定义常规文本输入。
+radio 定义单选按钮输入（选择多个选择之一）
+submit  定义提交按钮（提交表单）
+<input type="text" name='test'/> 。还要注意文本字段的默认宽度是 20 个字符
+<input type="submit" value='test' /> 这就定义了一个提交按钮
+<!-- 一个最通俗的表单提交例子 -->
+<form action="action_page.php"><!-- 默认method是get，最终效果会拼接到url中 -->
+	First name:<br>
+	<input type="text" name="firstname" value="Mickey">
+	<br>
+	Last name:<br>
+	<input type="text" name="lastname" value="Mouse">
+	<br><br>
+	<input type="submit" value="Submit">
+</form> 
+<!-- 一个select下拉选择列表的表单提交的例子 -->
+<form action="action_page.php">
+	<select name="cars">
+		<option value="volvo">Volvo</option>
+		<option value="saab">Saab</option>
+		<option value="fiat" selected>Fiat</option>
+		<option value="audi">Audi</option>
+	</select>
+	<br><br>
+	<input type="submit" value='test'>
+</form>
+<!-- 一个button元素 -->
+<button onclick=''></button>
+<!-- input的type -->
+<input type="text" name="firstname" value='test'>
+<input type="password" name="psw">
+<input type="submit" value="Submit">
+<input type="radio" name="sex" value="female">
+<input type="radio" name="sex" value="male">
+<input type="checkbox" name="vehicle" value="Bike">
+<input type="button" onclick="alert('Hello World!')" value="Click Me!">
+<input type="number" name="quantity" min="1" max="5">

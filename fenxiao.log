@@ -1,17 +1,9 @@
-CREATE TABLE `distribute_user` (
-	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`openid` varchar(64) NOT NULL DEFAULT '' COMMENT '',
-	`phone_num` int(11) NOT NULL DEFAULT '' COMMENT '电话号码',
-	`earn_sum` int(11) NOT NULL DEFAULT 0 COMMENT '赚取总金额',
-	`flag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否第一次进入',
-	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`),
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+alter table gzh_user add earn_sum int(11) not null default 0 comment "赚取总金额";
+alter table gzh_user add flag tinyint(1) not null default 0 comment "是否第一次进入分销";
 
-CREATE TABLE `distribute_order` (
+CREATE TABLE `gzh_dis_order` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`order_id` varchar(64) NOT NULL DEFAULT '' COMMENT '',
+	`order_id` varchar(32) NOT NULL DEFAULT '' COMMENT '',
 	`openid` varchar(64) NOT NULL DEFAULT '' COMMENT '',
 	`phone_num` int(11) NOT NULL DEFAULT '' COMMENT '电话号码',
 	`s_openid` varchar(64) NOT NULL DEFAULT '' COMMENT '分享者openid',
