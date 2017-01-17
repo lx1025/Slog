@@ -1,4 +1,4 @@
-// https://github.com/ecomfe/spec/blob/master/javascript-style-guide.md 百度js编码规范
+//https://github.com/ecomfe/spec/blob/master/javascript-style-guide.md 百度js编码规范
 //array concat
 var a = ['a']
 var b = ['b']
@@ -18,7 +18,7 @@ console.log(a.slice(2));//['b','c','d']
 console.log(a.slice(-2));//['c','d']
 console.log(a.slice(-1));//['d']
 
-//array map array to array
+//array map，array to array
 //es6
 [1, 2, 3].map(x => x+1)
 var a = state.map(todo => {
@@ -40,7 +40,7 @@ console.log(a)
 $.getJSON('/test' {param1: 'value1'}, function (data) {
 	var items = [];
 	$.each(data, function(key, val){
-		items.push('<li id="'+key+'">val</li>')
+		items.push('<li id="'+key+'">val</li>')	//转码
 	})
 	$('<ul/>', {'class':'ul-class', html:items.join(',')}).appendTo('body')
 })
