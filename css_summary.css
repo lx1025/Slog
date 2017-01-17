@@ -1,3 +1,4 @@
+css书写规范：https://github.com/fex-team/styleguide/blob/master/css.md
 /*所有的样式会根据下面的规则层叠于一个新的虚拟样式表中
 由低到高依次是：
 浏览器缺省设置
@@ -112,3 +113,22 @@ a:hover {color:#FF00FF;}  /* 鼠标移动到链接上 */
 a:active {color:#0000FF;}  /* 已访问过的链接 */
 /*伪元素选择器*/
 p:first-letter {color:#ff0000;}
+
+/*彻底理解行高line-height*/
+http://www.w3school.com.cn/tiy/t.asp?f=csse_dim_line-height_percent
+/*根据百度前端规范，line-height应该用数值倍数定义*/
+/*line_height:1.0本身就会形成间距，而大部分的浏览器的行高默认为1.1,1.2*/
+http://m.studyofnet.com/news/273.html
+你知道原因吗？https://zhidao.baidu.com/question/425857126386532692.html
+浏览器显示最小字体是12px（百度前端规范），行高为10px，所以重叠。
+
+/*理解em*/
+px是绝对单位，不支持IE的缩放，em是相对单位。
+1em指的是一个字体的大小，它会继承父级元素的字体大小，因此并不是一个固定的值。
+不仅仅是字体，将行距line-height，和纵向高度的单位都用em。保证缩放时候的整体性。
+em指字体高，任意浏览器的默认字体高都是16px。所以,未经调整的浏览器都符合:1em=16px。那么12px=0.75em,10px=0.625em。
+https://segmentfault.com/q/1010000004704818/a-1020000004705715
+
+/*清除浮动*/
+http://www.jb51.net/css/173023.html
+前五种

@@ -1,3 +1,4 @@
+https://github.com/ecomfe/spec/blob/master/html-style-guide.md 百度html规范。
 什么是HTML语义化？
 基本上都是围绕着几个主要的标签，像标题（H1~H6）、列表（li）、强调（strong em）等等
 根据内容（内容语义化），选择合适的标签（代码语义化，便于开发者阅读和写出更优雅的代码的同时让浏览器的爬虫和机器很好地解析
@@ -226,3 +227,14 @@ disabled，readonly，maxlength
 对空行和  空格 
 进行控 制 
 </pre>
+
+<!-- 前端规范 -->
+小写，-，短，不允许style命名，不允许自闭和，语义化，符合嵌套规则，标签的使用应尽量简洁，减少不必要的标签
+属性值必须用双引号包围，布尔类型的属性不添加属性值，自定义属性以data-×××命名，<!DOCTYPE html>必须大写
+启用IE Edge模式：<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+在 html 标签上设置正确的 lang 属性：<html lang="zh-CN">
+编码：<meta charset="UTF-8">
+引入 CSS 时必须指明 rel="stylesheet"：<link rel="stylesheet" href="page.css">
+引入CSS JS时link标签type属性省略：text/css 和 text/javascript 是 type 的默认值
+img：禁止src为空，尽量不使用title，为重要的图片增加alt属性，添加width和height属性
+button：type属性必须
