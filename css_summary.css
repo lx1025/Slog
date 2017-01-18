@@ -137,3 +137,54 @@ http://www.jb51.net/css/173023.html
     display: none
 }
 $('#id').show()
+
+/*弹性盒布局*/
+/*Flex是Flexible Box的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性。任何一个容器都可以指定为Flex布局。*/
+/*http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html*/
+.container {
+    display: flex;
+    flex-direction: row | row-reverse | column | column-reverse;
+    flex-wrap: nowrap | wrap | wrap-reverse;
+    justify-content: flex-start | flex-end | center | space-between | space-around;
+    align-items: flex-start | flex-end | center | baseline | stretch;
+    align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+}
+.item {
+    order: <integer>;
+    flex-grow: <number>;
+    flex-shrink: <number>;
+    flex-basis: auto;
+    flex: 0 1 auto;
+}
+/*使用弹性盒布局的两个例子：http://www.cnblogs.com/qq9694526/p/5713698.html*/
+/*使用flex的传统布局*/
+.container {
+    display: flex;
+    display: -webkit-flex;
+    height: 50px;
+}
+.left {
+    flex: 0 1 50px;
+}
+.right {
+    flex: 1 1 auto;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+}
+.right .title {
+    flex: 0 1 20px;
+}
+.right .desc {
+    flex: 1 1 auto;
+}
+/*一行两列的例子*/
+.container {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
+.item {
+    flex: 0 1 50%;
+    height: 30px;
+}
