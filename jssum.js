@@ -3,20 +3,20 @@
 var a = ['a']
 var b = ['b']
 var c = 'c'
-console.log(a.concat(b));
-console.log(a.concat(c));
+console.log(a.concat(b));   //['a', 'b', 'c']
+console.log(a.concat(c));   //['a', 'b', 'c']
 
 //array join array>str
 var a = ['a', 'b', 'c']
-console.log(a.join());//'abc'
-console.log(a.join('x'));//'axbxcx'
+console.log(a.join());              //'abc'
+console.log(a.join('x'));           //'axbxcx'
 
 //array slice
 var a = ['a', 'b', 'c', 'd']
-console.log(a.slice(1,2));//['b']
-console.log(a.slice(2));//['b','c','d']
-console.log(a.slice(-2));//['c','d']
-console.log(a.slice(-1));//['d']
+console.log(a.slice(1,2));  //['b']
+console.log(a.slice(2));    //['b','c','d']
+console.log(a.slice(-2));   //['c','d']
+console.log(a.slice(-1));   //['d']
 
 //array map，array to array
 //es6
@@ -47,7 +47,7 @@ $.getJSON('/test' {param1: 'value1'}, function (data) {
 
 //百度js编码规范
 // utf8编码，文件结尾处一个空行，四个空格缩进， 二元运算符两侧必须有一个空格，一元运算符与操作对象之间不允许有空格
-// 语句结束加；函数定义结束不加；
+// 语句结束加；函数定义结束不加；//可是我一个分号也不想加
 // 用作代码块起始的左花括号 { 前必须有一个空格
 // if / else / for / while / switch / do / function / try / catch / finally 关键字后，必须有一个空格
 // 在对象创建时，属性中的 : 之后必须有空格，: 之前不允许有空格
@@ -92,7 +92,7 @@ $.getJSON('/test' {param1: 'value1'}, function (data) {
 // function foo(option) {
 //     // TODO
 // }
-// 使用严格的===避免等于判断中隐式的类型转换
+// 使用严格的===避免等于判断中隐式的类型转换，但是有的时候==也是好用的
 // 使用简洁的if判断：if (!a)，其中a为零或'',均判断为true,但[],{}判断为false
 // var a = '' //var a = 0
 // if (!a) {console.log('success')}

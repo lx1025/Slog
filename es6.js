@@ -66,6 +66,7 @@ class Animal {
     },1000)
   }
 }
+var animal = new Animal()
 animal.says('hi')
 
 //template string
