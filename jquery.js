@@ -187,6 +187,10 @@ $('button').click(function(){
 	}
 	})
 
+//DOM隐藏显示
+$('').show()
+$('').hide()
+
 //插入DOM
 $('').append('some text')	//末尾插入
 $('').text('some text')

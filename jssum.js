@@ -96,8 +96,10 @@ $.getJSON('/test' {param1: 'value1'}, function (data) {
 // 使用简洁的if判断：if (!a)，其中a为零或'',均判断为true,但[],{}判断为false
 // var a = '' //var a = 0
 // if (!a) {console.log('success')}
-// var a = [] //var a = {}
+// var a = []
 // if (!a.length) {console.log('success')}
+// var a = {}
+// if (!a.ke)
 // 对有序集合进行顺序无关的遍历时，使用逆序遍历：逆序遍历可以节省变量，代码比较优化，注这是遍历数组的最佳方案：
 // var a = ['a', 'b', 'c', 1,2]
 // aLen = a.length
@@ -188,4 +190,48 @@ var app = {
 }
 app.time_running()
 
-//
+//四舍五入float.toFixed(2) 2是保留位数
+console.log((1.2345.toFixed(2)))
+
+//js object api
+//判断类型
+console.log({}.constructor === Object)
+console.log([].constructor === Array)
+//拥有属性
+var x = {foo: 'something'}
+console.log(x.hasOwnProperty('foo'))
+//keys or values to array, 
+//IE8及以下是不支持的!
+var a = {x:1, y:2}
+var keys_arr = Object.keys(a)
+var values_arr = Object.values(a)
+//or
+var pt = { x: 1, y: 2, z: 'xing' };
+console.log(pt);
+var keys_arr = []
+var values_arr = []
+for (i in pt) {
+    keys_arr.push(i)
+    values_arr.push(pt[i])
+}
+console.log(keys_arr, values_arr);
+//or这里失效了！concat失效了！
+var pt = { x: 1, y: 2, z: 'xing' };
+console.log(pt);
+var keys_arr = []
+var vaules_arr = []
+for (i in pt) {
+    keys_arr.concat(i)
+    values_arr.concat(String(pt[i])
+}
+console.log(keys_arr, values_arr);
+//把一个object的所有value or key拼成字符串,
+var pt = { x: 1, y: 2, z: 'xing' };
+console.log(pt);
+var keys_str = ''
+var values_str = ''
+for (i in pt) {
+    keys_str += i + ''
+    values_str += pt[i] + ''
+}
+console.log(keys_str, values_str);

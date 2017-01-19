@@ -189,3 +189,6 @@ $('#id').show()
     flex: 0 1 50%;
     height: 30px;
 }
+
+/*内联样式的写法*/
+<p style="color: red;padding-top: 1px">something<p>
