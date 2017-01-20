@@ -250,5 +250,3 @@ console.log(c)
 $('div.test').data('data', 'something')//...then
 var a =$('div.test').data('data')
 //注：添加属性可使用$('div.test').attr('data', 'test')
-
-

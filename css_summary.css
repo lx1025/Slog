@@ -19,7 +19,7 @@ font-size:8pt;
 h3
 {
 text-align:right;
-font-size:20pt;
+font-size:20px;
 }
 假如拥有内部样式表的这个页面同时与外部样式表链接，那么 h3 得到的样式是：
 color:red;
@@ -190,5 +190,11 @@ $('#id').show()
     height: 30px;
 }
 
-/*内联样式的写法*/
+/*内联样式的写法, 双引号分号*/
 <p style="color: red;padding-top: 1px">something<p>
+
+/*关于适配,真的最后一关了...*/
+/*https://isux.tencent.com/web-app-rem.html*/
+/*
+    
+*/
