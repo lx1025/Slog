@@ -250,3 +250,9 @@ console.log(c)
 $('div.test').data('data', 'something')//...then
 var a =$('div.test').data('data')
 //注：添加属性可使用$('div.test').attr('data', 'test')
+
+//鼠标的动作
+$('.money').on('mouseover', function(evt) {
+    console.log('test')
+    $('.real-money').show()
+})

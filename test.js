@@ -56,3 +56,24 @@ var app = {
         }, 1000)
     }
 }
+$('').show()
+$('').hide()
+$('').html()
+$('').text()
+$('').val()
+$('').append()
+$('<ul/>', {class: "ul-class", html: items.join(',')}).appendTo('#id')
+$.ajax({
+    url: '/test',
+    type: 'POST',
+    dataType: 'json',
+    data: {params, values},
+    success (data) {
+        var billInfo = `<div id="result">
+            <ul class="bill">
+            <li>${data.create_time}</li>
+            </ul>
+        </div>`
+    }
+})
+!
