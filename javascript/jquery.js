@@ -298,3 +298,15 @@ $.ajax({
     jsonp: 'callback',
     jsonpCallback: 'func'
 })
+
+//一段远古时期的jquery代码,来自myktv_cms
+//html
+ktv名字(回车进行搜索): <input id='ktv_name' placeholder='回车进行搜索' hint='回车进行搜索' />
+//js
+$('#ktv_name').bind('keypress', function (event) {
+    if (event.keyCode == '13') {
+        var url = window.location.href
+        var new_url = LB.setUrlParam(url, 'ktv_name', $('#ktv_name').val())     //这一段用字符串拼接也可以
+        window.location.href = new_url
+    }
+})
