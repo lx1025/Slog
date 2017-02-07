@@ -1,4 +1,4 @@
-git commit -a -m 'update' 将所有修改放进版本库
+git commit -a -m 'update' 将所有修改放进版本库,这个命令在涉及文件路径或者文件名改变的前提下格外有用
 git diff 查看工作区与当前版本库的差别，commmit至版本库之后显示自然为空
 git status 查看目前版本库与origin master的版本对比
 git log 查看当前版本库日志
