@@ -33,3 +33,26 @@ insert into ktv_bar_apply_user (name, phone_num, city, own_source, own_money) va
 
 http://static.ktvsky.com/2015/index.html
 静态活动页面!
+
+CREATE TABLE `feedback_info` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`type`varchar(8) NOT NULL DEFAULT '' COMMENT '反馈信息类型',
+	`detail` text NOT NULL DEFAULT '' COMMENT '详细描述',
+	`contact` varchar(16) NOT NULL DEFAULT '' COMMENT '联系方式',
+	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+{% if 'game_order' in modules %}
+<li{% if body_class == 'game_order' %} class="active"{% end %}>
+    <a class="dropdown-toggle" id="dropdownMenuWow" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        WOW相关统计
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li><a href="/game/order">游戏机订单</a></li>
+        <li><a href="/ktv_bar/feedback/stat">反馈统计</a></li>
+    </ul>
+</li>
+{% end %}
