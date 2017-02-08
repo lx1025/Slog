@@ -17,3 +17,7 @@ tail -f /data/torn_log/*coupon*  |grep "/namegame" -C 10
 #查找文件或者路径的指令：
 find . -name 'pyspider' 
 locate nginx.
+
+#一个标准的post curl
+curl -X POST -d 'directory=game&page=2&page_size=1' '101.254.157.124:8088/directory/get'
+curl '101.254.157.124:8088/directory/get?page=1&page_size=10&directroy=game'

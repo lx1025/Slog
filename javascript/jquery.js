@@ -310,3 +310,6 @@ $('#ktv_name').bind('keypress', function (event) {
         window.location.href = new_url
     }
 })
+
+//一个抽象的jquery查询
+alert($(this).parent().parent('tr').find('td:first-child').text());
