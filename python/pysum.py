@@ -28,10 +28,10 @@ class test():
     def run(self):
         return "helloworld"
 t = test()
-print(hasattr(t, name))       #True
-print(getattr(t, name))       #xinghang
-print(getattr(t, run))          #method
-setattr(t, 'age', '18')
-print(getattr(t, age))          #18
+print(hasattr(t, name))     #True
+print(getattr(t, name))     #xinghang
+print(getattr(t, run))        #method
+setattr(t, 'age', '18')        #设置属性
+print(getattr(t, age))       #18
 
 #
