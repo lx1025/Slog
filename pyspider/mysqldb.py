@@ -19,7 +19,7 @@ class ToMysql():
         kwargs = {'host':'192.168.0.172',
                         'port':3308,
                         'user':'mombaby',
-                        'passwd':'098f6bcd4621d373cade4e832627b4f6',
+                        'passwd':'',
                         'db':'myktv',
                         'charset':'utf8'}
 
