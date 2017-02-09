@@ -21,9 +21,9 @@ string:
     getset key value                                                       #设置键的字符串值, 并返回旧值s
     setex key <time> value                                            #设置key关联value, 设置生存时间
     srtlen key                                                                #value的长度
-    incr/derc key                                                          #当key的键值为整数时，+1
-    incrby/dercby key num                                          #制定增加值
-    append key newvalue                                            #追加值到这个key的value:append name 'test'; getrange name 0 -1 (输出xinghangtest)
+    incr/derc key                                                           #当key的键值为整数时，+1
+    incrby/dercby key num                                           #制定增加值
+    append key newvalue                                             #追加值到这个key的value:append name 'test'; getrange name 0 -1 (输出xinghangtest)
     
 #非常适合存储对象
 hash:
@@ -35,10 +35,10 @@ hash:
     hdel key filed1     
     hexist key filed1                               #判断一个键对应的键值中是否含有某字段
     hgetall key                                       #输出一个对象
-    hincrby key filed1 num                   #增加值,
-    hkeys key                                       #获取key对应的所有的哈希字段
-    hvals key                                        #获取key所对应的所有的哈希值
-    hlen  key                                        #key所对应的hash字段的个数
+    hincrby key filed1 num                    #增加值,
+    hkeys key                                        #获取key对应的所有的哈希字段
+    hvals key                                         #获取key所对应的所有的哈希值
+    hlen  key                                         #key所对应的hash字段的个数
 
     
 list:key [value1,value2,value3]
