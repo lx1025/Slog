@@ -14,7 +14,7 @@ console.log(a.join('x'));           //'axbxcx'
 //array slice
 var a = ['a', 'b', 'c', 'd']
 console.log(a.slice(1,2));  //['b']
-console.log(a.slice(2));    //['b','c','d']
+console.log(a.slice(1));    //['b','c','d']
 console.log(a.slice(-2));   //['c','d']
 console.log(a.slice(-1));   //['d']
 
@@ -27,7 +27,7 @@ var a = state.map(todo => {
         } else {
           return todo;
       })
-//es5
+//es5 注意bind
 [1, 2, 3].map((function(x){
     return x+1
 }).bind(this))
@@ -37,9 +37,9 @@ var a = [1, 2, 3, 4].filter(item => item%2===0)
 console.log(a)
 
 //array push with ajax
-$.getJSON('/test' {param1: 'value1'}, function (data) {
+$.getJSON('/test', {param1: 'value1'}, function (data) {
     var items = [];
-    $.each(data, function(key, val){
+    $.each(data, function (key, val) {
         items.push('<li id="'+key+'">val</li>') //转码
     })
     $('<ul/>', {'class':'ul-class', html:items.join(',')}).appendTo('body')
@@ -101,7 +101,7 @@ $.getJSON('/test' {param1: 'value1'}, function (data) {
 // var a = {}
 // if (!a.ke)
 // 对有序集合进行顺序无关的遍历时，使用逆序遍历：逆序遍历可以节省变量，代码比较优化，注这是遍历数组的最佳方案：
-// var a = ['a', 'b', 'c', 1,2]
+// var a = ['a', 'b', 'c', 1, 2]
 // aLen = a.length
 // while (aLen--) {
 //  console.log(a[aLen])
@@ -145,9 +145,12 @@ $.getJSON('/test' {param1: 'value1'}, function (data) {
 // for (var i in a) {
 //  console.log(i)
 // }//0,1,2,3,4
-// for (var i=0, len=a.length;i<len;i++){
+// for (var i in a) {
+//     console.log(a[i])
+// }//a, b, c, 1, 2
+// for (var i=0, len=a.length;i<len;i++) {
 //  console.log(a[i])
-// }//a,b,c,1,2
+// }//a,b,c,1,2 注意,这里并没有bind
 
 //对于一个标准的js文件的结构，可以这样写
 $(function(){
@@ -190,7 +193,7 @@ var app = {
 }
 app.time_running()
 
-//四舍五入float.toFixed(2) 2是保留位数
+//四舍五入: <float>.toFixed(2) 2是保留位数
 console.log((1.2345.toFixed(2)))
 
 //js object api
@@ -202,7 +205,7 @@ var x = {foo: 'something'}
 console.log(x.hasOwnProperty('foo'))
 //keys or values to array, 
 //IE8及以下是不支持的!
-var a = {x:1, y:2}
+var a = {x: 1, y: 2}
 var keys_arr = Object.keys(a)
 var values_arr = Object.values(a)
 //or
