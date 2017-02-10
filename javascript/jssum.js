@@ -99,7 +99,7 @@ $.getJSON('/test', {param1: 'value1'}, function (data) {
 // var a = []
 // if (!a.length) {console.log('success')}
 // var a = {}
-// if (!a.ke)
+// if (!a.ke) {cons}
 // 对有序集合进行顺序无关的遍历时，使用逆序遍历：逆序遍历可以节省变量，代码比较优化，注这是遍历数组的最佳方案：
 // var a = ['a', 'b', 'c', 1, 2]
 // aLen = a.length
@@ -238,3 +238,59 @@ for (i in pt) {
     values_str += pt[i] + ''
 }
 console.log(keys_str, values_str);
+
+//编写一个数组去重的方法:
+//way1
+function test(arr) {
+    var res = []
+    for (var i=0, len=arr.length; i<len; i++ ) {
+        if (res.indexOf(arr[i]) == -1) {
+            res.push(arr[i])
+        }
+    }
+    return res
+}
+var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
+console.log(test(a))
+//way2 报错原因未知
+function test(arr) {
+    var dic = {}
+    var res = []
+    for (i in arr) {
+        if (!dic.arr[i]) {
+            dic.arr[i] = 1
+            res.push(arr[i])
+        }
+    }
+    return res
+｝
+var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
+console.log(test(a))
+//way2.5 成功
+function test(arr) {
+    var dic = {}
+    var res = []
+    for (i in arr) {
+        if (!dic[arr[i]]) {
+            dic[arr[i]] = 1
+            res.push(arr[i])
+        }
+    }
+    return res
+}
+var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
+console.log(test(a))
+//way3 这种方法效率最高可是破坏了原数组的顺序
+function test(arr) {
+    var tmp = arr.sort()
+    var key = 1
+    for (var i=1, len=tmp.length; i<len; i++) {
+            if (tmp[i] != tmp[i-1]) {
+                tmp[key] = tmp[i] 
+                key++
+            }
+    }
+    return tmp.slice(0,key)
+}
+var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
+console.log(test(a))

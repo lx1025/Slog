@@ -34,4 +34,15 @@ print(getattr(t, run))        #method
 setattr(t, 'age', '18')        #设置属性
 print(getattr(t, age))       #18
 
-#
+#微信api获取用户信息
+state = 'http://erp.statg.ktvsky.com/test?ktv_id=84579&date=20161010'
+if '?' in state:
+    print(state.split('?'), 1)  # 1表示切一次 ['http://erp.statg.ktvsky.com/test', 'ktv_id=84579&date=20161010']
+    path, params = state.split('?', 1)
+    print(path, params)     # http://erp.statg.ktvsky.com/test  ktv_id=84579&date=20161010
+    params_list = params.split('&')
+    print(params_list)        # ['ktv_id=84579', 'date=20161010']
+    params_list = list(filter(lambda x: 'date' not in x, params_list))
+    print(params_list)        # ['ktv_id=84579']
+    state = path + '?' + '&'.join(params_list)
+    print(state)                   # http://erp.statg.ktvsky.com/test?ktv_id=84579

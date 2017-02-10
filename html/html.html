@@ -1,4 +1,4 @@
-https://github.com/ecomfe/spec/blob/master/html-style-guide.md 百度html规范。
+<!-- https://github.com/ecomfe/spec/blob/master/html-style-guide.md 百度html规范。
 什么是HTML语义化？
 基本上都是围绕着几个主要的标签，像标题（H1~H6）、列表（li）、强调（strong em）等等
 根据内容（内容语义化），选择合适的标签（代码语义化，便于开发者阅读和写出更优雅的代码的同时让浏览器的爬虫和机器很好地解析
@@ -6,19 +6,19 @@ https://github.com/ecomfe/spec/blob/master/html-style-guide.md 百度html规范�
 用户体验：例如title、alt用于解释名词或解释图片信息、label标签的活用
 有利于SEO：和搜索引擎建立良好沟通，有助于爬虫抓取更多的有效信息：爬虫依赖于标签来确定上下文和各个关键字的权重
 方便其他设备解析（如屏幕阅读器、盲人阅读器、移动设备）以意义的方式来渲染网页；
-附：html标签语义http://wenku.baidu.com/link?url=Ak6zE7Ho6x8IiK6LAFY7hXQXVuP3VBohiXDnhlCUMIhmSGN0ZXqsznuIdsui7f0qSwoXhIb6wrE-K9P8KnQ5Q9fQaJA7KvHs5gol490sDB_
+附：html标签语义http://wenku.baidu.com/link?url=Ak6zE7Ho6x8IiK6LAFY7hXQXVuP3VBohiXDnhlCUMIhmSGN0ZXqsznuIdsui7f0qSwoXhIb6wrE-K9P8KnQ5Q9fQaJA7KvHs5gol490sDB -->
 
-写HTML代码时应注意什么？
+<!-- 写HTML代码时应注意什么？
 尽可能少的使用无语义的标签div和span；
 在语义不明显时，既可以使用div或者p时，尽量用p, 因为p在默认情况下有上下间距，对兼容特殊终端有利；
 不要使用纯样式标签，如：b、font、u等，改用css设置。
 需要强调的文本，可以包含在strong或者em标签中（浏览器预设样式，能用CSS指定就不用他们），strong默认样式是加粗（不要用b），em是斜体（不用i）；
 使用表格时，标题要用caption，表头用thead，主体部分用tbody包围，尾部用tfoot包围。表头和一般单元格要区分开，表头用th，单元格用td；
 表单域要用fieldset标签包起来，并用legend标签说明表单的用途；
-每个input标签对应的说明文本都需要使用label标签，并且通过为input设置id属性，在lable标签中设置for=someld来让说明文本和相对应的input关联起来。
+每个input标签对应的说明文本都需要使用label标签，并且通过为input设置id属性，在lable标签中设置for=someid来让说明文本和相对应的input关联起来。 -->
 
 <a href="http://www.baidu.com">baidu</a>
-属性值应该始终被包括在引号内。双引号是最常用的，不过使用单引号也没有问题。
+属性值应该始终被包括在引号内。双引号是最常用的，不过使用单引号也没有问题,百度前端规范规定使用双引号.
 <a href="http://www.baidu.com">baidu</a>
 <h1> 定义最大的标题。<h6> 定义最小的标题。
 <hr /> 创建水平线
@@ -48,17 +48,17 @@ This text is in Verdana and red</p>
 
 应该避免使用下面这些标签和属性：
 标签  描述
-<center>    定义居中的内容。
 <font> 和 <basefont> 定义 HTML 字体。
-<s> 和 <strike>  定义删除线文本
 <u> 定义下划线文本
+<b> 定义粗体文本。
+<center>    定义居中的内容。
+<s> 和 <strike>  定义删除线文本
 <s><center><p style="font-size:30px">This text is 30 pixels high</p></center></s>
 <font size="3" color="red">This is some text!</font>
 
 文字格式：
-<b> 定义粗体文本。
 <big>   定义大号字。
-<em>    定义着重文字。
+<em>    定义着重(斜体)文字。
 <i> 定义斜体字。
 <small> 定义小号字。
 <strong>    定义加重语气。
@@ -250,7 +250,9 @@ checked 属性设置或返回 checkbox 是否应被选中。
 <input type="checkbox" id="checkman">
 <input type="button" onclick=changeHandler()>
 <!-- 返回的例子 -->
-if ($('#checkman').checked) {
-    console.log('something')    
-}
+<script>
+    if ($('#checkman').checked == ture) {
+        console.log('something')
+    }
+</script>
 
