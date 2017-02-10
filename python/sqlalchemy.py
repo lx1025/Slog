@@ -2,6 +2,8 @@
 num = self.slave.query(func.count('1').label('count')).filter(KtvAgent.province_id!=0, KtvAgent.province_id!=1, KtvAgent.city_id==0, KtvAgent.payed==1).scalar()
 #总量查询：
 sum = self.slave.query(func.sum(CustomKtvOrder.fee)).filter(CustomKtvOrder.state==2, CustomKtvOrder.fee!=1).scalar()
+#日期 :
+count = self.slave.query(func.count('1').label('count')).filter(func.date(MusicOrder.create_time) == date).scalar()
 #多查询：
 res = self.slave.query(KtvStore).filter(KtvStore.store_id.in_(ktvids)).all()
 #删除：
@@ -16,3 +18,4 @@ else:
     self.master.add(GzhDisOrder(**data))
 self.master.commit()
 
+insert into music_order (sp_id, store_id, mac_id, tp, pay_fee, state, info) values(6, 5000003, "00E07E0057E3", 2, 1000000, 1, "asdf");

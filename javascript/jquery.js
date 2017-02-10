@@ -256,3 +256,60 @@ $('.money').on('mouseover', function(evt) {
     console.log('test')
     $('.real-money').show()
 })
+
+//一个checkbox表单提交的例子:
+//html
+<div class="left">
+    <input type="checkbox" name="trouble" id="trouble1" value="1"/><label for="trouble1">录音效果不好</label>
+    <input type="checkbox" name="trouble" id="trouble3" value="3"/><label for="trouble3">歌曲不全</label>
+    <input type="checkbox" name="trouble" id="trouble5" value="5"/><label for="trouble5">没法退款</label>
+    <input type="checkbox" name="trouble" id="trouble7" value="7"/><label for="trouble7">搜不到想唱的歌</label>
+</div>
+<div class="right">
+    <input type="checkbox" name="trouble" id="trouble2" value="2"/><label for="trouble2">机器卡顿</label>
+    <input type="checkbox" name="trouble" id="trouble4" value="4"/><label for="trouble4">点歌太繁琐</label>
+    <input type="checkbox" name="trouble" id="trouble6" value="6"/><label for="trouble6">音乐质量差</label>
+    <input type="checkbox" name="trouble" id="trouble8" value="8"/><label for="trouble8">环境空气不好</label>
+</div>
+//js
+var count = 0;
+var type = [];
+$('input:checkbox').each(function () {
+    if ($(this).prop('checked') == true) {
+        count++;
+        type.push($(this).val())
+    }
+});
+if(count<1){
+alert("至少选一项");
+return;
+}
+type = type.join('')
+
+//关于wow用户反馈的跨域解决
+//jsonp并不支持post方式,会自动转换为get
+$.ajax({
+    type: 'get',
+    url: 'URL',
+    data: {
+        key: value
+    },
+    datatype: 'jsonp',
+    jsonp: 'callback',
+    jsonpCallback: 'func'
+})
+
+//一段远古时期的jquery代码,来自myktv_cms
+//html
+ktv名字(回车进行搜索): <input id='ktv_name' placeholder='回车进行搜索' hint='回车进行搜索' />
+//js
+$('#ktv_name').bind('keypress', function (event) {
+    if (event.keyCode == '13') {
+        var url = window.location.href
+        var new_url = LB.setUrlParam(url, 'ktv_name', $('#ktv_name').val())     //这一段用字符串拼接也可以
+        window.location.href = new_url
+    }
+})
+
+//一个抽象的jquery查询
+alert($(this).parent().parent('tr').find('td:first-child').text());

@@ -1,4 +1,5 @@
-css书写规范：https://github.com/fex-team/styleguide/blob/master/css.md
+css书写规范：https://github.com/fex-team/styleguide/blob/master/css.md*/
+
 /*所有的样式会根据下面的规则层叠于一个新的虚拟样式表中
 由低到高依次是：
 浏览器缺省设置
@@ -6,25 +7,24 @@ css书写规范：https://github.com/fex-team/styleguide/blob/master/css.md
 内部样式表（位于 <head> 标签内部）
 内联样式（在 HTML 元素内部）*/
 
-关于多重样式：
-如果某些属性在不同的样式表中被同样的选择器定义，那么属性值将从更具体的样式表中被继承过来。 
-例如，外部样式表拥有针对 h3 选择器的三个属性：
-h3
-{
-color:red;
-text-align:left;
-font-size:8pt;
+/*关于多重样式：如果某些属性在不同的样式表中被同样的选择器定义，那么属性值将从更具体的样式表中被继承过来,例如*/
+/*外部样式表拥有针对 h3 选择器的三个属性：*/
+h3 {
+    color:red;
+    text-align:left;
+    font-size:8pt;
 }
-而内部样式表拥有针对 h3 选择器的两个属性：
-h3
-{
-text-align:right;
-font-size:20px;
+/*而内部样式表拥有针对 h3 选择器的两个属性：*/
+h3 {
+    text-align:right;
+    font-size:20px;
 }
-假如拥有内部样式表的这个页面同时与外部样式表链接，那么 h3 得到的样式是：
+/*假如拥有内部样式表的这个页面同时与外部样式表链接，那么 h3 得到的样式是：*/
+h3 {
 color:red;
 text-align:right;
 font-size:20pt;
+}
 
 /*外部样式表：
 <head>
@@ -34,7 +34,6 @@ mystyle.css:
 hr {color: sienna;}
 p {margin-left: 20px;}
 body {background-image: url("images/back40.gif");}
-
 /*内部样式表：*/
 <head>
 <style type="text/css">  type  可省
@@ -43,7 +42,6 @@ body {background-image: url("images/back40.gif");}
   body {background-image: url("images/back40.gif");}
 </style>
 </head>
-
 /*内联样式表：*/
 <p style="color: sienna; margin-left: 20px">
 This is a paragraph
@@ -197,4 +195,3 @@ $('#id').show()
 /*https://isux.tencent.com/web-app-rem.html*/
 /*
     
-*/
