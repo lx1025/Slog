@@ -352,7 +352,7 @@ pull一个镜像:docker pull centos:centos6
 将image打上标签:docker tag  <image_id>  <tag_name>  (注意:这里的tag name必须是 <user/resp_name>的形式, 你必须有dockhub的账号,并且已经在本地终端上登记过(docker login))
 push到自己的dokcer hub:docker push <tag_name>
 
--------------------------------------------------------
+------------------------------------------------
 eg2,在上述镜像中安装mysql5.6(https://segmentfault.com/a/1190000003049498):
 ----这种安装方法无法启动>..<
 wget dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
@@ -375,7 +375,7 @@ yum repolist enabled | grep mysql
 建立一个数据库:
 
 
-------------------------------------------
+----------------------------------------------
 关于docker-machine,以及docker和pycharm的连接
 1.安装docker
 见上
