@@ -404,12 +404,61 @@ function whatBrowser() {
     console.log(userAgent)
 }
 whatBrowser()    
-Netscape
-5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
-Mozilla
-Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
+// Netscape
+// 5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
+// Mozilla
+// Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
 
 //JS 一定要放在 Body 的最底部么？聊聊浏览器的渲染机制
 //script标签的位置会影响首屏时间么？
 //答案是：不影响（如果这里里的首屏指的是页面从白板变成网页画面——也就是第一次Painting,这个时间仅仅取决于dom树,cssom树,render树的生成时间），但有可能截断首屏的内容，使其只显示上面一部分(打断了深度遍历)。
 //实质过程就是按序加载,可是先生成dom树,再生成cssdom树,然后render;js代码是加载完成后顺序执行
+
+//this_final
+
+//关于闭包:获取函数内部变量
+//一个最简单直接的闭包的例子
+function a() {
+    var n = 0
+    function res() {
+        n++
+        console.log(n)
+    }
+    return res
+}
+b = a()
+b()     //1
+b()     //2
+//三个易错的demo
+//demo1
+for (var i = 0; i < 10; i++) {
+    setTimeout(function() {
+        console.log(i);  
+    }, 1000);
+}//10个10
+for (var i = 0; i < 10; i++) {
+    console.log(i)
+}//1,2,3....
+for (var i = 0; i < 10; i++) {
+    (function (e) {
+        setTimeout(function () {
+            console.log(e)
+        }, 1000)
+    })(i)
+}//1,2,3 这叫做匿名括号函数
+//demo2 http://blog.csdn.net/gaoshanwudi/article/details/7355794
+//demo3
+function createFunctions(){
+    var result = new Array();
+    for (var i=0; i < 10; i++){
+        result[i] = function(){
+            return i;
+        };
+        console.log(result[i])
+    }
+    return result;
+}
+var funcs = createFunctions();
+for (var i=0; i < funcs.length; i++){
+  console.log(funcs[i]());
+}
