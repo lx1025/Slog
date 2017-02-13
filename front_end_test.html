@@ -1,0 +1,84 @@
+<!-- 常用那几种浏览器测试？有哪些内核(Layout Engine)?
+(Q1)浏览器：IE，Chrome，FireFox，Safari，Opera。
+(Q2)内核：Trident(英[ˈtraɪdnt],三叉戟)，Gecko(英[ˈgekəʊ],壁虎)，Presto(英[ˈprestəʊ],)，Webkit。  -->
+
+
+<!-- 说下行内元素和块级元素的区别？行内块元素的兼容性使用？（IE8 以下）
+ (Q1)行内元素：会在水平方向排列，不能包含块级元素，设置width无效，height无效(可以设置line-height)，margin上下无效，padding上下无效。
+块级元素：各占据一行，垂直方向排列。从新行开始结束接着一个断行。
+(Q2)兼容性：display:inline-block;*display:inline;*zoom:1; -->
+
+<!-- 清除浮动的几种方式:(./css/css_summary.css/*清除浮动*) -->
+
+<!-- box-sizing常用的属性有哪些？分别有什么作用？
+(Q1)box-sizing: content-box|border-box|inherit;
+(Q2)content-box:宽度和高度分别应用到元素的内容框。
+在宽度和高度之外绘制元素的内边距和边框(元素默认效果)。
+(Q2)border-box:元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。
+通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。 -->
+
+<!--  Doctype作用？标准模式与兼容模式各有什么区别?
+(Q1)<!DOCTYPE>告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。
+(Q2)标准模式的排版和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。 -->
+
+<!-- 页面导入样式时，使用link和@import有什么区别？
+（1）link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;
+（2）页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;
+（3）import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题; -->
+
+<!-- 介绍一下你对浏览器内核的理解？
+主要分成两部分：渲染引擎(layout engineer或Rendering Engine)和JS引擎。
+渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要内核。
+JS引擎则：解析和执行javascript来实现网页的动态效果。
+最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎。-->
+
+<!-- .html5有哪些新特性？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
+HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
+(1)绘画 canvas;
+(2)用于媒介回放的 video 和 audio 元素;
+(3)本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;
+(4)sessionStorage 的数据在浏览器关闭后自动删除;
+(5)语意化更好的内容元素，比如 article、footer、header、nav、section;
+(6)表单控件，calendar、date、time、email、url、search;
+(7)新的技术webworker, websocket, Geolocation; -->
+
+<!-- html标签的语义化(./html/html.html) -->
+
+<!-- HTTP状态码？
+100 Continue  继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
+200 OK   正常返回信息
+30* Redirect  请求的网页已永久移动到新位置。
+40* Client 出错 
+400 Bad Request  服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。
+401 Unauthorized  授权出错
+403 Forbidden  禁止访问。
+404 Not Found  找不到如何与 URI 相匹配的资源。
+50* Server 出错
+500 Internal Server Error  最常见的服务器端错误。
+503 Service Unavailable 服务器端暂时无法处理请求（可能是过载或维护） -->
+
+<!-- 前端性能优化的策略:
+（1）减少http请求次数:从设计实现层面简化页面,合理设置 HTTP缓存, CSS Sprites(雪碧图), JS、CSS源码压缩, 使用Inline Images且图片大小合适
+（2）用变量保存AJAX请求结果，每次操作本地变量，不用请求，减少请求次数
+（3）用innerHTML代替DOM操作，减少DOM操作次数，在使用 DOM 操作库时用上 array-ids, 优化javascript性能。
+（4）当需要设置的样式很多时设置className而不是直接操作style。
+（5）少用全局变量、缓存DOM节点查找的结果。减少IO读取操作。
+（6）避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。
+（7）将样式表放在顶部，将脚本放在底部 -->
+
+<!-- js代码为什么要放在body后边;为什么建议把css代码以link方式放在body前边的head中的(还建议把link标签放在<script>前边呢)
+(Q1)浏览器是逐行加载html代码的,js代码在加载完成后立即执行,渲染顺序是(dom, cssom, layout, render)
+某些js代码是必须放在body前边的,比如获取浏览器的UA来决定引入不同的css,
+但是某些包含dom操作的js代码,会因为dom树当前还没有加载完成,导致代码并没有产生效果,这类js代码就应该放在body之后,等待dom树生成之后再加载然后执行,
+当然你的js代码还可以放在body中,但是必须注意,如果这段代码包含了某些dom操作,它可能会打断dom树的深度遍历,影响dom树的生成,导致渲染失败.
+所以js代码通常放在body之后.
+(Q2)如果你的项目是模块化的,import显然更有利于开发, 
+link之所已效率更高,是因为在dom树生成时, link会同时被加载,而@import引用的CSS会等到页面被加载完再加载,
+现在来看一个例子,假定link css需要10ms加载完成,dom树的生成也需要10ms:
+如果link放在body的前边:
+浏览器按序加载html,首先发出linkcss的加载请求,然后继续向下,10ms后dom树渲染完成,因为link标签同时加载的属性,此时css也已加载完成,直接可以生成cssom树
+共需10ms, 就可以生成dom树和cssom树,然后再layout(定位), render(渲染);
+如果link放在body的后边,浏览器首先需要10ms生成dom树,然后发现link标签,再花费10ms加载css, 生成cssom树,共需20ms.
+因为我们建议把link标签放在最前边,包括script的前边
+ -->
+

@@ -4,4 +4,3 @@ scp work@120.132.55.163:/home/work/pos_order.sql pos_order.sql #本地mysql所�
 !my
 use myktv
 source /home/xinghang/pos_order.sql
-

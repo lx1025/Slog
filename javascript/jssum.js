@@ -294,3 +294,122 @@ function test(arr) {
 }
 var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
 console.log(test(a))
+
+//关于js的dom操作
+document.createDocumentFragment()    //创建一个DOM片段
+document.createElement()   //创建一个具体的元素
+document.createTextNode()   //创建一个文本节点
+//添加、移除、替换、插入
+appendChild()
+removeChild()
+replaceChild()
+insertBefore()
+//eg
+var para=document.createElement("p");
+var node=document.createTextNode("这是新段落。");
+para.appendChild(node);
+var element=document.getElementById("div1");
+element.appendChild(para);
+//查找
+document.getElementsByTagName()
+document.getElementsByClassName()
+document.getElementsByName()     // 注: 通过元素的Name属性的值(IE容错能力较强，会得到一个数组，其中包括id等于name值的)
+document.getElementById()
+//eg
+document.getElementById('any_id').src = 'something'
+
+//关于call和apply
+//call()的第一个参数是上下文，后续是实例传入的参数序列。
+//apply和call一个意思, apply()函数有两个参数：第一个参数是上下文，第二个参数是参数组成的数组。如果上下文是null，则使用全局对象代替。
+//call用来方便实现继承方法
+function Animal(name){      
+    this.name = name;      
+    this.showName = function(){      
+        alert(this.name);      
+    }      
+}      
+function Cat(name){    
+    Animal.call(this, name);    
+}      
+var cat = new Cat("Black Cat");     
+cat.showName(); 
+//多重继承 es5的写法
+function Class10(a, b) {
+    this.a = a
+    this.b = b
+    this.showSub = function() {
+        alert(this.a - this.b)
+    }
+}  
+function Class11(a, b) {  
+    this.a = a
+    this.b = b
+    this.showAdd = function () {
+        alert(this.a + this.b)
+    }
+}  
+function Class2(a, b) {  
+    Class10.call(this, a, b);  
+    Class11.call(this, a, b);  
+} 
+test= new Class2(2, 1)
+test.showSub()
+test.showAdd()
+//这样就不行了...
+function Class10(a, b) {
+    this.showSub = function() {
+        alert(this.a - this.b)
+    }
+}  
+function Class11(a, b) {  
+    this.showAdd = function () {
+        alert(this.a + this.b)
+    }
+}  
+function Class2(a, b) {  
+    Class10.call(this, a, b);  
+    Class11.call(this, a, b);  
+} 
+test= new Class2(2, 1)
+test.showSub()      //NaN
+test.showAdd()      //NaN
+//es6的写法
+function Class10(a, b) {
+    this.showSub = () => {
+        alert(a - b)
+    }
+}  
+function Class11(a, b) {  
+    this.showAdd = () => {
+        alert(a + b)
+    }
+}  
+function Class2(a, b) {  
+    Class10.call(this, a, b);  
+    Class11.call(this, a, b);  
+} 
+test= new Class2(2, 1)
+test.showSub()
+test.showAdd()
+
+//js获取UA
+function whatBrowser() {  
+    appName = navigator.appName;  
+    version = navigator.appVersion;  
+    codeName = navigator.appCodeName;  
+    userAgent = navigator.userAgent;
+    console.log(appName)
+    console.log(version)
+    console.log(codeName)
+    console.log(userAgent)
+}
+whatBrowser()    
+Netscape
+5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
+Mozilla
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
+
+//JS 一定要放在 Body 的最底部么？聊聊浏览器的渲染机制
+//script标签的位置会影响首屏时间么？
+//答案是：不影响（如果这里里的首屏指的是页面从白板变成网页画面——也就是第一次Painting,这个时间仅仅取决于dom树,cssom树,render树的生成时间），但有可能截断首屏的内容，使其只显示上面一部分(打断了深度遍历)。
+//实质过程就是按序加载,可是先生成dom树,再生成cssdom树,然后render;js代码是加载完成后顺序执行
