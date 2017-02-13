@@ -448,7 +448,7 @@ for (var i = 0; i < 10; i++) {
 }//1,2,3 这叫做匿名括号函数
 //demo2 http://blog.csdn.net/gaoshanwudi/article/details/7355794
 //demo3
-function createFunctions(){
+function a(){
     var result = new Array();
     for (var i=0; i < 10; i++){
         result[i] = function(){
@@ -458,7 +458,7 @@ function createFunctions(){
     }
     return result;
 }
-var funcs = createFunctions();
+var b = a();
 for (var i=0; i < funcs.length; i++){
-  console.log(funcs[i]());
+    console.log(funcs[i]());
 }
