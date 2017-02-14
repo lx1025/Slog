@@ -511,7 +511,7 @@ $('#clickMe').click(function (event) {
 }) 
 
 //javascript的本地对象，内置对象和宿主对象
-//本地对象为array obj regexp(正则表达式)等可以new实例化
+//本地对象为array obj regexp(正则表达式, 定义两种表达式的方式你知道吗?1:re = /\d+/ig, 2, var re = new RegExp('\d+', 'ig'))等可以new实例化
 //内置对象为gload Math 等不可以实例化的
 //宿主为浏览器自带的document, window, navigator等
 
