@@ -462,3 +462,50 @@ var b = a();
 for (var i=0; i < funcs.length; i++){
     console.log(funcs[i]());
 }
+
+//关于js事件冒泡和事件捕获
+//一个直接的发生时间冒泡和捕获的例子:
+/*html
+<!DOCTYPE html> 
+<meta charset="utf-8"> 
+<title>test</title> 
+<head> 
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script type="text/javascript"> 
+$(function(){ 
+$('#clickMe').click(function(){ 
+alert('hello'); 
+}); 
+$('body').click(function(){ 
+alert('baby'); 
+}); 
+}); 
+</script> 
+</head> 
+<body> 
+<div style="width:100px;height:100px;background-color:red;"> 
+<button type="button" id="button2">button1</button> 
+<button id="clickMe">button2</button> 
+</div> 
+</body> 
+</html> 
+*/
+//事件冒泡,当点击button2时,依次弹出hello baby,事件从子节点蔓延到父节点,触发了绑定在父节点的事件,就叫做事件冒泡
+//事件捕获,当点击任意位置,会弹出baby,这就叫时间事件捕获,通过时间的选择器可以避免发生意料之外的事件捕获
+//如何解决冒泡:
+//demo1 return false
+$('#clickMe').on('click', function () {
+    alert('hello')
+    return false    //return false方法
+})
+//demo2 ie e.stopPropagation, 非ie cancelBubble
+$('#clickMe').click(function (event) {
+    alert('hello'); 
+    var e = window.event || event; 
+    if ( e.stopPropagation ){ //如果提供了事件对象，则这是一个非IE浏览器 
+        e.stopPropagation(); 
+}else{ 
+    //兼容IE的方式来取消事件冒泡 
+    window.event.cancelBubble = true; 
+} 
+}) 
