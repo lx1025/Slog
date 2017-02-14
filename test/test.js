@@ -1,79 +1,31 @@
-var a = state.map(todo => {
-    if (todo.id === updatetodo.id) {
-        return {...todo, ...updatetodo}
-    }
-    else {
-        return todo
-    }
-})
-a.map(i => i+1)
-var a.filter(item => item%2===1)
-$.getJSON('/test', {param1: 'value1'}, function(data) {
-    var items = []
-    $.each(data, function(key, val) {
-        items.push('<li id="'+key+'">val</li>')
-    })
-    $('<ul/>', {'class':'ul-class',html:items.join(',')}).append('body')
-});
-var a = ['a', 'b', 'c']           //array
-var aLen = a.length         //属性不是函数
-while (a.length--) {
-    console.log(a[aLen])    
-}
-console.log(aLen)           //-1
-
-var a = ['a', 'b', 'c']           //array
-for (var i=0, len=a.length; i<len; i++) {
-    console.log(a[i])
-}
-console.log(i,len) //var 全局作用域名
-$(function(){
-    var app = {
-        a: 1,
-        test() {
-            console.log(app.a)
+//js的递归快拍
+if (typeof Array.prototype.quickSort != 'function') {
+    Array.prototype.quickSort = function () {
+        quickSortHelper(this, 0, this.length-1)
+        function quickSortHelper (arr, start, end) {
+            if (start < end) {
+                var part = partation(arr, start, end)
+                arguments.callee(arr, start, part - 1)
+                arguments.callee(arr, part + 1, end)
+            }
+        }
+        function partation(arr, start, end) {
+            var pivot = arr[start]
+            while (start < end) {
+                while (start < end && arr[end] > pivot) {
+                    end -= 1
+                }
+                arr[start] = arr[end]
+                while (start < end && arr[start] < pivot) {
+                    start += 1
+                }
+                arr[end] = arr[start]
+            }
+            arr[start] = pivot
+            return start
         }
     }
-    $('#id').click()
-})
-var app = {
-    time: 10,
-    isClickable: true,
-    time_running() {
-        timmer = setInterval(function() {
-            app.isClickable = false
-            $('#login_button').hide()
-            app.time--
-            $('#timmer').text(app.time).show()
-            if (app.time <= 0) {
-                app.clickable = true
-                $('#login_button').show()
-                $('#timmer').hide()
-                app.time = 10
-                console.log('success')
-                clearInterval(timmer)                
-            }
-        }, 1000)
-    }
 }
-$('').show()
-$('').hide()
-$('').html()
-$('').text()
-$('').val()
-$('').append()
-$('<ul/>', {class: "ul-class", html: items.join(',')}).appendTo('#id')
-$.ajax({
-    url: '/test',
-    type: 'POST',
-    dataType: 'json',
-    data: {params, values},
-    success (data) {
-        var billInfo = `<div id="result">
-            <ul class="bill">
-            <li>${data.create_time}</li>
-            </ul>
-        </div>`
-    }
-})
-!
+var a = [3,1,2]
+a.quickSort()
+console.log(a)

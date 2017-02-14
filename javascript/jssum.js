@@ -295,6 +295,38 @@ function test(arr) {
 var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
 console.log(test(a))
 
+//js快速排序的递归写法, 两层while (start<end)必须都有, 否则控制台就卡死了...为什么呢
+if (typeof Array.prototype.quickSort !== 'function') {
+    Array.prototype.quickSort = function () {
+        quickSortHelper(this, 0, this.length-1);
+        function quickSortHelper(arr, start, end) {
+            if(start < end){
+                var part = partation(arr, start, end)
+                arguments.callee(arr, start, part - 1)
+                arguments.callee(arr, part + 1, end)
+            }         
+        }
+        function partation(arr, start, end) {
+            var pivot = arr[start]
+            while (start < end) {
+                while (start < end && arr[end] > pivot) {
+                    end -= 1
+                }
+                arr[start] = arr[end]
+                while(start < end && arr[start] < pivot) {
+                    start += 1
+                } 
+                arr[end] = arr[start]
+            }
+            arr[start] = pivot
+            return start
+        }
+    }
+}   
+var arr = [5, 2, 3, 1, 4];
+arr.quickSort();
+console.log(arr);
+
 //关于js的dom操作
 document.createDocumentFragment()    //创建一个DOM片段
 document.createElement()   //创建一个具体的元素
@@ -394,7 +426,7 @@ test.showAdd()
 
 //js获取UA
 function whatBrowser() {  
-    appName = navigator.appName;  
+    appName =  cgator.appName;  
     version = navigator.appVersion;  
     codeName = navigator.appCodeName;  
     userAgent = navigator.userAgent;
@@ -575,3 +607,31 @@ var res1 = str.match(/^\d+$/)       //null
 var res2 = str1.match(/^\d+$/)     //null
 var res3 = str.match(/\d+/)    //["18", index: 10, input: "My age is 18.Golden age!"]
 var res4 = str1.match(/\d+/)    //nu//
+//利用正则表达式将url的请求参数转化为字典对象: var reg = /([^&?=]+)=([^&?=]*)/g
+//way1
+function getQueryObject(url) {
+    url = url == null ? window.location.href : url;
+    var search = url.substring(url.lastIndexOf("?") + 1);  //str.substring(index1,  index2) 字符串截取,只有一个参数时截取至尾部   
+    var obj = {};     
+    var reg = /([^?&=]+)=([^?&=]*)/g        //正则的分组, 后续可以用$1, $2获取分组,这是replace的特殊用法
+    search.replace(reg, ($1, $2) => {
+        data[$1] = $2        
+    });     
+    return obj;
+}
+//way2
+function getQueryObject(url) {
+    url = url == null ? window.location.href : url;
+    var search = url.substring(url.lastIndexOf("?") + 1);     
+    var reg = /([^?&=]+)=([^?&=]*)/g
+    var a = search.match(reg)
+    console.log(a)
+    data = {}
+    for (i in a) {
+        key_value = a[i].split('=')
+        data[key_value[0]] = key_value[1]
+    }
+    console.log(data)
+        
+}
+getQueryObject()
