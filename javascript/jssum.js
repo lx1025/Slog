@@ -509,3 +509,69 @@ $('#clickMe').click(function (event) {
     window.event.cancelBubble = true; 
 } 
 }) 
+
+//javascript的本地对象，内置对象和宿主对象
+//本地对象为array obj regexp(正则表达式)等可以new实例化
+//内置对象为gload Math 等不可以实例化的
+//宿主为浏览器自带的document, window, navigator等
+
+//关于正则表达式
+//正则表达式的预定义(分为名词和量词)
+//名词:
+/*
+.       .                   匹配除换行符之外的任何一个字符 
+\d    [0-9]                   匹配数字 
+\D    [^0-9]                  匹配非数字字符 
+\s     [ \n\r\t\f\x0B]               匹配一个空白字符 
+\S    [^ \n\r\t\f\x0B]               匹配一个非空白字符 
+\w    [a-zA-Z0-9_]                    匹配字母数字和下划线 
+\W    [^a-zA-Z0-9_]                 匹配除字母数字下划线之外的字符 
+量词(以下全是贪婪量词, 即力求可以实现的最大匹配):
+*     匹配前面的子表达式零次或多次。zo* 能匹配 "z" 以及 "zoo"。 * 等价于{0,}。 
++     匹配前面的子表达式一次或多次。'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。 
+?     匹配前面的子表达式零次或一次。"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。 
+{n}   n 是一个非负整数。匹配确定的 n 次。'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。 
+{n,}  n 是一个非负整数。至少匹配n 次。'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。 
+{n,m} m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。 "o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
+用贪婪量词进行匹配时叫做贪婪匹配, 即力争最大匹配, 以上量词都是贪婪量词 
+用惰性量词进行匹配时，贪婪量词后加?变成惰性匹配, 即力争最小匹配 
+var str = "abc";  
+var re = /\w+/;//将匹配abc  
+re = /\w+?/;//将匹配a  
+*/
+//js正则表达式RegExp
+//完整清晰的正则表达式教程见 http://www.cnblogs.com/aaronjs/archive/2012/06/30/2570970.html
+//test 返回值boolen
+//银行卡位数验证正则:
+var res = (/^\d{6,}$/).test(vaule)
+//手机号正则匹配:
+var res = (/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/).test(value)
+//邮箱正则匹配:
+var res = (/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/).test(value)
+//replace
+var str ="some money"
+alert(str.replace("some","much"))       //much money  
+var re = /\s/ 
+alert(str.replace(re,"%"))      //some%money  
+str ="some some         some" 
+re = /\s+/
+alert(str.replace(re,"#"))      //some#some        some
+re = /\s+/g;        //g,全局标志,将使正则表达式匹配整个字符串  
+alert(str.replace(re,"@"))      //some@some@some@  
+//split  
+var str = "a-bd-c"
+var arr = str.split("-")    //["a","bd","c"]  
+re=/[^a-z]/i    //前面我们说^表示字符开始,但在[]里它表示一个负字符集,表示非.
+arr = str.split(re)         //仍返回["a","bd","c"];  
+//search  在字符串中查找时我们常用indexOf
+var str = "My age is 18.Golden age!";//年龄不是一定的,我们用indexOf不能查找它的位置  
+re = /\d+/;  
+alert(str.search(re));//10
+//match 返回匹配的查找目标,类型为arr, arr[0]位匹配值. 
+//另:这里的一个坑,关于正则中^&的用法(https://zhidao.baidu.com/question/581570451.html)
+var str = 'My age is 18.Golden age!'
+var str1 = 'My age is Golden age!'
+var res1 = str.match(/^\d+$/)       //null
+var res2 = str1.match(/^\d+$/)     //null
+var res3 = str.match(/\d+/)    //["18", index: 10, input: "My age is 18.Golden age!"]
+var res4 = str1.match(/\d+/)    //nu//
