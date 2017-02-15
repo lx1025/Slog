@@ -44,3 +44,21 @@ git checkout -b test origin/test
 
 删除本地分支：git branch -d name
 删除远端分支：git push origin :name
+
+一个标准的git仓库的配置文件（首先需要添加公钥）
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = git@github.com:xinghanggogogo/Slog.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[user]
+	name = xinghang
+	email = xinghang@thunder.com.cn
