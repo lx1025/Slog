@@ -74,10 +74,10 @@ $.getJSON('/test', {param1: 'value1'}, function (data) {
 // Promise对象 用 动宾短语的进行时 表达：var loadingData = ajax.get('url')
 // loadingData.then(callback)
 // 关于注释：
-// 单行// 
+// 单行//
 // 多行/**/
 // 文档说明/** */
-// /** 
+// /**
 //  *@file:
 //  *@class:
 // */
@@ -113,7 +113,7 @@ $.getJSON('/test', {param1: 'value1'}, function (data) {
 // str转num，并期望忽略数字后的非数字字符串时使用parseInt():
 // var width = '200px';
 // a = parseInt(width, 10)  //使用parseInt(必须指定机制)
-// num,str装boolen：!!a 
+// num,str装boolen：!!a
 // var a = 3.14;
 // console.log(!!a)         //ture
 // var b = 0；
@@ -203,7 +203,7 @@ console.log([].constructor === Array)
 //拥有属性
 var x = {foo: 'something'}
 console.log(x.hasOwnProperty('foo'))
-//keys or values to array, 
+//keys or values to array,
 //IE8及以下是不支持的!
 var a = {x: 1, y: 2}
 var keys_arr = Object.keys(a)
@@ -286,7 +286,7 @@ function test(arr) {
     var key = 1
     for (var i=1, len=tmp.length; i<len; i++) {
             if (tmp[i] != tmp[i-1]) {
-                tmp[key] = tmp[i] 
+                tmp[key] = tmp[i]
                 key++
             }
     }
@@ -304,7 +304,7 @@ if (typeof Array.prototype.quickSort !== 'function') {
                 var part = partation(arr, start, end)
                 arguments.callee(arr, start, part - 1)
                 arguments.callee(arr, part + 1, end)
-            }         
+            }
         }
         function partation(arr, start, end) {
             var pivot = arr[start]
@@ -315,14 +315,14 @@ if (typeof Array.prototype.quickSort !== 'function') {
                 arr[start] = arr[end]
                 while(start < end && arr[start] < pivot) {
                     start += 1
-                } 
+                }
                 arr[end] = arr[start]
             }
             arr[start] = pivot
             return start
         }
     }
-}   
+}
 var arr = [5, 2, 3, 1, 4];
 arr.quickSort();
 console.log(arr);
@@ -354,17 +354,17 @@ document.getElementById('any_id').src = 'something'
 //call()的第一个参数是上下文，后续是实例传入的参数序列。
 //apply和call一个意思, apply()函数有两个参数：第一个参数是上下文，第二个参数是参数组成的数组。如果上下文是null，则使用全局对象代替。
 //call用来方便实现继承方法
-function Animal(name){      
-    this.name = name;      
-    this.showName = function(){      
-        alert(this.name);      
-    }      
-}      
-function Cat(name){    
-    Animal.call(this, name);    
-}      
-var cat = new Cat("Black Cat");     
-cat.showName(); 
+function Animal(name){
+    this.name = name;
+    this.showName = function(){
+        alert(this.name);
+    }
+}
+function Cat(name){
+    Animal.call(this, name);
+}
+var cat = new Cat("Black Cat");
+cat.showName();
 //多重继承 es5的写法
 function Class10(a, b) {
     this.a = a
@@ -372,18 +372,18 @@ function Class10(a, b) {
     this.showSub = function() {
         alert(this.a - this.b)
     }
-}  
-function Class11(a, b) {  
+}
+function Class11(a, b) {
     this.a = a
     this.b = b
     this.showAdd = function () {
         alert(this.a + this.b)
     }
-}  
-function Class2(a, b) {  
-    Class10.call(this, a, b);  
-    Class11.call(this, a, b);  
-} 
+}
+function Class2(a, b) {
+    Class10.call(this, a, b);
+    Class11.call(this, a, b);
+}
 test= new Class2(2, 1)
 test.showSub()
 test.showAdd()
@@ -392,16 +392,16 @@ function Class10(a, b) {
     this.showSub = function() {
         alert(this.a - this.b)
     }
-}  
-function Class11(a, b) {  
+}
+function Class11(a, b) {
     this.showAdd = function () {
         alert(this.a + this.b)
     }
-}  
-function Class2(a, b) {  
-    Class10.call(this, a, b);  
-    Class11.call(this, a, b);  
-} 
+}
+function Class2(a, b) {
+    Class10.call(this, a, b);
+    Class11.call(this, a, b);
+}
 test= new Class2(2, 1)
 test.showSub()      //NaN
 test.showAdd()      //NaN
@@ -410,32 +410,32 @@ function Class10(a, b) {
     this.showSub = () => {
         alert(a - b)
     }
-}  
-function Class11(a, b) {  
+}
+function Class11(a, b) {
     this.showAdd = () => {
         alert(a + b)
     }
-}  
-function Class2(a, b) {  
-    Class10.call(this, a, b);  
-    Class11.call(this, a, b);  
-} 
+}
+function Class2(a, b) {
+    Class10.call(this, a, b);
+    Class11.call(this, a, b);
+}
 test= new Class2(2, 1)
 test.showSub()
 test.showAdd()
 
 //js获取UA
-function whatBrowser() {  
-    appName =  cgator.appName;  
-    version = navigator.appVersion;  
-    codeName = navigator.appCodeName;  
+function whatBrowser() {
+    appName =  cgator.appName;
+    version = navigator.appVersion;
+    codeName = navigator.appCodeName;
     userAgent = navigator.userAgent;
     console.log(appName)
     console.log(version)
     console.log(codeName)
     console.log(userAgent)
 }
-whatBrowser()    
+whatBrowser()
 // Netscape
 // 5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
 // Mozilla
@@ -463,7 +463,7 @@ b()     //2
 //demo1
 for (var i = 0; i < 10; i++) {
     setTimeout(function() {
-        console.log(i);  
+        console.log(i);
     }, 1000);
 }//10个10
 for (var i = 0; i < 10; i++) {
@@ -496,29 +496,29 @@ for (var i=0; i < funcs.length; i++){
 //关于js事件冒泡和事件捕获
 //一个直接的发生时间冒泡和捕获的例子:
 /*html
-<!DOCTYPE html> 
-<meta charset="utf-8"> 
-<title>test</title> 
-<head> 
-<script src="http://code.jquery.com/jquery-latest.js"></script> 
-<script type="text/javascript"> 
-$(function(){ 
-$('#clickMe').click(function(){ 
-alert('hello'); 
-}); 
-$('body').click(function(){ 
-alert('baby'); 
-}); 
-}); 
-</script> 
-</head> 
-<body> 
-<div style="width:100px;height:100px;background-color:red;"> 
-<button type="button" id="button2">button1</button> 
-<button id="clickMe">button2</button> 
-</div> 
-</body> 
-</html> 
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>test</title>
+<head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+$(function(){
+$('#clickMe').click(function(){
+alert('hello');
+});
+$('body').click(function(){
+alert('baby');
+});
+});
+</script>
+</head>
+<body>
+<div style="width:100px;height:100px;background-color:red;">
+<button type="button" id="button2">button1</button>
+<button id="clickMe">button2</button>
+</div>
+</body>
+</html>
 */
 //事件冒泡,当点击button2时,依次弹出hello baby,事件从子节点蔓延到父节点,触发了绑定在父节点的事件,就叫做事件冒泡
 //事件捕获,当点击任意位置,会弹出baby,这就叫时间事件捕获,通过时间的选择器可以避免发生意料之外的事件捕获
@@ -530,15 +530,15 @@ $('#clickMe').on('click', function () {
 })
 //demo2 ie e.stopPropagation, 非ie cancelBubble
 $('#clickMe').click(function (event) {
-    alert('hello'); 
-    var e = window.event || event; 
-    if ( e.stopPropagation ){ //如果提供了事件对象，则这是一个非IE浏览器 
-        e.stopPropagation(); 
-}else{ 
-    //兼容IE的方式来取消事件冒泡 
-    window.event.cancelBubble = true; 
-} 
-}) 
+    alert('hello');
+    var e = window.event || event;
+    if ( e.stopPropagation ){ //如果提供了事件对象，则这是一个非IE浏览器
+        e.stopPropagation();
+}else{
+    //兼容IE的方式来取消事件冒泡
+    window.event.cancelBubble = true;
+}
+})
 
 //javascript的本地对象，内置对象和宿主对象
 //本地对象为array obj regexp(正则表达式, 定义两种表达式的方式你知道吗?1:re = /\d+/ig, 2, var re = new RegExp('\d+', 'ig'))等可以new实例化
@@ -549,25 +549,25 @@ $('#clickMe').click(function (event) {
 //正则表达式的预定义(分为名词和量词)
 //名词:
 /*
-.       .                   匹配除换行符之外的任何一个字符 
-\d    [0-9]                   匹配数字 
-\D    [^0-9]                  匹配非数字字符 
-\s     [ \n\r\t\f\x0B]               匹配一个空白字符 
-\S    [^ \n\r\t\f\x0B]               匹配一个非空白字符 
-\w    [a-zA-Z0-9_]                    匹配字母数字和下划线 
-\W    [^a-zA-Z0-9_]                 匹配除字母数字下划线之外的字符 
+.       .                   匹配除换行符之外的任何一个字符
+\d    [0-9]                   匹配数字
+\D    [^0-9]                  匹配非数字字符
+\s     [ \n\r\t\f\x0B]               匹配一个空白字符
+\S    [^ \n\r\t\f\x0B]               匹配一个非空白字符
+\w    [a-zA-Z0-9_]                    匹配字母数字和下划线
+\W    [^a-zA-Z0-9_]                 匹配除字母数字下划线之外的字符
 量词(以下全是贪婪量词, 即力求可以实现的最大匹配):
-*     匹配前面的子表达式零次或多次。zo* 能匹配 "z" 以及 "zoo"。 * 等价于{0,}。 
-+     匹配前面的子表达式一次或多次。'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。 
-?     匹配前面的子表达式零次或一次。"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。 
-{n}   n 是一个非负整数。匹配确定的 n 次。'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。 
-{n,}  n 是一个非负整数。至少匹配n 次。'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。 
+*     匹配前面的子表达式零次或多次。zo* 能匹配 "z" 以及 "zoo"。 * 等价于{0,}。
++     匹配前面的子表达式一次或多次。'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。
+?     匹配前面的子表达式零次或一次。"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。
+{n}   n 是一个非负整数。匹配确定的 n 次。'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。
+{n,}  n 是一个非负整数。至少匹配n 次。'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。
 {n,m} m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。 "o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
-用贪婪量词进行匹配时叫做贪婪匹配, 即力争最大匹配, 以上量词都是贪婪量词 
-用惰性量词进行匹配时，贪婪量词后加?变成惰性匹配, 即力争最小匹配 
-var str = "abc";  
-var re = /\w+/;//将匹配abc  
-re = /\w+?/;//将匹配a  
+用贪婪量词进行匹配时叫做贪婪匹配, 即力争最大匹配, 以上量词都是贪婪量词
+用惰性量词进行匹配时，贪婪量词后加?变成惰性匹配, 即力争最小匹配
+var str = "abc";
+var re = /\w+/;//将匹配abc
+re = /\w+?/;//将匹配a
 */
 //js正则表达式RegExp
 //完整清晰的正则表达式教程见 http://www.cnblogs.com/aaronjs/archive/2012/06/30/2570970.html
@@ -580,24 +580,24 @@ var res = (/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}
 var res = (/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/).test(value)
 //replace
 var str ="some money"
-alert(str.replace("some","much"))       //much money  
-var re = /\s/ 
-alert(str.replace(re,"%"))      //some%money  
-str ="some some         some" 
+alert(str.replace("some","much"))       //much money
+var re = /\s/
+alert(str.replace(re,"%"))      //some%money
+str ="some some         some"
 re = /\s+/
 alert(str.replace(re,"#"))      //some#some        some
-re = /\s+/g;        //g,全局标志,将使正则表达式匹配整个字符串  
-alert(str.replace(re,"@"))      //some@some@some@  
-//split  
+re = /\s+/g;        //g,全局标志,将使正则表达式匹配整个字符串
+alert(str.replace(re,"@"))      //some@some@some@
+//split
 var str = "a-bd-c"
-var arr = str.split("-")    //["a","bd","c"]  
+var arr = str.split("-")    //["a","bd","c"]
 re=/[^a-z]/i    //前面我们说^表示字符开始,但在[]里它表示一个负字符集,表示非.
-arr = str.split(re)         //仍返回["a","bd","c"];  
+arr = str.split(re)         //仍返回["a","bd","c"];
 //search  在字符串中查找时我们常用indexOf
-var str = "My age is 18.Golden age!";//年龄不是一定的,我们用indexOf不能查找它的位置  
-re = /\d+/;  
+var str = "My age is 18.Golden age!";//年龄不是一定的,我们用indexOf不能查找它的位置
+re = /\d+/;
 alert(str.search(re));//10
-//match 返回匹配的查找目标,类型为arr, arr[0]位匹配值. 
+//match 返回匹配的查找目标,类型为arr, arr[0]位匹配值.
 //另:这里的一个坑,关于正则中^&的用法(https://zhidao.baidu.com/question/581570451.html)
 var str = 'My age is 18.Golden age!'
 var str1 = 'My age is Golden age!'
@@ -609,18 +609,18 @@ var res4 = str1.match(/\d+/)    //nu//
 //way1
 function getQueryObject(url) {
     url = url == null ? window.location.href : url;
-    var search = url.substring(url.lastIndexOf("?") + 1);  //str.substring(index1,  index2) 字符串截取,只有一个参数时截取至尾部   
-    var obj = {};     
+    var search = url.substring(url.lastIndexOf("?") + 1);  //str.substring(index1,  index2) 字符串截取,只有一个参数时截取至尾部
+    var obj = {};
     var reg = /([^?&=]+)=([^?&=]*)/g        //正则的分组, 后续可以用$1, $2获取分组,这是replace的特殊用法
     search.replace(reg, ($1, $2) => {
-        data[$1] = $2        
-    });     
+        data[$1] = $2
+    });
     return obj;
 }
 //way2
 function getQueryObject(url) {
     url = url == null ? window.location.href : url;
-    var search = url.substring(url.lastIndexOf("?") + 1);     
+    var search = url.substring(url.lastIndexOf('?') + 1)
     var reg = /([^?&=]+)=([^?&=]*)/g
     var a = search.match(reg)
     console.log(a)
@@ -630,6 +630,5 @@ function getQueryObject(url) {
         data[key_value[0]] = key_value[1]
     }
     console.log(data)
-        
 }
 getQueryObject()
