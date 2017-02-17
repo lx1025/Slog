@@ -1,6 +1,6 @@
-数据库导出导入：
-mysqldump  -u ktvsky -p098f6bcd4621d373cade4e832627b4f6 -P 3306 -h 10.10.146.167 myktv pos_order>pos_order.sql	#远端mysql所在环境
-scp work@120.132.55.163:/home/work/pos_order.sql pos_order.sql #本地mysql所在环境
-!my
-use myktv
-source /home/xinghang/pos_order.sql
+select ktv_id, sum(total_fee)/100 as sum_total_fee from archive_order \
+where state=2 and channel in (0, 1) and tp not in (1, 2, 7) and  \
+finish_time >= '2016-02-16 00:00:00' and finish_time <= '2016-02-16 23:59:59'
+group by ktv_id order by sum_total_fee desc limit 10;
+
+select ktv_id, MIN(finish_time) as first_order_time from archive_order group by ktv_id order by first_order_time desc limit 10;

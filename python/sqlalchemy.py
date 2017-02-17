@@ -6,6 +6,7 @@ sum = self.slave.query(func.sum(CustomKtvOrder.fee)).filter(CustomKtvOrder.state
 count = self.slave.query(func.count('1').label('count')).filter(func.date(MusicOrder.create_time) == date).scalar()
 #多查询：
 res = self.slave.query(KtvStore).filter(KtvStore.store_id.in_(ktvids)).all()
+res = self.slave.query(KtvStore).filter(KtvStore.store_id)
 #删除：
 self.master.query(WxWithdraw).filter(WxWithdraw.ktv_id == ktv_id).filter(func.date(WxWithdraw.create_time) == date).delete()
 self.master.commit()

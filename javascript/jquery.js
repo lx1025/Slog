@@ -95,7 +95,7 @@ $('#result').load(function() {
             //called when there is an error
         }
     });
-    
+
 });
 
 //JQUERY属性相关------------------------------
@@ -106,8 +106,8 @@ $('ul li:last').addClass(function(index){
     return "item"+index;
 })
 $('p').attr('data', 'testdataxxxx')//attr用于自定义属性
-var data = $('p').attr('data-test')      
-var p_title = $('p').prop('class')  //prop用于自带属性 
+var data = $('p').attr('data-test')
+var p_title = $('p').prop('class')  //prop用于自带属性
 $('div').text(p_title)
 
 $('div#result').append($('p').hasClass('className').ToString())
@@ -144,7 +144,7 @@ $('input[name*="man"]').val('some text')    //选择指定属性具有包含一�
 $('input[name~="man"]').val('some text')    //选择指定属性用空格分隔的值中包含一个给定值的元素
 $('input[name$="man"]').val('some text')    //选择指定属性是以给定值结尾的元素
 $('input[name^="man"]').val('some test')    //选择指定属性是给定值的元素。
-$('input[name="man"]').val('some text') //选择指定属性是给定值的元素
+$('input[name="man"]').val('some text')     //选择指定属性是给定值的元素
 $('input[name!="man"]').val('some text')    //选择不存在指定属性，或者指定的属性值不等于给定值的元素
 $(':button').addClass('class_name')
 $('form input:checkbox').parent().css('border', '2px dotted green')
@@ -173,7 +173,7 @@ $('').addClass('class_name')
 $('').removeClass('class name')
 $('').toggleClass('selector')
 $('').hasClass('className')
-//css 
+//css
 $('').css()
 //复制元素
 $('').clone().appendTo('selector')
@@ -211,11 +211,11 @@ $('p#id').empty() //删除选择匹配元素下的的所有子元素包含文本
 
 // jquery判空
 // JavaScript判断object/json 是否为空，可以使用jQuery的isEmptyObject()方法。
-console.log(isEmptyObject());           //true  
-console.log(isEmptyObject({}));         //true  
-console.log(isEmptyObject(null));       //true  
-console.log(isEmptyObject(23));         //true  
-console.log(isEmptyObject({"te": 2}));      //false  
+console.log(isEmptyObject());           //true
+console.log(isEmptyObject({}));         //true
+console.log(isEmptyObject(null));       //true
+console.log(isEmptyObject(23));         //true
+console.log(isEmptyObject({"te": 2}));      //false
 
 //jquery的常用方法
 //$.tirm()去掉空格
@@ -224,7 +224,7 @@ console.log($.trim('  something '))
 var a = ['a', 'b']
 a = $.map(a, function (value, index){
   return (value.toUpperCase() + index)
-}) 
+})
 console.log(a) //["A0", "B1"]
 //等同于
 var a = ['a', 'b']
@@ -237,7 +237,7 @@ $.each(a, function(index, el) {
 });
 //$.inArray() 判断是否在array中
 var a = [1,2,3,4];
-var index = $.inArray(4,a) 
+var index = $.inArray(4,a)
 console.log(index)
 //$.extend()　合并对象
 var a = {x:1, y:2}

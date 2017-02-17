@@ -602,7 +602,7 @@ alert(str.search(re));//10
 var str = 'My age is 18.Golden age!'
 var str1 = 'My age is Golden age!'
 var res1 = str.match(/^\d+$/)       //null
-var res2 = str1.match(/^\d+$/)     //null
+var res2 = str1.match(/^\d+$/)       //null
 var res3 = str.match(/\d+/)    //["18", index: 10, input: "My age is 18.Golden age!"]
 var res4 = str1.match(/\d+/)    //nu//
 //利用正则表达式将url的请求参数转化为字典对象: var reg = /([^&?=]+)=([^&?=]*)/g

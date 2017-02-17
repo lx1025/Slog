@@ -14,7 +14,7 @@ class ApplyHandler(BaseHandler):
 
     def submit(self, r):
         self.render('apply.tpl',
-            body_class = 'apply',           
+            body_class = 'apply',
             r=r)
 
     @web.authenticated
@@ -46,3 +46,10 @@ if '?' in state:
     print(params_list)        # ['ktv_id=84579']
     state = path + '?' + '&'.join(params_list)
     print(state)                   # http://erp.statg.ktvsky.com/test?ktv_id=84579
+
+#关于日期的操作
+from datetime import timedelta
+import when
+date = when.yesterday()
+date = date-timedelta(day-1)
+print(date)
