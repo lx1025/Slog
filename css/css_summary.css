@@ -29,7 +29,7 @@ font-size:20pt;
 /*外部样式表：
 <head>
 <link rel="stylesheet" type="text/css" href="mystyle.css" />
-</head> */ 
+</head> */
 mystyle.css:
 hr {color: sienna;}
 p {margin-left: 20px;}
@@ -196,3 +196,51 @@ $('#id').show()
 /*
 
 /*Css盒模型:内容，border ,margin，padding*/
+
+/*关于inline-block*/
+/*block元素的特点是：
+总是在新行上开始；
+高度，行高以及顶和内边距都可控制；
+宽度缺省是它的容器的100%，除非设定一个宽度
+<div>, <p>, <h1>, <form>, <ul> 和 <li>是块元素的例子。*/
+/*inline元素的特点是：
+和其他元素都在一行上；
+高，行高及顶和底边距不可改变；
+宽度就是它的文字或图片的宽度，不可改变。*/
+/*inline-block的元素特点：
+应用此特性的元素呈现为行对象，和周围元素保持在同一行，但可以设置宽度和高度地块元素的属性*/
+/*用法1:用于行内元素, 元素将可以设置宽度和高度和内边距, 用于设置背景图片*/
+em {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-top: 2px;
+    margin-right: 2px;
+    background: url(http://zhibo.sogou.com/web2/images/sprite.png) -331px -298px no-repeat;
+}
+a {
+   display: inline-block;
+   width: 145px;
+   height: 40px;
+   overflow: hidden;
+   background: url("http://zhibo.sogou.com/web2/images/sprite.png") -313px 0px no-repeat;
+}
+/*用法2:用于块元素, 将其展现为行内元素, 和周围元素同一个行显示, 此例效果为两个相邻的表单, 右为放大镜*/
+.input1 {
+    float: left;
+    width: 200px;
+    height: 20px;
+    border: 1px solid #ffaca0;
+    border-right: none;
+    border-radius: 2px 0 0 2px;
+    text-indent: 10px;
+    line-height: 34px;
+}
+.input2 {
+    display: inline-block;
+    width: 74px;
+    height: 36px;
+    cursor: pointer;
+    border: none;
+    background: url("http://zhibo.sogou.com/web2/images/sprite.png") -219px -73px no-repeat;
+}
