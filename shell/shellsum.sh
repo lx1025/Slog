@@ -25,3 +25,6 @@ curl '101.254.157.124:8088/directory/get?page=1&page_size=10&directroy=game'
 #默认的配置加载文件
 .bashrc 每次shell执行命令时都会执行一次
 .bash_profile 只有在shell登陆（启动）时才会执行一次
+
+#python 开启一个服务器
+python -m http.server <port_num>
