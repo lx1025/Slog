@@ -280,7 +280,7 @@ $('input:checkbox').each(function () {
         type.push($(this).val())
     }
 });
-if(count<1){
+if (count<1) {
 alert("至少选一项");
 return;
 }
@@ -312,4 +312,5 @@ $('#ktv_name').bind('keypress', function (event) {
 })
 
 //一个抽象的jquery查询
+alert($(this).parent().parent('tr').find('td:first-child').text());
 alert($(this).parent().parent('tr').find('td:first-child').text());
