@@ -632,3 +632,8 @@ function getQueryObject(url) {
     console.log(data)
 }
 getQueryObject()
+
+//根据请求端是否是手机端来判断跳转:
+if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+    window.location.href = "wow.html"
+}
