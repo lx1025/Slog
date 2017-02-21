@@ -10,6 +10,11 @@ button, input, select, textarea {
     margin: 0;
     vertical-align: baseline;
 }
+button, input, select, textarea {
+    font-size: 100%;
+    margin: 0:auto;
+    vertical-align: ;
+}
 .head {
     position: relative;
     width: 1500px;
@@ -42,7 +47,6 @@ button, input, select, textarea {
 .head .search {
     position: relative;
     float: left;
-    display: inline;
     margin-left: 345px;
     height: 36px;
 }
