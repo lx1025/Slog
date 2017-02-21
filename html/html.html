@@ -18,7 +18,7 @@
 每个input标签对应的说明文本都需要使用label标签，并且通过为input设置id属性，在lable标签中设置for=someid来让说明文本和相对应的input关联起来。 -->
 
 <a href="http://www.baidu.com">baidu</a>
-属性值应该始终被包括在引号内。双引号是最常用的，不过使用单引号也没有问题,百度前端规范规定使用双引号.
+<!-- 属性值应该始终被包括在引号内。双引号是最常用的，不过使用单引号也没有问题,百度前端规范规定使用双引号. -->
 <a href="http://www.baidu.com">baidu</a>
 <h1> 定义最大的标题。<h6> 定义最小的标题。
 <hr /> 创建水平线
@@ -42,7 +42,7 @@ eg:下面的代码输出内容？
 </body>
 </html>
 
-<!-- font-famuly样式， 多样式用；隔开 -->
+<!-- font-family样式， 多样式用；隔开 -->
 <p style="font-family:arial;color:red;font-size:20px;">A paragraph.</p>
 This text is in Verdana and red</p>
 
@@ -140,8 +140,8 @@ eg:
 一个是块级元素，一个是内联元素
 大多数 HTML 元素被定义为块级元素或内联元素。
 “块级元素”译为 block level element，“内联元素”译为 inline element。
-块级元素在浏览器显示时，通常会以新行来开始（和结束）。
-内联元素在显示时通常不会以新行开始。
+块级元素在浏览器显示时，通常会以新行来开始（和结束）,可以设置宽高。
+内联元素在显示时通常不会以新行开始,不能设置宽高。
 块元素：
 <div></div>,<form action=""></form>,<h></h>,<p></p>,
 <ol></ol><ul></ul><table></table>
@@ -161,8 +161,9 @@ eg:
 <!-- 关于heml文档的head -->
 <head>
     <title>Title of the document</title><!-- 标题 -->
+    <html lang="zh-CN">
     <meta name="description" content="HTML, CSS, XML" /><!-- 关键字 -->
-    <base href="http://www.w3school.com.cn/images/" /><!-- 定义默认链接和默认mubiao -->
+    <base href="http://www.w3school.com.cn/images/" /><!-- 定义默认链接和默认目标 -->
     <base target="_blank" />
     <link rel="stylesheet" type="text/css" href="mystyle.css" /><!-- 样式表或者脚本文件 -->
 </head>
@@ -187,8 +188,8 @@ submit  定义提交按钮（提交表单）
     <input type="text" name="lastname" value="Mouse">
     <br><br>
     <input type="submit" value="Submit">
-</form> 
-<!-- 一个select下拉选择列表的表单提交的例子 -->
+</form>
+<!-- 一个select下拉选择列表的表单提交的例子, 默认是get-->
 <form action="action_page.php">
     <select name="cars">
         <option value="volvo">Volvo</option>
@@ -213,7 +214,7 @@ submit  定义提交按钮（提交表单）
 <!-- input的其他属性 -->
 disabled，readonly，maxlength
 
-<!-- html三元素的原理rgb-->
+<!-- html三元色的原理rgb-->
 #ff0000red
 #00ff00green
 #0000ffblue
@@ -222,10 +223,10 @@ disabled，readonly，maxlength
 <!-- 关于pre标签 -->
 <pre> 标签可定义预格式化的文本。
 被包围在 <pre> 标签 元素中的文本通常会保留空格和换行符。而文本也会呈现为等宽字体。
-<pre> 
-此例演示如何使用 pre 标签 
-对空行和  空格 
-进行控 制 
+<pre>
+此例演示如何使用 pre 标签
+对空行和  空格
+进行控 制
 </pre>
 
 <!-- 前端规范 -->
@@ -255,4 +256,3 @@ checked 属性设置或返回 checkbox 是否应被选中。
         console.log('something')
     }
 </script>
-
