@@ -249,3 +249,7 @@ a {
     border: none;
     background: url("http://zhibo.sogou.com/web2/images/sprite.png") -219px -73px no-repeat;
 }
+
+/*关于background属性*/
+/*拿上面的em标签属性为例:
+background的url是一张雪碧图,后边的坐标是雪碧图的位置,记住是选取图片的左上角,至于大小,取决于em标签的大小,此例中即指15px * 15px*/
