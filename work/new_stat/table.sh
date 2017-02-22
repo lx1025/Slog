@@ -31,7 +31,7 @@ CREATE TABLE `archive_order` (
       `ch_rate_fee` int(11) NOT NULL DEFAULT '0' COMMENT '渠道商收取的手续费',
       `ls_rate_fee` int(11) NOT NULL DEFAULT '0' COMMENT '雷石收取的手续费',
       `channel` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:微信, 1:支付宝, 2:pos',
-      `tp` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:普通, 1:电影, 2:红包',
+      `tp` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:普通, 1:电影, 2:红包, 7:bar',
       `mch_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:商户, 1:代理商,',
       `state` tinyint(1) NOT NULL DEFAULT '0' COMMENT '已支付, 已退款',
       `finish_time` datetime DEFAULT NULL COMMENT '支付完成时间',

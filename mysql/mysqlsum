@@ -14,3 +14,5 @@ group by ktv_id order by sum_total_fee desc limit 10;
 select ktv_id, MIN(finish_time) as first_order_time from archive_order group by ktv_id order by first_order_time desc limit 10;
 
 select sum(total_fee)/100 as sum_total_fee from archive_order where ktv_id = 87603 and state = 2 and channel in (0, 1) and tp not in (1, 2, 7) and finish_time >= '2017-02-19 00:00:00' and finish_time <= '2017-02-19 23:59:59'
+
+select sum(total_fee)/100 as sum_total_fee, count(*) as cnt from archive_order where tp in (1, 2, 7) group by tp
