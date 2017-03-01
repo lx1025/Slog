@@ -46,7 +46,7 @@ HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存�
 100 Continue  继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
 200 OK   正常返回信息
 30* Redirect  请求的网页已永久移动到新位置。
-40* Client 出错 
+40* Client 出错
 400 Bad Request  服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。
 401 Unauthorized  授权出错
 403 Forbidden  禁止访问。
@@ -67,14 +67,14 @@ HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存�
 <!-- js代码为什么要放在body后边;为什么建议把css代码以link方式放在body前边的head中的(还建议把link标签放在<script>前边呢)
 (Q1)浏览器是逐行加载html代码的,js代码在加载完成后立即执行,渲染顺序是(dom, cssom, layout, render),渲染顺序不等于加载顺序
 某些js代码是必须放在body前边的,比如获取浏览器的UA来决定引入不同的css,
-但是某些包含dom操作的js代码,会因为dom树当前还没有加载完成,导致代码并没有产生效果,这类js代码就应该放在body之后,等待dom树生成之后再加载然后执行,
+但是某些包含dom操作的js代码,会因为dom树木当前还没有加载完成,导致代码并没有产生效果,这类js代码就应该放在body之后,等待dom树生成之后再加载然后执行,
 当然你的js代码还可以放在body中,但是必须注意,如果这段代码包含了某些dom操作,它可能会打断dom树的深度遍历,影响dom树的生成,导致渲染失败.
 所以js代码通常放在body之后.
-(Q2)如果你的项目是模块化的,import显然更有利于开发, 
+(Q2)如果你的项目是模块化的,import显然更有利于开发,
 link之所已效率更高,是因为在dom树生成时, link会同时被加载,而@import引用的CSS会等到页面被加载完再加载,
 现在来看一个例子,假定link css需要10ms加载完成,dom树的生成也需要10ms:
 如果link放在body的前边:
-浏览器按序加载html,首先发出linkcss的加载请求,然后继续向下,10ms后dom树渲染完成,因为link标签同时加载的属性,此时css也已加载完成,直接可以生成cssom树
+浏览器按序加载html,首先发出linkcss的加载请求,然后继续向下,10ms后dom树加载完成,因为link标签同时加载的属性,此时css也已加载完成,直接可以生成cssom树
 共需10ms, 就可以生成dom树和cssom树,然后再layout(定位), render(渲染);
 如果link放在body的后边,浏览器首先需要10ms生成dom树,然后发现link标签,再花费10ms加载css, 生成cssom树,共需20ms.
 因为我们建议把link标签放在最前边,包括script的前边

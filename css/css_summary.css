@@ -253,3 +253,79 @@ a {
 /*关于background属性*/
 /*拿上面的em标签属性为例:
 background的url是一张雪碧图,后边的坐标是雪碧图的位置,记住是选取图片的左上角,至于大小,取决于em标签的大小,此例中即指15px * 15px*/
+
+/*一个关于布局的demo*/
+/*html*/
+/*
+<body>
+    <div class="test">
+        <div class="test1"></div>
+        <div class="test3"></div>
+        <div class="test2"></div>
+    </div>
+</body>
+*/
+.test {
+    width: 940px;
+    margin: 0 auto;
+}
+
+.test1 {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+.test3 {
+    float: right;
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}
+.test2 {
+    overflow: hidden;
+    zoom: 1;
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}
+
+/* 样式的书写顺序已提高可读性
+布局位置相关(fomating-model):
+positon, top, right, bottom, left, float, display, overflow, vertical-align
+盒子模型相关(box-model):
+border, width, height, padding, margin,
+文本相关(typographic):
+font, line-height, text-align, word-wrap
+显示相关(visual):
+color, background, list-sytle, transtion
+另:
+如果有content属性, 应该放在最前面
+*/
+/*两个例子, 实例为豆瓣首页的登录和注册按钮*/
+/*必须限制行高,否则会使padding撑开.*/
+.sing-in {
+    border: 1px solid #30A080;
+    border-radius: 2px;
+    width: 100px;
+    padding: 0 22px;
+    margin-right: 2px;
+    font-size: 12px;
+    text-align: center;
+    color: #30A080;
+    visibility: top;
+    background-color: #30A080;
+}
+.sing-up {
+    display: inline-block;
+    border: 1px solid #30A080;
+    border-radius: 2px;
+    width:89px;
+    padding: 8px 21px 7px;
+    margin-left: 4px;
+    font-size: 12px;
+    line-height: 1;
+    color: #30A080;
+    text-align: center;
+    vertical-align: top;
+}

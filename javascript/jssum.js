@@ -295,11 +295,11 @@ function test(arr) {
 var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
 console.log(test(a))
 
-//js快速排序的递归写法, 两层while (start<end)必须都有, 否则控制台就卡死了...为什么呢
+//js快速排序的递归写法, 两层while (start<end)必须都有, 否则控制台卡死
 if (typeof Array.prototype.quickSort !== 'function') {
     Array.prototype.quickSort = function () {
         quickSortHelper(this, 0, this.length-1);
-        function quickSortHelper(arr, start, end) {
+        function (arr, start, end) {
             if(start < end){
                 var part = partation(arr, start, end)
                 arguments.callee(arr, start, part - 1)
@@ -443,7 +443,7 @@ whatBrowser()
 
 //JS 一定要放在 Body 的最底部么？聊聊浏览器的渲染机制
 //script标签的位置会影响首屏时间么？
-//答案是：不影响（如果这里里的首屏指的是页面从白板变成网页画面——也就是第一次Painting,这个时间仅仅取决于dom树,cssom树,render树的生成时间），但有可能截断首屏的内容，使其只显示上面一部分(打断了深度遍历)。
+//答案是：不影响（如果这里的首屏指的是页面从白板变成网页画面——也就是第一次Painting,这个时间仅仅取决于dom树,cssom树,render树的生成时间），但有可能截断首屏的内容，使其只显示上面一部分(打断了深度遍历)。
 //实质过程就是按序加载,可是先生成dom树,再生成cssdom树,然后render;js代码是加载完成后顺序执行
 
 //关于闭包:获取函数内部变量
@@ -480,26 +480,25 @@ for (var i = 0; i < 10; i++) {
 //demo3
 function a(){
     var result = new Array();
-    for (var i=0; i < 10; i++){
-        result[i] = function(){
+    for (var i=0; i < 10; i++) {
+        result[i] = function () {
             return i;
         };
-        console.log(result[i])
     }
     return result;
 }
 var b = a();
-for (var i=0; i < funcs.length; i++){
-    console.log(funcs[i]());
+for (var i=0; i<b.length; i++){
+    console.log(b[i]());
 }
 
 //关于js事件冒泡和事件捕获
-//一个直接的发生时间冒泡和捕获的例子:
+//一个直接的发生事件冒泡和捕获的例子:
 /*html
 <!DOCTYPE html>
+<head>
 <meta charset="utf-8">
 <title>test</title>
-<head>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -528,21 +527,22 @@ $('#clickMe').on('click', function () {
     alert('hello')
     return false    //return false方法
 })
+
 //demo2 ie e.stopPropagation, 非ie cancelBubble
 $('#clickMe').click(function (event) {
     alert('hello');
     var e = window.event || event;
     if ( e.stopPropagation ){ //如果提供了事件对象，则这是一个非IE浏览器
         e.stopPropagation();
-}else{
-    //兼容IE的方式来取消事件冒泡
-    window.event.cancelBubble = true;
+    }else{
+        //兼容IE的方式来取消事件冒泡
+        window.event.cancelBubble = true;
 }
 })
 
 //javascript的本地对象，内置对象和宿主对象
 //本地对象为array obj regexp(正则表达式, 定义两种表达式的方式你知道吗?1:re = /\d+/ig, 2, var re = new RegExp('\d+', 'ig'))等可以new实例化
-//内置对象为gload Math 等不可以实例化的
+//内置对象为gload Math 等不可以实例化的, 可以直接使用其属性的对象
 //宿主为浏览器自带的document, window, navigator等
 
 //关于正则表达式
@@ -550,13 +550,13 @@ $('#clickMe').click(function (event) {
 //名词:
 /*
 .       .                   匹配除换行符之外的任何一个字符
-\d    [0-9]                   匹配数字
-\D    [^0-9]                  匹配非数字字符
-\s     [ \n\r\t\f\x0B]               匹配一个空白字符
-\S    [^ \n\r\t\f\x0B]               匹配一个非空白字符
-\w    [a-zA-Z0-9_]                    匹配字母数字和下划线
+\d    [0-9]                 匹配数字
+\D    [^0-9]                匹配非数字字符
+\s    [\n\r\t\f\x0B]       匹配一个空白字符
+\S    [^\n\r\t\f\x0B]       匹配一个非空白字符
+\w    [a-zA-Z0-9_]          匹配字母数字和下划线
 \W    [^a-zA-Z0-9_]                 匹配除字母数字下划线之外的字符
-量词(以下全是贪婪量词, 即力求可以实现的最大匹配):
+量词(以下都是贪婪量词, 即力求可以实现的最大匹配):
 *     匹配前面的子表达式零次或多次。zo* 能匹配 "z" 以及 "zoo"。 * 等价于{0,}。
 +     匹配前面的子表达式一次或多次。'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。
 ?     匹配前面的子表达式零次或一次。"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。
@@ -576,19 +576,19 @@ re = /\w+?/;//将匹配a
 var res = (/^\d{6,}$/).test(vaule)
 //手机号正则匹配:
 var res = (/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/).test(value)
-//邮箱正则匹配:
-var res = (/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/).test(value)
+//邮箱正则匹配:(注意.的转义符)
+var res = (/^[0-9a-zA-Z-_]+@[0-9a-zA-Z-_]+\.[0-9a-zA-Z-_]+$/)
 //replace
 var str ="some money"
 alert(str.replace("some","much"))       //much money
 var re = /\s/
-alert(str.replace(re,"%"))      //some%money
+alert(str.replace(re,"%"))              //some%money
 str ="some some         some"
-re = /\s+/
-alert(str.replace(re,"#"))      //some#some        some
-re = /\s+/g;        //g,全局标志,将使正则表达式匹配整个字符串
-alert(str.replace(re,"@"))      //some@some@some@
-//split
+re = /\s+/                              //只有一次
+alert(str.replace(re,"#"))              //some#some        some
+re = /\s+/g;                            //g,全局标志,将使正则表达式匹配整个字符串
+alert(str.replace(re,"@"))              //some@some@some@
+//split var to array
 var str = "a-bd-c"
 var arr = str.split("-")    //["a","bd","c"]
 re=/[^a-z]/i    //前面我们说^表示字符开始,但在[]里它表示一个负字符集,表示非.
@@ -632,8 +632,31 @@ function getQueryObject(url) {
     console.log(data)
 }
 getQueryObject()
+//写出'www.bitland.com'的正则
+//一个最简单的面试题
+var reg = /^w{3}\.\w+\.\w+$/
 
 //根据请求端是否是手机端来判断跳转:
 if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
-    window.location.href = "wow.html"
+    window.location.href = "wow.html" //相对路径
 }
+
+//一次工作的es6实践:
+$(function () {
+    if (navinator.userAgent.match(/(iPhone|Android|iPod|ios)/i)) {
+        $(.navi).hide()
+    }
+    $.post('/stat/new',{}, function (data) {
+        all = data.all
+        $('#all').append(
+            all.map(x => `<td>${x}</td>`).join('')
+        )
+    $('.pos_follow_ktv_ids').each(
+        ktv_id = $(this).attr('data-ktvid')
+        var that = $(this)
+        $.get('/stat/following', {ktv_id = ktv_id} function (data) {
+            that.text(data.res)
+        })
+    )
+    })
+})

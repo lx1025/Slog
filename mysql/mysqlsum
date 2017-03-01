@@ -4,7 +4,7 @@ mysqldump  -u ktvsky -p098f6bcd4621d373cade4e832627b4f6 -P 3306 -h 10.10.146.167
 scp work@120.132.55.163:/home/work/archive_order.sql archive_order.sql
 !my
 use myktv
-source archive_order.sql
+source /home/xinghang/archive_order.sql
 
 select ktv_id, sum(total_fee)/100 as sum_total_fee from archive_order \
 where state=2 and channel in (0, 1) and tp not in (1, 2, 7) and  \
