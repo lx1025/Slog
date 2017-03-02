@@ -1,3 +1,8 @@
+#云片短信账号密码.
+https://www.yunpian.com/component/login
+tanguobin@ktvsky.com
+ktvsky5166
+
 #stage环境下nginx位置：
 /usr/local/nginx/conf/nginx.conf 查到服务端口号
 tail -f nohup.out

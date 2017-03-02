@@ -44,16 +44,20 @@ CREATE TABLE `wow_coupon_order` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `openid` varchar(32) NOT NULL DEFAULT '',
       `tp` enum('充值','消费') NOT NULL DEFAULT '充值',
-      `order_id` varchar(32) NOT NULL DEFAULT '',
+      `order_id` varchar(64) NOT NULL DEFAULT '',
       `wx_pay_id` varchar(64) NOT NULL DEFAULT '',
       `pay_fee` int(11) NOT NULL DEFAULT '0',
       `total_fee` int(11) NOT NULL DEFAULT '0',
       `info` varchar(32) NOT NULL DEFAULT '' COMMENT '京东众筹, 或者充值信息',
       `state` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0订单生成, 1支付成功or京东众筹已经使用',
-      `phone_num` varchar(11) NOT NULL DEFAULT '电话',
+      `phone_num` varchar(11) NOT NULL DEFAULT '' COMMENT '',
       `remain_money` int(11) NOT NULL DEFAULT 0 COMMENT '账户所剩金额',
       `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
       `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
       PRIMARY KEY (`id`),
       KEY `order_id` (`order_id`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 |
+    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+
+insert into wow_coupon_order (openid, pay_fee, total_fee, info, state, remain_money) values('ozSixwkVLz8fIyfPAS6ME4ASd4Dc', 300, 500, '充值套餐', 1, 500)
+insert into wow_coupon_order (openid, pay_fee, total_fee, info, state, remain_money) values('ozSixwkVLz8fIyfPAS6ME4ASd4Dc', 300, 500, '充值套餐', 1, 800)
+insert into wow_coupon_order (pay_fee, total_fee, info, phone_num) values(500, 500, '京东众筹', 13521776628)
