@@ -45,10 +45,10 @@ CREATE TABLE `wow_coupon_order` (
       `openid` varchar(32) NOT NULL DEFAULT '',
       `tp` enum('充值','消费') NOT NULL DEFAULT '充值',
       `order_id` varchar(32) NOT NULL DEFAULT '',
-      `wx_pay_id` varchar(64)
+      `wx_pay_id` varchar(64) NOT NULL DEFAULT '',
       `pay_fee` int(11) NOT NULL DEFAULT '0',
       `total_fee` int(11) NOT NULL DEFAULT '0',
-      `info` varchar(32) NOT NULL DEFAULT '' COMMENT '京东众筹, 或者充值信息'
+      `info` varchar(32) NOT NULL DEFAULT '' COMMENT '京东众筹, 或者充值信息',
       `state` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0订单生成, 1支付成功or京东众筹已经使用',
       `phone_num` varchar(11) NOT NULL DEFAULT '电话',
       `remain_money` int(11) NOT NULL DEFAULT 0 COMMENT '账户所剩金额',
