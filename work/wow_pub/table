@@ -61,3 +61,25 @@ CREATE TABLE `wow_coupon_order` (
 insert into wow_coupon_order (openid, pay_fee, total_fee, info, state, remain_money) values('ozSixwkVLz8fIyfPAS6ME4ASd4Dc', 300, 500, '充值套餐', 1, 500)
 insert into wow_coupon_order (openid, pay_fee, total_fee, info, state, remain_money) values('ozSixwkVLz8fIyfPAS6ME4ASd4Dc', 300, 500, '充值套餐', 1, 800)
 insert into wow_coupon_order (pay_fee, total_fee, info, phone_num) values(500, 500, '京东众筹', 13521776628)
+
+制作一组数据:
+1.kbar调用下单接口:
+101.254.157.124:8888/v2/bar/order/consume post
+'{
+    tp: 5,
+    sp_id: 6,
+    store_id: 5000001,
+    mac_id: '00E07E0054E7',
+    pay_coin: 6,
+    pay_fee: 5050,
+    info: 'kbar会员包时套餐.xinghang'
+}'
+返回:
+{
+  "errcode": 200,
+  "errmsg": "服务正常",
+  "pay_url": "/bar/coupon/consume?order_id=COUPONBAR1449#coupon",
+  "order_id": "COUPONBAR1449"
+}
+2.用户扫码:
+101.254.157.124:8888/bar/coupon/consume?order_id=COUPONBAR1449

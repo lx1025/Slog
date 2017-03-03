@@ -25,6 +25,8 @@ locate nginx.
 
 #一个标准的post curl
 curl -X POST -d 'directory=game&page=2&page_size=1' '101.254.157.124:8088/directory/get'
+wrong(不能传输中文.): curl -X POST -d 'tp=5&sp_id=6&store_id=5000001&mac_id=00E07E0054E7&pay_coin=6&pay_fee=50.5&info=kbar会员包时套餐.xinghang' '101.254.157.124:8888/v2/bar/order/consume'
+
 curl '101.254.157.124:8088/directory/get?page=1&page_size=10&directroy=game'
 
 #默认的配置加载文件
