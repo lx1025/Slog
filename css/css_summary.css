@@ -329,3 +329,15 @@ color, background, list-sytle, transtion
     text-align: center;
     vertical-align: top;
 }
+
+
+/*demo5.html当中的样式问题.
+总宽度为264px, input和a标签总宽度都是130px加2px的margin,最终结果出现换行.
+原因:两个同行标显示的标签(input + a)分行书写, 导致浏览器自动加了边距, 最终大于264px,导致了不能再同一行显示.
+解决:两个同行显示的分行标签同行书写.
+http://blog.csdn.net/wangji5850/article/details/50854280
+*/
+
+/*建议背诵reset.css*/
+/*关于box-sizing属性*/
+/*http://www.cnblogs.com/zhaoran/archive/2013/05/24/3097482.html*/
