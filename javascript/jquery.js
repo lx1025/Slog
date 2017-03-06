@@ -314,3 +314,28 @@ $('#ktv_name').bind('keypress', function (event) {
 //一个抽象的jquery查询
 alert($(this).parent().parent('tr').find('td:first-child').text());
 alert($(this).parent().parent('tr').find('td:first-child').text());
+
+//一个each方法丢失了this的实例:
+//var that = $(this)
+$('.sp_follow_ktv_id').each(function () {
+    var that = $(this);
+    ktv_id = $(this).attr('data-ktvid')
+    $.get('/stat/following', {ktv_id:ktv_id, tp:'sp'}, function (data) {
+        that.text(data.res)
+    })
+})
+
+//一个寻找后代元素并加入test的实例:
+function get_week (datetime) {
+    var date = [];
+    date = datetime.substring(0, 10).split("-");
+    var ssdate=new Date(date[0], +(date[1]-1), date[2]);
+    var week = ssdate.getDay();
+    return ['周一', '周二', '周三', '周四', '周五', '周六', '周日'][+week - 1]
+}
+$('.order-item').each(function () {
+    var datetime = $(this).attr('datetime')
+    $(this).find('.week').text(get_week(datetime))
+    $(this).find('.time').text(datetime.substring(11))
+    $(this).find('.date').text(datetime.substring(0, 10))
+})
