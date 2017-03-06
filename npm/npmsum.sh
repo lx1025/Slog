@@ -16,3 +16,9 @@ cnpm update <name>
 cnpm ls
 关于 npm ERR! extraneous 的warning:
 http://lifeonubuntu.com/npm-problem-npm-err-extraneous/
+
+#npm install --save 与 npm install --save-dev 的区别
+一个放在package.json 的dependencies , 一个放在devDependencies里面.
+产品模式用dependencies，开发模式用devDep。
+
+#static文件夹通常放置外源的cdn, 而static文件夹通常放置自己编写的静态文件.
