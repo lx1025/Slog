@@ -341,3 +341,13 @@ http://blog.csdn.net/wangji5850/article/details/50854280
 /*建议背诵reset.css*/
 /*关于box-sizing属性*/
 /*http://www.cnblogs.com/zhaoran/archive/2013/05/24/3097482.html*/
+
+/*关于行内元素和块级元素的特征,final!!!*/
+/*
+块级元素对应于display:block.
+行内元素对应于display:inline.
+块级元素可以设置width,height,margin,padding属性
+行内元素设置width,height属性无效，它的长度高度主要根据内容决定.
+行内元素的margin和padding属性,水平方向的padding-left,padding-right,margin-left,margin- right都产生边距效果,但竖直方向的padding-top,padding-bottom,margin-top,margin-bottom却不 会产生边距效果.
+块级元素即使设置了宽度,仍然是独占一行.(参考demo7,h标签必须设置float.)
+*/

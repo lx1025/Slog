@@ -43,7 +43,7 @@ CREATE TABLE `music_order` (
 CREATE TABLE `wow_coupon_order` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `openid` varchar(32) NOT NULL DEFAULT '',
-      `tp` enum('充值','消费') NOT NULL DEFAULT '充值',
+      `tp` enum('recharge','consume') NOT NULL DEFAULT 'recharge',
       `order_id` varchar(64) NOT NULL DEFAULT '',
       `wx_pay_id` varchar(64) NOT NULL DEFAULT '',
       `pay_fee` int(11) NOT NULL DEFAULT '0',
