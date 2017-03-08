@@ -35,3 +35,10 @@ curl '101.254.157.124:8088/directory/get?page=1&page_size=10&directroy=game'
 
 #python 开启一个服务器
 python -m http.server <port_num>
+
+#一个制定端口号的scp命令:
+#通常意义上,P表示的是端口号,而p代表的是密码.
+scp -P 3026 xinghang@101.254.157.124:/home/xinghang/work/myktv_cms/wx_order.xlsx wx_order.xlsx
+
+#服务器跳板:
+ssh work@106.75.34.22 -p 22
