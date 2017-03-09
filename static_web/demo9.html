@@ -1,0 +1,35 @@
+<!-- 测试浮动
+怪的批爆.
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+    div {
+        width: 100px;
+        height: 100px;
+    }
+    .test1 {
+        float: left;
+        background-color: red;
+    }
+    .test2 {
+        background-color: blue;
+    }
+    .clear {
+        content: '.';
+        clear: both;
+    }
+    </style>
+</head>
+<body>
+    <div class="test1"></div>
+    <div class="clear"></div>
+    <div class="test2">test</div>
+</body>
+</html>
