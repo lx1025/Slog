@@ -82,7 +82,7 @@ class Handler(BaseHandler):
                      "num" : item['users'],
                      "source" : "yy"
                 }
-                
+
                 print save
                 self.crawl('http://www.yy.com/mobileweb/play/live?sid=%s&ssid=%s#!/live/room' % (item['sid'],item['ssid']),
                     callback=self.get_videolink,
@@ -92,7 +92,7 @@ class Handler(BaseHandler):
                     js_script="""function() {setTimeout("", 10000);}""",
                     validate_cert=False
                     )
-                
+
     def get_videolink(self, response):
         print response.doc
         result = response.save
@@ -101,7 +101,7 @@ class Handler(BaseHandler):
         result['head_img'] = head_img
         result['m3u8_link'] = m3u8_link
         yield result
-       
+
     def on_result(self, result):
             #print result
             if not result:
@@ -132,7 +132,7 @@ class Handler(BaseHandler):
 
     @config(age=10 * 24 * 60 * 60)
     def index_page(self, response):
-        
+
         for each in response.doc('ul.g-list2 > li'):
                 save = {
                     "room_id" : each.xpath('div/a/@href')[0].encode('utf8').split('/')[-1],
@@ -144,23 +144,23 @@ class Handler(BaseHandler):
                      "num" : each.xpath('div/a/div[2]/div[2]/span/text()')[0].encode('utf8'),
                      "source" : "huajiao"
                 }
-                
+
                 print save
-                self.crawl('http://h.huajiao.com/l/index?liveid=%s&userid=&time=&reference=&from=&isappinstalled=&version=&qd=&channel=' % each.xpath('div/a/@href')[0].encode('utf8').split('/')[-1], 
+                self.crawl('http://h.huajiao.com/l/index?liveid=%s&userid=&time=&reference=&from=&isappinstalled=&version=&qd=&channel=' % each.xpath('div/a/@href')[0].encode('utf8').split('/')[-1],
                           callback=self.get_videolink,
                           save = save,
                           headers={'User-Agent': 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16'},
                           fetch_type='js',
                           validate_cert=False
                           )
-                
+
     def get_videolink(self, response):
         result = response.save
         m3u8_link = response.doc('.h5_player > video').attr.src
-        
+
         result['m3u8_link'] = m3u8_link
         yield result
-       
+
     def on_result(self, result):
             #print result
             if not result:
@@ -188,15 +188,15 @@ class Handler(BaseHandler):
         print os.getcwd()
         for i in range(1, 2394):
             url = 'http://m.25xz.com/special/%s.shtml' % i
-            self.crawl(url, 
-                             callback=self.index_page,
-                             headers={'User-Agent': 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16'},
-                             fetch_type='js',
-                             validate_cert=False
-                              )
+            self.crawl(url,
+                     callback=self.index_page,
+                     headers={'User-Agent': 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16'},
+                     fetch_type='js',
+                     validate_cert=False
+                      )
 
     def index_page(self, response):
-        
+
         singer = response.doc('#header > span').text().encode('utf8').split('-')[0]
         for each in response.doc('.list-song > li'):
             song = each.xpath('a/div[2]/div[1]/text()')[0].encode('utf8')
@@ -210,10 +210,9 @@ class Handler(BaseHandler):
         if not result:
             return
         value_list = []
-        value_list.append(result['song']) 
+        value_list.append(result['song'])
         value_list.append(result['singer'])
         with open('zangzugequ.csv', 'a+') as csvfile:
             writer = csv.writer(csvfile,dialect='excel')
             writer.writerow(value_list)
             print 'success'
-        

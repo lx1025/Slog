@@ -48,3 +48,20 @@ info:
   "fail_process_sq": 0,
   "hash": "396090D23F283EBAD546D136E5F89CD6"
 }
+
+首页排行榜:
+http://www.kugou.com/yy/rank/home/1-6666.html
+web站排行榜接口:
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=1&page=1&rankid=6666&pagesize=500
+
+
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=6666&pagesize=500 total=80
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=22943&pagesize=500 total=78
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=8888&pagesize=500 total=285
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=23784&pagesize=500 total=311
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=24971&pagesize=500 total=98
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=27&pagesize=500 total=86
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=28&pagesize=500 total=54
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=24045&pagesize=500 total=29
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=24047&pagesize=500 toal=98
+http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=29606&pagesize=500 total=50

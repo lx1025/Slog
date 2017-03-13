@@ -660,3 +660,13 @@ $(function () {
     )
     })
 })
+
+//window.location获取url各项参数:
+//假设当前的url为: http://101.254.157.124:8888/index.html
+window.location.href = 'http://101.254.157.124:8888/index?param=value'
+window.location.protocal = 'http:'
+window.location.hostname = '101.254.157.124:8888'
+window.location.host = '101.254.157.124'
+window.location.port = ':8888'
+window.location.pathname = '/index'
+window.location.search = '?'
