@@ -99,7 +99,7 @@ $.getJSON('/test', {param1: 'value1'}, function (data) {
 // var a = []
 // if (!a.length) {console.log('success')}
 // var a = {}
-// if (!a.ke) {cons}
+// if (!a.ke) {console.log('success')}
 // 对有序集合进行顺序无关的遍历时，使用逆序遍历：逆序遍历可以节省变量，代码比较优化，注这是遍历数组的最佳方案：
 // var a = ['a', 'b', 'c', 1, 2]
 // aLen = a.length
@@ -612,11 +612,12 @@ function getQueryObject(url) {
     var search = url.substring(url.lastIndexOf("?") + 1);  //str.substring(index1,  index2) 字符串截取,只有一个参数时截取至尾部
     var obj = {};
     var reg = /([^?&=]+)=([^?&=]*)/g        //正则的分组, 后续可以用$1, $2获取分组,这是replace的特殊用法
-    search.replace(reg, ($1, $2) => {
-        data[$1] = $2
+    search.replace(reg, ($1, $2, $3) => {
+        obj[$2] = $3
     });
     return obj;
 }
+getQueryObject()
 //way2
 function getQueryObject(url) {
     url = url == null ? window.location.href : url;
@@ -632,6 +633,17 @@ function getQueryObject(url) {
     console.log(data)
 }
 getQueryObject()
+//way3 获取url中的某个参数
+//注:为什么不使用var reg = //的形式呢?因为//这种定义方式我并没有找到方法传递字符串!
+function getParam(param) {
+    var url = 'http:xiaomi.com/?id=1'
+    reg = new RegExp((param)+'='+'([^&]*)', 'ig')  //i不区分大小写, g全文搜索
+    url.replace(reg, ($1, $2) => {
+        console.log($1, $2)    //注意$1, 和$2的的值,结合way1
+    })
+}
+getParam('id')
+
 //写出'www.bitland.com'的正则
 //一个最简单的面试题
 var reg = /^w{3}\.\w+\.\w+$/
