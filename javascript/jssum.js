@@ -608,7 +608,7 @@ var res4 = str1.match(/\d+/)    //nu//
 //利用正则表达式将url的请求参数转化为字典对象: var reg = /([^&?=]+)=([^&?=]*)/g
 //way1
 function getQueryObject(url) {
-    url = url == null ? window.location.href : url;
+    url = !url ? window.location.href : url;
     var search = url.substring(url.lastIndexOf("?") + 1);  //str.substring(index1,  index2) 字符串截取,只有一个参数时截取至尾部
     var obj = {};
     var reg = /([^?&=]+)=([^?&=]*)/g        //正则的分组, 后续可以用$1, $2获取分组,这是replace的特殊用法
@@ -620,7 +620,7 @@ function getQueryObject(url) {
 getQueryObject()
 //way2
 function getQueryObject(url) {
-    url = url == null ? window.location.href : url;
+    url = !url ? window.location.href : url;
     var search = url.substring(url.lastIndexOf('?') + 1)
     var reg = /([^?&=]+)=([^?&=]*)/g
     var a = search.match(reg)
