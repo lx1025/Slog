@@ -19,3 +19,7 @@ select sum(total_fee)/100 as sum_total_fee, count(*) as cnt from archive_order w
 
 #导出mysql数据:
 mysql  -u ktvsky -p098f6bcd4621d373cade4e832627b4f6 -P 3306 -h 10.9.192.10 ktv_bar -e 'select * from music_order limit 10' > ../tmp/o.txt
+
+关于offset:
+select * from kugou_singer limit 10 offset 0  #从1开始
+select * from kugou_singer limit 10 offset 10 #从11开始
