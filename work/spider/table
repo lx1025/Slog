@@ -55,7 +55,7 @@ CREATE TABLE `o2o_spider_song` (
 	`label` varchar(32) NOT NULL DEFAULT '' COMMENT '来源内部音源标签',
 	`state` tinyint(1) NOT NULL DEFAULT 0 COMMENT '审核状态 0:未审核 1:已审核',
 	`super_json` text NOT NULL DEFAULT '' COMMENT '歌曲meta的json长串',
-	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `hash` (`hash`)
@@ -66,6 +66,13 @@ CREATE TABLE `kugou_singer` (
 	`artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
 	`kugouid` varchar(128) NOT NULL DEFAULT '' COMMENT '酷狗id',
 	UNIQUE KEY `hash` (`hash`),
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `test` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(128) NOT NULL DEFAULT '' COMMENT '',
+	`time` datetime NOT NULL DEFAULT '' COMMENT '',
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 

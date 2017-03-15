@@ -2,6 +2,7 @@
 mysqldump:
 mysqldump  -u ktvsky -p098f6bcd4621d373cade4e832627b4f6 -P 3306 -h 10.10.146.167 myktv archive_order > archive_order.sql
 scp work@120.132.55.163:/home/work/archive_order.sql archive_order.sql
+(scp -p 3026 stage@101.254.157.124:/home/stage/o2o_spider_song.sql o2o_spider_song.sql)
 !my
 use myktv
 source /home/xinghang/archive_order.sql
@@ -23,3 +24,12 @@ mysql  -u ktvsky -p098f6bcd4621d373cade4e832627b4f6 -P 3306 -h 10.9.192.10 ktv_b
 关于offset:
 select * from kugou_singer limit 10 offset 0  #从1开始
 select * from kugou_singer limit 10 offset 10 #从11开始
+
+#查看mysql所有进程:
+show processlist
+
+#关于表连接:
+http://huaxia524151.iteye.com/blog/1423614
+两个表R, S
+select * from R,S #笛卡尔积, 相乘
+select * from R cross join S 同上

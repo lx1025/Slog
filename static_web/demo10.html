@@ -86,28 +86,28 @@
             margin: 0 auto;
             line-height: 56px;
         }
-        .wrap .left {
+        .navi .wrap .left {
             float: left;
             display: inline-block;
         }
-        .wrap .left li {
+        .navi .wrap .left li {
             display: inline-block;
             margin-right: 60px;
             font-size: 17px;
             color: #cbcbdc;
         }
-        .wrap .right {
+        .navi .wrap .right {
             float: right;
             display: inline-block;
         }
-        .wrap .right li {
+        .navi .wrap .right li {
             display: inline-block;
             float: right;
             margin-left: 32px;
             font-size: 15px;
             color: #cbcbdc;
         }
-        .wrap ul span {
+        .navi .wrap ul span {
             display: inline-block;
             margin: 0;
             padding: 0;
@@ -146,7 +146,52 @@
             height: 16px;
             margin: 13px 5px 0 0;
             border: none;
-            background: url(http://www.kugou.com/yy/static/images/search/search.png) -40px -56px no-repeat        }
+            background: url(http://www.kugou.com/yy/static/images/search/search.png) -40px -56px no-repeat
+        }
+        .main {
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .main .bar {
+            height: 59px;
+            border-bottom: 1px #f0f0f0 solid;
+            font-size: 16px;
+            line-height: 58px;
+            color: #666;
+        }
+        .main .bar li {
+            display: inline-block;
+            width: 100px;
+            text-align: center;
+        }
+        .bar .active {
+            color: #14a9ff;
+            border-bottom: 2px #14a9ff solid;
+        }
+        .desc {
+            height: 59px;
+        }
+        .desc p {
+            float: left;
+            font-size: 14px;
+            line-height: 59px;
+        }
+        .desc p span {
+            margin: 0;
+            padding: 0;
+            color: #14a9ff;
+        }
+        .desc a {
+            float: right;
+            display: inline-block;
+            width:88px;
+            height: 36px;
+            margin-top: 11px;
+            font-size: 16px;
+            line-height: 36px;
+            color: #fff;
+            background-color: #14a9ff;
+        }
     </style>
 </head>
 <body>
@@ -192,25 +237,25 @@
             </form>
         </div>
     </div>
-    <div class="content">
-        <ul>
-            <li>单曲</li>
+    <div class="main">
+        <ul class="bar">
+            <li class="active">单曲</li>
             <li>歌单</li>
             <li>MV</li>
         </ul>
-        <div class="desc">
+        <div class="                                                                                                                          ">
             <p>搜索到<span>平凡之路伴奏</span>相关的曲目</p>
             <a href="">
                 <span></span>
                 播放
             </a>
         </div>
-        <ul>
+        <ul class="leader">
             <li><span></span>歌曲名</li>
             <li>专辑</li>
             <li>时长</li>
         </ul>
-        <ul>
+        <ul class="content">
             <li>
                 <div><span></span>朴树-平凡之路伴奏</div>
                 <div><<Old Beat I Made>></div>
