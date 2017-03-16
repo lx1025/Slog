@@ -64,7 +64,7 @@
             color: #fff;
             background-color: #169af3
         }
-        span {
+        .header span {
             margin-right:32px;
         }
         .header ul {
@@ -115,6 +115,84 @@
             height: 15px;
             background: url(http://www.kugou.com/yy/static/images/sprite.png) 0 -191px no-repeat;
         }
+        .content {
+            width: 1000px;
+            margin:40px auto;
+        }
+        .content .side {
+            float: left;
+            width: 220px;
+            color: #555;
+            border: 1px #eee solid;
+        }
+        .content .side .first {
+            height: 50px;
+            padding-left: 5px;
+            font-size: 16px;
+            line-height: 50px;
+        }
+        .content .side .active {
+            background-color: #169af3;
+        }
+        .content .side li {
+            height: 38px;
+            font-size: 14px;
+            line-height: 38px;
+        }
+        .content .side span {
+            display: inline-block;
+            position: relative;
+            top:3px;
+            width: 16px;
+            height: 16px;
+            margin: 0 5px;
+            background: url(http://www.kugou.com/yy/static/images/ku.png) 0 0 no-repeat;
+        }
+        .content .center {
+            float: right;
+            width: 770px;
+        }
+        .content .center .bar {
+            height: 57px;
+            border-bottom: 1px dotted #cacaca;
+            line-height: 56px;
+        }
+        .content .center .bar h3 {
+            float: left;
+            font-size: 24px;
+            margin-right: 20px;
+        }
+        .content .bar .run {
+            float: right;
+            display: inline-block;
+            width: 112px;
+            height: 34px;
+            margin-top: 11px;
+            font-size: 14px;
+            line-height: 34px;
+            text-align: center;
+            color: #fff;
+            background-color: #169af3;
+        }
+        .content .main ul li {
+            height: 55px;
+            border-bottom: 1px #f8f8f8 solid;
+            font-size: 14px;
+            line-height: 54px;
+        }
+        .content .main ul span {
+            display: inline-block;
+            position: relative;
+            top: 2px;
+            height: 14px;
+            width:14px;
+            margin:  0 10px;
+            background: url(http://www.kugou.com/yy/static/images/search/search.png) -64px -56px no-repeat;
+        }
+        .content .main ul .time {
+            float: right;
+            color: #cacaca;
+        }
     </style>
 </head>
 <body>
@@ -153,8 +231,14 @@
         </div>
     </div>
     <div class="content">
-        <ul>
+        <ul class="side">
             <li class="first">热门榜单</li>
+            <li class="active"><span></span>酷音乐排行榜</li>
+            <li><span></span>酷音乐排行榜</li>
+            <li><span></span>酷音乐排行榜</li>
+            <li><span></span>酷音乐排行榜</li>
+            <li><span></span>酷音乐排行榜</li>
+            <li><span></span>酷音乐排行榜</li>
             <li><span></span>酷音乐排行榜</li>
             <li><span></span>酷音乐排行榜</li>
             <li><span></span>酷音乐排行榜</li>
@@ -164,29 +248,60 @@
         </ul>
         <div class="center">
             <div class="bar">
-                <h>酷音乐流行风向标</h>
+                <h3>酷音乐流行风向标</h3>
                 <span>2017-03-13</span>
-                <a href="">
-                    <span></span>
+                <a class="run" href="">
                     播放全部
                 </a>
             </div>
-            <div>
+            <div class="main">
                 <ul>
                     <li class="first"><span></span>全选</li>
                     <li>
-                        <div>
-                            <span></span>
-                            <span>1</span>
-                            <span>郁可唯 - 思慕【三生三世十里桃花插曲】</span>
-                        </div>
-                        <div>
-                            <span>5:07</span>
-                        </div>
+                        <span></span>
+                        <em>1</em>
+                        <em class="title">郁可唯 - 思慕【三生三世十里桃花插曲】</em>
+                        <em class="time">5:07</em>
+                    </li>
+                    <li>
+                        <span></span>
+                        <em>1</em>
+                        <em class="title">郁可唯 - 思慕【三生三世十里桃花插曲】</em>
+                        <em class="time">5:07</em>
+                    </li>
+                    <li>
+                        <span></span>
+                        <em>1</em>
+                        <em class="title">郁可唯 - 思慕【三生三世十里桃花插曲】</em>
+                        <em class="time">5:07</em>
+                    </li>
+                    <li>
+                        <span></span>
+                        <em>1</em>
+                        <em class="title">郁可唯 - 思慕【三生三世十里桃花插曲】</em>
+                        <em class="time">5:07</em>
+                    </li>
+                    <li>
+                        <span></span>
+                        <em>1</em>
+                        <em class="title">郁可唯 - 思慕【三生三世十里桃花插曲】</em>
+                        <em class="time">5:07</em>
+                    </li>
+                    <li>
+                        <span></span>
+                        <em>1</em>
+                        <em class="title">郁可唯 - 思慕【三生三世十里桃花插曲】</em>
+                        <em class="time">5:07</em>
+                    </li>
+                    <li>
+                        <span></span>
+                        <em>1</em>
+                        <em class="title">郁可唯 - 思慕【三生三世十里桃花插曲】</em>
+                        <em class="time">5:07</em>
                     </li>
                 </ul>
             </div>
         </div>
-    <!-- </div>
+ </div>
 </body>
 </html>

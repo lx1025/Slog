@@ -33,3 +33,7 @@ http://huaxia524151.iteye.com/blog/1423614
 两个表R, S
 select * from R,S #笛卡尔积, 相乘
 select * from R cross join S 同上
+
+建立索引:
+create index o2o_spider_song_artist on o2o_spider_song(artist)
+create index o2o_spider_song_artist_bthash on o2o_spider_song(artist, bthash)
