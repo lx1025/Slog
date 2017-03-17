@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,OAAO;EACH,KAAK,EAAE,MAAM;EACb,MAAM,EAAE,MAAM;EACd,YAAI;IACA,KAAK,EAAE,GAAG;;AAClB,SAAS;EACL,KAAK,EAAE,IAAI",
-"sources": ["../sass/hello_world.sass"],
-"names": [],
-"file": "hello_world.css"
-}
