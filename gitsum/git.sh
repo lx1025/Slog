@@ -28,8 +28,14 @@ index ce01362..55d6c28 100644
 @@ -1 +1,2 @@
  hello
 +need to be stashed
-回退工作区
+回退工作区, 暂存
 git stash
+显示已暂存列表
+git stash list
+stash@{0}: WIP on master: 440e976 init
+工作区恢复
+git stash pop --index stash@{0}
+
 
 关于分支操作,假定当前在master分支
 local：本地创建分支并推送至远端
