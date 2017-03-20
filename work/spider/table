@@ -30,6 +30,26 @@ CREATE TABLE `o2o_spider_song` (
 	UNIQUE KEY `hash` (`hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+CREATE TABLE `5sing` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(128) NOT NULL DEFAULT '' COMMENT '歌名',
+	`artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+	`extname` varchar(11) NOT NULL DEFAULT '' COMMENT '音源后缀',
+	`music_link` varchar(128) NOT NULL DEFAULT '' COMMENT  '音乐链接',
+	`size` int(11) NOT NULL DEFAULT 0 COMMENT '文件大小',
+	`source` varchar(32) NOT NULL DEFAULT '' COMMENT '来源',
+	`source_id` varchar(32) NOT NULL DEFAULT '' COMMENT '来源内部id',
+	`addtime` varchar(32) NOT NULL DEFAULT '' COMMENT '来源内部更新时间',
+	`label` varchar(32) NOT NULL DEFAULT '' COMMENT '来源内部音源标签',
+	`state` tinyint(1) NOT NULL DEFAULT 0 COMMENT '审核状态 0:未审核 1:已审核',
+	`song_url` varchar(128) NOT NULL DEFAULT '' COMMENT  '播放页面链接',
+	`download_url` varchar(128) NOT NULL DEFAULT '' COMMENT  '下载链接',
+	`super_json` text NOT NULL DEFAULT '' COMMENT '歌曲meta的json长串',
+	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `hash` (`source_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `kugou_singer` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -63,3 +83,6 @@ http://songsearch.kugou.com/song_search_v2?keyword=%E5%B9%B3%E5%87%A1%E4%B9%8B%E
 .pyenv/versions/2.7.1/envs/scrapy/lib/python2.7/site-packages/pyspider/
 mysql配置文件scp:
 scp -P 3026 xinghang@101.254.157.124:/home/xinghang/.pyenv/versions/2.7.1/envs/scrapy/lib/python2.7/site-packages/pyspider/database/mysql/mysqldb.py work/myktv_cms/
+
+5sing
+http://data.5sing.kgimg.com/G094/M03/16/05/ng0DAFjKlo6AP6VNAKHByI4n2WY319.mp3
