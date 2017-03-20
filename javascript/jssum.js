@@ -682,3 +682,16 @@ window.location.host = '101.254.157.124'
 window.location.port = ':8888'
 window.location.pathname = '/index'
 window.location.search = '?param=value'
+
+//使用em为单位的基础代码
+//但一个匿名函数被括起来,并且后边再加上一个括号,它就能自动执行.
+(function () {
+    size()
+    window.onresize = function () {
+        size()
+    }
+    function size () {
+        var winW = document.documentElement.clientWidth || document.body.clientWidth
+        document.documentElement.style.fontSize = winw / 10 + 'px';
+    }
+})()

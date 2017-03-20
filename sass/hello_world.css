@@ -1,55 +1,12 @@
-/*
-Error: Invalid CSS after "http:": expected pseudoclass or pseudoelement, was "//search.5sing...."
-        on line 9 of /Users/xinghang/Slog/sass/hello_world.sass
+.father {
+  width: 10rem;
+  height: 5rem;
+  margin: 0 auto;
+  background-color: #f8f8f8; }
+  .father .son {
+    font-size: 0.16rem;
+    color: red; }
 
-4:     .son
-5:         color: red
-6: .daughter
-7:     color: blue
-8: 
-9: http://search.5sing.kugou.com/home/json?keyword=%E5%88%98%E5%BE%B7%E5%8D%8E&sort=1&page=1&filter=3&type=0
-
-Backtrace:
-/Users/xinghang/Slog/sass/hello_world.sass:9
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1165:in `expected'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1101:in `expected'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1096:in `tok!'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/static_parser.rb:277:in `pseudo'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/static_parser.rb:160:in `simple_selector_sequence'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/static_parser.rb:112:in `selector'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/static_parser.rb:86:in `selector_comma_sequence'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1079:in `expr!'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/static_parser.rb:20:in `parse_selector'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:414:in `visit_rule'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `with_base'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `visit'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `map'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:157:in `visit'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:8:in `visit'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:36:in `css_tree'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:20:in `render'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:268:in `render'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:404:in `run'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:62:in `process_result'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/bin/sass:18:in `load'
-/private/var/folders/_x/80911css08l5d5s9w1zpqth40000gn/T/AppTranslocation/315F6CD8-BCE6-4784-B525-BA74BEAD8D12/d/Koala.app/Contents/Resources/app.nw/bin/sass:18:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"http:\": expected pseudoclass or pseudoelement, was \"//search.5sing....\"\A         on line 9 of /Users/xinghang/Slog/sass/hello_world.sass\A \A 4:     .son\A 5:         color: red\A 6: .daughter\A 7:     color: blue\A 8: \A 9: http://search.5sing.kugou.com/home/json?keyword=%E5%88%98%E5%BE%B7%E5%8D%8E&sort=1&page=1&filter=3&type=0"; }
+.daughter {
+  font-size: 0.16rem;
+  color: blue; }

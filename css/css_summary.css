@@ -351,3 +351,13 @@ http://blog.csdn.net/wangji5850/article/details/50854280
 行内元素的margin和padding属性,水平方向的padding-left,padding-right,margin-left,margin- right都产生边距效果,但竖直方向的padding-top,padding-bottom,margin-top,margin-bottom却不 会产生边距效果.
 块级元素即使设置了宽度,仍然是独占一行.(参考demo7,h标签必须设置float.)
 */
+
+/*关于css3 media属性
+CSS3 @media 查询
+http://www.runoob.com/cssref/css3-pr-mediaquery.html
+*/
+@media screen and (max-width: 300px) {
+    body {
+        background-color: lightblue;
+    }
+}
