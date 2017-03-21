@@ -19,6 +19,7 @@ cd stash-test && echo 'hello'> readme
 git add . && git commit -m "init"
 更新工作区，查看diff
 echo 'need to be stashed' >> readme
+
 git add readme
 git diff
 diff --git a/readme b/readme
