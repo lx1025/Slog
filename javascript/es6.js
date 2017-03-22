@@ -109,3 +109,5 @@ function animal(...args){
     console.log(args);
 }
 animal(a,b,c)
+
+//Promise finally

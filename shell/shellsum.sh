@@ -57,6 +57,9 @@ ps -ef | grep pyspider | awk '{print $2}' | xargs kill -9
 7、单词为单位移动：option + 方向键
 
 压缩解压缩scp导入数据库:
-压缩: tar -zxcf a.tar.gz o2o_spider_song.sql
+压缩: tar czvf xinghang.tar.gz zhouligang.sql
 scp: scp -P 3026 stage@101.254.157.124:/data/a.tar.gz
-解压缩: tar -zxvf a.tar.gz o2o_spider_song.sql
+解压缩: tar zxvf a.tar.gz o2o_spider_song.sql
+
+以G为单位的ls
+ls -alh
