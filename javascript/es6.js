@@ -111,3 +111,50 @@ function animal(...args){
 animal(a,b,c)
 
 //Promise finally
+//先看个需求: 把一个工程中的ajax请求
+//如果我这样写:
+//utils.js内
+export default {
+    _get(url, params) {
+        vue.http.get(url, {params: params}).then(response => {
+            console.log('success')
+            let res = response.body
+            return res
+        }, response => {
+            console.log('error')
+            console.log(response.body)
+        })
+    }
+}
+//action.js内
+let res = utils._get(url, params)
+console.log(res)
+console.log('something')
+commit('ASDFA', res)
+//你会发现打印顺序竟然是这样:
+//undifine, something, success
+//恍然大悟, 原来这段代码中的异步请求,并没有被等待, 这就是promise的作用了.
+//所以我这样写
+//utils.js内
+export default {
+    _get(url, params) {
+        var p = new Promise((resolve, reject) {
+            vue.http.get(url, {params: params}).then(response => {
+                console.log('success')
+                let res = response.body
+                resolve(res)     //对应then,表示成功状态
+            }, response => {
+                console.log('error')
+                reject(response) //对应catch, 表示失败状态
+            })
+        })
+        return p                 //一定要记得return
+    }
+}
+//action.js内部
+utils._get(url, params).then(res => {
+    commit('ASDFA', res)
+}).catch(res => {
+    console.log(res)
+})
+//完美的解决了异步通信的问题.
