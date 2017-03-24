@@ -111,7 +111,7 @@ function animal(...args){
 animal(a,b,c)
 
 //Promise finally
-//先看个需求: 把一个工程中的ajax请求
+//先看个需求: 把一个工程中的ajax请求封装
 //如果我这样写:
 //utils.js内
 export default {
@@ -142,10 +142,10 @@ export default {
             vue.http.get(url, {params: params}).then(response => {
                 console.log('success')
                 let res = response.body
-                resolve(res)     //对应then,表示成功状态
+                resolve(res)     //对应then,表示成功状态,将res传递给then
             }, response => {
                 console.log('error')
-                reject(response) //对应catch, 表示失败状态
+                reject(response) //对应catch, 表示失败状态, 将response传递给catch
             })
         })
         return p                 //一定要记得return

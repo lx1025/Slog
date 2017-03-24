@@ -41,7 +41,14 @@ select * from R cross join S 同上
 建立索引:
 create index o2o_spider_song_artist on o2o_spider_song(artist)
 create index o2o_spider_song_artist_bthash on o2o_spider_song(artist, bthash)
+查看表的索引:
+show index from o2o_spider_song
+删除表的索引:
+drop index index_name on table_name
 
 清空表:
 delete from 5sing
 truncate table 5sing
+
+查看当前mysql所在端口号:
+show global variables like 'port'

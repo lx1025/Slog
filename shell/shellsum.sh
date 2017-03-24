@@ -53,7 +53,6 @@ ps -ef | grep pyspider | awk '{print $2}' | xargs kill -9
 4、搜索以前使用命令：ctrl + r
 5、清除当前行：ctrl + u
 6、清除至当前行尾：ctrl + k
-
 7、单词为单位移动：option + 方向键
 
 压缩解压缩scp导入数据库:
@@ -63,3 +62,19 @@ scp: scp -P 3026 stage@101.254.157.124:/data/a.tar.gz
 
 以G为单位的ls
 ls -alh
+
+ubutn全局环境变量位置:
+sudo vim /etc/enviorment
+apt-get 安装java:
+https://tecadmin.net/install-oracle-java-8-ubuntu-via-ppa/#
+
+echo写入文件内容
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+
+song主机:
+106.75.97.4
+
+几个文件查看命令:
+当前目录下单个文件大小,目录只显示目录本身大小: ls -alh
+当前主机磁盘状态: df -h
+显示当前文件夹下单位大小,包含目录大小: du -sh *
