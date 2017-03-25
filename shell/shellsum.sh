@@ -45,6 +45,7 @@ ssh work@106.75.34.22 -p 22
 
 #查看所有相关进程
 ps -ef | grep pyspider | awk '{print $2}' | xargs kill -9
+ps -ef | grep phantomjs | awk '{print $2}' | xargs kill -9
 
 #mac
 1、将光标移动到行首：ctrl + a
@@ -78,3 +79,8 @@ song主机:
 当前目录下单个文件大小,目录只显示目录本身大小: ls -alh
 当前主机磁盘状态: df -h
 显示当前文件夹下单位大小,包含目录大小: du -sh *
+
+ubuntu添加环境变量:
+1.ubuntu系统级的环境变量都在/etc/enviorment中,直接在PATH后添加路径即可
+2.在.bashrc或者.bash_profile中添加环境变量: export PATH="/home/work/elasticsearch-5.2.2/bin":$PATH
+3.直接在终端输入: export PATH="/home/work/elasticsearch-5.2.2/bin":$PATH, 缺点是终端一旦关闭会失效!
