@@ -2,10 +2,10 @@
 curl -XDELETE localhost:9200/btsong
 
 # 查看当前所有的index
-curl localhost:9200/_cat/indices?v
+curl 106.75.97.4:9200/_cat/indices?v
 
 # 查看某index mapping
-curl -XGET localhost:9200/song/_mapping?pretty
+curl -XGET 106.75.97.4:9200/song/_mapping?pretty
 
 # 创建index song 和 type song
 curl -X PUT http://localhost:9200/song -d'{

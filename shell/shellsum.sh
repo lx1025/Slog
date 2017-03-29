@@ -46,7 +46,7 @@ ssh work@106.75.34.22 -p 22
 #查看所有相关进程
 ps -ef | grep pyspider | awk '{print $2}' | xargs kill -9
 ps -ef | grep phantomjs | awk '{print $2}' | xargs kill -9
-
+ps -ef | grep phantonjs | awk '{print $2}' | xargs kill -9
 #mac
 1、将光标移动到行首：ctrl + a
 2、将光标移动到行尾：ctrl + e
@@ -84,3 +84,6 @@ ubuntu添加环境变量:
 1.ubuntu系统级的环境变量都在/etc/enviorment中,直接在PATH后添加路径即可
 2.在.bashrc或者.bash_profile中添加环境变量: export PATH="/home/work/elasticsearch-5.2.2/bin":$PATH
 3.直接在终端输入: export PATH="/home/work/elasticsearch-5.2.2/bin":$PATH, 缺点是终端一旦关闭会失效!
+
+关于ffpeg取在线音乐的时长:
+ffprobe -v quiet -print_format json -show_streams http://data.5sing.kgimg.com/G030/M01/05/01/voYBAFXu8KKIa89FAAtg5wen4k8AABb6ABvYVgAC2D_146.m4a | jq  .streams[0].duration

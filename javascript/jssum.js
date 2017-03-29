@@ -327,29 +327,6 @@ var arr = [5, 2, 3, 1, 4];
 arr.quickSort();
 console.log(arr);
 
-//关于js的dom操作
-document.createDocumentFragment()    //创建一个DOM片段
-document.createElement()   //创建一个具体的元素
-document.createTextNode()   //创建一个文本节点
-//添加、移除、替换、插入
-appendChild()
-removeChild()
-replaceChild()
-insertBefore()
-//eg
-var para=document.createElement("p");
-var node=document.createTextNode("这是新段落。");
-para.appendChild(node);
-var element=document.getElementById("div1");
-element.appendChild(para);
-//查找
-document.getElementsByTagName()
-document.getElementsByClassName()
-document.getElementsByName()     // 注: 通过元素的Name属性的值(IE容错能力较强，会得到一个数组，其中包括id等于name值的)
-document.getElementById()
-//eg
-document.getElementById('any_id').src = 'something'
-
 //关于call和apply
 //call()的第一个参数是上下文，后续是实例传入的参数序列。
 //apply和call一个意思, apply()函数有两个参数：第一个参数是上下文，第二个参数是参数组成的数组。如果上下文是null，则使用全局对象代替。
@@ -695,3 +672,25 @@ window.location.search = '?param=value'
         document.documentElement.style.fontSize = winw / 10 + 'px';
     }
 })()
+
+//原生js dom操作 last
+//访问:
+document.getElementById()
+document.getElementsByClassName()
+document.getElementsByTagName()
+document.getElementsByName() // 注: 通过元素的Name属性的值(IE容错能力较强，会得到一个数组，其中包括id等于name值的)
+//修改:
+document.getElementById("p1").innerHTML = "some_new_text"
+document.getElementById("p2").style.color = "blue"
+document.getElementById("p3").src = 'http://www.baidu.com'
+//新建 添加 删除:
+var p = document.createElement("p")
+var node = document.createTextNode("这是新段落")
+p.appendChild(node)
+var element=document.getElementById("div1")
+element.appendChild(p);
+element.removeChild(p)
+//监听事件:(注意是'=')
+document.getElementById('intro').onclick = () => {console.log('test')}
+//触发事件:
+document.getElementById('intro').click()

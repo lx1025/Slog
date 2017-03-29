@@ -83,7 +83,6 @@ CREATE TABLE `kugou_singer` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
 	`kugouid` varchar(128) NOT NULL DEFAULT '' COMMENT '酷狗id',
-	UNIQUE KEY `hash` (`hash`),
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
