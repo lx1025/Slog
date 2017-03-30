@@ -77,3 +77,17 @@ print(date)
 print(type(date))
 
 #python 处理csv类型文件的库openpyxl
+
+#一个正则取目标的例子
+#findall
+import re
+string = '[03:46.571] <150,2000><203,2000><206,2000><150,2000><400,2000>'
+res = [int(item[:-1]) for item in re.findall(r'\d+\,', string)]
+print(res)
+#search
+import re
+string = '[03:46.571] <150,2000><203,2000><206,2000><150,2000><400,2000>'
+res = re.search(r'\d+\,', string)
+print(res.group(0))
+#match
+#match（）函数只检测RE是不是在string的开始位置匹配， search()会扫描整个string查找匹配,

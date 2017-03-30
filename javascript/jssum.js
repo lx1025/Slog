@@ -694,3 +694,4 @@ element.removeChild(p)
 document.getElementById('intro').onclick = () => {console.log('test')}
 //触发事件:
 document.getElementById('intro').click()
+document.getElementById('input').focus()

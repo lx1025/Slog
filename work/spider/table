@@ -73,6 +73,7 @@ CREATE TABLE `5sing` (
 	`song_url` varchar(128) NOT NULL DEFAULT '' COMMENT  '播放页面链接',
 	`download_url` varchar(128) NOT NULL DEFAULT '' COMMENT  '下载链接',
 	`super_json` text NOT NULL DEFAULT '' COMMENT '歌曲meta的json长串',
+	`duration` int(11) NOT NULL DEFAULT 0 COMMENT '时长',
 	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),

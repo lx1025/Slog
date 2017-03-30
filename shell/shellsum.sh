@@ -71,10 +71,6 @@ https://tecadmin.net/install-oracle-java-8-ubuntu-via-ppa/#
 
 echo写入文件内容
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
-
-song主机:
-106.75.97.4
-
 几个文件查看命令:
 当前目录下单个文件大小,目录只显示目录本身大小: ls -alh
 当前主机磁盘状态: df -h
@@ -87,3 +83,23 @@ ubuntu添加环境变量:
 
 关于ffpeg取在线音乐的时长:
 ffprobe -v quiet -print_format json -show_streams http://data.5sing.kgimg.com/G030/M01/05/01/voYBAFXu8KKIa89FAAtg5wen4k8AABb6ABvYVgAC2D_146.m4a | jq  .streams[0].duration
+
+last -n 5
+该命令用来列出目前与过去登录系统的用户相关信息。
+
+关于awk的简单用法:
+awk是一个强大的文本分析工具,简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理.
+eg.1
+last -n 5 | awk '{print $1}'
+eg.2 处理文本
+cat /etc/passwd
+cat /etc/passwd | awk  -F ':'  '{print $1}'
+cat /etc/passwd | awk  -F ':'  '{print $1"\t"$7}'
+cat /etc/passwd | awk  -F ':'  'BEGIN {print "name, shell"}  {print $1", "$7} END {print "blue, /bin/nosh"}'
+eg.3 搜索文本,定位到行
+awk -F: '/root/' /etc/passwd
+eg.4 搜索/etc/passwd有root关键字的所有行，并显示对应的shell
+awk -F: '/root/{print $7}' /etc/passwd
+
+alias 命名别名
+alias ls="ls -l"
