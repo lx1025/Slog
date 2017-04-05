@@ -50,7 +50,7 @@ CREATE TABLE `btsong` (
 	`source_id` varchar(32) NOT NULL DEFAULT '' COMMENT '来源内部id',
 	`addtime` varchar(32) NOT NULL DEFAULT '' COMMENT '来源内部更新时间',
 	`label` varchar(32) NOT NULL DEFAULT '' COMMENT '来源内部音源标签',
-	`state` tinyint(1) NOT NULL DEFAULT 0 COMMENT '审核状态 0:未审核 1:已审核',
+	` tinyint(1) NOT NULL DEFAULT 0 COMMENT '审核状态 0:未审核 1:已审核',
 	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),

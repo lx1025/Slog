@@ -52,3 +52,9 @@ truncate table 5sing
 
 查看当前mysql所在端口号:
 show global variables like 'port'
+
+update多字段!妈的这你都不会
+update o2o_spider_song set bthash = '', btname = '' where bthash != ''
+
+mysql版本
+mysql -V

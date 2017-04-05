@@ -91,3 +91,35 @@ res = re.search(r'\d+\,', string)
 print(res.group(0))
 #match
 #match（）函数只检测RE是不是在string的开始位置匹配， search()会扫描整个string查找匹配,
+
+# 二分查找!
+def search_data(data, length, data_find):
+        low = 0
+        high = length - 1
+
+        if data_find < data[0]:
+            return data[0]
+        if data_find > data[length - 1]:
+            return data[length - 1]
+
+        while low <= high:
+            mid = int((high + low) / 2)
+            if data[mid] == data_find:
+                return data[mid]
+            if data[mid] > data_find:
+                high = mid - 1
+            else:
+                low = mid + 1
+        return data[low] if abs(data[low] - data_find) < abs(data[high] - data_find) else data[high]
+lis = [1, 2, 4, 5, 6, 7, 8]
+a = 7.6
+res = search_data(lis, len(lis), a)
+print(res)
+
+# 一个很棒的url处理库furl
+from furl import furl
+f = furl('http://www.google.com/?page=1')
+print(f.url)
+print(f.args)
+f.args['page'] = 2
+print(f.url)
