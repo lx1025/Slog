@@ -20,10 +20,6 @@ server {
     location / {
         proxy_pass http://127.0.0.1:8000 #实现反向代理这里的意思是从80->8000，这个端口运行着工程  8000是非常关键的，涉及到微信的认证
     }
-    location /article {
-        proxy_pass http://127.0.0.1:8000/article #二级路由
-        proxy_redirect default ;
-    }
 }
 文件的另外一个末尾行：
 include /etc/nginx/confid.d/*.conf
@@ -37,16 +33,16 @@ server {
         root /usr/share/nginx/html;        #当访问http://localhost:8088时，定位到此根目录，然后按找顺序查找下列文件
         index index.html index.htm;
     }
-}   
+}
 访问：http://localhost:8088 出现nginx的欢迎页
 
 至此，nignx的初始配置基本完成了,几个可能会用到的命令
-sudo vim 
+sudo vim
 sudo nginx -t 查看启动日志，如果启动或重启失败，可以由此查找错误信息
 
 另：nginx的负载均衡
 upstream backend {
-    ip_hash;    
+    ip_hash;
     server backend1.example.com;
     server backend2.example.com;
     server backend3.example.com;
@@ -54,4 +50,56 @@ upstream backend {
 }
 location / {
     proxy_pass http://backend;
+}
+
+nginx热加载:
+检查配置文件语法: nginx -t
+热加载: nginx -s reload
+
+关于location的匹配规则:
+location [ = | ~ | ~* | ^~ ] uri { ... }
+location @name { ... }
+1. =指令用于精确字符匹配
+location = /demo {
+    rewrite ^ http://google.com;
+}
+2. ^~指令用于字符前缀匹配
+location ^~ /demo {
+    rewrite ^ http://google.com;
+}
+3. ~指令用于正则匹配, 使用~*则不区分大小写
+location ~ /[0-9]emo {
+    rewrite ^ http://google.com;
+}
+4. 指令为空用于正常匹配
+location /demo {
+    rewrite ^ http://google.com;
+}
+以下规则都能匹配:
+http://192.168.33.10/demo
+http://192.168.33.10/demo/
+http://192.168.33.10/demo/aaa
+http://192.168.33.10/demo/aaa/bbb
+http://192.168.33.10/demo/AAA
+http://192.168.33.10/demoaaa
+http://192.168.33.10/demo.aaa
+5.全匹配
+location / {
+    rewrite ^ http://google.com;
+}
+
+关于rewrite规则:
+location /gzh_custom/gzh {
+    rewrite ^/(.*)$ http://erp.stage.ktvsky.com/$1 permanent;
+}
+
+关于nginx的动静分离:
+location ~* \.(swf|js|css|png|txt|gif|jpg|jpeg|bng|bmp|ico)$ {
+    if ($http_referer ~* $host$uri$is_args$args) {
+        return 404;
+    }
+    expires 30d;
+    access_log off;
+    add_header Cache-Control 'public';
+    root html/myktv_static/wow;
 }
