@@ -16,7 +16,6 @@ server {
     server_name localhost;   #这里是你的域名，即服务器名称，即访问者的所填写url中的host（主机名），两者对应
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
-
     location / {
         proxy_pass http://127.0.0.1:8000 #实现反向代理这里的意思是从80->8000，这个端口运行着工程  8000是非常关键的，涉及到微信的认证
     }
@@ -83,9 +82,14 @@ http://192.168.33.10/demo/aaa/bbb
 http://192.168.33.10/demo/AAA
 http://192.168.33.10/demoaaa
 http://192.168.33.10/demo.aaa
-5.全匹配
+5. 全匹配
 location / {
     rewrite ^ http://google.com;
+}
+6. @命名匹配, 绑定一个模式，类似变量替换的用法
+error_page 404 = @not_found
+location @not_found {
+      rewrite http://google.com;
 }
 
 关于rewrite规则:
@@ -103,3 +107,32 @@ location ~* \.(swf|js|css|png|txt|gif|jpg|jpeg|bng|bmp|ico)$ {
     add_header Cache-Control 'public';
     root html/myktv_static/wow;
 }
+
+location关键字 try_files
+找指定路径下文件，如果不存在，则转给哪个文件执行
+语法: try_files file1 [file2 ... filen] fallback
+eg: 这里配合了命名匹配和负载均衡
+upstream xiaomi {
+    server 127.0.0.1:8001 max_fails=2 fail_timeout=30s weight=4;
+    server 127.0.0.1:8002 max_fails=2 fail_timeout=30s weight=4;
+    server 127.0.0.1:8003 max_fails=2 fail_timeout=30s weight=4;
+    server 127.0.0.1:8004 max_fails=2 fail_timeout=30s weight=4;
+    keepalive 8;
+}
+server {
+    listen 80;
+    server_name localhost;
+    location / {
+        try_files $uri $uri/index.html $uri.html @xiaomi;
+    }
+    location @xiaomi {
+        proxy_read_timeout 300;
+        proxy_connect_timeout 300;
+        proxy_redirect off;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Frame-Options SAMEORIGIN;
+        proxy_pass http://xiaomi;
+    }
