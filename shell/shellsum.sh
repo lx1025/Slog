@@ -57,7 +57,7 @@ ps -ef | grep phantonjs | awk '{print $2}' | xargs kill -9
 7、单词为单位移动：option + 方向键
 
 压缩解压缩scp导入数据库:
-压缩: tar czvf xinghang.tar.gz zhouligang.sql
+压缩: tar cxvf xinghang.tar.gz zhouligang.sql
 scp: scp -P 3026 stage@101.254.157.124:/data/a.tar.gz
 解压缩: tar zxvf a.tar.gz o2o_spider_song.sql
 
@@ -101,5 +101,13 @@ awk -F: '/root/' /etc/passwd
 eg.4 搜索/etc/passwd有root关键字的所有行，并显示对应的shell
 awk -F: '/root/{print $7}' /etc/passwd
 
-alias 命名别名
+alias 命名某指令为别名
 alias ls="ls -l"
+
+关于tail命令和cat命令
+tail nohup.out # 默认10行
+tail -n 200 nohup.out # 设定参数, 200行
+tail -f nohup.out # follow 追踪
+cat file1 # 显示整个文件的内容
+cat > file2  # 建立一个文件
+cat file1 file2 > file # 合并文件

@@ -123,3 +123,7 @@ print(f.url)
 print(f.args)
 f.args['page'] = 2
 print(f.url)
+
+#redirect两种路径的细微差别:
+self.redirect('/static/gzh/distribution/base.html') # 绝对路径
+self.redirect('static/gzh/distribution/base.html') # 相对路径

@@ -110,7 +110,7 @@ location ~* \.(swf|js|css|png|txt|gif|jpg|jpeg|bng|bmp|ico)$ {
 
 location关键字 try_files
 找指定路径下文件，如果不存在，则转给哪个文件执行
-语法: try_files file1 [file2 ... filen] fallback
+语法: try_files file1 [file2 ... filen] fallback       
 eg: 这里配合了命名匹配和负载均衡
 upstream xiaomi {
     server 127.0.0.1:8001 max_fails=2 fail_timeout=30s weight=4;
