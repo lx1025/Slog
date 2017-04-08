@@ -111,3 +111,14 @@ tail -f nohup.out # follow 追踪
 cat file1 # 显示整个文件的内容
 cat > file2  # 建立一个文件
 cat file1 file2 > file # 合并文件
+
+关于mv指令
+move 用于文件移动或者重命名
+文件改名: mv test.log test.txt
+移动文件: mv test.txt test1
+批量移动文件: mv log1.txt log2.txt log3.txt test1
+          : mv -t /opt/soft/test/test4/ log1.txt log2.txt  log3.txt
+文件改名,询问是否覆盖: mv -i text.log text.txt
+文件改名,强制覆盖: mv -f text.log text.txt
+目录改名或者移动: mv dir1 dir2 若dir2存在,就是移动目录, 否则就是改名
+将当前目录下所有文件移动到上级目录: mv * ../
