@@ -122,3 +122,4 @@ move 用于文件移动或者重命名
 文件改名,强制覆盖: mv -f text.log text.txt
 目录改名或者移动: mv dir1 dir2 若dir2存在,就是移动目录, 否则就是改名
 将当前目录下所有文件移动到上级目录: mv * ../
+文件重命名做备份: mv text.log -b text.txt 

@@ -3,7 +3,7 @@ alter table gzh_user add flag tinyint(1) not null default 0 comment "是否第�
 
 CREATE TABLE `gzh_dis_order` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `order_id` varchar(32) NOT NULL DEFAULT '' COMMENT '',
+    `order_id` varchar(128) NOT NULL DEFAULT '' COMMENT '',
     `openid` varchar(64) NOT NULL DEFAULT '' COMMENT '',
     `phone_num` bigint(11) NOT NULL DEFAULT 0 COMMENT '电话号码',
     `s_openid` varchar(64) NOT NULL DEFAULT '' COMMENT '分享者openid',

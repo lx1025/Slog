@@ -590,6 +590,7 @@ function getQueryObject(url) {
     var obj = {};
     var reg = /([^?&=]+)=([^?&=]*)/g        //正则的分组, 后续可以用$1, $2获取分组,这是replace的特殊用法
     search.replace(reg, ($1, $2, $3) => {
+        console.log($1);
         obj[$2] = $3
     });
     return obj;
@@ -624,6 +625,11 @@ getParam('id')
 //写出'www.bitland.com'的正则
 //一个最简单的面试题
 var reg = /^w{3}\.\w+\.\w+$/
+
+//将字符串中的所有的数字加上<em>标签
+var str = 'asdf123qwer456jkl789'
+var reg = /(\d+)/g
+str.replace(reg, ($1) => `<em>${$1}</em>`)
 
 //根据请求端是否是手机端来判断跳转:
 if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {

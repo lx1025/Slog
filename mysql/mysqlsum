@@ -58,3 +58,17 @@ update o2o_spider_song set bthash = '', btname = '' where bthash != ''
 
 mysql版本
 mysql -V
+
+mysql的初步.http://blog.csdn.net/javazejian/article/details/61614366
+
+desc items
+定义浮点类型:
+float(6, 1) 最大长度6位, 小数点位1位
+group by and having:
+select sex ,count(id) from user group by sex having sex is not null
+
+关于concat:
+select Concat(username,'(',birthday,')') AS name_birthday  from user where birthday is not null;
+
+一次内连接:
+select tm.name, tm.price, od.items_num, (tm.price * od.items_num) AS sum_price from orderdetail AS od inner join items AS tm on od.items_id = tm.id;
