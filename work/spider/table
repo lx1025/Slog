@@ -115,8 +115,6 @@ scp -P 3026 xinghang@101.254.157.124:/home/xinghang/.pyenv/versions/2.7.1/envs/s
 5sing
 http://data.5sing.kgimg.com/G094/M03/16/05/ng0DAFjKlo6AP6VNAKHByI4n2WY319.mp3
 
-mysql -umombaby -h192.168.0.172 -P3308 -p098f6bcd4621d373cade4e832627b4f6 myktv -e 'select * from o2o_spider_song where lable = "伴奏" or title like "%伴奏%"' > ..//o.xlsx
-
 CREATE TABLE `kugou_by_cat` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`title` varchar(128) NOT NULL DEFAULT '' COMMENT '全称',

@@ -122,3 +122,5 @@ move 用于文件移动或者重命名
 目录改名或者移动: mv dir1 dir2 若dir2存在,就是移动目录, 否则就是改名
 将当前目录下所有文件移动到上级目录: mv * ../
 文件重命名做备份: mv text.log -b text.txt
+
+mysql -uroot -h10.9.138.23 -p098f6bcd4621d373cade4e832627b4f6 kugou -e "select id from o2o_spider_song where name like '%快三%' or name like '%慢四%' or name like '%快四%' or  name like '%DJ%' or name like '%舞曲%' or name like '%广场舞%' or name like '%串烧%' or name like '%电音%' or name like '%慢摇%' or name like '%MC%' or name like '%喊麦%' or name like '%慢三%' or name like '%车载%' or name like '%remix%' or name like '%m c%' or name like '%m.c%' or name like 'd.j'" > o.txt

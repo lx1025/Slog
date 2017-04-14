@@ -60,18 +60,117 @@ mysql版本
 mysql -V
 
 mysql的初步.http://blog.csdn.net/javazejian/article/details/61614366
-
-desc items
+desc <table_name>
 定义浮点类型:
 float(6, 1) 最大长度6位, 小数点位1位
 group by and having:
 select sex ,count(id) from user group by sex having sex is not null
-
 关于concat:
 select Concat(username,'(',birthday,')') AS name_birthday  from user where birthday is not null;
-
 一次内连接:
 select tm.name, tm.price, od.items_num, (tm.price * od.items_num) AS sum_price from orderdetail AS od inner join items AS tm on od.items_id = tm.id;
 
 #关于index的关键字:
 mysql的字段名字竟然不能用index!我真是的醉了.!
+
+关于表连接的一次实例
+关于表连接的一次实例
+关于表连接的一次实例
+关于表连接的一次实例
+
+select * from table1
++------+-------+
+| id   | name  |
++------+-------+
+|    1 | lee   |
+|    2 | zhang |
+|    3 | steve |
+|    4 | wang  |
++------+-------+
+select * from table2;
++------+-------+
+| id   | score |
++------+-------+
+|    1 |    90 |
+|    2 |   100 |
+|    3 |    70 |
+|    5 |    80 |
++------+-------+
+传统连接: 结果集只显示两个表满足查询条件的部分
+select * from table1 t1, table2 t2 where t1.id = t2.id;
++------+-------+------+-------+
+| id   | name  | id   | score |
++------+-------+------+-------+
+|    1 | lee   |    1 |    90 |
+|    2 | zhang |    2 |   100 |
+|    3 | steve |    3 |    70 |
++------+-------+------+-------+
+内连接: 效果等同于传统链接, 这里用on子句指定连接条件，用where子句指定其他限定条件
+select * from table1 t1 inner join table2 t2 on t1.id = t2.id;
++------+-------+------+-------+
+| id   | name  | id   | score |
++------+-------+------+-------+
+|    1 | lee   |    1 |    90 |
+|    2 | zhang |    2 |   100 |
+|    3 | steve |    3 |    70 |
++------+-------+------+-------+
+select * from table1 t1 inner join table2 t2 on t1.id = t2.id where t2.score = 90;
++------+------+------+-------+
+| id   | name | id   | score |
++------+------+------+-------+
+|    1 | lee  |    1 |    90 |
++------+------+------+-------+
+外连接:
+左连接:
+结果集包括语句中指定的左表的所有行，而不仅仅是满足连接条件的行
+如果左表的某行在右表中没有匹配行，在结果集中此行的右表的所有的字段值均为空值null
+select * from from table1 t1 left join table2 t2 on t1.id = t2.id;
++------+-------+------+-------+
+| id   | name  | id   | score |
++------+-------+------+-------+
+|    1 | lee   |    1 |    90 |
+|    2 | zhang |    2 |   100 |
+|    3 | steve |    3 |    70 |
+|    4 | wang  | NULL |  NULL |
++------+-------+------+-------+
+左连接查看差别:
+select * from table1 t1 left join table2 t2 on t1.id = t2.id WHERE t2.id is null
+select count(*) from table1 t1 left join table2 t2 on t1.id = t2.id where t2.id is null (注意是is而不是=)
++------+------+------+-------+
+| id   | name | id   | score |
++------+------+------+-------+
+|    4 | wang | NULL |  NULL |
++------+------+------+-------+
+右连接:
+结果集包括语句中指定的右表的所有行, 而不仅仅是满足连接条件的行
+如果右表的某行在左表中没有匹配行,在结果集中此行的左表的所有的字段值均为空值null
+select * from table1 t1 right join table2 t2 on t1.id = t2.id
++------+-------+------+-------+
+| id   | name  | id   | score |
++------+-------+------+-------+
+|    1 | lee   |    1 |    90 |
+|    2 | zhang |    2 |   100 |
+|    3 | steve |    3 |    70 |
+| NULL | NULL  |    5 |    80 |
++------+-------+------+-------+
+select * from table1 t1 right join table2 t2 on t1.id = t2.id order by t2.score;
++------+-------+------+-------+
+| id   | name  | id   | score |
++------+-------+------+-------+
+|    3 | steve |    3 |    70 |
+| NULL | NULL  |    5 |    80 |
+|    1 | lee   |    1 |    90 |
+|    2 | zhang |    2 |   100 |
++------+-------+------+-------+
+全连接:
+包含左右表的所有行
+select * from table1 t1 full join table2 t2 on t1.id = t2.id
+记忆方式就是左连接左表全, 右连接右表全, 全连接全部全
+eg.
+select count(*) from kugou_by_cat k1 left join o2o_spider_song o1 on k1.hash = o1.hash where o1.hash is null
+select count(*) from kugou_by_cat k1 left join o2o_spider_song o1 on k1.hash = o1.hash where o1.hash is null;
++----------+
+| count(*) |
++----------+
+|   204813 |
++----------+
