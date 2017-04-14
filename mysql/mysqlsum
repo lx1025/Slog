@@ -72,3 +72,6 @@ select Concat(username,'(',birthday,')') AS name_birthday  from user where birth
 
 一次内连接:
 select tm.name, tm.price, od.items_num, (tm.price * od.items_num) AS sum_price from orderdetail AS od inner join items AS tm on od.items_id = tm.id;
+
+#关于index的关键字:
+mysql的字段名字竟然不能用index!我真是的醉了.!

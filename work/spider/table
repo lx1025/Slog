@@ -116,3 +116,35 @@ scp -P 3026 xinghang@101.254.157.124:/home/xinghang/.pyenv/versions/2.7.1/envs/s
 http://data.5sing.kgimg.com/G094/M03/16/05/ng0DAFjKlo6AP6VNAKHByI4n2WY319.mp3
 
 mysql -umombaby -h192.168.0.172 -P3308 -p098f6bcd4621d373cade4e832627b4f6 myktv -e 'select * from o2o_spider_song where lable = "伴奏" or title like "%伴奏%"' > ..//o.xlsx
+
+CREATE TABLE `kugou_by_cat` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`title` varchar(128) NOT NULL DEFAULT '' COMMENT '全称',
+	`name` varchar(128) NOT NULL DEFAULT '' COMMENT '歌名',
+	`artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+	`extname` varchar(11) NOT NULL DEFAULT '' COMMENT '音源后缀',
+	`size` int(11) NOT NULL DEFAULT 0 COMMENT '文件大小',
+	`size320` int(11) NOT NULL DEFAULT 0 COMMENT '320文件大小',
+	`sizesq` int(11) NOT NULL DEFAULT 0 COMMENT 'sq文件大小',
+	`hash` varchar(128) NOT NULL DEFAULT '' COMMENT '哈希值',
+	`hash320` varchar(128) NOT NULL DEFAULT '' COMMENT '320哈希值',
+	`hashsq` varchar(128) NOT NULL DEFAULT '' COMMENT 'sq哈希值',
+	`bitrate` int(11) NOT NULL DEFAULT 0 COMMENT '比特率',
+	`duration` int(11) NOT NULL DEFAULT 0 COMMENT '时长',
+	`source_id` int(32) NOT NULL DEFAULT 0 COMMENT '来源内部id',
+	`_index` varchar(32) NOT NULL DEFAULT '' COMMENT '_index',
+	`cat` varchar(32) NOT NULL DEFAULT '' COMMENT 'category',
+	`tag` varchar(32) NOT NULL DEFAULT '' COMMENT 'tag',
+	`re1` varchar(32) NOT NULL DEFAULT '' COMMENT '预留字段1',
+	`re2` varchar(32) NOT NULL DEFAULT '' COMMENT '预留字段2',
+	`re3` varchar(32) NOT NULL DEFAULT '' COMMENT '预留字段3',
+	`re4` varchar(32) NOT NULL DEFAULT '' COMMENT '预留字段4',
+	`re5` int(11) NOT NULL DEFAULT 0 COMMENT '预留字段5',
+	`re6` int(11) NOT NULL DEFAULT 0 COMMENT '预留字段6',
+	`re7` int(11) NOT NULL DEFAULT 0 COMMENT '预留字段7',
+	`re8` int(11) NOT NULL DEFAULT 0 COMMENT '预留字段8',
+	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `hash` (`hash`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

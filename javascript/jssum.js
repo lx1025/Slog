@@ -299,7 +299,7 @@ console.log(test(a))
 if (typeof Array.prototype.quickSort !== 'function') {
     Array.prototype.quickSort = function () {
         quickSortHelper(this, 0, this.length-1);
-        function (arr, start, end) {
+        function quickSortHelper(arr, start, end) {
             if(start < end){
                 var part = partation(arr, start, end)
                 arguments.callee(arr, start, part - 1)

@@ -89,6 +89,12 @@ import re
 string = '[03:46.571] <150,2000><203,2000><206,2000><150,2000><400,2000>'
 res = re.search(r'\d+\,', string)
 print(res.group(0))
+#另一个re.search的实战例子:通过()实现group的分配
+cat_jump_url = 'http://m.www2.kugou.com/yueku/category/html/index.html?areaid=2'
+print re.search(r'/areaid=(\d+)/', cat_jump_url).group(0) # areaid=2
+print re.search(r'/areaid=(\d+)/', cat_jump_url).group(1) # 2
+print re.search(r'/areaid=\d+/', cat_jump_url).group(1)   # error
+
 #match
 #match（）函数只检测RE是不是在string的开始位置匹配， search()会扫描整个string查找匹配,
 

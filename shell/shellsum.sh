@@ -45,8 +45,7 @@ ssh work@106.75.34.22 -p 22
 
 #查看所有相关进程
 ps -ef | grep pyspider | awk '{print $2}' | xargs kill -9
-ps -ef | grep phantomjs | awk '{print $2}' | xargs kill -9
-ps -ef | grep phantonjs | awk '{print $2}' | xargs kill -9
+ps -ef | grep phantonmjs | awk '{print $2}' | xargs kill -9
 #mac
 1、将光标移动到行首：ctrl + a
 2、将光标移动到行尾：ctrl + e
@@ -122,4 +121,4 @@ move 用于文件移动或者重命名
 文件改名,强制覆盖: mv -f text.log text.txt
 目录改名或者移动: mv dir1 dir2 若dir2存在,就是移动目录, 否则就是改名
 将当前目录下所有文件移动到上级目录: mv * ../
-文件重命名做备份: mv text.log -b text.txt 
+文件重命名做备份: mv text.log -b text.txt
