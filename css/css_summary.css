@@ -380,4 +380,4 @@ a:active {color: #0000FF}	/* 选定的链接 */
 a:visited {color: #00FF00}	/* 已访问的链接 */
 input:focus {border: none}  /* 拥有键盘输入焦点*/
 p:first-child {font-size: 16px} /* http://www.w3school.com.cn/cssref/pr_pseudo_first-child.asp */
-q:lang(no) {quotes: "~" "~"}/* http://www.w3school.com.cn/cssref/pr_pseudo_lang.asp */
+q:lang(no) {quotes: "~" "~"} /* http://www.w3school.com.cn/cssref/pr_pseudo_lang.asp */
