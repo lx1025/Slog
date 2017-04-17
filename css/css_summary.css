@@ -5,14 +5,14 @@ css书写规范：https://github.com/fex-team/styleguide/blob/master/css.md*/
 浏览器缺省设置
 外部样式表  (位于<head> 标签内部的link标签)
 内部样式表（位于 <head> 标签内部的style标签）
-内联样式（在 HTML 元素内部）*/
+内联样式（在 HTML 元素内部）双引号, 分号*/
 
 /*关于多重样式：如果某些属性在不同的样式表中被同样的选择器定义，那么属性值将从更具体的样式表中被继承过来,例如*/
 /*外部样式表拥有针对 h3 选择器的三个属性：*/
 h3 {
     color:red;
     text-align:left;
-    font-size:8pt;
+    font-size:8px;
 }
 /*而内部样式表拥有针对 h3 选择器的两个属性：*/
 h3 {
@@ -48,22 +48,16 @@ This is a paragraph
 </p>
 
 /*文本属性：
-color   设置文本颜色
-direction   设置文本方向。
-letter-spacing  设置字符间距
-line-height 设置行高
-text-align  对齐元素中的文本
-text-decoration 向文本添加修饰
-text-indent 缩进元素中文本的首行
-text-shadow 设置文本阴影
-text-transform  控制元素中的字母
+font              字体属性
+color             设置文本颜色
+direction         设置文本方向。
+letter-spacing    设置字符间距
+line-height       设置行高
+text-align        对齐元素中的文本
+text-decoration   向文本添加修饰
+text-indent       缩进元素中文本的首行
+text-shadow       设置文本阴影
 */
-
-/*链接属性：*/
-a:link {color:#FF0000;text-decoration:none;background-color:#B2FF99;}      /* 未访问链接*/
-a:visited {color:#00FF00;}  /* 已访问链接 */
-a:hover {color:#FF00FF;}  /* 鼠标移动到链接上 */
-a:active {color:#0000FF;}  /* 已访问过的链接 */
 
 /*有序无序list元素的序号风格：*/
 ul.a {list-style-type:circle;}
@@ -77,7 +71,7 @@ ol.e {list-style:square url("sqpurple.gif");} 图像风格转化
 /*元素选择器*/
 html {color:black;}
 p {color:gray;}
-/*选择器分组*/
+/*选择器分组, 逗号间隔*/
 body, h2, p, table, th, td, pre, strong, em {color:gray;}
 /*通配符选择器*/
 * {color:red;}
@@ -87,7 +81,7 @@ This paragraph is a very important warning.
 </p>*/
 .important {font-weight:bold;}
 .warning {font-style:italic;}
-.important.warning {background:silver;}
+.important .warning {background:silver;}
 /*id选择器*/
 #mostImportant {color:red; background:yellow;}
 /*属性选择器*/
@@ -98,19 +92,19 @@ img[alt] {border: 5px solid red;}
 h1 em {color:red;}
 /*子元素选择器, */
 /*如果您不希望选择任意的后代元素，而是希望缩小范围，只选择某个元素的子元素*/
-h1>strong {color:red;}
+h1 > strong {color:red;}
 /*相邻兄弟选择器*/
 /*读作，将h1元素之后的的兄弟p元素巴拉巴拉*/
 h1 + p {margin-top:50px;}
 /*读作，将li元素之后的的兄弟li元素巴拉巴拉*/
 li + li {font-weight:bold;} /*第一个li元素没有样式*/
 /*伪类选择器*/
-a:link {color:#FF0000;text-decoration:none;background-color:#B2FF99;}      /* 未访问链接*/
-a:visited {color:#00FF00;}  /* 已访问链接 */
-a:hover {color:#FF00FF;}  /* 鼠标移动到链接上 */
-a:active {color:#0000FF;}  /* 激活链接时刻 */
+a:link {color:#FF0000;text-decoration:none;background-color:#B2FF99;}
+a:visited {color:#00FF00;}
+a:hover {color:#FF00FF;}
+a:active {color:#0000FF;}
 /*伪元素选择器*/
-p:first-letter {color:#ff0000;}
+p:first-letter {color:#ff0000;} /*http://www.w3school.com.cn/cssref/pr_pseudo_first-child.asp*/
 
 /*彻底理解行高line-height*/
 http://www.w3school.com.cn/tiy/t.asp?f=csse_dim_line-height_percent
@@ -133,8 +127,13 @@ em指字体高，任意浏览器的默认字体高都是16px。所以,未经调�
 https://segmentfault.com/q/1010000004704818/a-1020000004705715
 
 /*清除浮动*/
-http://www.jb51.net/css/173023.html
+/*http://www.jb51.net/css/173023.html
 前五种
+1.父元素手动定义height
+2.结尾处加空div标签 clear:both
+3.父级div定义 伪类:after 和 zoom
+4.父级div定义 overflow:hidden
+4.父级div定义 overflow:auto*/
 
 /*一个常用的组合*/
 #id {
@@ -194,7 +193,7 @@ $('#id').show()
 }
 
 /*内联样式的写法, 双引号分号*/
-<p style="color: red;padding-top: 1px">something<p>
+<p style="color:red; padding-top:1px">something<p>
 
 /*关于适配,真的最后一关了...*/
 /*https://isux.tencent.com/web-app-rem.html*/
@@ -214,6 +213,7 @@ $('#id').show()
 宽度就是它的文字或图片的宽度，不可改变。*/
 /*inline-block的元素特点：
 应用此特性的元素呈现为行对象，和周围元素保持在同一行，但可以设置宽度和高度地块元素的属性*/
+
 /*用法1:用于行内元素, 元素将可以设置宽度和高度和内边距, 用于设置背景图片*/
 em {
     display: inline-block;
@@ -370,3 +370,14 @@ http://www.runoob.com/cssref/css3-pr-mediaquery.html
 小正文: 13px;
 辅助文字: 12px;
 */
+
+/*关于css伪类
+css伪类用于向某些选择器添加特定的效果
+*/
+a:link {color: #FF0000}		/* 未访问的链接 */
+a:hover {color: #FF00FF}	/* 鼠标移动到链接上 */
+a:active {color: #0000FF}	/* 选定的链接 */
+a:visited {color: #00FF00}	/* 已访问的链接 */
+input:focus {border: none}  /* 拥有键盘输入焦点*/
+p:first-child {font-size: 16px} /* http://www.w3school.com.cn/cssref/pr_pseudo_first-child.asp */
+q:lang(no) {quotes: "~" "~"}/* http://www.w3school.com.cn/cssref/pr_pseudo_lang.asp */

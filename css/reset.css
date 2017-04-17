@@ -49,8 +49,8 @@ table {
 }
 /*万能清除浮动*/
 .clearfix:after {
-    content: "." ;
     display: block ;
+    content: "." ;
     visibility: hidden ;
     height: 0 ;
     clear: both ;

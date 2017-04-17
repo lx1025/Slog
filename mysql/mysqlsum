@@ -166,8 +166,8 @@ select * from table1 t1 right join table2 t2 on t1.id = t2.id order by t2.score;
 包含左右表的所有行
 select * from table1 t1 full join table2 t2 on t1.id = t2.id
 记忆方式就是左连接左表全, 右连接右表全, 全连接全部全
+
 eg.
-select count(*) from kugou_by_cat k1 left join o2o_spider_song o1 on k1.hash = o1.hash where o1.hash is null
 select count(*) from kugou_by_cat k1 left join o2o_spider_song o1 on k1.hash = o1.hash where o1.hash is null;
 +----------+
 | count(*) |
