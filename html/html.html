@@ -42,7 +42,7 @@ eg:下面的代码输出内容？
 </body>
 </html>
 
-<!-- font-family样式， 多样式用；隔开 -->
+<!-- font-family样式, 多重的内联样式引号分号 -->
 <p style="font-family:arial;color:red;font-size:20px;">A paragraph.</p>
 This text is in Verdana and red</p>
 
@@ -58,17 +58,17 @@ This text is in Verdana and red</p>
 
 文字格式：
 <big>   定义大号字。
-<em>    定义着重(斜体)文字。
-<i> 定义斜体字。
+<em>    定义着重(斜体)文字。虽然这个标签广泛用于显示小的图标, 本意却是emphasize
+<i>     定义斜体字。
 <small> 定义小号字。
-<strong>    定义加重语气。
+<strong>定义加重语气。
 <sub>   定义下标字。
 <sup>   定义上标字。
 <ins>   定义插入字。
 <del>   定义删除字。
-<s> 不赞成使用。使用 <del> 代替。
-<strike>    不赞成使用。使用 <del> 代替。
-<u> 下划线 不赞成使用。使用样式（style）代替。
+<s>     不赞成使用。使用 <del> 代替。
+<strike>不赞成使用。使用 <del> 代替。
+<u>     下划线 不赞成使用。使用样式（style）代替。
 
 关于em和i的区别：
 <i>标签：
@@ -90,36 +90,35 @@ http://www.w3school.com.cn/html/html_quotation_elements.asp
 <img border="0" src="/i/tulip_ballade.jpg" alt="Tulip">
 -->
 条件注释
-你也许会在 HTML 中偶尔发现条件注释：
+<!-- 你也许会在 HTML 中偶尔发现条件注释： -->
 <!--[if IE 8]>
         .... some HTML here ....
 <![endif]-->
 
-<link rel="stylesheet" type="text/css" href="/html/csstest1.css" >
-<link rel="stylesheet" href="/css/master.css">
-
-<a href="http://www.baidu.com" style="text-decoration:none"></a>
-
-<span>定义文档中小块的空白区域。</span>
-
-<label> 标签为 input 元素定义标签（label）。
+<!-- 关于label标签 -->
+<label> 标签为 input 元素的定义标签（label）。
 label 元素不会向用户呈现任何特殊的样式。不过，它为鼠标用户改善了可用性，因为如果用户点击 label 元素内的文本，则会切换到控件本身。
 <label> 标签的 for 属性应该等于相关元素的 id 元素，以便将它们捆绑起来。
 eg:
-<form>
+<form action="/index">
     <label for="male">Male</label>
     <input type="radio" name="sex" id="male" />
-    <br />
+    <br>
     <label for="female">Female</label>
     <input type="radio" name="sex" id="female" />
+    <br>
+    <input type="submit" value="提交">
 </form>
 
+<!-- 新页面中打开一个链接 -->
 <a href="http://www.w3school.com.cn/" target="_blank">Visit W3School!</a>
-如何在浏览器中命名一个锚：（id和name同样有效）
+
+<!-- 如何在浏览器中命名一个锚：（id和name同样有效） -->
 <a name='tips'>有用的提示</a>
 <a href='http://www.baidu.com/#tips'>跳转到有用的提示</a>
 
-<img src="img.jpg" alt="a substitute" />
+<!-- img的alt属性 -->
+<img src="img.jpg" alt="a substitute info" />
 
 <!-- table中表示一个空的占位符 &nbsp; not block space不间断空格 -->
 <table border="1">
@@ -133,9 +132,7 @@ eg:
     </tr>
 </table>
 
-<ul>标示点</ul>和<ol>数字</ol>
-
-<!-- 关于div和span标签 -->
+<!-- 关于块元素和内联元素 -->
 可以通过 <div> 和 <span> 将 HTML 元素组合起来。
 一个是块级元素，一个是内联元素
 大多数 HTML 元素被定义为块级元素或内联元素。
@@ -143,20 +140,24 @@ eg:
 块级元素在浏览器显示时，通常会以新行来开始（和结束）,可以设置宽高。
 内联元素在显示时通常不会以新行开始,不能设置宽高。
 块元素：
-<div></div>,<form action=""></form>,<h></h>,<p></p>,
-<ol></ol><ul></ul><table></table>
+<div></div>
+<h></h>
+<p></p>
+<ol></ol>
+<ul></ul>
+<form action=""></form>
+<table></table>
 内联元素：
 <span></span>
 <a href=""></a>
 各种文本格式化元素
-<br><!-- br竟然是内联元素 -->
+<br>(试想span标签内部包含<br>)
 <img src="" alt="">
 <label for=""></label>
 <input type="text">
+<iframe src="" frameborder="0"></iframe>
 可变元素：
 <button></button>
-
-<iframe src="" frameborder="0"></iframe> <!-- 内联元素 -->
 
 <!-- 关于html文档的head -->
 <!-- 定义标题(title), 语言(html lang), 关键字(meta content), 编码(meta charset), 默认链接(base href), 默认目标(base target), 样式或者脚本文件(link rel type href)-->

@@ -138,3 +138,6 @@ sudo systemctl stop nginx
 
 用init.d启动服务
 etc/init.d/nginx start
+
+grep命令文件夹下全局搜索:
+grep -nir '<?xml version=\"1.0\' .

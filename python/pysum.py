@@ -133,3 +133,16 @@ print(f.url)
 #redirect两种路径的细微差别:
 self.redirect('/static/gzh/distribution/base.html') # 绝对路径
 self.redirect('static/gzh/distribution/base.html') # 相对路径
+
+# python3使用urllib实现json接口调用和mp3下载:
+import urllib.request
+import json
+# urlopen json格式化转化
+song = dict()
+song_meta_api = 'http://www.kugou.com/yy/index.php?r=play/getdata&hash=%s&album_id=0&_=1492405735488' % song.get('hash')
+response = urllib.request.urlopen(song_meta_api)
+data = json.loads(response.read().decode(response.info().get_param('charset') or 'utf-8'))
+download_url = data['data']['play_url']
+filename = song.get('name')
+# urlretrieve下载文件重定向:
+urllib.request.urlretrieve(download_url, '/data/songs/' + filename)
