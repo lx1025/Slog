@@ -124,7 +124,7 @@ $('').append('some text')       //末尾插入,而不是重写
 $('span').appendTo('#id')　     //同样是末尾插入
 $('p').first().after(function(){
     return '<div>'+this.className+'</div>'
-})  //appendTo
+})
 //移除替换
 $('p').detach() //删除所有p元素
 $('p').remove() //同上
