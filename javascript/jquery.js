@@ -18,18 +18,8 @@ $(document).ajaxError(function(event, xhr, settings, thrownError) {
     /* Stuff to do when an AJAX call returns an error */
 })
 
-//AJAX辅助方法
-//param, serialize
-//将一个object转化为url参数
-var params = {a:3; b:4}
-new_params = $.param(params)
-//将一个form表单提交内容转化为url参数
-$('form').submit(function() {
-    console.log($(this).serialize())//[{}, {}]
-})
-
 //AJAX快捷方法:
-//get, post, getJSON
+//get, post, getJSON, load
 $.get('/xinghang', function(data){
     $(".result").html(data);
     console.log('get success')
@@ -45,12 +35,10 @@ $.getJSON('/xinghang', {param1: 'value1'}, function(data) {
 $.post('/xinghang', {param1: 'value1'}, function(data) {
     console.log(data)
 });
-//load
-$('#result').load('test/test.html', function(){
-})
+$('#result').load('test/test.html', function(){})
 $('#result').load('test/test.html', #container)  //只加载部分
 $('#result').load(function() {
-    jQuery.ajax({
+    $.ajax({
         url: '/path/to/file',
         type: 'POST',
         dataType: 'xml/html/script/json/jsonp',
@@ -65,7 +53,6 @@ $('#result').load(function() {
             //called when there is an error
         }
     });
-
 });
 
 //JQUERY 选择器
@@ -155,7 +142,7 @@ console.log(isEmptyObject(23));         //false
 console.log(isEmptyObject({"te": 2}));  //false
 
 //jquery的常用方法
-//trim, map, each, inArray, extend, data
+//trim, map, each, inArray, extend, data, param, serialize
 //$.trim() 去掉空格
 console.log($.trim('  something '))
 //$.map() 返回一个新list
@@ -190,6 +177,13 @@ console.log(c)
 $('div.test').data('data', 'something')//...then
 var a =$('div.test').data('data')
 //注：添加属性可使用$('div.test').attr('data', 'test')
+//$.param()将一个object转化为url参数
+var params = {a:3; b:4}
+new_params = $.param(params)
+//$(this).serialize()将一个form表单提交内容转化为url参数
+$('form').submit(function() {
+    console.log($(this).serialize())
+})
 
 //鼠标的动作
 $('.money').on('mouseover', function(evt) {
