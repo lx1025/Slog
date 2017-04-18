@@ -1,10 +1,12 @@
-git commit -a -m 'update' 将所有修改放进版本库,这个命令在涉及文件路径或者文件名改变的前提下格外有用
+工作区 add to 版本库 commit to 暂存区
+git pull
+git commit -a -m 'update' 将所有修改放进暂存区,这个命令在涉及文件路径或者文件名改变的前提下格外有用
 git diff 查看工作区与当前版本库的差别，commmit至版本库之后显示自然为空
 git status 查看目前版本库与origin master的版本对比
-git log 查看当前版本库日志
+git log 查看当前版本日志
 
-git reset --hard b52a8fbeb4300a30fc4157c6323bebce71a720b3 本地版本强制回退，不保存两次commit之间的更改
-git reset --soft b52a8fbeb4300a30fc4157c6323bebce71a720b3 本地版本撤销，保留两次commit之间的更改，再次commit即可
+git reset --hard b52a8fbeb4300a30fc4157c6323bebce71a720b3 本地版本强制回退,不保存工作区
+git reset --soft b52a8fbeb4300a30fc4157c6323bebce71a720b3 本地版本撤销, 保存工作区
 
 合并冲突的最合理规则：
 <<<head 表示远端版本
@@ -36,7 +38,6 @@ git stash list
 stash@{0}: WIP on master: 440e976 init
 工作区恢复
 git stash pop --index stash@{0}
-
 
 关于分支操作,假定当前在master分支
 local：本地创建分支并推送至远端
