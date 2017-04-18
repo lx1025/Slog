@@ -11,12 +11,10 @@ res = self.slave.query(KtvStore).filter(KtvStore.store_id)
 self.master.query(WxWithdraw).filter(WxWithdraw.ktv_id == ktv_id).filter(func.date(WxWithdraw.create_time) == date).delete()
 self.master.commit()
 #增改的update：
-def update(self, order_id, data)
-q = self.master.query(GzhDisOrder).filter_by(order_id=order_id)
-if q.scalar():
-    q.update(data)
-else:
-    self.master.add(GzhDisOrder(**data))
-self.master.commit()
-
-insert into music_order (sp_id, store_id, mac_id, tp, pay_fee, state, info) values(6, 5000003, "00E07E0057E3", 2, 1000000, 1, "asdf");
+def update(self, order_id, data):
+    q = self.master.query(GzhDisOrder).filter_by(order_id=order_id)
+    if q.scalar():
+        q.update(data)
+    else:
+        self.master.add(GzhDisOrder(**data))
+    self.master.commit()

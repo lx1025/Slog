@@ -56,9 +56,9 @@ ps -ef | grep phantonmjs | awk '{print $2}' | xargs kill -9
 7、单词为单位移动：option + 方向键
 
 压缩解压缩scp导入数据库:
-压缩: tar cxvf xinghang.tar.gz zhouligang.sql
+压缩: tar -zcvf a.tar.gz songs
 scp: scp -P 3026 stage@101.254.157.124:/data/a.tar.gz
-解压缩: tar zxvf a.tar.gz o2o_spider_song.sql
+解压缩: tar -zxvf a.tar.gz
 
 以G为单位的ls
 ls -alh
@@ -124,3 +124,17 @@ move 用于文件移动或者重命名
 文件重命名做备份: mv text.log -b text.txt
 
 mysql -uroot -h10.9.138.23 -p098f6bcd4621d373cade4e832627b4f6 kugou -e "select id from o2o_spider_song where name like '%快三%' or name like '%慢四%' or name like '%快四%' or  name like '%DJ%' or name like '%舞曲%' or name like '%广场舞%' or name like '%串烧%' or name like '%电音%' or name like '%慢摇%' or name like '%MC%' or name like '%喊麦%' or name like '%慢三%' or name like '%车载%' or name like '%remix%' or name like '%m c%' or name like '%m.c%' or name like 'd.j'" > o.txt
+
+ubuntu搭建ftp服务器:
+http://cuiqingcai.com/436.html
+
+关于systemctl命令:
+systemctl命令是系统服务管理器指令
+来自: http://man.linuxde.net/systemctl
+sudo systemctl status nginx
+sudo systemctl start nginx
+sudo systemctl restart nginx
+sudo systemctl stop nginx
+
+用init.d启动服务
+etc/init.d/nginx start

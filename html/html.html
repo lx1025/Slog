@@ -158,11 +158,13 @@ eg:
 
 <iframe src="" frameborder="0"></iframe> <!-- 内联元素 -->
 
-<!-- 关于heml文档的head -->
+<!-- 关于html文档的head -->
+<!-- 定义标题(title), 语言(html lang), 关键字(meta content), 编码(meta charset), 默认链接(base href), 默认目标(base target), 样式或者脚本文件(link rel type href)-->
 <head>
-    <title>Title of the document</title><!-- 标题 -->
-    <html lang="zh-CN">
-    <meta name="description" content="HTML, CSS, XML" /><!-- 关键字 -->
+    <title>五色花</title><!-- 标题 -->
+    <html lang="zh-CN"><!-- 语言 -->
+    <meta name="五色花" content="教育, 聚合" /><!-- 关键字 -->
+    <meta charset="UTF-8"> <!-- 编码 -->
     <base href="http://www.w3school.com.cn/images/" /><!-- 定义默认链接和默认目标 -->
     <base target="_blank" />
     <link rel="stylesheet" type="text/css" href="mystyle.css" /><!-- 样式表或者脚本文件 -->
@@ -171,8 +173,8 @@ eg:
 <!-- 彻底掌握表单last time -->
 HTML 表单用于搜集不同类型的用户输入。
 <form action=""></form>定义一个表单
-表单包含表单元素表单元素指的是不同类型的 input元素、复选框、单选按钮、提交按钮等等
-<input> 元素是最重要的表单元素，根据不同的 type 属性，它有多种类型
+表单包含表单元素指的是不同类型的 input元素、复选框、单选按钮、提交按钮等等
+<input> 元素是最重要的表单元素, 包含属性: type name value, 根据不同的 type 属性, 它有多种类型.
 类型  描述
 text  定义常规文本输入。
 radio 定义单选按钮输入（选择多个选择之一）
@@ -186,19 +188,19 @@ submit  定义提交按钮（提交表单）
     <br>
     Last name:<br>
     <input type="text" name="lastname" value="Mouse">
-    <br><br>
-    <input type="submit" value="Submit">
+    <br>
+    <input type="submit" value="提交">
 </form>
 <!-- 一个select下拉选择列表的表单提交的例子, 默认是get-->
+<!-- 请手写 -->
 <form action="action_page.php">
     <select name="cars">
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
-        <option value="fiat" selected>Fiat</option>
-        <option value="audi">Audi</option>
+        <option value="fiat" selected></option>
     </select>
-    <br><br>
-    <input type="submit" value='test'>
+    <br>
+    <input type="submit" value='提交'>
 </form>
 <!-- 一个button元素 -->
 <button onclick=''>一个按钮</button>
@@ -211,16 +213,19 @@ submit  定义提交按钮（提交表单）
 <input type="checkbox" name="vehicle" value="Bike">
 <input type="button" onclick="alert('Hello World!')" value="Click Me!">
 <input type="number" name="quantity" min="1" max="5">
-<!-- input的其他属性 -->
-disabled，readonly，maxlength
+<!-- input的属性 -->
+type name value disabled readonly maxlength
 
-<!-- html三元色的原理rgb-->
-#ff0000red
-#00ff00green
-#0000ffblue
-16进制加和混和
+<!-- html三元色的原理rgb, # + 16进制加和混和-->
+#ff0000 red
+#00ff00 green
+#0000ff blue
+<!-- 几个应该记住的颜色: -->
+#aaa 一个很舒服的灰色
+#30A080 豆瓣色
+#fff 白色
 
-<!-- 关于pre标签 -->
+<!-- 关于pre标签, 注意同p标签的区别-->
 <pre> 标签可定义预格式化的文本。
 被包围在 <pre> 标签 元素中的文本通常会保留空格和换行符。而文本也会呈现为等宽字体。
 <pre>
@@ -233,26 +238,43 @@ disabled，readonly，maxlength
 小写，-，短，不允许style命名，不允许自闭和，语义化，符合嵌套规则，标签的使用应尽量简洁，减少不必要的标签
 属性值必须用双引号包围，布尔类型的属性不添加属性值，自定义属性以data-×××命名，<!DOCTYPE html>必须大写
 启用IE Edge模式：<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-在 html 标签上设置正确的 lang 属性：<html lang="zh-CN">
+lang 属性：<html lang="zh-CN">
 编码：<meta charset="UTF-8">
 引入 CSS 时必须指明 rel="stylesheet"：<link rel="stylesheet" href="page.css">
 引入CSS JS时link标签type属性省略：text/css 和 text/javascript 是 type 的默认值
 img：禁止src为空，尽量不使用title，为重要的图片增加alt属性，添加width和height属性
 button：type属性必须
 
+<!-- html的嵌套规则: -->
+<!-- http://www.admin10000.com/document/4894.html -->
+1.块元素可以包含内联元素或某些块元素, 内联元素只能包含其它的内联元素,不能包含块元素.
+    <div><h1></h1><p></p></div> —— 对
+    <a href=”#”><span></span></a> —— 对
+    <span><div></div></span> —— 错
+2.p标签不能包含块级元素:
+    <p><ol><li></li></ol></p> —— 错
+    <p><div></div></p> —— 错
+3.除了p标签, 以下标签同样不能包含块级元素:
+    h1、h2、h3、h4、h5、h6、p
+4.块级元素与块级元素并列、内嵌元素与内嵌元素并列:
+　　<div><h2></h2><p></p></div> —— 对
+　　<div><a href=”#”></a><span></span></div> —— 对
+　　<div><h2></h2><span></span></div> —— 错
+
 <!-- 关于checked属性 -->
 checked 属性设置或返回 checkbox 是否应被选中。
-<!-- 设置的例子 -->
+<!--1.设置checkbox属性 -->
 <script>
     function changeHandler() {
-        $('#checkman').checked=true
+        $('#checkman').checked = true
     }
 </script>
 <input type="checkbox" id="checkman">
 <input type="button" onclick=changeHandler()>
-<!-- 返回的例子 -->
+<!--2. 返回checkbox属性 -->
 <script>
     if ($('#checkman').checked == ture) {
         console.log('something')
     }
 </script>
+<input type="checkbox" id="checkman">
