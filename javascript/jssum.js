@@ -641,7 +641,7 @@ $(function () {
     if (navinator.userAgent.match(/(iPhone|Android|iPod|ios)/i)) {
         $(.navi).hide()
     }
-    $.post('/stat/new',{}, function (data) {
+    $.post('/stat/new', {}, function (data) {
         all = data.all
         $('#all').append(
             all.map(x => `<td>${x}</td>`).join('')

@@ -155,10 +155,18 @@ console.log(a) //["A0", "B1"]
 var a = ['a', 'b']
 a = a.map((value, index) => value.toUpperCase()+index)
 console.log(a)  //["A0", "B1"]
-//$.each() 单纯的迭代，不返回内容
+//关于jquery中的each有两种用法
+//$.each() 单纯的迭代, 不返回内容, 它有两个参数
 var a = ['a', 'b']
 $.each(a, function(index, el) {
     console.log(index, el)
+});
+//$('selector').each(), 通过this拿到item
+$('input:checkbox').each(function () {
+    if ($(this).prop('checked') == true) {
+        count++;
+        type.push($(this).val())
+    }
 });
 //$.inArray() 判断是否在array中
 var a = [1,2,3,4];
