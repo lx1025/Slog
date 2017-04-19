@@ -13,7 +13,7 @@ include /etc/nginx/sites-enabled/*;
 这一行加载了一个外部的配置文件，sites-enabled文件夹下只有一个default文件，这个外部的配置文件就是默认的nginx的配置文件
 文件内容：
 server {
-    server_name localhost;   #这里是你的域名，即服务器名称，即访问者的所填写url中的host（主机名），两者对应
+    server_name localhost;               #这里是你的域名，即服务器名称，即访问者的所填写url中的host（主机名），两者对应
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
     location / {
@@ -25,11 +25,11 @@ include /etc/nginx/confid.d/*.conf
 到这个目录下添加文件：test.conf
 写入内容：
 server {
-    listen 8088;     #修改端口号
+    listen 8088;                         #修改端口号
     server_name  localhost;
 
     location / {
-        root /usr/share/nginx/html;        #当访问http://localhost:8088时，定位到此根目录，然后按找顺序查找下列文件
+        root /usr/share/nginx/html;      #当访问http://localhost:8088时，定位到此根目录，然后按找顺序查找下列文件
         index index.html index.htm;
     }
 }
@@ -110,7 +110,7 @@ location ~* \.(swf|js|css|png|txt|gif|jpg|jpeg|bng|bmp|ico)$ {
 
 location关键字 try_files
 找指定路径下文件，如果不存在，则转给哪个文件执行
-语法: try_files file1 [file2 ... filen] fallback       
+语法: try_files file1 [file2 ... filen] fallback
 eg: 这里配合了命名匹配和负载均衡
 upstream xiaomi {
     server 127.0.0.1:8001 max_fails=2 fail_timeout=30s weight=4;
@@ -136,3 +136,20 @@ server {
         proxy_set_header X-Frame-Options SAMEORIGIN;
         proxy_pass http://xiaomi;
     }
+
+------工作实例
+//显示出/data/songs/目录下的所有文件
+cd /etc/nginx/sites-enabled/
+sudo vim songs
+server {
+    listen 80 default_server;
+    server_name localhost;
+
+    location / {
+        root /data/songs;
+        autoindex on;
+        autoindex_exact_size off;
+        autoindex_localtime on;
+        charset utf-8,gbk;
+    }
+}

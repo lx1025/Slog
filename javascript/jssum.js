@@ -369,25 +369,26 @@ if (typeof Array.prototype.quickSort !== 'function') {
         }
     }
 }
-var arr = [5, 2, 3, 1, 4];
-arr.quickSort();
-console.log(arr);
+var arr = [5, 2, 3, 1, 4]
+arr.quickSort()
+console.log(arr)
 
 //关于call和apply
-//call()的第一个参数是上下文，后续是实例传入的参数序列。
-//apply和call一个意思, apply()函数有两个参数：第一个参数是上下文，第二个参数是参数组成的数组。如果上下文是null，则使用全局对象代替。
-//call用来方便实现继承方法
+//用来方便实现继承方法
+//对比es6中class extend的区别
+//call()的第一个参数是上下文，后续是实例传入的参数序列
+//apply()和call()一个意思, apply()函数有两个参数：第一个参数是上下文，第二个参数是参数组成的数组。如果上下文是null，则使用全局对象代替
 function Animal(name){
     this.name = name;
     this.showName = function(){
-        alert(this.name);
+        alert(this.name)
     }
 }
 function Cat(name){
-    Animal.call(this, name);
+    Animal.call(this, name)
 }
-var cat = new Cat("Black Cat");
-cat.showName();
+var cat = new Cat("Black Cat")
+cat.showName()
 //多重继承 es5的写法
 function Class10(a, b) {
     this.a = a
@@ -404,10 +405,10 @@ function Class11(a, b) {
     }
 }
 function Class2(a, b) {
-    Class10.call(this, a, b);
-    Class11.call(this, a, b);
+    Class10.call(this, a, b)
+    Class11.call(this, a, b)
 }
-test= new Class2(2, 1)
+test = new Class2(2, 1)
 test.showSub()
 test.showAdd()
 //这样就不行了...
@@ -425,7 +426,7 @@ function Class2(a, b) {
     Class10.call(this, a, b);
     Class11.call(this, a, b);
 }
-test= new Class2(2, 1)
+test = new Class2(2, 1)
 test.showSub()      //NaN
 test.showAdd()      //NaN
 //es6的写法
@@ -443,16 +444,17 @@ function Class2(a, b) {
     Class10.call(this, a, b);
     Class11.call(this, a, b);
 }
-test= new Class2(2, 1)
+test = new Class2(2, 1)
 test.showSub()
 test.showAdd()
 
-//js获取UA
+//js获取浏览器相关信息
+//appName, appVersion, appCodeName, userAgent
 function whatBrowser() {
-    appName =  cgator.appName;
-    version = navigator.appVersion;
-    codeName = navigator.appCodeName;
-    userAgent = navigator.userAgent;
+    let appName =  navigator.appName;
+    let version = navigator.appVersion;
+    let codeName = navigator.appCodeName;
+    let userAgent = navigator.userAgent;
     console.log(appName)
     console.log(version)
     console.log(codeName)
@@ -464,10 +466,16 @@ whatBrowser()
 // Mozilla
 // Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
 
-//JS 一定要放在 Body 的最底部么？聊聊浏览器的渲染机制
+//关于浏览器的渲染机制
+//JS 一定要放在 Body 的最底部么?
 //script标签的位置会影响首屏时间么？
-//答案是：不影响（如果这里的首屏指的是页面从白板变成网页画面——也就是第一次Painting,这个时间仅仅取决于dom树,cssom树,render树的生成时间），但有可能截断首屏的内容，使其只显示上面一部分(打断了深度遍历)。
-//实质过程就是按序加载,可是先生成dom树,再生成cssdom树,然后render;js代码是加载完成后顺序执行
+//答案是：不影响（如果这里的首屏指的是页面从白板变成网页画面——也就是第一次Painting,这个时间仅仅取决于render完成的时间, 而render是有前提的, 就是整个文档加载完成
+//所以无论js代码放在那里, 此时都已经加载完毕了, 但放在body内部有可能截断首屏的内容，使其只显示上面一部分(打断了深度遍历)
+//浏览器是逐行加载html文档代码的, html代码加载成dom树, css代码加载成cssdom树, js代码在加载完成后立即执行, 全部加载完成后, layout, render
+//某些js代码是必须放在body前边的, 比如获取浏览器的UA来决定引入不同的css
+//但是某些包含dom操作的js代码, 会因为dom树木当前还没有加载完成,导致代码并没有产生效果,这类js代码就应该放在body之后,等待dom树生成之后再加载然后执行
+//当然你的js代码还可以放在body中, 但是必须注意,如果这段代码包含了某些dom操作, 它可能会打断dom树的深度遍历, 影响dom树的生成, 导致渲染失败
+//所以js代码通常放在body之后
 
 //关于闭包:获取函数内部变量
 //一个最简单直接的闭包的例子
@@ -498,65 +506,57 @@ for (var i = 0; i < 10; i++) {
             console.log(e)
         }, 1000)
     })(i)
-}//1,2,3 这叫做匿名括号函数
+}//1,2,3... 这叫做匿名括号函数
 //demo2 http://blog.csdn.net/gaoshanwudi/article/details/7355794
 //demo3
-function a(){
-    var result = new Array();
-    for (var i=0; i < 10; i++) {
+function a() {
+    var result = [];
+    for (var i=0; i<10; i++) {
         result[i] = function () {
             return i;
         };
     }
     return result;
 }
-var b = a();
+var b = a()
 for (var i=0; i<b.length; i++){
-    console.log(b[i]());
+    console.log(b[i]())
 }
 
 //关于js事件冒泡和事件捕获
 //一个直接的发生事件冒泡和捕获的例子:
-/*html
-<!DOCTYPE html>
-<head>
-<meta charset="utf-8">
-<title>test</title>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
-$(function(){
-$('#clickMe').click(function(){
-alert('hello');
-});
-$('body').click(function(){
-alert('baby');
-});
-});
-</script>
-</head>
+//html
 <body>
-<div style="width:100px;height:100px;background-color:red;">
-<button type="button" id="button2">button1</button>
-<button id="clickMe">button2</button>
-</div>
+    <div>
+        <button type="button" id="button2">button1</button>
+        <button type="button" id="clickMe">button2</button>
+    </div>
 </body>
-</html>
-*/
+//js
+$(function(){
+    $('#clickMe').click(function(){
+        alert('hello')
+    })
+    $('body').click(function(){
+        alert('baby')
+    })
+})
 //事件冒泡,当点击button2时,依次弹出hello baby,事件从子节点蔓延到父节点,触发了绑定在父节点的事件,就叫做事件冒泡
 //事件捕获,当点击任意位置,会弹出baby,这就叫时间事件捕获,通过时间的选择器可以避免发生意料之外的事件捕获
 //如何解决冒泡:
-//demo1 return false
+//demo1 return false方法
 $('#clickMe').on('click', function () {
     alert('hello')
-    return false    //return false方法
+    return false
 })
-
 //demo2 ie e.stopPropagation, 非ie cancelBubble
 $('#clickMe').click(function (event) {
-    alert('hello');
+    alert('hello')
+    //拿到事件
     var e = window.event || event;
-    if ( e.stopPropagation ){ //如果提供了事件对象，则这是一个非IE浏览器
-        e.stopPropagation();
+    if ( e.stopPropagation ){
+        //如果提供了事件对象，则这是一个非IE浏览器
+        e.stopPropagation()
     }else{
         //兼容IE的方式来取消事件冒泡
         window.event.cancelBubble = true;
@@ -564,8 +564,8 @@ $('#clickMe').click(function (event) {
 })
 
 //javascript的本地对象，内置对象和宿主对象
-//本地对象为array obj regexp(正则表达式, 定义两种表达式的方式你知道吗?1:re = /\d+/ig, 2, var re = new RegExp('\d+', 'ig'))等可以new实例化
-//内置对象为gload Math 等不可以实例化的, 可以直接使用其属性的对象
+//本地对象为array obj regexp
+//内置对象为像Math 等不可以实例化的, 可以直接使用其属性的对象
 //宿主为浏览器自带的document, window, navigator等
 
 //关于正则表达式
@@ -575,16 +575,16 @@ $('#clickMe').click(function (event) {
 .       .                   匹配除换行符之外的任何一个字符
 \d    [0-9]                 匹配数字
 \D    [^0-9]                匹配非数字字符
-\s    [\n\r\t\f\x0B]       匹配一个空白字符
+\s    [\n\r\t\f\x0B]        匹配一个空白字符
 \S    [^\n\r\t\f\x0B]       匹配一个非空白字符
 \w    [a-zA-Z0-9_]          匹配字母数字和下划线
-\W    [^a-zA-Z0-9_]                 匹配除字母数字下划线之外的字符
+\W    [^a-zA-Z0-9_]         匹配除字母数字下划线之外的字符
 量词(以下都是贪婪量词, 即力求可以实现的最大匹配):
 *     匹配前面的子表达式零次或多次。zo* 能匹配 "z" 以及 "zoo"。 * 等价于{0,}。
 +     匹配前面的子表达式一次或多次。'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。
 ?     匹配前面的子表达式零次或一次。"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。
-{n}   n 是一个非负整数。匹配确定的 n 次。'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。
-{n,}  n 是一个非负整数。至少匹配n 次。'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。
+{n}   n 是一个非负整数。匹配确定的n次。'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。
+{n,}  n 是一个非负整数。至少匹配n次。'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。
 {n,m} m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。 "o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
 用贪婪量词进行匹配时叫做贪婪匹配, 即力争最大匹配, 以上量词都是贪婪量词
 用惰性量词进行匹配时，贪婪量词后加?变成惰性匹配, 即力争最小匹配
@@ -593,6 +593,7 @@ var re = /\w+/;//将匹配abc
 re = /\w+?/;//将匹配a
 */
 //js正则表达式RegExp
+//js两种表达式的方式你知道吗?1:var re = /\d+/ig, 2, var re = new RegExp('\d+', 'ig'))
 //完整清晰的正则表达式教程见 http://www.cnblogs.com/aaronjs/archive/2012/06/30/2570970.html
 //test 返回值boolen
 //银行卡位数验证正则:
@@ -600,7 +601,7 @@ var res = (/^\d{6,}$/).test(vaule)
 //手机号正则匹配:
 var res = (/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/).test(value)
 //邮箱正则匹配:(注意.的转义符)
-var res = (/^[0-9a-zA-Z-_]+@[0-9a-zA-Z-_]+\.[0-9a-zA-Z-_]+$/)
+var res = (/^[0-9a-zA-Z-_]+@[0-9a-zA-Z-_]+\.[0-9a-zA-Z-_]+$/).test(value)
 //replace
 var str ="some money"
 alert(str.replace("some","much"))       //much money
@@ -611,30 +612,34 @@ re = /\s+/                              //只有一次
 alert(str.replace(re,"#"))              //some#some        some
 re = /\s+/g;                            //g,全局标志,将使正则表达式匹配整个字符串
 alert(str.replace(re,"@"))              //some@some@some@
-//split var to array
+//split var to array, split后竟然可以跟正则表达式...
 var str = "a-bd-c"
 var arr = str.split("-")    //["a","bd","c"]
 re=/[^a-z]/i    //前面我们说^表示字符开始,但在[]里它表示一个负字符集,表示非.
 arr = str.split(re)         //仍返回["a","bd","c"];
-//search  在字符串中查找时我们常用indexOf
-var str = "My age is 18.Golden age!";//年龄不是一定的,我们用indexOf不能查找它的位置
+//search  返回num 在字符串中查找时我们常用indexOf, 只能返回第一个匹配到的
+var str = "My age is 18.Golden age!"
 re = /\d+/;
-alert(str.search(re));//10
-//match 返回匹配的查找目标,类型为arr, arr[0]位匹配值.
+console.log(str.search(re));//10
+var str = "My age is 18.Golden age!11"
+re = /\d+/g;
+console.log(str.search(re));//10
+//match 返回一个array
 //另:这里的一个坑,关于正则中^&的用法(https://zhidao.baidu.com/question/581570451.html)
 var str = 'My age is 18.Golden age!'
 var str1 = 'My age is Golden age!'
-var res1 = str.match(/^\d+$/)       //null
-var res2 = str1.match(/^\d+$/)       //null
-var res3 = str.match(/\d+/)    //["18", index: 10, input: "My age is 18.Golden age!"]
-var res4 = str1.match(/\d+/)    //nu//
+var str2 = 'My age is Golden age!'
+var res1 = str.match(/^\d+$/)          //null
+var res2 = str1.match(/^\d+$/)         //null
+var res3 = str.match(/\d+/)            //["18", index: 10, input: "My age is 18.Golden age!"]
+var res4 = str1.match(/\d+/)           //null
 //利用正则表达式将url的请求参数转化为字典对象: var reg = /([^&?=]+)=([^&?=]*)/g
 //way1
 function getQueryObject(url) {
     url = !url ? window.location.href : url;
     var search = url.substring(url.lastIndexOf("?") + 1);  //str.substring(index1,  index2) 字符串截取,只有一个参数时截取至尾部
     var obj = {};
-    var reg = /([^?&=]+)=([^?&=]*)/g        //正则的分组, 后续可以用$1, $2获取分组,这是replace的特殊用法
+    var reg = /([^?&=]+)=([^?&=]*)/g        //正则的分组, 后续可以用$1获取完成匹配, $2表示第一个分部, $2表示第二个分部,这是replace的特殊用法
     search.replace(reg, ($1, $2, $3) => {
         console.log($1);
         obj[$2] = $3
@@ -657,16 +662,27 @@ function getQueryObject(url) {
     console.log(data)
 }
 getQueryObject()
-//way3 获取url中的某个参数
+//获取url中的某个参数
 //注:为什么不使用var reg = //的形式呢?因为//这种定义方式我并没有找到方法传递字符串!
+//way1 这种方法并不对...因为无法返回...
 function getParam(param) {
     var url = 'http://xiaomi.com/?id=1'
-    reg = new RegExp((param)+'='+'([^&]*)', 'ig')  //i不区分大小写, g全文搜索
+    reg = new RegExp(param+'='+'([^&]*)', 'ig')  //i不区分大小写, g全文搜索
     url.replace(reg, ($1, $2) => {
-        console.log($1, $2)    //注意$1, 和$2的的值,结合way1
+        console.log($1, $2)                      //注意$1, 和$2的的值,结合way1
     })
 }
-getParam('id')
+var id = getParam('id')
+console.log(id)
+//way2
+function getParam(param) {
+    var url = 'http://xiaomi.com/?id=1'
+    reg = new RegExp(param+'='+'([^&]*)', 'ig')  //i不区分大小写, g全文搜索
+    var val = url.match(reg)[0]
+    return val.split('=')[1]
+}
+var id = getParam('id')
+console.log(id)
 
 //写出'www.bitland.com'的正则
 //一个最简单的面试题
@@ -676,6 +692,7 @@ var reg = /^w{3}\.\w+\.\w+$/
 var str = 'asdf123qwer456jkl789'
 var reg = /(\d+)/g
 str.replace(reg, ($1) => `<em>${$1}</em>`)
+console.log(str)
 
 //根据请求端是否是手机端来判断跳转:
 if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
