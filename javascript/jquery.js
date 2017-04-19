@@ -24,14 +24,17 @@ $.get('/xinghang', function(data){
     $(".result").html(data);
     console.log('get success')
 })
-$.getJSON('/xinghang', {param1: 'value1'}, function(data) {
-    var data = data.info
-    var items = [];
-    $.each(data, function(key, val){
-        items.push('<li id="' + key + '>' + val + '<li>')
+$.getJSON('/test', {param1: value1}, function(response) {
+    var data = response.data
+    var items = []
+    $.each(data, function(key, val) {
+        //es5:
+        items.push('<li id="' + key + '">' + val + '</li>')
+        //es6:
+        items.push(`<li id=${key}>${val}</li>`)
+        $('<ul/>', {'class': 'ul-class', html: items.join(',')}).appendTo('selector')
     })
-    $('<ul/>', {'class':'ul-class', html:items.join(',')}).appendTo('body')
-});
+})
 $.post('/xinghang', {param1: 'value1'}, function(data) {
     console.log(data)
 });
@@ -145,7 +148,7 @@ console.log(isEmptyObject({"te": 2}));  //false
 //trim, map, each, inArray, extend, data, param, serialize
 //$.trim() 去掉空格
 console.log($.trim('  something '))
-//$.map() 返回一个新list
+//$.map() 返回一个新list, 接收两个参数.
 var a = ['a', 'b']
 a = $.map(a, function (value, index){
   return (value.toUpperCase() + index)

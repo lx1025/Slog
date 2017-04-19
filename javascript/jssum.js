@@ -1,9 +1,74 @@
-//https://github.com/ecomfe/spec/blob/master/javascript-style-guide.md 百度js编码规范
+// https://github.com/ecomfe/spec/blob/master/javascript-style-guide.md 百度js编码规范
+// 百度js编码规范
+// utf8编码，文件结尾处一个空行，四个空格缩进， 二元运算符两侧必须有一个空格，一元运算符与操作对象之间不允许有空格
+// 语句结束加；函数定义结束不加；//可是我一个分号也不想加
+// 用作代码块起始的左花括号 { 前必须有一个空格
+// if / else / for / while / switch / do / function / try / catch / finally 关键字后，必须有一个空格
+// 创建对象时，属性中的 : 之后必须有空格，: 之前不允许有空格
+// 函数声明、具名函数表达式、函数调用中，函数名和 ( 之间不允许有空格
+// 在函数调用、函数声明、括号表达式、属性访问 中 if / for / while / switch / catch 等语句中，() 和 [] 内紧贴括号部分不允许有空格
+// 单行声明的数组与对象，如果包含元素，{} 和 [] 内紧贴括号部分不允许包含空格
+// 每个独立语句结束后必须换行
+// 运算符处换行时，运算符必须在新行的行首
+// 对于 if...else...、try...catch...finally 等语句，推荐使用在 } 号后添加一个换行 的风格，使代码层次结构更清晰，阅读性更好
+// if (condition) {
+//     // some statements;
+// }
+// else {
+//     // some statements;
+// }
+// 关于命名规则：
+// 变量 使用 Camel命名法：var loadingModules = {}
+// 常量 使用 全部字母大写，单词间下划线分隔 的命名方式：var HTML_ENTITY = {}
+// 函数 函数参数 使用 Camel命名法
+// 类 使用 Pascal命名法
+// 枚举变量 使用 Pascal命名法，枚举的属性 使用 全部字母大写，单词间下划线分隔 的命名方式
+// 函数名 使用 动宾短语：function getStyle(element) {}
+// boolean 类型的变量使用 is 或 has 开头：var isReady = True
+// Promise对象 用 动宾短语的进行时 表达：var loadingData = new Promise((resolve, reject) {})
+// loadingData.then(callback)
+// 关于注释：
+// 单行//
+// 多行/**/
+// 文档说明/** */
+// /**
+//  *@file:
+//  *@class:
+// */
+// 一个函数的说明：
+// /**
+//  * 函数描述
+//  *
+//  * @param {Object} option 参数描述
+//  * @param {string} option.url option项描述
+//  * @param {string=} option.method option项描述，可选参数
+//  */
+// function foo(option) {
+//     //Todo
+// }
+// 使用严格的===避免等于判断中隐式的类型转换，但是有的时候==也是好用的
+// 对有序集合进行顺序无关的遍历时，使用逆序遍历：逆序遍历可以节省变量，代码比较优化，
+// 关于字符串：
+// 单引号，字符串拼接使用数组和'+', '+'效率更高，而数组兼容老版本的浏览器
+// 字符转转义，要有印象
+// HTML 转义
+// var str = '<p>' + htmlEncode(content) + '</p>';
+// var str = '<input type="text" value="' + htmlEncode(value) + '">';
+// URL 转义
+// var str = '<a href="/?key=' + htmlEncode(urlEncode(value)) + '">link</a>';
+// JavaScript字符串 转义 + HTML 转义
+// var str = '<button onclick="check(\'' + htmlEncode(strLiteral(name)) + '\')">提交</button>';
+// 关于object：
+// 新建空对象 var obj = {},对象属性要么全加'',要么全不加'',使用.来访问对象属性
+// 关于array：
+// 新建空数组 var arr = []
+// 清空数组使用 arr.length = 0
+
 //array concat
 var a = ['a']
 var b = ['b']
 var c = 'c'
-console.log(a.concat(b));   //['a', 'b', 'c']
+console.log(a.concat(b));   //['a', 'b']
 console.log(a.concat(c));   //['a', 'b', 'c']
 
 //array join array>str
@@ -37,121 +102,114 @@ var a = [1, 2, 3, 4].filter(item => item%2===0)
 console.log(a)
 
 //array push with ajax
-$.getJSON('/test', {param1: 'value1'}, function (data) {
-    var items = [];
-    $.each(data, function (key, val) {
-        items.push('<li id="'+key+'">val</li>') //转码
+$.getJSON('/test', {param1: value1}, function(response) {
+    var data = response.data
+    var items = []
+    $.each(data, function(key, val) {
+        //es5:
+        items.push('<li id="' + key + '">' + val + '</li>')
+        //es6:
+        items.push(`<li id=${key}>${val}</li>`)
+        $('<ul/>', {'class': 'ul-class', html: items.join(',')}).appendTo('selector')
     })
-    $('<ul/>', {'class':'ul-class', html:items.join(',')}).appendTo('body')
 })
 
-//百度js编码规范
-// utf8编码，文件结尾处一个空行，四个空格缩进， 二元运算符两侧必须有一个空格，一元运算符与操作对象之间不允许有空格
-// 语句结束加；函数定义结束不加；//可是我一个分号也不想加
-// 用作代码块起始的左花括号 { 前必须有一个空格
-// if / else / for / while / switch / do / function / try / catch / finally 关键字后，必须有一个空格
-// 在对象创建时，属性中的 : 之后必须有空格，: 之前不允许有空格
-// 函数声明、具名函数表达式、函数调用中，函数名和 ( 之间不允许有空格
-// 在函数调用、函数声明、括号表达式、属性访问 中 if / for / while / switch / catch 等语句中，() 和 [] 内紧贴括号部分不允许有空格
-// 单行声明的数组与对象，如果包含元素，{} 和 [] 内紧贴括号部分不允许包含空格
-// 每个独立语句结束后必须换行
-// 运算符处换行时，运算符必须在新行的行首
-// 对于 if...else...、try...catch...finally 等语句，推荐使用在 } 号后添加一个换行 的风格，使代码层次结构更清晰，阅读性更好
-// if (condition) {
-//     // some statements;
-// }
-// else {
-//     // some statements;
-// }
-// 关于命名规则：
-// 变量 使用 Camel命名法：var loadingModules = {}
-// 常量 使用 全部字母大写，单词间下划线分隔 的命名方式：var HTML_ENTITY = {}
-// 函数 函数参数 使用 Camel命名法
-// 类 使用 Pascal命名法
-// 枚举变量 使用 Pascal命名法，枚举的属性 使用 全部字母大写，单词间下划线分隔 的命名方式
-// 函数名 使用 动宾短语：function getStyle(element) {}
-// boolean 类型的变量使用 is 或 has 开头：var isReady = True
-// Promise对象 用 动宾短语的进行时 表达：var loadingData = ajax.get('url')
-// loadingData.then(callback)
-// 关于注释：
-// 单行//
-// 多行/**/
-// 文档说明/** */
-// /**
-//  *@file:
-//  *@class:
-// */
-// 一个函数的说明：
-// /**
-//  * 函数描述
-//  *
-//  * @param {Object} option 参数描述
-//  * @param {string} option.url option项描述
-//  * @param {string=} option.method option项描述，可选参数
-//  */
-// function foo(option) {
-//     // TODO
-// }
-// 使用严格的===避免等于判断中隐式的类型转换，但是有的时候==也是好用的
-// 使用简洁的if判断：if (!a)，其中a为零或'',均判断为true,但[],{}判断为false
-// var a = '' //var a = 0
-// if (!a) {console.log('success')}
-// var a = []
-// if (!a.length) {console.log('success')}
-// var a = {}
-// if (!a.ke) {console.log('success')}
-// 对有序集合进行顺序无关的遍历时，使用逆序遍历：逆序遍历可以节省变量，代码比较优化，注这是遍历数组的最佳方案：
-// var a = ['a', 'b', 'c', 1, 2]
-// aLen = a.length
-// while (aLen--) {
-//  console.log(a[aLen])
-// }//aLen初始为5,--,进入while函数体内部
-
-// 关于类型转换：
-// num转str：num + ''     //String(num), num.toString()
-// str转num： +str    //Number(str)
-// str转num，并期望忽略数字后的非数字字符串时使用parseInt():
-// var width = '200px';
-// a = parseInt(width, 10)  //使用parseInt(必须指定机制)
+// 关于js中 num str bollen 类型的转换：
+// num转str, 使用第一种
+var num = 1
+num = num + ''
+num = String(num)
+num = num.toString()
+// str转num：
+var str = '1'
+str = +str
+str = Number(str)
+// str转num，并期望忽略数字后的非数字字符串时使用parseInt(), 使用parseInt(必须指定进制)
+var width = '200px'
+a = parseInt(width, 10)
 // num,str装boolen：!!a
-// var a = 3.14;
-// console.log(!!a)         //ture
-// var b = 0；
-// console.log(!!b)         //false
+var a = 3.14;
+console.log(!!a)         //ture
+var b = 0；
+console.log(!!b)         //false
 // num去掉小数点使用Math.round(),不要使用parseInt():
-// var a = 3.14
-// console.log(Math.round(a)    //四舍五入
-// console.log(Math.ceil(a))        //向下取整
-// console.log(Math.floor(a))   //向上取整
-// 关于字符串：
-// 单引号，字符串拼接使用数组和'+', '+'效率更高，而数组兼容老版本的浏览器
-// 字符转转义，要有印象
-// // HTML 转义
-// var str = '<p>' + htmlEncode(content) + '</p>';
-// // HTML 转义
-// var str = '<input type="text" value="' + htmlEncode(value) + '">';
-// // URL 转义
-// var str = '<a href="/?key=' + htmlEncode(urlEncode(value)) + '">link</a>';
-// // JavaScript字符串 转义 + HTML 转义
-// var str = '<button onclick="check(\'' + htmlEncode(strLiteral(name)) + '\')">提交</button>';
-// 关于object：
-// 新建空对象 var obj = {},对象属性要么全加'',要么全不加'',使用.来访问对象属性
-// 关于array：
-// 新建空数组 var arr = []
-// 清空数组使用 arr.length = 0
-// 遍历数组不要使用for in：数组对象可能存在数字以外的属性, 这种情况下 for in 不会得到正确结果
-// var a = ['a','b','c',1,2]
-// console.log(a)
-// for (var i in a) {
-//  console.log(i)
-// }//0,1,2,3,4
-// for (var i in a) {
-//     console.log(a[i])
-// }//a, b, c, 1, 2
-// for (var i=0, len=a.length;i<len;i++) {
-//  console.log(a[i])
-// }//a,b,c,1,2 注意,这里并没有bind
+var a = 3.14
+console.log(Math.round(a)    //四舍五入
+console.log(Math.ceil(a))    //向下取整
+console.log(Math.floor(a))   //向上取整
 
+//使用for in 的方法来实现array或者object的迭代:
+//在array中 i 相当于index, 在object中 i 相当于 key
+var a = ['a', 'b', 1, 2]
+var b = {'a': 1, 3: 'b'}
+for (var i in a) {
+    console.log(i)
+    console.log(a[i])
+}
+for (var i in b) {
+    console.log(i)
+    console.log(b[i])
+}
+
+//关于undefined, null的差别:
+//第一问 a is not defined的出现情况(直接使用未声明变量)
+console.log(a)     //VM1497:1 Uncaught ReferenceError: a is not defined.
+//第二问 出现undefined的情况
+//1.使用声明过但未初始化变量会报undefined
+var a
+console.log(a)
+//2.未声明变量typeof会报undefined
+console.log(typeof(a))
+//第三问 关于null
+a = null
+console.log(typeof(a))
+//object (null是特殊的object(指针), {}并不是null, typeof操作会返回"object")
+a = {}
+onsole.log(a == null)
+//false ({}并不是null)
+var a = {}
+var b = null
+a.name = 'xinghang'
+b.name = 'feifei' //这里会报错，b为空指针对象，不能像普通对象一样直接添加属性。
+b = a
+b.name = 'xinghang'
+//此时 a 和 b 指向同一个对象。a.name, b.name 均为'jam'
+
+//js基本数据类型判空的最佳实现
+//0, '', []
+var a = '' or var a = 0
+if (!a) {console.log('success')}
+var a = []
+if (!a.length) {console.log('success')}
+var a = {}
+
+//关于object判空:
+function objectIsEmpty(obj) {
+    for (var i in obj) {
+        return false;
+    }
+    return true;
+}
+var a = {}
+a.name = 'something'
+console.log(isEmpty(a))        //false
+console.log(isEmpty({}))       //true
+console.log(isEmpty(null))     //true
+
+//迭代数组的最佳方案：
+//对有序集合进行顺序无关的遍历时，使用逆序遍历：逆序遍历可以节省变量，代码比较优化
+var a = ['a', 'b', 'c', 1, 2]
+aLen = a.length
+while (aLen--) {
+    console.log(a[aLen])
+}
+
+//对$()的理解
+$('#id').click() //表示选择器
+$(document).ready()//表示文档加载完成，一般简写为：
+$(function(){
+    console.log('something')
+})
 //对于一个标准的js文件的结构，可以这样写
 $(function(){
     var app = {
@@ -163,40 +221,28 @@ $(function(){
     $('#someid').on('click', app.test())
 })
 
-//对$()的理解
-$('#id').click() //表示选择器
-$(document).ready()//表示文档加载完成，一般简写为：
-$(function(){
-    console.log('something')
+//关于js计时器
+//html
+<button id='my-button'>120</button>
+//js
+$('button').on('click', function() {
+    $('button').attr('disabled', true)
+    var totalTime = +$('button').text()
+    var timer = setInterval(function() {
+        $('button').text(--totalTime)
+        if(totalTime <= 0) {
+            $('button').attr('disabled', false)
+            $('button').text(120)
+            clearInterval(timer);
+        }
+    }, 1000)
 })
-
-//用js实现一个计时器：
-var app = {
-    time: 10,
-    clickable: true,
-    time_running(){
-        timer = setInterval(function() {
-            app.clickable = false;
-            app.time--;
-            $('#login_button').hide()
-            $('#timmer').show()
-            console.log(app.time)
-            if(app.time <= 0) {
-                app.clickable = true;
-                $('#login_button').show()
-                $('#timmer').hide
-                console.log('success!')
-                clearInterval(timer);
-            }
-        }, 1000)
-    }
-}
-app.time_running()
 
 //四舍五入: <float>.toFixed(2) 2是保留位数
 console.log((1.2345.toFixed(2)))
 
 //js object api
+//constructor, hasOwnProperty, keys, values
 //判断类型
 console.log({}.constructor === Object)
 console.log([].constructor === Array)
@@ -217,19 +263,19 @@ for (i in pt) {
     keys_arr.push(i)
     values_arr.push(pt[i])
 }
-console.log(keys_arr, values_arr);
+console.log(keys_arr, values_arr)
 //or这里失效了！concat失效了！
-var pt = { x: 1, y: 2, z: 'xing' };
-console.log(pt);
+var pt = { x: 1, y: 2, z: 'xing' }
+console.log(pt)
 var keys_arr = []
-var vaules_arr = []
+var values_arr = []
 for (i in pt) {
-    keys_arr.concat(i)
-    values_arr.concat(String(pt[i])
+    keys_arr.push(i)
+    values_arr.cancat(String(pt[i]))
 }
-console.log(keys_arr, values_arr);
+console.log(keys_arr, values_arr)
 //把一个object的所有value or key拼成字符串,
-var pt = { x: 1, y: 2, z: 'xing' };
+var pt = { x: 1, y: 2, z: 'xing' }
 console.log(pt);
 var keys_str = ''
 var values_str = ''
@@ -614,7 +660,7 @@ getQueryObject()
 //way3 获取url中的某个参数
 //注:为什么不使用var reg = //的形式呢?因为//这种定义方式我并没有找到方法传递字符串!
 function getParam(param) {
-    var url = 'http:xiaomi.com/?id=1'
+    var url = 'http://xiaomi.com/?id=1'
     reg = new RegExp((param)+'='+'([^&]*)', 'ig')  //i不区分大小写, g全文搜索
     url.replace(reg, ($1, $2) => {
         console.log($1, $2)    //注意$1, 和$2的的值,结合way1
@@ -666,7 +712,7 @@ window.location.port = ':8888'
 window.location.pathname = '/index'
 window.location.search = '?param=value'
 
-//使用em为单位的基础代码
+//使用em为单位的基础构建代码
 //但一个匿名函数被括起来,并且后边再加上一个括号,它就能自动执行.
 (function () {
     size()

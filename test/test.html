@@ -4,67 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style media="screen">
-        body, td, th {
-            font: 12px Helvetica,Arial,sans-serif;
-            line-height: 1.62;
-        }
-        body, div, dl, dt, dd, ul, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, blockquote {
-            margin: 0;
-            padding: 0;
-        }
-        a {
-            text-decoration: none;
-        }
-        ul {
-            list-style: none;
-        }
-        .wrap {
-            margin: 0 auto;
-            width: 950px;
-        }
-        .ulwrap {
-            width: 265px
-        }
-        li {
-            display: inline-block;
-            margin-right: 5px;
-            font-size: 12px;
-            line-height: 1;
-        }
-        li a{
-            color: #30A080
-        }
-        .bigli {
-            width: 100%;
-            margin-bottom: 2px;
-            font-size: 14px;
-        }
-        .bigli a {
-            color: #333;
-        }
-
-    </style>
+    <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+    <title>Test</title>
 </head>
 <body>
     <div class="wrap">
-        <div class="ulwrap">
-            <ul>
-                <li class="bigli"><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-                <li><a href="">旅行</a></li>
-            </ul>
-        </div>
+         <button id='my-button'>120</button>
     </div>
 </body>
+<script>
+    $(function() {
+        $('button').on('click', function() {
+            $('button').attr('disabled', true)
+            var totalTime = +$('button').text()
+            timer = setInterval(function() {
+                $('button').text(--totalTime)
+                if(totalTime <= 0) {
+                    $('button').attr('disabled', false)
+                    $('button').text(120)
+                    clearInterval(timer);
+                }
+            }, 1000)
+        })
+    })
+</script>
 </html>
