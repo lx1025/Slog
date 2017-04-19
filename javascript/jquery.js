@@ -92,7 +92,8 @@ $('div:animated')                                               //'http://www.cs
 
 //JQUERY 属性相关
 //attr, prop, removeAttr, removeProp(增删查)
-$('p').attr('data', 'testdata')//attr用于自定义属性
+$('p').attr('data', 'testdata')     //attr用于自定义属性
+$("input:text:eq(2)").attr("disabled") = false     //设置disabled属性
 var data = $('p').attr('data-test')
 var p_title = $('p').prop('class')  //prop用于自带属性
 $('div').text(p_title)
