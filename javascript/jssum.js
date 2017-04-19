@@ -137,6 +137,8 @@ var a = 3.14
 console.log(Math.round(a)    //四舍五入
 console.log(Math.ceil(a))    //向下取整
 console.log(Math.floor(a))   //向上取整
+//四舍五入: <float>.toFixed(2) 2是保留位数
+console.log((1.2345.toFixed(2)))
 
 //使用for in 的方法来实现array或者object的迭代:
 //在array中 i 相当于index, 在object中 i 相当于 key
@@ -237,9 +239,6 @@ $('button').on('click', function() {
         }
     }, 1000)
 })
-
-//四舍五入: <float>.toFixed(2) 2是保留位数
-console.log((1.2345.toFixed(2)))
 
 //js object api
 //constructor, hasOwnProperty, keys, values
