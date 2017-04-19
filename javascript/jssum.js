@@ -583,6 +583,7 @@ $('#clickMe').click(function (event) {
 *     匹配前面的子表达式零次或多次。zo* 能匹配 "z" 以及 "zoo"。 * 等价于{0,}。
 +     匹配前面的子表达式一次或多次。'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。
 ?     匹配前面的子表达式零次或一次。"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。
+[a-z] 匹配内部的任意子表达式。
 {n}   n 是一个非负整数。匹配确定的n次。'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。
 {n,}  n 是一个非负整数。至少匹配n次。'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。
 {n,m} m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。 "o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
@@ -614,9 +615,9 @@ re = /\s+/g;                            //g,全局标志,将使正则表达式�
 alert(str.replace(re,"@"))              //some@some@some@
 //split var to array, split后竟然可以跟正则表达式...
 var str = "a-bd-c"
-var arr = str.split("-")    //["a","bd","c"]
-re=/[^a-z]/i    //前面我们说^表示字符开始,但在[]里它表示一个负字符集,表示非.
-arr = str.split(re)         //仍返回["a","bd","c"];
+var arr = str.split("-")                //["a","bd","c"]
+re=/[^a-z]/i                            //前面我们说^表示字符开始,但在[]里它表示一个负字符集,表示非.
+arr = str.split(re)                     //仍返回["a","bd","c"];
 //search  返回num 在字符串中查找时我们常用indexOf, 只能返回第一个匹配到的
 var str = "My age is 18.Golden age!"
 re = /\d+/;
