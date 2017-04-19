@@ -8,7 +8,6 @@ https://www.ucloud.cn/
 tanguobin@ktvsky.com
 ktvsky5166
 
-
 #stage环境下nginx位置：
 /usr/local/nginx/conf/nginx.conf 查到服务端口号
 tail -f nohup.out
