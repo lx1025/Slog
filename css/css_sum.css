@@ -129,11 +129,22 @@ https://segmentfault.com/q/1010000004704818/a-1020000004705715
 /*清除浮动*/
 /*http://www.jb51.net/css/173023.html
 前五种
-1.父元素手动定义height
+1.父元素手动定义height, 或者父级元素定义display: table, 这两种方式都能获取子元素的宽高
 2.结尾处加空div标签 clear:both
-3.父级div定义 伪类:after 和 zoom
+3.父级div定义 伪类::after 和 zoom
 4.父级div定义 overflow:hidden
 4.父级div定义 overflow:auto*/
+/*最常用的方式伪类的方式*/
+.clearfix::after {
+    content: '.';
+    display: block;
+    visibility: hidden;
+    height: 0;
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
 
 /*一个常用的组合*/
 #id {
