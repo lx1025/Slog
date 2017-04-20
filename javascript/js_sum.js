@@ -476,7 +476,11 @@ whatBrowser()
 //当然你的js代码还可以放在body中, 但是必须注意,如果这段代码包含了某些dom操作, 它可能会打断dom树的深度遍历, 影响dom树的生成, 导致渲染失败
 //所以js代码通常放在body之后
 
-//关于闭包:获取函数内部变量
+//关于闭包
+//闭包是一个概念
+//在js中, 一个函数可以访问到函数外部定义的变量, 可是外部缺无法访问到函数内部定义的变量,
+//为了访问到函数内部定义的变量, 且保证这个变量不被稀释掉, 这就是闭包的作用
+//定义一个函数, 在这个函数中定义一个函数并返回它, 内部的定义函数操作变量
 //一个最简单直接的闭包的例子
 function a() {
     var n = 0
@@ -486,7 +490,7 @@ function a() {
     }
     return res
 }
-b = a()
+var b = a()
 b()     //1
 b()     //2
 //三个易错的demo
@@ -633,15 +637,22 @@ var res1 = str.match(/^\d+$/)          //null
 var res2 = str1.match(/^\d+$/)         //null
 var res3 = str.match(/\d+/)            //["18", index: 10, input: "My age is 18.Golden age!"]
 var res4 = str1.match(/\d+/)           //null
+//replace
+//利用repalce取cookie的指定值:可以延伸为截取某字符串
+cookies = document.cookie
+var cookieA = ''
+cookieA = cookies.repalce(/.*cookieA=([^;]*).*/, "$1")
 //利用正则表达式将url的请求参数转化为字典对象: var reg = /([^&?=]+)=([^&?=]*)/g
 //way1
 function getQueryObject(url) {
     url = !url ? window.location.href : url;
     var search = url.substring(url.lastIndexOf("?") + 1);  //str.substring(index1,  index2) 字符串截取,只有一个参数时截取至尾部
     var obj = {};
-    var reg = /([^?&=]+)=([^?&=]*)/g        //正则的分组, 后续可以用$1获取完成匹配, $2表示第一个分部, $2表示第二个分部,这是replace的特殊用法
+    var reg = /([^?&=]+)=([^?&=]*)/g        //正则的分组, 后续可以用$1获取完全匹配, $2表示第一个分部, $3表示第二个分部,这是replace的特殊用法, 注意同下面的way1对比, 到底谁是$1
     search.replace(reg, ($1, $2, $3) => {
-        console.log($1);
+        console.log($1)
+        console.log($2)
+        console.log($3)
         obj[$2] = $3
     });
     return obj;
@@ -664,16 +675,16 @@ function getQueryObject(url) {
 getQueryObject()
 //获取url中的某个参数
 //注:为什么不使用var reg = //的形式呢?因为//这种定义方式我并没有找到方法传递字符串!
-//way1 这种方法并不对...因为无法返回...
+//way1
 function getParam(param) {
-    var url = 'http://xiaomi.com/?id=1'
-    reg = new RegExp(param+'='+'([^&]*)', 'ig')  //i不区分大小写, g全文搜索
-    url.replace(reg, ($1, $2) => {
-        console.log($1, $2)                      //注意$1, 和$2的的值,结合way1
-    })
+    var url = 'http://xiaomi.com/?id=1&type=2'
+    reg = new RegExp('.*'+param+'='+'([^&]*)'+'.*', 'ig')  //i不区分大小写, g全文搜索
+    val = url.replace(reg, '$1')
+    return val
 }
 var id = getParam('id')
-console.log(id)
+var type = getParam('type')
+console.log(id, type)
 //way2
 function getParam(param) {
     var url = 'http://xiaomi.com/?id=1'
