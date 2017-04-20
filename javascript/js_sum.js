@@ -775,3 +775,30 @@ document.getElementById('intro').onclick = () => {console.log('test')}
 //触发事件:
 document.getElementById('intro').click()
 document.getElementById('input').focus()
+
+//使用document.cookie和window.storage实现页面通信
+// 关于cookie:
+// 各种后端框架都方便的封装了设置cookie的方法,比如(tonador), 本质上都是通过在响应报文的头部加入 Set-Cookie 字段来设置的
+// Set-Cookie: NAME=VALUE; expires=DATE; path=PATH; domain=DOMAIN
+// expires是过期时间戳，通常用当前时间的毫秒数加上一段时间： new Date().getTime()+30*24*60*60*1000)(这就能解释清理cookie的时候, 将expire设置成一个过去的时间就能删除cookie)
+// 如果不设置expires，在浏览器中这个cookie将被当做session对待，也就是关闭了浏览器cookie就消失
+// 读取:
+var cookies = document.cookie //这一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie)
+var cookieA = cookies.repalce(/.*cookieA=([^;]*).*/, "$1")
+//设置:
+document.cookie = 'cookie_example=123'+';expires='+expire+';path=/';
+//关于localStorage:
+//来自html5,实现本地存储, 突破了cookie 4k的限制, 最大的存储空间是5M, localStorage中所有的item都是str类型
+//用法:setItem(), getItem(), removeItem()
+var storage = window.localStorage
+var data = {
+    name: 'xinghang',
+    sex: 'man',
+    hobby: 'program'
+}
+var dataStr = JSON.stringify(data)
+storage.setItem('data', dataStr)
+var dataStr = storage.getItem('data'))
+var dataJson = JSON.parse(dataStr)
+console.log(dataJson, typeof(dataJson))
+storage.removeItem('data')
