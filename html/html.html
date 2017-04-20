@@ -171,6 +171,15 @@ eg:
     <link rel="stylesheet" type="text/css" href="mystyle.css" /><!-- 样式表或者脚本文件 -->
 </head>
 
+<!-- 关于 DOCTYPE标签, 标准模式与兼容模式  -->
+<!DOCTYPE ***>告知浏览器的解析器用什么文档标准解析这个文档, 这就是标准模式
+DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现
+在兼容模式中, 页面以向后兼容的方式显示, 模拟老式浏览器的行为以防止站点无法工作, 简单的说，就是尽可能的显示能显示的东西给用户看
+几个差别, 浏览器处理元素的差别:
+1.width不同, 标准模式默认content-box, 交融模式默认width为全部宽度(不同于content-box同border-box)
+2.兼容模式下可设置百分比的高度和行内元素的高宽
+3.用margin:0 auto设置水平居中在IE下会失效
+
 <!-- 彻底掌握表单last time -->
 HTML 表单用于搜集不同类型的用户输入。
 <form action=""></form>定义一个表单
@@ -261,6 +270,10 @@ button：type属性必须
 　　<div><h2></h2><p></p></div> —— 对
 　　<div><a href=”#”></a><span></span></div> —— 对
 　　<div><h2></h2><span></span></div> —— 错
+5.行内元素如何包含块级元素
+    display:inline-block
+    display:inline;
+    zoom:1;
 
 <!-- 关于checked属性 -->
 checked 属性设置或返回 checkbox 是否应被选中。
@@ -279,3 +292,11 @@ checked 属性设置或返回 checkbox 是否应被选中。
     }
 </script>
 <input type="checkbox" id="checkman">
+
+<!-- HTML5的新特性和理HTML5新标签的浏览器兼容问题 -->
+1.绘画 canvas
+2.用于媒介回放的 video 和 audio 元素
+3.本地存储 localStorage 和 sessionStorage, 其中localStorage长期存储数据，浏览器关闭后数据不丢失, sessionStorage的数据在浏览器关闭后自动删除
+4.语意化更好的内容元素 比如 article、footer、header、nav、section
+5.表单控件 calendar、date、time、email、url、search
+6.新的技术  webworker, websocket, Geolocation

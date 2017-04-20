@@ -381,3 +381,15 @@ a:visited {color: #00FF00}	/* 已访问的链接 */
 input:focus {border: none}  /* 拥有键盘输入焦点*/
 p:first-child {font-size: 16px} /* http://www.w3school.com.cn/cssref/pr_pseudo_first-child.asp */
 q:lang(no) {quotes: "~" "~"} /* http://www.w3school.com.cn/cssref/pr_pseudo_lang.asp */
+
+/*关于box-sizing属性
+box-sizing: content-box|border-box|inherit
+content-box: 默认, 宽度和高度分别应用到元素的内容框, 在宽度和高度之外绘制元素的内边距和边框
+border-box: 元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制,通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度
+*/
+
+/*关于引入css时的, link和@import的差别
+1.link属于XHTML标签, 除了加载CSS外, 还能用于定义RSS, 定义rel连接属性等作用, 而@import是CSS提供的, 只能用于加载CSS
+2.页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载
+3.import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题(这就能解释为什么你的vue项目在ie浏览器中表现很糟糕的原因)
+*/

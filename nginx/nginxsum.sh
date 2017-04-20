@@ -29,7 +29,7 @@ server {
     server_name  localhost;
 
     location / {
-        root /usr/share/nginx/html;      #当访问http://localhost:8088时，定位到此根目录，然后按找顺序查找下列文件
+        root /usr/share/nginx/html;      #当访问http://localhost:8088时，定位到此根目录，然后按找顺序查找文件, 如果没有找到, 就去index中顺序查找
         index index.html index.htm;
     }
 }
@@ -97,15 +97,15 @@ location /gzh_custom/gzh {
     rewrite ^/(.*)$ http://erp.stage.ktvsky.com/$1 permanent;
 }
 
-关于nginx的动静分离:
+关于nginx的静态文件的处理(动静分离):
 location ~* \.(swf|js|css|png|txt|gif|jpg|jpeg|bng|bmp|ico)$ {
     if ($http_referer ~* $host$uri$is_args$args) {
         return 404;
     }
+    root html/myktv_static/wow;
     expires 30d;
     access_log off;
     add_header Cache-Control 'public';
-    root html/myktv_static/wow;
 }
 
 location关键字 try_files
@@ -138,6 +138,7 @@ server {
     }
 
 ------工作实例
+//一次工作实例
 //显示出/data/songs/目录下的所有文件
 cd /etc/nginx/sites-enabled/
 sudo vim songs
