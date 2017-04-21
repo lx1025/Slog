@@ -400,9 +400,9 @@ border-box: 元素指定的任何内边距和边框都将在已设定的宽度�
 */
 
 /*关于引入css时的, link和@import的差别
-1.link属于XHTML标签, 除了加载CSS外, 还能用于定义RSS, 定义rel连接属性等作用, 而@import是CSS提供的, 只能用于加载CSS
-2.页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载
-3.import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题(这就能解释为什么你的vue项目在ie浏览器中表现很糟糕的原因)
+1.link属于HTML标签, 能够定义rel连接属性等作用(rel属性规定当前文档与被链接文档之间的关系); 而@import是CSS提供的, 只能用于加载CSS
+2.页面被加载的时, link会同时被加, 而@import引用的CSS会等到页面被加载完再加载
+3.import是CSS2.1 提出的, 只在IE5以上才能被识别, 而link是HTML标签，无兼容问题(这就能解释为什么你的vue项目在ie浏览器中表现很糟糕的原因)
 */
 
 /*关于hack
@@ -411,17 +411,71 @@ border-box: 元素指定的任何内边距和边框都将在已设定的宽度�
 百度前端规范建议使用选择器hack
 */
 /*选择器hack区分IE浏览器版本 6789*/
-
-/*属性hack区分IE浏览器版本 6789*/
-.ie {
-    background-color:#f1ee18;     /*通用识别*/
-    background-color:#00deff\9;   /*ie 678*/
-    +background-color:#a200ff;    /*ie 67*/
-    _background-color:#1e0bd1;    /*ie 6*/
+#test {
+    width:300px;
+    height:300px;
+    background-color:blue;          /*firefox*/
+    background-color:red\9;         /*all ie*/
+    background-color:yellow\0;      /*ie8*/
+    +background-color:pink;         /*ie7*/
+    _background-color:orange;       /*ie6*/
 }
+:root #test {
+    background-color:purple\9;  /*ie9*/
+}
+@media all and (min-width:0px) {
+    #test {
+        background-color: black; /*opera*/
+    }
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    #test {
+        background-color: gray; /*chrome and safari*/
+    }
+}
+
 /*eg.解决ie6的双边距问题*/
 .box {
-    _display: inline; /* fix double margin */
+    _display: inline;            /* fix double margin */
     float: left;
     margin-left: 20px;
 }
+
+/*css3 新属性
+更多的选择器
+弹性布局: flex
+多列布局: column
+帧动画: keyframes / animations
+过渡动画: transition
+背景渐变: linear-gradient / radial-gradient
+背景属性: background-image / background-size / background-clip / background-origin
+边框、阴影: border-image / border-radius / box-shadow
+2D、3D变换: transform / transform-origin
+用户界面属性添加: box-sizing / outline-offset / cursor
+*/
+/*关于css3中的transtion, animation, transform属性
+transtion: 处理过渡效果
+animation: css3动画, 配合keyframe一起使用
+transform: 处理元素的形变, 比如位移, 旋转, 缩放, 倾斜
+*/
+
+/*关于垂直居中,最佳实现方案1.
+1.设置position: absolute, top、bottom、left、right都设置为0, 然后margin: auto
+2.设置position: absolute; 然后left和top都设置为50%, 再根据margin的负值来调正(已知宽高)
+3.同方案2, 最后一步用transform:translate(-50%,-50%)
+4.display:table-cell; vertical-align:middle;
+5.使用flex弹性盒模型
+*/
+
+/*关于display: inline-block显示缝隙问题
+1.float
+2.使用margin负值
+3.移除空格(写在同一行)
+*/
+
+/*关于display: none和visibility:hidden的区别是什么？
+display:none: HTML元素（对象）的宽度、高度等各种属性值都将“丢失”, 浏览器将不render这个元素, 不影响周围元素的布局
+visibility:hidden:HTML元素（对象）仅仅是在视觉上看不见（完全透明），可是仍然会被render, 仍然会占据空间, 影响周围元素的布局
+*/
+
+/*关于content属性, 移步浮动.*/
