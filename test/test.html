@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
-    <title>Test</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>jQuery链式语法演示</title>
+    <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+    <script>
+        $(function() {
+            //第一行代码，在文档中添加4个按钮
+            $('<input type="button" value="第1个按钮"/><input type="button" value="第2个按钮"/><input type="button" value="删除按钮事件处理函数"/><input type="button" value="隐藏或显示文本"/>').appendTo($('body'));
+            //第2行代码，分别选中4个按钮，并为它们绑定不同的事件处理函数
+            $('input[type="button"]')
+                .eq(0).click(function() { //匹配第一个按钮，并绑定click事件处理函数
+                    alert('是第一个按钮的事件处理函数');
+                }).end().eq(1) //返回所有按钮，再匹配第2个按钮
+                .click(function() { //为第2个按钮绑定click事件处理函数
+                    $('input[type="button"]:eq(0)').trigger('click');
+                }).end().eq(2) //返回所有按钮，再匹配第3个按钮
+                .click(function() { //为第3个按钮绑定click事件处理函数
+                    $('input[type="button"]:eq(0)').unbind('click');
+                }).end().eq(3) //返回所有按钮，再匹配第4个按钮
+                .toggle(function() { //为第4个按钮绑定toggle事件处理函数
+                    $('.panel').hide('slow');
+                }, function() {
+                    $('.panel').show('slow');
+                })
+        });
+    </script>
 </head>
+
 <body>
-    <div class="wrap">
-         <button id='my-button'>120</button>
-    </div>
+    <div class="panel">test</div>
 </body>
-<script>
-    $(function() {
-        $('button').on('click', function() {
-            $('button').attr('disabled', true)
-            var totalTime = +$('button').text()
-            timer = setInterval(function() {
-                $('button').text(--totalTime)
-                if(totalTime <= 0) {
-                    $('button').attr('disabled', false)
-                    $('button').text(120)
-                    clearInterval(timer);
-                }
-            }, 1000)
-        })
-    })
-</script>
+
 </html>

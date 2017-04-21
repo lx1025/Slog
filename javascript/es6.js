@@ -4,7 +4,7 @@
 // arrow functions
 // template string
 // destruction
-// default, rest arguments
+// function default, rest arguments
 // Promise
 
 //var全局作用域

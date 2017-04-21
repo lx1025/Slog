@@ -1,3 +1,7 @@
+//JQ如何扩展插件？
+jQuery.extend():     //给JQuery对象本身扩展方法
+jQuery.fn.extend():  //给JQ元素扩展方法
+
 //AJAX全局事件处理函数
 $(document).ajaxSend(function() {
     /* stuff to do before an AJAX request is sent */
@@ -18,8 +22,8 @@ $(document).ajaxError(function(event, xhr, settings, thrownError) {
     /* Stuff to do when an AJAX call returns an error */
 })
 
-//AJAX快捷方法:
-//get, post, getJSON, load
+//AJAX快捷方法:()
+//get, post, getJSON, load, ajax(jsonp)
 $.get('/xinghang', function(data){
     $(".result").html(data);
     console.log('get success')
@@ -57,6 +61,20 @@ $('#result').load(function() {
         }
     });
 });
+$.ajax({
+    url: 'www.baidu.com/',
+    type: 'GET',
+    dataType: 'jsonp',
+    data: {name: 'xinghang'},
+    jsonp: 'callback',     //这个参数会被拼接到url中, 后台根据这个参数判断是jsonp的请求.
+    jsonpCallback: 'func'  //这是回调函数名, callback=func, 后台根据这个值返回'func(data)'
+    success: function(response) {
+        $('#mydata').html(response)
+    },
+    error: function(msg) {
+        console.log(msg)
+    }
+})
 
 //JQUERY 选择器
 $('*')
@@ -285,3 +303,19 @@ $('.order-item').each(function () {
     $(this).find('.time').text(datetime.substring(11))
     $(this).find('.date').text(datetime.substring(0, 10))
 })
+
+// 关于jquery同zepto的区别:
+// Zepto更加的轻量级，专为移动端开发
+// Zepto并不是包含JQ所有的功能，只是封装JQ常用的一些方法
+// Zepto内部划分模块，不同的功能放到了不同的文件中，需要使用的时候引入，否则不引入
+// JQ则是所有功能都放到一个文件中。JQ会更加占用项目体积，而Zepto的使用率更高
+
+// jquery的优势:
+// 简介 简单
+// 强大的选择器支持
+// 封装了常用功能，例如：slideUp()、$.each()等等
+// 丰富强大的插件库
+// 完善的AJAX
+// 链式语法
+
+//关于jquery的链式语法:

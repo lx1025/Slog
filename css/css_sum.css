@@ -478,4 +478,5 @@ display:none: HTML元素（对象）的宽度、高度等各种属性值都将�
 visibility:hidden:HTML元素（对象）仅仅是在视觉上看不见（完全透明），可是仍然会被render, 仍然会占据空间, 影响周围元素的布局
 */
 
-/*关于content属性, 移步浮动.*/
+/*关于content属性
+移步浮动.*/

@@ -802,3 +802,5 @@ var dataStr = storage.getItem('data'))
 var dataJson = JSON.parse(dataStr)
 console.log(dataJson, typeof(dataJson))
 storage.removeItem('data')
+
+//关于js原生XMLHttpRequest
