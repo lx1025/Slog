@@ -480,3 +480,12 @@ visibility:hidden:HTML元素（对象）仅仅是在视觉上看不见（完全�
 
 /*关于content属性
 移步浮动.*/
+
+/*关于src同href的区别
+src: source, 用于<script>, <img>, <iframe>, 用于替换当前元素,指向的内容将会嵌入到文档中当前标签所在位置
+href: 用于<a> <link> <base>, 用于在当前文档和引用资源之间确立联系
+src: source, 指向外部资源的位置, 指向的内容将会嵌入到文档中当前标签所在位置,
+特别注意:
+<script src="/jquery/2.1.1/jquery.min.js"></script>这是同步的, 会发生阻塞
+<link href=”common.css” rel=”stylesheet”/>异步的不会发生阻塞
+*/
