@@ -318,4 +318,31 @@ $('.order-item').each(function () {
 // 完善的AJAX
 // 链式语法
 
+// 关于toggle
+$("p").toggle(
+    function() {
+        $("body").css("background-color", "green")
+    },
+    function() {
+        $("body").css("background-color", "red")
+    },
+    function(){
+        $("body").css("background-color", "yellow")
+});
+
 //关于jquery的链式语法:
+$('input[type="button"]')
+    .eq(0).click(function() {
+        alert('是第一个按钮的事件处理函数');
+    }).end().eq(1)
+    .click(function() {
+        $('input[type="button"]:eq(0)').trigger('click');
+    }).end().eq(2)
+    .click(function() {
+        $('input[type="button"]:eq(0)').unbind('click');
+    }).end().eq(3)
+    .toggle(function() {
+        $('.panel').hide('slow');
+    }, function() {
+        $('.panel').show('slow');
+    })

@@ -88,3 +88,5 @@ select count(id) from o2o_spider_song where name like '%铃声%'
 分类首页: http://mobilecdnbj.kugou.com/api/v3/tag/list?apiver=2&plat=0&pid=0
 儿童首页: http://m.www2.kugou.com/yueku/category/index.php?r=area/index&areaid=2&t=0.5147441825829446
 获取tagid: http://mobilecdnbj.kugou.com/api/v3/tag/info?&apiver=2&id=235
+
+http://www.kugou.com/yy/index.php?r=play/getdata&hash=2B3FADD4EDB3D08F8C0D9F883445CEF2&album_id=0&_=1492755395805

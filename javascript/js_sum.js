@@ -566,10 +566,18 @@ $('#clickMe').click(function (event) {
 }
 })
 
-//javascript的本地对象，内置对象和宿主对象
-//本地对象为array obj regexp
-//内置对象为像Math 等不可以实例化的, 可以直接使用其属性的对象
+//1.JavaScript基本数据类型:
+//基本数据类型: number, string, boolean, undefined, null
+//引用数据类型: Object(Array, Date, RegExp, Function)
+//2.javascript的本地对象，内置对象和宿主对象:
+//本地对象为 Array, Date, RegExp, Function
+//内置对象为 Math等不可以实例化的, 可以直接使用其属性的对象
 //宿主为浏览器自带的document, window, navigator等
+//3.new 操作符具体干了什么:
+//创建一个空对象, this变量指向该空对象，同时还继承了该对象的原型比如Array的属性和方法, 然后返回this
+var obj = {}
+obj.__proto__ = Base.prototype;
+Base.call(obj)
 
 //关于正则表达式
 //正则表达式的预定义(分为名词和量词)
@@ -776,7 +784,7 @@ document.getElementById('intro').onclick = () => {console.log('test')}
 document.getElementById('intro').click()
 document.getElementById('input').focus()
 
-//使用document.cookie和window.storage实现页面通信
+// 使用document.cookie和window.storage实现页面通信
 // 关于cookie:
 // 各种后端框架都方便的封装了设置cookie的方法,比如(tonador), 本质上都是通过在响应报文的头部加入 Set-Cookie 字段来设置的
 // Set-Cookie: NAME=VALUE; expires=DATE; path=PATH; domain=DOMAIN
@@ -785,11 +793,11 @@ document.getElementById('input').focus()
 // 读取:
 var cookies = document.cookie //这一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie)
 var cookieA = cookies.repalce(/.*cookieA=([^;]*).*/, "$1")
-//设置:
+// 设置:
 document.cookie = 'cookie_example=123'+';expires='+expire+';path=/';
-//关于localStorage:
-//来自html5,实现本地存储, 突破了cookie 4k的限制, 最大的存储空间是5M, localStorage中所有的item都是str类型
-//用法:setItem(), getItem(), removeItem()
+// 关于localStorage:
+// 来自html5,实现本地存储, 突破了cookie 4k的限制, 最大的存储空间是5M, localStorage中所有的item都是str类型
+// 用法:setItem(), getItem(), removeItem()
 var storage = window.localStorage
 var data = {
     name: 'xinghang',
@@ -803,4 +811,39 @@ var dataJson = JSON.parse(dataStr)
 console.log(dataJson, typeof(dataJson))
 storage.removeItem('data')
 
-//关于js原生XMLHttpRequest
+// 关于js原生XMLHttpRequest:
+var xml = new XMLHttpRequest()
+xmlhttp.onreadystatechange = () => {
+    document.getElementById('A1').innerHTML=xmlhttp.status;
+    document.getElementById('A2').innerHTML=xmlhttp.statusText;
+    document.getElementById('A3').innerHTML=xmlhttp.responseText;
+}
+xmlhttp.open("GET",url,true)
+xmlhttp.send(null)
+
+// 关于js严格模式的一些限制:(use strict)
+// 消除JavaScript语法的一些不合理，不严谨，减少一些怪异行为
+// 1.全局变量必须显示声明
+// 2.禁止this指向全局对象(构造函数，必须加new)
+// 3.函数不能有重复的形参名
+// 4.保留字(let、interface、package、private、protected、public、static、yield、implements)
+
+// 关于js的作用域已经作用域链:
+// js作用域的范围是函数，函数嵌套函数，查找变量从内层函数依次向外层找，最后找不到在window上找
+
+// 关于this
+// this是JavaScript的一个关键字，随着函数使用场合不同，this的值会发生变化
+// 但是有一个总原则，那就是this指的是调用函数的那个对象。
+// this一般情况下：是全局对象Global。
+// 作为方法调用，那么this就是指这个对象
+
+//模板引擎的快速使用(type, id, {%%}, 分行, =, 两个参数)
+<script type="text/template" id="temp">
+    <%for (var i in data) {%>
+        <li><%= data[i] %></li>
+    <%}%>
+</script>
+
+var data = ['a', 'b', 'c']
+var html = baidu.template('temp', {data: data})
+$('#result').html(html)

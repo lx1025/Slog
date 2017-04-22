@@ -28,11 +28,16 @@ JS引擎则：解析和执行javascript来实现网页的动态效果。
 1.减少.
 减少http请求次数; 减少IO次数; 减少用全局变量; 减少DOM操作次数(或在使用 DOM 操作库时用上 array-ids)
 2.变小, 变轻
-CSS Sprites(雪碧图); JS、CSS源码压缩; 使用Inline Images且图片大小合适
+CSS Sprites(雪碧图); 压缩JS,CSS,三方库（带有min的文件: jquery.min.js）; 使用Inline Images且图片大小合适, 选取图片的时候，能选择jpg就不选择png 图片搞定之后，使用网站进行二次压缩（TinyPNG）
 3.缓存
 合理设置 HTTP缓存; 用变量保存AJAX请求结果, 每次操作本地变量, 不用请求, 减少请求次数; 缓存DOM节点查找的结果
 4.关于css
 将样式表放在顶部, 用link; 避免使用css表达式(动态属性); 当需要设置的样式很多时设置className而不是直接操作style
+
+尽可能使用CDN来加载你的三方库
+选取图片的时候，能选择jpg就不选择png（只有镂空图才选择png图片）
+减少网路请求，比如使用懒加载等等
+优化代码
 -->
 
 <!-- js代码为什么要放在body后边;为什么建议把css代码以link方式放在body前边的head中的(还建议把link标签放在<script>前边呢)
@@ -105,3 +110,32 @@ else{
     storage.removeItem('data')
 }
  -->
+
+<!-- 实现跨域的三种方案
+1. JSONP
+2. 后台设置访问源限制
+3. 使用后台代理
+JSONP(最常用):
+利用了script标签src属性没有域的限制而完成
+需要前端、后台配合完成
+后台设置访问源限制:
+只需后台做访问源(Access-Control-Allow-Origin)的设置, 修改报文头, 前端就可以正常访问跨域的数据
+使用服务器端通信
+使用后台代理:
+前端不直接访问跨域的数据, 而是交给服务器去做
+服务器去请求别的站点的数据, 后台服务器是没有域的限制的
+当后台获取到数据之后, 前端从自己的服务器请求到数据, 无需做跨域处理
+-->
+
+<!-- 关于baiduTemplate.js模板引擎
+根据数据，快速生成HTML代码片段，插入到HTML结构中显示
+首先编写结构，可以将HTML和JavaScript混写，然后赋值数据，就可以生成HTML代码片段
+<script type="text/template" id="fruit">
+    <%for (var i = 0; i < data.length; i++) {%>
+        <li><%= data[i] %></li>
+    <%}%>
+</script>
+var data = ['orange', 'pear', 'apple']
+var html = baidu.template('li', {data: data})
+document.getElementById("result").innerHTML = html
+-->

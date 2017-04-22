@@ -24,6 +24,10 @@ mysql -u ktvsky -p098f6bcd4621d373cade4e832627b4f6 -P 3306 -h 10.9.192.10 ktv_ba
 关于offset:
 select * from kugou_singer limit 10 offset 0  #从1开始
 select * from kugou_singer limit 10 offset 10 #从11开始
+以上的效率极差, 对于大表而言, 应该先where, 在limit
+eg:
+select * from o2o_spider_song where id>1000000 limit 100;
+它的效率远远高于 select * from o2o_spider_song limit 1000 offset 1000000;
 
 #查看mysql所有进程:
 show processlist
@@ -40,6 +44,7 @@ select * from R cross join S 同上
 
 建立索引:
 create index o2o_spider_song_artist on o2o_spider_song(artist)
+create unique index hash on o2o_spider_song(hash) (效果等同于建表时候的UNIQUE KEY `hash` (`hash`))
 create index o2o_spider_song_artist_bthash on o2o_spider_song(artist, bthash)
 查看表的索引:
 show index from o2o_spider_song
@@ -167,10 +172,32 @@ select * from table1 t1 right join table2 t2 on t1.id = t2.id order by t2.score;
 select * from table1 t1 full join table2 t2 on t1.id = t2.id
 记忆方式就是左连接左表全, 右连接右表全, 全连接全部全
 
-eg.
+eg1.左连接的查询操作:
 select count(*) from kugou_by_cat k1 left join o2o_spider_song o1 on k1.hash = o1.hash where o1.hash is null;
 +----------+
 | count(*) |
 +----------+
 |   204813 |
 +----------+
+eg2.左连接的更新操作:
+update kugou_by_cat k1 left join o2o_spider_song o1 on k1.hash = o1.hash set k1.is_exist = 1 where o1.hash is not null;
+
+关于mysql增删改字段:
+添加字段: alter table kugou_by_cat add column is_exist int(11) not null default 0 comment '附加信息';
+删除字段: alter talbe kugou_by_cat drop column is_exist;
+修改字段名称: alter table kugou_by_cat change re5 is_exist int(11);
+
+一次实例:
+o2o_spider_song这个表, 建表时, 我为了避免重复爬取, 将hash值设定成了unique key
+后来制定hash进行查询时候, 发现速度缓慢, 然后用create index o2o_spider_song_artist on o2o_spider_song(hash)的方式建立了索引
+查询速度果然大增, 可是当我接下show createtable的时候, hash的unique_key的表示没有了, 取而代之的是一个key(KEY `o2o_spider_song_artist_bthash` (`bthash`), o2o_spider_song_hash这个名字是我起的)的标识
+这是不是意味着, key和index中间的某种关联呢?
+1.建表的时候, key会自动建立index, 无论是PRIMARY KEY, 试试UNIQUE KEY, 还是KEY, index的名字都是定义, 比如
+PRIMARY KEY (`id`),
+UNIQUE KEY `hash` (`hash`),
+KEY `o2o_spider_song_bthash` (`bthash`)
+--说道这里为什么刚开始的时候, hash查询会缓慢, 我并不清楚.
+2.而当你建立index时, 如果跟建表时候的key的名称发生冲突, 则key类型会被index类型覆盖
+
+#查询:
+select count(distinct(hash)) from kugou_by_cat
