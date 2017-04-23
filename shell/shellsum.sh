@@ -146,3 +146,11 @@ etc/init.d/nginx start
 
 grep命令文件夹下全局搜索:
 grep -nir '<?xml version=\"1.0\' .
+
+显示用户所在组:
+groups xinghang
+切换root用户:
+sudo -s
+
+非常好用的pstree命令!
+pstree
