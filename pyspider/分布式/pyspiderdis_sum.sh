@@ -17,7 +17,7 @@ ubuntu 1
      }
  }
 
-# 注意ip地址的一致.醉了哦
+# 注意ip地址的一致
 centos 1
 {
     "taskdb": "mysql+taskdb://pyspider:pyspider-pass@192.168.1.3:3306/taskdb",
