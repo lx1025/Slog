@@ -119,12 +119,13 @@ http://m.studyofnet.com/news/273.html
 你知道原因吗？https://zhidao.baidu.com/question/425857126386532692.html
 浏览器显示最小字体是12px（百度前端规范），行高为10px，所以重叠。
 
-/*理解em*/
+/*理解em
 px是绝对单位，不支持IE的缩放，em是相对单位。
 1em指的是一个字体的大小，它会继承父级元素的字体大小，因此并不是一个固定的值。
 不仅仅是字体，将行距line-height，和纵向高度的单位都用em。保证缩放时候的整体性。
 em指字体高，任意浏览器的默认字体高都是16px。所以,未经调整的浏览器都符合:1em=16px。那么12px=0.75em,10px=0.625em。
 https://segmentfault.com/q/1010000004704818/a-1020000004705715
+*/
 
 /*清除浮动*/
 /*http://www.jb51.net/css/173023.html
@@ -350,7 +351,8 @@ http://blog.csdn.net/wangji5850/article/details/50854280
 */
 
 /*建议背诵reset.css*/
-/*关于box-sizing属性*/
+/*关于css3中box-sizing属性, 这个属性指定了你所定义的width和height制定的是盒子模型的哪个层次*/
+/* 由内到外：content-box、padding-box、border-box、margin-box*/
 /*http://www.cnblogs.com/zhaoran/archive/2013/05/24/3097482.html*/
 
 /*关于行内元素和块级元素的特征,final!!!*/
@@ -488,4 +490,47 @@ src: source, 指向外部资源的位置, 指向的内容将会嵌入到文档�
 特别注意:
 <script src="/jquery/2.1.1/jquery.min.js"></script>这是同步的, 会发生阻塞
 <link href=”common.css” rel=”stylesheet”/>异步的不会发生阻塞
+*/
+
+/*关于图片的选择
+颜色丰富(照片)用jpg
+颜色简单、有透明的用png
+有动画的用gif
+图片格式还有webp、svg等等
+通常来讲: webp > jpg > png > gif
+*/
+
+/*关于*FC http://www.cnblogs.com/xiaohuochai/p/5248536.html
+BFC: block formate content 块级格式内容
+FFC: float formate content 浮动格式内容*/
+/*关于margin折叠
+同一个BFC内的文档流里的多个相邻(兄弟和父子)块级元素的垂直方向的margin合并成一个
+sytle:
+.div1 {
+    margin: 50px;
+    width: 50px;
+    height: 50px;
+    background-color: #aaa
+}
+.div2 {
+    margin: 100px;
+    width: 50px;
+    height: 50px;
+    background-color: #aaa
+
+}
+html:
+<div class="float">
+    <div class="div1">div1</div>
+    <div class="div2">div2</div>
+</div>
+*/
+
+/*一个关于字体大小的例子, 问p标签内字体大小和行高
+html:
+<div style="font-size: 10px">
+    <p style="font: 2em/2em arial">test</p>
+</div>
+p标签内的字体大小是20px, line-height是40px
+一定要注意, 行高的em来自字体大小, 所以line-height是20px*2=40px
 */

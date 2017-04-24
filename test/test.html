@@ -3,33 +3,17 @@
 <head>
     <title>演示</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" href="../css/reset.css">
     <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
-    <script>
-        $(function() {
-            //在文档中添加4个按钮
-            $('<input type="button" value="第1个按钮"/><input type="button" value="第2个按钮"/><input type="button" value="删除按钮事件处理函数"/><input type="button" value="隐藏或显示文本"/>').appendTo($('body'));
-            //分别选中4个按钮，并为它们绑定不同的事件处理函数
-            $('input[type="button"]')
-                .eq(0).click(function() {
-                    alert('是第一个按钮的事件处理函数');
-                }).end().eq(1)
-                .click(function() {
-                    $('input[type="button"]:eq(0)').trigger('click');
-                }).end().eq(2)
-                .click(function() {
-                    $('input[type="button"]:eq(0)').unbind('click');
-                }).end().eq(3)
-                .toggle(function() {
-                    $('.panel').hide('slow');
-                }, function() {
-                    $('.panel').show('slow');
-                })
-        });
-    </script>
+    <style media="screen">
+        p {
+            font-size: 2em/2 arail;
+        }
+    </style>
 </head>
-
 <body>
-    <div class="panel">test</div>
+    <div style="font-size: 16px; background-color: #aaa">
+        <p>test</p>
+    </div>
 </body>
-
 </html>

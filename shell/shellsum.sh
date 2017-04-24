@@ -152,5 +152,7 @@ groups xinghang
 切换root用户:
 sudo -s
 
-非常好用的pstree命令!
+查看进程的pstree命令
 pstree
+查看进程及其占用: https://linux.cn/article-3141-1.html
+htop -d 1000

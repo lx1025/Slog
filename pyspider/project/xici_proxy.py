@@ -17,7 +17,7 @@ class Handler(BaseHandler):
                     )
     # doc和xpath混用.
     def index_page(self, response):
-        for each in response.doc('.odd'):
+        for each in response.doc('.odd'):    
             res = dict()
             res['ip'] = each.xpath('td')[1].text
             res['port'] = each.xpath('td')[2].text

@@ -847,3 +847,22 @@ xmlhttp.send(null)
 var data = ['a', 'b', 'c']
 var html = baidu.template('temp', {data: data})
 $('#result').html(html)
+
+//关于react es6中的函数绑定及其延伸
+//一个stackoverflow的问题:http://stackoverflow.com/questions/43568344/typeerror-cannot-read-property-function-name-of-undefined-when-binding-onclic
+//注意这个问题有四种解决:1.constructor绑定 2.constructor es7绑定 3.直接把函数定义成箭头函数 4.调用函数时传递this
+//当浏览器渲染这个组件的时候, 执行到map函数, 此时的this指的是全局, 必然没有例子中的函数
+//然后发现了这个问题:http://stackoverflow.com/questions/32317154/uncaught-typeerror-cannot-read-property-setstate-of-undefined?rq=1
+//当触发点击事件时, <button onClick={this.delta}>+</button>中的this指的是虽然是组件, 可是函delta函数定义中this指的就是点击事件, 必然没有setState这个函数
+//所以es6中函数绑定的意义非常重要, 使指定函数的this永远不变, 在react es6组件写法的例子中, 调用构建函数, this就永远指向了组件本身
+//最后看一下当你绑定函数的时候, bind函数具体做了什么呢: http://blog.csdn.net/jutal_ljt/article/details/53381670
+ this.x = 'a'
+ var module = {
+     x: 'b',
+     getX() {
+         return this.x
+     }
+ }
+module.getX()
+var newGetX = module.getX
+newGetX()
