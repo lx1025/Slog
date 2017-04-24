@@ -69,43 +69,43 @@ ol.e {list-style:square url("sqpurple.gif");} 图像风格转化
 
 /*彻底解决css选择器*/
 /*元素选择器*/
-html {color:black;}
-p {color:gray;}
+html {color: black;}
+p {color: gray;}
 /*选择器分组, 逗号间隔*/
-body, h2, p, table, th, td, pre, strong, em {color:gray;}
+body, h2, p, table, th, td, pre, strong, em {color: gray;}
 /*通配符选择器*/
-* {color:red;}
+* {color: red;}
 /*类选择器
 <p class="important warning">
 This paragraph is a very important warning.
 </p>*/
-.important {font-weight:bold;}
-.warning {font-style:italic;}
-.important .warning {background:silver;}
+.important {font-weight: bold;}
+.warning {font-style: italic;}
+.important .warning {background: silver;}
 /*id选择器*/
-#mostImportant {color:red; background:yellow;}
+#mostImportant {color: red; background: yellow;}
 /*属性选择器*/
-*[title] {color:red;}
-a[href] {color:red;}
+*[title] {color: red;}
+a[href] {color: red;}
 img[alt] {border: 5px solid red;}
 /*后代选择器*/
-h1 em {color:red;}
+h1 em {color: red;}
 /*子元素选择器, */
 /*如果您不希望选择任意的后代元素，而是希望缩小范围，只选择某个元素的子元素*/
-h1 > strong {color:red;}
+h1 > strong {color: red;}
 /*相邻兄弟选择器*/
 /*读作，将h1元素之后的的兄弟p元素巴拉巴拉*/
-h1 + p {margin-top:50px;}
+h1 + p {margin-top: 50px;}
 /*读作，将li元素之后的的兄弟li元素巴拉巴拉*/
-li + li {font-weight:bold;} /*第一个li元素没有样式*/
+li + li {font-weight: bold;} /*第一个li元素没有样式*/
 /*伪类选择器*/
-a:link {color:#FF0000;text-decoration:none;background-color:#B2FF99;}
-a:visited {color:#00FF00;}
-a:hover {color:#FF00FF;}
-a:active {color:#0000FF;}
+a:link {color: #FF0000;text-decoration:none;background-color:#B2FF99;}
+a:visited {color: #00FF00;}
+a:hover {color: #FF00FF;}
+a:active {color: #0000FF;}
 /*伪元素选择器*/
-p:first-letter {color:#ff0000;} /*http://www.w3school.com.cn/cssref/pr_pseudo_first-child.asp*/
-
+p:first-letter {color: #ff0000;} /*http://www.w3school.com.cn/cssref/pr_pseudo_first-child.asp*/
+/*关于选择器的属性*/
 /*彻底理解行高line-height*/
 http://www.w3school.com.cn/tiy/t.asp?f=csse_dim_line-height_percent
 /*根据百度前端规范，line-height应该用数值倍数替换例如百分比,像素值的表示.
@@ -510,14 +510,13 @@ sytle:
     margin: 50px;
     width: 50px;
     height: 50px;
-    background-color: #aaa
+    background-color: #aaa;
 }
 .div2 {
     margin: 100px;
     width: 50px;
     height: 50px;
-    background-color: #aaa
-
+    background-color: #aaa;
 }
 html:
 <div class="float">

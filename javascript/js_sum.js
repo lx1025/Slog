@@ -832,10 +832,25 @@ xmlhttp.send(null)
 // js作用域的范围是函数，函数嵌套函数，查找变量从内层函数依次向外层找，最后找不到在window上找
 
 // 关于this
-// this是JavaScript的一个关键字，随着函数使用场合不同，this的值会发生变化
-// 但是有一个总原则，那就是this指的是调用函数的那个对象。
-// this一般情况下：是全局对象Global。
-// 作为方法调用，那么this就是指这个对象
+// this是JavaScript的一个关键字, 它只可能存在于函数的中, 随着函数使用场合不同, this的值会发生变化
+// 但是有一个总原则, 那就是this指的是调用函数的那个对象, 而鉴于JS所谓的“万物皆对象”, 这个this因此可以是任何物件, 甚至的数字字面值
+// When a function of an object was called, the object will be passed into the execution context as 'this' value
+// this出现的情景:
+// 1.全局范围内:
+// this
+// 当在全部范围内使用 this, 它将会指向全局对象, 浏览器中运行的 JavaScript脚本, 这个全局对象是window。
+// 2.函数调用
+// foo()
+// 这里 this 也会指向全局对象, 比如下面的eg2
+// ES5 注意: 在严格模式下（strict mode），不存在全局变量。 这种情况下 this 将会是 undefined。
+// 3.方法调用
+// test.foo()
+// 这个例子中, this 指向 test 对象
+// 4.调用构造函数
+// new foo();
+// 如果函数倾向于和 new 关键词一块使用，则我们称这个函数是 构造函数。 在函数内部，this 指向新创建的对象。
+// 5.显式的设置 this
+// 比如call和apply函数
 
 //模板引擎的快速使用(type, id, {%%}, 分行, =, 两个参数)
 <script type="text/template" id="temp">
@@ -850,19 +865,61 @@ $('#result').html(html)
 
 //关于react es6中的函数绑定及其延伸
 //一个stackoverflow的问题:http://stackoverflow.com/questions/43568344/typeerror-cannot-read-property-function-name-of-undefined-when-binding-onclic
-//注意这个问题有四种解决:1.constructor绑定 2.constructor es7绑定 3.直接把函数定义成箭头函数 4.调用函数时传递this
+//注意这个问题有四种解决:1.constructor绑定 2.constructor es7绑定 3.直接把函数定义成箭头函数 4.调用函数时传递this 5.答案的最后一句话也是一种方法, 可以衡量你时候真正的理解了this
 //当浏览器渲染这个组件的时候, 执行到map函数, 此时的this指的是全局, 必然没有例子中的函数
 //然后发现了这个问题:http://stackoverflow.com/questions/32317154/uncaught-typeerror-cannot-read-property-setstate-of-undefined?rq=1
 //当触发点击事件时, <button onClick={this.delta}>+</button>中的this指的是虽然是组件, 可是函delta函数定义中this指的就是点击事件, 必然没有setState这个函数
 //所以es6中函数绑定的意义非常重要, 使指定函数的this永远不变, 在react es6组件写法的例子中, 调用构建函数, this就永远指向了组件本身
 //最后看一下当你绑定函数的时候, bind函数具体做了什么呢: http://blog.csdn.net/jutal_ljt/article/details/53381670
- this.x = 'a'
- var module = {
-     x: 'b',
-     getX() {
-         return this.x
-     }
- }
+//eg1:
+this.x = 'a'
+var module = {
+    x: 'b',
+    getX() {
+        return this.x
+    }
+}
 module.getX()
 var newGetX = module.getX
 newGetX()
+//eg2:
+function A(a) {
+    this.x = a
+    var get = function() {
+        return this.x
+    }
+    this.print = function() {
+        console.log(get())
+    }
+}
+//如果函数倾向于和new关键词一块使用, 则我们称这个函数是构造函数.在函数内部, this 指向新创建的对象
+a = new A(1)
+a.print()
+//错误原因: 此时get里的this指向的是window(函数)
+//改正方法:
+//way1:
+var that = this
+var get = function() {
+    return that.x
+}
+//way2:
+var get = function() {
+    return this.x
+}.bind(this)
+
+//关于js变量声明的提前规则:
+//解析器将当前作用域内所有变量和函数的声明提前到作用域的开始处
+var a = 1
+function test() {
+    console.log(a)
+    var a = 1
+}
+test() //undefined
+//等同于:
+var a = 1
+function test() {
+    var a
+    console.log(a)
+    a = 1
+}
+test() //undefined
