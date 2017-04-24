@@ -162,6 +162,15 @@ var a
 console.log(a)
 //2.未声明变量typeof会报undefined
 console.log(typeof(a))
+//一个相关的面试题:
+var a = 1;
+var a;
+alert(typeof a);
+(function() {
+    b = '-----';
+    var b;
+})();
+alert( typeof b);
 //第三问 关于null
 a = null
 console.log(typeof(a))
@@ -172,7 +181,7 @@ onsole.log(a == null)
 var a = {}
 var b = null
 a.name = 'xinghang'
-b.name = 'feifei' //这里会报错，b为空指针对象，不能像普通对象一样直接添加属性。
+b.name = 'feifei' //这里会报错, b为空指针对象, 不能像普通对象一样直接添加属性。
 b = a
 b.name = 'xinghang'
 //此时 a 和 b 指向同一个对象。a.name, b.name 均为'jam'
@@ -906,6 +915,28 @@ var get = function() {
 var get = function() {
     return this.x
 }.bind(this)
+//eg3再来看看当初一个例子,你认为是坑, 其实你自己理解不到位的一个例子:
+$('.sp_follow_ktv_id').each(function () {
+    ktv_id = $(this).attr('data-ktvid')
+    $.get('/stat/following', {ktv_id:ktv_id, tp:'sp'}, function (data) {
+        this.text(data.res)
+    })
+})
+//应该改成:
+$('.sp_follow_ktv_id').each(function () {
+    var that = $(this);
+    ktv_id = $(this).attr('data-ktvid')
+    $.get('/stat/following', {ktv_id:ktv_id, tp:'sp'}, function (data) {
+        that.text(data.res)
+    })
+})
+//or
+$('.sp_follow_ktv_id').each(function () {
+    ktv_id = $(this).attr('data-ktvid')
+    $.get('/stat/following', {ktv_id:ktv_id, tp:'sp'}, function (data) {
+        this.text(data.res)
+    }).bind(this)
+})
 
 //关于js变量声明的提前规则:
 //解析器将当前作用域内所有变量和函数的声明提前到作用域的开始处
