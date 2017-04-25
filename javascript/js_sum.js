@@ -841,7 +841,7 @@ xmlhttp.send(null)
 // js作用域的范围是函数，函数嵌套函数，查找变量从内层函数依次向外层找，最后找不到在window上找
 
 // 关于this
-// this是JavaScript的一个关键字, 它只可能存在于函数的中, 随着函数使用场合不同, this的值会发生变化
+// this是JavaScript的一个关键字, 它只可能存在于函数中, 随着函数使用场合的不同, this的值会发生变化
 // 但是有一个总原则, 那就是this指的是调用函数的那个对象, 而鉴于JS所谓的“万物皆对象”, 这个this因此可以是任何物件, 甚至的数字字面值
 // When a function of an object was called, the object will be passed into the execution context as 'this' value
 // this出现的情景:

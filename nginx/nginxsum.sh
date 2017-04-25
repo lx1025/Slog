@@ -154,3 +154,69 @@ server {
         charset utf-8,gbk;
     }
 }
+//一个关于tornado部署的nginx实例:
+user nginx;                         # 指定nginx运行的用户及用户组,默认为nobody
+worker_processes 1;                 # 开启的线程数，一般跟逻辑CPU核数一致
+
+error_log /var/log/nginx/error.log; # 定位全局错误日志文件
+pid /var/run/nginx.pid;             # 制定进程id文件存储位置
+
+events {
+    use epoll;                      # 设置工作模式为epoll, 除此之外还有select, poll,
+    worker_connections 1024;        # 每个进程的最大连接数目, 受系统进程的最大打开文件数量限制
+}
+
+http {                              # Nginx的Http服务器配置,Gzip配置
+    upstream frontends {
+        server 127.0.0.1:8000;
+        server 127.0.0.1:8001;
+        server 127.0.0.1:8002;
+        server 127.0.0.1:8003;
+    }
+
+    include /etc/nginx/mime.types;         # 主模块指令, 包含一些关键的配置指令
+    default_type application/octet-stream; # 核心模块指令，智力默认设置为二进制流，也就是当文件类型未定义时使用这种方式
+
+    access_log /var/log/nginx/access.log;  # 制定引用日志路径, 模式为main
+
+    keepalive_timeout 65;                  # 设置客户端连接保存活动的超时时间
+    proxy_read_timeout 200;                # 代理服务器处理请求的时间
+    sendfile on;                           # 开启高效文件传输模式
+    tcp_nopush on;                         # 开启防止网络阻塞
+    tcp_nodelay on;                        # 开启防止网络阻塞
+
+    gzip on;                               # 开启gzip压缩
+    gzip_min_length 1000;                  # 设置允许压缩的页面最小字节数B
+    gzip_proxied any;                      # Nginx作为反向代理的时候启用, any - 无条件启用压缩
+    gzip_types text/plain text/html text/css text/xml
+               application/x-javascript application/xml
+               application/atom+xml text/javascript;
+
+    proxy_next_upstream error;             # 和后端服务器通信出现错误, 失败的请求应该被发送到下一台后端服务器
+
+    server {
+        listen 80;
+        client_max_body_size 50M;          # 客户端请求报文body的最大长度
+        charset utf-8,gbk;                 # 编码方式
+        location ^~ /static/ {
+            root /var/www;
+            if ($query_string) {           # 当存在请求参数的时候, 缓存时间设置到最大
+                expires max;
+            }
+        }
+        location = /favicon.ico {
+            rewrite (.*) /static/favicon.ico;
+        }
+        location = /robots.txt {
+            rewrite (.*) /static/robots.txt;
+        }
+        location / {
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Scheme $scheme;
+            proxy_pass_header Server;                 # It's telling the nginx service to pass the upstream's Server header instead of putting its own in the response.
+            proxy_redirect false;                     # 这条命令的含义是不显示upsteam服务器返回报文的location字段???(具体请参考:http://blog.csdn.net/u010391029/article/details/50395680)
+            proxy_pass http://frontends;
+        }
+    }
+}
