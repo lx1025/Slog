@@ -533,3 +533,7 @@ html:
 p标签内的字体大小是20px, line-height是40px
 一定要注意, 行高的em来自字体大小, 所以line-height是20px*2=40px
 */
+
+/*word-warp属性
+break-word	允许长单词或URL地址进行换行。
+*/

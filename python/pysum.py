@@ -68,9 +68,7 @@ print(type(when.today()))
 print(when.today())
 #<class 'datetime.date'>
 #2016-02-17
-#
 #注意两个类型的区别
-#
 #时间转字符串
 date = (datetime.datetime.now() - datetime.timedelta(1)).strftime('%Y-%m-%d')
 print(date)
@@ -173,3 +171,36 @@ async def pay_query(self, order_id, loop=5):
         if loop>0:
             IOLoop.current().add_timeout(time.time()+60, self.pay_query, order_id, loop-1)
         raise utils.APIError(errcode=19004, errmsg='查单失败')
+
+# python中的的class与继承和super的作用:
+class Bird(object):
+    def __init__(self):
+        self.hungrey = True
+    def eat(self):
+        print 'ahahah' if self.hungrey else 'wuwuwuwuw'
+
+class SongBird(Bird):
+    def __init__(self):
+        super(SongBird, self).__init__() # __init__默认只执行一次, 用super方法解决.
+        self.sound = 'dingdingding'
+    def song(self):
+        print self.sound
+
+xiaoming = SongBird()
+xiaoming.song()
+xiaoming.eat()
+
+class A(object):
+    def __init__(self, name):
+        self.name = name
+    def greet(self):
+        print 'Hello, this is %s' % self.name
+
+class Dog(A):
+    def greet(self):
+        super(Dog, self).greet()
+        print self.name
+        print 'wangwangwang'
+
+dog = Dog('dog')
+dog.greet()
