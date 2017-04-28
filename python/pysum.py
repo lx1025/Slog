@@ -146,3 +146,30 @@ download_url = data['data']['play_url']
 filename = song.get('name')
 # urlretrieve下载文件重定向:
 urllib.request.urlretrieve(download_url, '/data/songs/' + filename)
+
+# tornado使用IOloop异步轮训的例子:
+async def pay_query(self, order_id, loop=5):
+    logging.info('query gzh_order loop %s'%loop)
+    order = ctrl.custom.get_gzh_order(order_id)
+    try:
+        http_client = utils.get_async_client()
+        request = utils.http_request(COMMON_ORDER_URL.format(order_id=order['order_id']))
+        res = await utils.fetch(http_client, request)
+        res = json.loads(res.body.decode())
+        logging.info('query order result: %s'%res)
+        if res['is_pay']:
+            ctrl.custom.update_gzh_order(order['order_id'], data=dict(state=2))
+            ctrl.custom.after_gzh_success_order_ctl(order)
+            try:
+                push_res = await ctrl.custom.send_tpl_msg_of_order_ctl(order)
+                logging.error('push_res: %s'%push_res)
+            except Exception as e:
+                logging.error('push order wx template msg: exception: %s'%(e))
+        elif loop>0:
+            IOLoop.current().add_timeout(time.time()+60, self.pay_query, order_id, loop-1)
+        return res
+    except Exception as e:
+        logging.error(e)
+        if loop>0:
+            IOLoop.current().add_timeout(time.time()+60, self.pay_query, order_id, loop-1)
+        raise utils.APIError(errcode=19004, errmsg='查单失败')

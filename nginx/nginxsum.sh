@@ -157,7 +157,6 @@ server {
 //一个关于tornado部署的nginx实例:
 user nginx;                         # 指定nginx运行的用户及用户组,默认为nobody
 worker_processes 1;                 # 开启的线程数，一般跟逻辑CPU核数一致
-
 error_log /var/log/nginx/error.log; # 定位全局错误日志文件
 pid /var/run/nginx.pid;             # 制定进程id文件存储位置
 
@@ -176,7 +175,6 @@ http {                              # Nginx的Http服务器配置,Gzip配置
 
     include /etc/nginx/mime.types;         # 主模块指令, 包含一些关键的配置指令
     default_type application/octet-stream; # 核心模块指令，智力默认设置为二进制流，也就是当文件类型未定义时使用这种方式
-
     access_log /var/log/nginx/access.log;  # 制定引用日志路径, 模式为main
 
     keepalive_timeout 65;                  # 设置客户端连接保存活动的超时时间
@@ -211,12 +209,12 @@ http {                              # Nginx的Http服务器配置,Gzip配置
             rewrite (.*) /static/robots.txt;
         }
         location / {
-            proxy_set_header Host $http_host;
+            proxy_pass http://frontends;              # 重定向
+            proxy_set_header Host $http_host;         # 发送给upstream服务器请求的报文hearder设置
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Scheme $scheme;
             proxy_pass_header Server;                 # It's telling the nginx service to pass the upstream's Server header instead of putting its own in the response.
             proxy_redirect false;                     # 这条命令的含义是不显示upsteam服务器返回报文的location字段???(具体请参考:http://blog.csdn.net/u010391029/article/details/50395680)
-            proxy_pass http://frontends;
         }
     }
 }

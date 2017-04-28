@@ -555,6 +555,7 @@ $(function(){
 })
 //事件冒泡,当点击button2时,依次弹出hello baby,事件从子节点蔓延到父节点,触发了绑定在父节点的事件,就叫做事件冒泡
 //事件捕获,当点击任意位置,会弹出baby,这就叫时间事件捕获,通过时间的选择器可以避免发生意料之外的事件捕获
+//从内向外冒泡, 然后从外到内捕获
 //如何解决冒泡:
 //demo1 return false方法
 $('#clickMe').on('click', function () {
@@ -583,7 +584,7 @@ $('#clickMe').click(function (event) {
 //内置对象为 Math等不可以实例化的, 可以直接使用其属性的对象
 //宿主为浏览器自带的document, window, navigator等
 //3.new 操作符具体干了什么:
-//创建一个空对象, this变量指向该空对象，同时还继承了该对象的原型比如Array的属性和方法, 然后返回this
+//创建一个空对象, 继承了new对象(可以是一个已定义的funtion, 比如 var a = new function a() {}, 也可以是关键字比如Array)的属性和方法, 然后返回this
 var obj = {}
 obj.__proto__ = Base.prototype;
 Base.call(obj)
@@ -954,3 +955,42 @@ function test() {
     a = 1
 }
 test() //undefined
+
+//关于原型继承, 以及原型链:
+function A() {
+    this.a = 1;
+}
+function B() {
+    this.b = 2;
+}
+B.prototype = new A()     //B继承A
+var b = new B
+console.log(b.b)          //2
+console.log(b.a)          //1
+//b.b在b自己的属性上找, b.a自己的属性里没找到则去b的原型即b.__proto__也就是B.prototype里找,
+//一层一层往上找，到null为止，b.__proto__.__proto__是Object.prototype，b.__proto__.__proto__.__proto__为null
+
+//关于window.history.replaceState, window.history.pushState, window.addEventListener("popstate", function() {})
+//关于参数: 第一个参数是记录绑定的数据, 第二个参数是标题(很多浏览器都忽略了)，第三个参数是新的URL
+//效果如此(http://www.zhangxinxu.com/study/201306/ajax-page-html5-history-api.html?area=pudong)
+//第一次进入页面:
+window.onload = function() {
+    window.history.replaceState({uri: '/test1'}, 'test1', '?key1=value1')
+    $.get('/test1', function(data) {
+        //dom(data)
+    })
+}
+//点击侧边栏:(先入state, 再ajax渲染dom)
+window.history.pushState({uri: '/test2'}, 'test2', '?key2=value2')
+$.get('test2', function(data) {
+    //dom(data)
+})
+//监听前进后退事件:
+window.addEventListener('popstate', function(e) {
+    if (history.state) {
+        uri = e.state.uri     //注意带上state
+        $.get(uri, function(data) {
+            //dom(data)
+        })
+    }
+})

@@ -17,6 +17,10 @@ cnpm ls
 关于 npm ERR! extraneous 的warning:
 http://lifeonubuntu.com/npm-problem-npm-err-extraneous/
 
+#查看全局安装包以及卸载:
+cnpm list -g --depth 0
+cnpm uninstall -g <package-name>
+
 #npm install --save 与 npm install --save-dev 的区别
     一个放在package.json 的dependencies , 一个放在devDependencies里面.
 产品模式用dependencies，开发模式用devDep。

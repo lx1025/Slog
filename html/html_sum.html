@@ -292,7 +292,7 @@ checked 属性设置或返回 checkbox 是否应被选中。
         console.log('something')
     }
 </script>
-<input type="checkbox" id="checkman">
+<input type="checkbox" id="xinghang">
 
 <!-- HTML5的新特性和理HTML5新标签的浏览器兼容问题 -->
 1.绘画 canvas
@@ -303,6 +303,26 @@ checked 属性设置或返回 checkbox 是否应被选中。
 6.新的技术: webworker(异步操作), websocket(套接字通信)
 7,拖放API: drag drop
 8.地理位置: Geolocation
+
+<!-- 关于html中的classlist和dataset:
+css:
+.d {
+    background-color: #aaa;
+}
+html:
+<div id="meal-expense" class="a b c" data-drink="coffee" data-food="sushi" data-meal="lunch">¥20</div>
+var node = document.getElementById('meal-expense')
+console.log(node.dataset)
+{drink: "coffee", food: "sushi", meal: "lunch"}
+console.log(node.dataset.drink)
+"coffee"
+console.log(node.classList)
+["a", "b", "c", value: "a b c"]
+node.classList.add('d')
+node.classList.remove('d')
+node.classList.toggle('d')
+看到样式改变
+-->
 
 <!-- 关于ifream标签
 1.iframe会阻塞主页面的加载, 阻碍dom树的生成

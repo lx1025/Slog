@@ -184,7 +184,7 @@ update kugou_by_cat k1 left join o2o_spider_song o1 on k1.hash = o1.hash set k1.
 
 关于mysql增删改字段:
 添加字段: alter table kugou_by_cat add column is_exist int(11) not null default 0 comment '附加信息';
-删除字段: alter talbe kugou_by_cat drop column is_exist;
+删除字段: alter table kugou_by_cat drop column is_exist;
 修改字段名称: alter table kugou_by_cat change re5 is_exist int(11);
 
 一次实例:

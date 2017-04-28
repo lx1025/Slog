@@ -109,11 +109,11 @@ alias 命名某指令为别名
 alias ls="ls -l"
 
 关于tail命令和cat命令
-tail nohup.out # 默认10行
-tail -n 200 nohup.out # 设定参数, 200行
-tail -f nohup.out # follow 追踪
-cat file1 # 显示整个文件的内容
-cat > file2  # 建立一个文件
+tail nohup.out         # 默认10行
+tail -n 200 nohup.out  # 设定参数, 200行
+tail -f nohup.out      # follow 追踪
+cat file1              # 显示整个文件的内容
+cat > file2            # 建立一个文件
 cat file1 file2 > file # 合并文件
 
 关于mv指令
@@ -147,6 +147,8 @@ etc/init.d/nginx start
 grep命令文件夹下全局搜索:
 grep -nir '<?xml version=\"1.0\' .
 
+查看当前用户:
+whoami
 显示用户所在组:
 groups xinghang
 切换root用户:
@@ -156,3 +158,24 @@ sudo -s
 pstree
 查看进程及其占用: https://linux.cn/article-3141-1.html
 htop -d 1000
+
+查看当前redis占用: 'info memory'
+127.0.0.1:6379> info memory
+# Memory
+used_memory:9093088
+used_memory_human:8.67M
+used_memory_rss:21397504
+used_memory_rss_human:20.41M
+used_memory_peak:9116736
+used_memory_peak_human:8.69M
+total_system_memory:8371302400
+total_system_memory_human:7.80G
+used_memory_lua:37888
+used_memory_lua_human:37.00K
+maxmemory:0
+maxmemory_human:0B
+maxmemory_policy:noeviction
+mem_fragmentation_ratio:2.35
+mem_allocator:jemalloc-4.0.3
+更详细的redis info
+127.0.0.1:6379> info
