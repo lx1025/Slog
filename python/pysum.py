@@ -173,22 +173,22 @@ async def pay_query(self, order_id, loop=5):
         raise utils.APIError(errcode=19004, errmsg='查单失败')
 
 # python中的的class与继承和super的作用:
-class Bird(object):
+class A(object):
     def __init__(self):
-        self.hungrey = True
-    def eat(self):
-        print 'ahahah' if self.hungrey else 'wuwuwuwuw'
+        self.name = 'xinghang'
+    def greet(self):
+        print 'Hello, this is %s' % self.name
 
-class SongBird(Bird):
-    def __init__(self):
-        super(SongBird, self).__init__() # __init__默认只执行一次, 用super方法解决.
-        self.sound = 'dingdingding'
-    def song(self):
-        print self.sound
+class Dog(A):
+    def __init__(self, address):
+        super(Dog, self).__init__()
+        self.address = address
+    def greet(self):
+        print self.address
+        print self.name
 
-xiaoming = SongBird()
-xiaoming.song()
-xiaoming.eat()
+dog = Dog('beijing')
+dog.greet()
 
 class A(object):
     def __init__(self, name):
