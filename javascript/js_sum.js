@@ -1016,20 +1016,6 @@ function test() {
 }
 test() //undefined
 
-//关于原型继承, 以及原型链:
-function A() {
-    this.a = 1;
-}
-function B() {
-    this.b = 2;
-}
-B.prototype = new A()     //B继承A
-var b = new B
-console.log(b.b)          //2
-console.log(b.a)          //1
-//b.b在b自己的属性上找, b.a自己的属性里没找到则去b的原型即b.__proto__也就是B.prototype里找,
-//一层一层往上找，到null为止，b.__proto__.__proto__是Object.prototype，b.__proto__.__proto__.__proto__为null
-
 //关于window.history.replaceState, window.history.pushState, window.addEventListener("popstate", function() {})
 //关于参数: 第一个参数是记录绑定的数据, 第二个参数是标题(很多浏览器都忽略了)，第三个参数是新的URL
 //效果如此(http://www.zhangxinxu.com/study/201306/ajax-page-html5-history-api.html?area=pudong)
@@ -1054,3 +1040,17 @@ window.addEventListener('popstate', function(e) {
         })
     }
 })
+
+//关于js中的prototype, 原型继承, 以及原型链:
+//javascript中的每个对象都有prototype属性，Javascript中对象的prototype属性的解释是: 返回对象类型原型的引用
+function A() {
+    this.a = 1;
+}
+function B() {
+    this.b = 2;
+}
+B.prototype = new A()     //B继承A(17.5.1注: 这种理解并不是很正确, 这里强调的是克隆, 结合new的本质去理解)
+var b = new B
+console.log(b.b)          //2
+console.log(b.a)          //1
+//b.b在b自己的属性上找, b.a自己的属性里没找到则去b的原型里找
