@@ -64,6 +64,9 @@
 // 新建空数组 var arr = []
 // 清空数组使用 arr.length = 0
 
+//关于js中的内存的分类:
+//栈内存: 用来执行js代码的环境(作用域). js作用域只有两种, 全局作用域, 和私有作用域
+//堆内存: 用来存储引用数据类型的内容, Object就是key-value, function就是函数字符串
 //array concat
 var a = ['a']
 var b = ['b']
@@ -157,7 +160,7 @@ for (var i in b) {
 //第一问 a is not defined的出现情况(直接使用未声明变量)
 console.log(a)     //VM1497:1 Uncaught ReferenceError: a is not defined.
 //第二问 出现undefined的情况
-//1.使用声明过但未初始化变量会报undefined
+//1.使用声明过但未初始化, 默认值是nudefined
 var a
 console.log(a)
 //2.未声明变量typeof会报undefined
@@ -165,12 +168,12 @@ console.log(typeof(a))
 //一个相关的面试题:
 var a = 1;
 var a;
-alert(typeof a);
+alert(typeof(a));   //number
 (function() {
     b = '-----';
     var b;
 })();
-alert( typeof b);
+alert( typeof b); //undefined,未声明, 未定义.
 //第三问 关于null
 a = null
 console.log(typeof(a))
@@ -575,12 +578,27 @@ $('#clickMe').click(function (event) {
         window.event.cancelBubble = true;
 }
 })
-
+//0.JavaScript特殊数据类型:
+//对象, 带有属性和方法的特殊数据类型
+//JavaScript 中的所有事物都是对象：Number, Sting, undefined, null, Object, function
+//此外，JavaScript 允许自定义对象,
 //1.JavaScript基本数据类型:
-//基本数据类型: number, string, boolean, undefined, null
-//引用数据类型: Object(Array, Date, RegExp, Function)
+//基本数据类型: Number, String, Boolean, undefined, null
+//引用数据类型: Object, Array, RegExp, Date, function
+//基本数据类型操作的值本身,而引用数据类型操作的引用地址, 特别注意, fn变量本身存储的是一个内存地址, 这个地址指定的内存区域里存储的是这个函数定义的内容,是字符串.
+//eg.
+var a = 12
+var obj = {}
+function fn() {
+    console.log('test1')
+}
+console.log('test2')
+console.log(a)
+console.log(obj)
+console.log(fn)
+console.log(fn()) //fn会先执行.
 //2.javascript的本地对象，内置对象和宿主对象:
-//本地对象为 Array, Date, RegExp, Function
+//本地对象为 Array, Date, RegExp, Numberjjj
 //内置对象为 Math等不可以实例化的, 可以直接使用其属性的对象
 //宿主为浏览器自带的document, window, navigator等
 //3.new 操作符具体干了什么:
@@ -939,8 +957,10 @@ $('.sp_follow_ktv_id').each(function () {
     }).bind(this)
 })
 
-//关于js变量声明的提前规则:
-//解析器将当前作用域内所有变量和函数的声明提前到作用域的开始处
+//关于js中的预解释
+//变量声明的提前规则:
+//解析器将当前作用域内所有变量和函数(带var和带function)的声明提前到作用域的开始处
+//不同点是, var会仅仅声明, 而function声明, 并定义, 空间存的是字符串
 var a = 1
 function test() {
     console.log(a)

@@ -176,8 +176,6 @@ async def pay_query(self, order_id, loop=5):
 class A(object):
     def __init__(self):
         self.name = 'xinghang'
-    def greet(self):
-        print 'Hello, this is %s' % self.name
 
 class Dog(A):
     def __init__(self, address):
