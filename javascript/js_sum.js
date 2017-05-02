@@ -421,10 +421,10 @@ arr.quickSort()
 console.log(arr)
 
 //关于call和apply
-//用来方便实现继承方法
+//用来方便的实现方法的继承
 //对比es6中class extend的区别
-//call()的第一个参数是上下文，后续是实例传入的参数序列
-//apply()和call()一个意思, apply()函数有两个参数：第一个参数是上下文，第二个参数是参数组成的数组。如果上下文是null，则使用全局对象代替
+//call()的第一个参数是上下文(指定this),后续是实例传入的参数序列
+//apply()和call()一个意思, apply()函数有两个参数：第一个参数是上下文(指定this),第二个参数是参数组成的数组。如果上下文是null，则使用全局对象代替
 function Animal(name){
     this.name = name;
     this.showName = function(){
@@ -518,7 +518,7 @@ whatBrowser()
 //script标签的位置会影响首屏时间么？
 //答案是：不影响（如果这里的首屏指的是页面从白板变成网页画面——也就是第一次Painting,这个时间仅仅取决于render完成的时间, 而render是有前提的, 就是整个文档加载完成
 //所以无论js代码放在那里, 此时都已经加载完毕了, 但放在body内部有可能截断首屏的内容，使其只显示上面一部分(打断了深度遍历)
-//浏览器是逐行加载html文档代码的, html代码加载成dom树, css代码加载成cssdom树, js代码在加载完成后立即执行, 全部加载完成后, layout, render
+//浏览器是逐行加载html文档的, html代码加载成dom树, css代码加载成cssdom树, js代码在加载完成后立即执行, 全部加载完成后, layout, render
 //某些js代码是必须放在body前边的, 比如获取浏览器的UA来决定引入不同的css
 //但是某些包含dom操作的js代码, 会因为dom树木当前还没有加载完成,导致代码并没有产生效果,这类js代码就应该放在body之后,等待dom树生成之后再加载然后执行
 //当然你的js代码还可以放在body中, 但是必须注意,如果这段代码包含了某些dom操作, 它可能会打断dom树的深度遍历, 影响dom树的生成, 导致渲染失败
@@ -604,15 +604,13 @@ $('#clickMe').on('click', function () {
 //demo2 ie e.stopPropagation, 非ie cancelBubble
 $('#clickMe').click(function (event) {
     alert('hello')
-    //拿到事件
     var e = window.event || event;
-    if ( e.stopPropagation ){
-        //如果提供了事件对象，则这是一个非IE浏览器
-        e.stopPropagation()
-    }else{
-        //兼容IE的方式来取消事件冒泡
-        window.event.cancelBubble = true;
-}
+    if (e.stopPropagation){
+        e.stopPropagation()                   //如果提供了事件对象，则这是一个非IE浏览器
+    }
+    else{
+        window.event.cancelBubble = true     //兼容IE的方式来取消事件冒泡
+    }
 })
 //0.JavaScript特殊数据类型:
 //对象, 带有属性和方法的特殊数据类型
@@ -701,7 +699,7 @@ var str = "My age is 18.Golden age!11"
 re = /\d+/g;
 console.log(str.search(re));//10
 //match 返回一个array
-//另:这里的一个坑,关于正则中^&的用法(https://zhidao.baidu.com/question/581570451.html)
+//另:这里的一个坑,关于正则中^$的用法(https://zhidao.baidu.com/question/581570451.html)
 var str = 'My age is 18.Golden age!'
 var str1 = 'My age is Golden age!'
 var str2 = 'My age is Golden age!'
@@ -709,11 +707,17 @@ var res1 = str.match(/^\d+$/)          //null
 var res2 = str1.match(/^\d+$/)         //null
 var res3 = str.match(/\d+/)            //["18", index: 10, input: "My age is 18.Golden age!"]
 var res4 = str1.match(/\d+/)           //null
-//replace
+//replace, 返回一个新的字符串
 //利用repalce取cookie的指定值:可以延伸为截取某字符串
+//取出指定cookie
 cookies = document.cookie
 var cookieA = ''
 cookieA = cookies.repalce(/.*cookieA=([^;]*).*/, "$1")
+//eg2.加粗所有数字
+var str = 'asdf123qwer456jkl789'
+var reg = /(\d+)/g
+str = str.replace(reg, ($1) => `<em>${$1}</em>`)
+console.log(str)
 //利用正则表达式将url的请求参数转化为字典对象: var reg = /([^&?=]+)=([^&?=]*)/g
 //way1
 function getQueryObject(url) {
@@ -774,7 +778,7 @@ var reg = /^w{3}\.\w+\.\w+$/
 //将字符串中的所有的数字加上<em>标签
 var str = 'asdf123qwer456jkl789'
 var reg = /(\d+)/g
-str.replace(reg, ($1) => `<em>${$1}</em>`)
+str = str.replace(reg, ($1) => `<em>${$1}</em>`)
 console.log(str)
 
 //根据请求端是否是手机端来判断跳转:
@@ -782,7 +786,7 @@ if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
     window.location.href = "wow.html" //相对路径
 }
 
-//一次工作的es6实践:
+//一次工作的es6实践, 判断客户端类型:
 $(function () {
     if (navinator.userAgent.match(/(iPhone|Android|iPod|ios)/i)) {
         $(.navi).hide()
@@ -815,13 +819,13 @@ window.location.search = '?param=value'
 //使用em为单位的基础构建代码
 //但一个匿名函数被括起来,并且后边再加上一个括号,它就能自动执行.
 (function () {
-    size()
-    window.onresize = function () {
-        size()
-    }
     function size () {
         var winW = document.documentElement.clientWidth || document.body.clientWidth
         document.documentElement.style.fontSize = winw / 10 + 'px';
+    }
+    size()
+    window.onresize = function () {
+        size()
     }
 })()
 
@@ -848,12 +852,12 @@ document.getElementById('intro').onclick = () => {console.log('test')}
 document.getElementById('intro').click()
 document.getElementById('input').focus()
 
-// 使用document.cookie和window.storage实现页面通信
+// 使用document.cookie和window.localStorage实现页面通信
 // 关于cookie:
-// 各种后端框架都方便的封装了设置cookie的方法,比如(tonador), 本质上都是通过在响应报文的头部加入 Set-Cookie 字段来设置的
+// 各种后端框架都方便的封装了设置cookie的方法,比如(tonador), 本质上都是通过在响应报文的头部加入 Set-Cookie 字段来设置的, 形如:
 // Set-Cookie: NAME=VALUE; expires=DATE; path=PATH; domain=DOMAIN
 // expires是过期时间戳，通常用当前时间的毫秒数加上一段时间： new Date().getTime()+30*24*60*60*1000)(这就能解释清理cookie的时候, 将expire设置成一个过去的时间就能删除cookie)
-// 如果不设置expires，在浏览器中这个cookie将被当做session对待，也就是关闭了浏览器cookie就消失
+// 如果不设置expires，在浏览器中这个cookie将被当做session对待, 也就是关闭了浏览器cookie就消失(注意在tornado中的用法, 不设置过期时间关闭浏览器cookie就会消失.)
 // 读取:
 var cookies = document.cookie //这一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie)
 var cookieA = cookies.repalce(/.*cookieA=([^;]*).*/, "$1")
