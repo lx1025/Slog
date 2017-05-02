@@ -112,6 +112,8 @@ console.log(a)
 var a = [1, 2, 3, 5].filter(function(item) {
     return item%2 === 0
 })
+console.log(a)
+//item is not defined; bind(this)
 
 //array push with ajax
 $.getJSON('/test', {param1: value1}, function(response) {
@@ -122,11 +124,11 @@ $.getJSON('/test', {param1: value1}, function(response) {
         items.push('<li id="' + key + '">' + val + '</li>')
         //es6:
         items.push(`<li id=${key}>${val}</li>`)
-        $('<ul/>', {'class': 'ul-class', html: items.join(',')}).appendTo('selector')
+        $('<ul/>', {class: 'ul-class', html: items.join(',')}).appendTo('<selector>')
     })
 })
 
-// 关于js中 num str bollen 类型的转换：
+// 关于js中 num str bollen 等基本数据类型的转换：
 // num转str, 使用第一种
 var num = 1
 num = num + ''
@@ -150,7 +152,7 @@ console.log(Math.round(a)    //四舍五入
 console.log(Math.ceil(a))    //向下取整
 console.log(Math.floor(a))   //向上取整
 //四舍五入: <float>.toFixed(2) 2是保留位数
-console.log((1.2345.toFixed(2)))
+console.log((1.2345.toFixed(2))) //js万物皆对象, 什么是对象? 有自己的属性和方法就是对象
 
 //使用for in 的方法来实现array或者object的迭代:
 //在array中 i 相当于index, 在object中 i 相当于 key
@@ -169,7 +171,7 @@ for (var i in b) {
 //第一问 a is not defined的出现情况(直接使用未声明变量)
 console.log(a)     //VM1497:1 Uncaught ReferenceError: a is not defined.
 //第二问 出现undefined的情况
-//1.使用声明过但未初始化, 默认值是nudefined
+//1.使用声明过但未定义, 默认值是nudefined
 var a
 console.log(a)
 //2.未声明变量typeof会报undefined
@@ -199,19 +201,20 @@ b.name = 'xinghang'
 //此时 a 和 b 指向同一个对象。a.name, b.name 均为'jam'
 
 //js基本数据类型判空的最佳实现
-//0, '', []
+//0, ''
 var a = '' or var a = 0
 if (!a) {console.log('success')}
 var a = []
-if (!a.length) {console.log('success')}
-var a = {}
 
+//js引用数据类型判空的最佳实现
+//关于array判空
+if (!a.length) {console.log('success')}
 //关于object判空:
 function objectIsEmpty(obj) {
     for (var i in obj) {
-        return false;
+        return false
     }
-    return true;
+    return true
 }
 var a = {}
 a.name = 'something'
@@ -229,6 +232,7 @@ while (aLen--) {
 
 //对$()的理解
 $('#id').click() //表示选择器
+$(this).text('something')
 $(document).ready()//表示文档加载完成，一般简写为：
 $(function(){
     console.log('something')
@@ -240,6 +244,15 @@ $(function(){
         test(){
             console.log(app.a)
         }
+    }
+    $('#someid').on('click', app.test())
+})
+$(function() {
+    var app = {
+        a: 1,
+        test() {
+            console.log(a);
+        },
     }
     $('#someid').on('click', app.test())
 })
@@ -261,7 +274,7 @@ $('button').on('click', function() {
     }, 1000)
 })
 
-//js object api
+//js Object's api
 //constructor, hasOwnProperty, keys, values
 //判断类型
 console.log({}.constructor === Object)
