@@ -1,16 +1,17 @@
 // https://github.com/ecomfe/spec/blob/master/javascript-style-guide.md 百度js编码规范
 // 百度js编码规范
-// utf8编码，文件结尾处一个空行，四个空格缩进， 二元运算符两侧必须有一个空格，一元运算符与操作对象之间不允许有空格
-// 语句结束加；函数定义结束不加；//可是我一个分号也不想加
+// utf8编码, 文件结尾处一个空行, 四个空格缩进, 二元运算符两侧必须有一个空格, 一元运算符与操作对象之间不允许有空格
+// 语句结束加, 函数定义结束不加, //可是我一个分号也不想加
 // 用作代码块起始的左花括号 { 前必须有一个空格
 // if / else / for / while / switch / do / function / try / catch / finally 关键字后，必须有一个空格
-// 创建对象时，属性中的 : 之后必须有空格，: 之前不允许有空格
-// 函数声明、具名函数表达式、函数调用中，函数名和 ( 之间不允许有空格
+// 创建对象时, 属性中的: 之后必须有空格, : 之前不允许有空格
+// 函数声明、具名函数表达式、函数调用中, 函数名和 ( 之间不允许有空格
 // 在函数调用、函数声明、括号表达式、属性访问 中 if / for / while / switch / catch 等语句中，() 和 [] 内紧贴括号部分不允许有空格
 // 单行声明的数组与对象，如果包含元素，{} 和 [] 内紧贴括号部分不允许包含空格
 // 每个独立语句结束后必须换行
 // 运算符处换行时，运算符必须在新行的行首
-// 对于 if...else...、try...catch...finally 等语句，推荐使用在 } 号后添加一个换行 的风格，使代码层次结构更清晰，阅读性更好
+// 对于 if...else...、try...catch...finally 等语句，推荐使用在 } 号后添加一个换行的风格，使代码层次结构更清晰，阅读性更好
+// eg.
 // if (condition) {
 //     // some statements;
 // }
@@ -49,7 +50,7 @@
 // 使用严格的===避免等于判断中隐式的类型转换，但是有的时候==也是好用的
 // 对有序集合进行顺序无关的遍历时，使用逆序遍历：逆序遍历可以节省变量，代码比较优化，
 // 关于字符串：
-// 单引号，字符串拼接使用数组和'+', '+'效率更高，而数组兼容老版本的浏览器
+// 单引号, 字符串拼接使用数组和'+', '+'效率更高，而数组兼容老版本的浏览器
 // 字符转转义，要有印象
 // HTML 转义
 // var str = '<p>' + htmlEncode(content) + '</p>';
@@ -65,8 +66,10 @@
 // 清空数组使用 arr.length = 0
 
 //关于js中的内存的分类:
+//js加载html文档, 会申请两种内存 , 栈内存, 堆内存
 //栈内存: 用来执行js代码的环境(作用域). js作用域只有两种, 全局作用域, 和私有作用域
 //堆内存: 用来存储引用数据类型的内容, Object就是key-value, function就是函数字符串
+
 //array concat
 var a = ['a']
 var b = ['b']
@@ -81,14 +84,15 @@ console.log(a.join('x'));           //'axbxcx'
 
 //array slice
 var a = ['a', 'b', 'c', 'd']
-console.log(a.slice(1,2));  //['b']
+console.log(a.slice(1, 2));  //['b']
 console.log(a.slice(1));    //['b','c','d']
 console.log(a.slice(-2));   //['c','d']
 console.log(a.slice(-1));   //['d']
 
 //array map，array to array
 //es6
-[1, 2, 3].map(x => x+1)
+vat test = [1, 2, 3].map(x => x+1)
+console.log(test)
 var a = state.map(todo => {
         if (todo.id === updatedTodo.id) {
           return { ...todo, ...updatedTodo };
@@ -99,10 +103,15 @@ var a = state.map(todo => {
 [1, 2, 3].map((function(x){
     return x+1
 }).bind(this))
+//上边这个例子现在就可以清晰的看懂了: es5的语法, 没有使用箭头函数, 此时作用域指的是全局window, 必然x未声明, 所以需要绑定this.
 
 //array filter array to array
 var a = [1, 2, 3, 4].filter(item => item%2===0)
 console.log(a)
+//test: 请说明下列代码的报错信息, 并改正:
+var a = [1, 2, 3, 5].filter(function(item) {
+    return item%2 === 0
+})
 
 //array push with ajax
 $.getJSON('/test', {param1: value1}, function(response) {
