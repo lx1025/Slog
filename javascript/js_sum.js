@@ -616,9 +616,10 @@ $('#clickMe').click(function (event) {
 //对象, 带有属性和方法的特殊数据类型
 //JavaScript 中的所有事物都是对象：Number, Sting, undefined, null, Object, function
 //此外，JavaScript 允许自定义对象,
-//1.JavaScript基本数据类型:
+//1.JavaScript一般数据类型:
 //基本数据类型: Number, String, Boolean, undefined, null
-//引用数据类型: Object, Array, RegExp, Date, function
+//引用数据类型: 1.Object: {}(对象), [](数组), RegExp, Date
+//            2.function
 //基本数据类型操作的值本身,而引用数据类型操作的引用地址, 特别注意, fn变量本身存储的是一个内存地址, 这个地址指定的内存区域里存储的是这个函数定义的内容,是字符串.
 //eg.
 var a = 12
@@ -1041,16 +1042,34 @@ window.addEventListener('popstate', function(e) {
     }
 })
 
-//关于js中的prototype, 原型继承, 以及原型链:
-//javascript中的每个对象都有prototype属性，Javascript中对象的prototype属性的解释是: 返回对象类型原型的引用
-function A() {
-    this.a = 1;
+//关于js中的prototype, __proto__, 原型继承, 以及原型链:
+//js中有两种引用数据类型, 分别是function和Object
+//js中的每个function都有prototype属性, 这是一个指针, 指向该函数的原型, 必然是一个Object
+//js中的每个Object都有prototype属性, 这也是一个指针, 指向该Object的原型, 同样是一个Object
+var a = function () {}
+console.log(a.prototype)
+//输出内容为:
+Object {
+constructor: function (),
+__proto__: Object
 }
-function B() {
-    this.b = 2;
+//我们可以为这个Object添加方法:
+a.prototype.say = function () {console.log('bingo')}
+//可以再console.log(a.prototype)对比结果:
+Object {
+constructor: function (),
+__proto__: Object,
+say: function(),
 }
-B.prototype = new A()     //B继承A(17.5.1注: 这种理解并不是很正确, 这里强调的是克隆, 结合new的本质去理解)
-var b = new B
-console.log(b.b)          //2
-console.log(b.a)          //1
-//b.b在b自己的属性上找, b.a自己的属性里没找到则去b的原型里找
+//然后:
+var b = new a()
+b.say()
+//输出: bingo
+//new的本质是:
+var p = {}
+p.__proto__ = Person.prototype
+Person.call(p)
+//每个对象都会在其内部初始化一个属性, 就是__proto__, 当我们访问一个对象的属性时, 如果这个对象内部不存在这个属性, 那么他就会去__proto__(引用)里找这个属性
+//这个__proto__所指的Object也有自己的__proto__, 于是就这样一直找下去, 也就是我们平时所说的原型链的概念
+//问, 一个函数可以更改其原型的方法吗:
+//可以, 通过prototype属性就可以
