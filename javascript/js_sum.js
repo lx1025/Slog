@@ -201,10 +201,24 @@ b.name = 'xinghang'
 //此时 a 和 b 指向同一个对象。a.name, b.name 均为'jam'
 
 //js基本数据类型判空的最佳实现
-//0, ''
-var a = '' or var a = 0
+//0, '', boolen
+var a = '' or var a = 0 var a = false
 if (!a) {console.log('success')}
 var a = []
+//注意下面这个例子:
+function test(arr) {
+    var dic = {}
+    var res = []
+    for (i in arr) {
+        if (!dic[arr[i]]) {
+            dic[arr[i]] = 1
+            res.push(arr[i])
+        }
+    }
+    return res
+}
+var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
+console.log(test(a))
 
 //js引用数据类型判空的最佳实现
 //关于array判空
