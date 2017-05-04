@@ -1050,16 +1050,16 @@ var a = function () {}
 console.log(a.prototype)
 //输出内容为:
 Object {
-constructor: function (),
-__proto__: Object
+    constructor: function (),
+    __proto__: Object
 }
 //我们可以为这个Object添加方法:
 a.prototype.say = function () {console.log('bingo')}
 //可以再console.log(a.prototype)对比结果:
 Object {
-constructor: function (),
-__proto__: Object,
-say: function(),
+    constructor: function (),
+    __proto__: Object,
+    say: function(),
 }
 //然后:
 var b = new a()

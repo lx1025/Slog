@@ -179,3 +179,6 @@ mem_fragmentation_ratio:2.35
 mem_allocator:jemalloc-4.0.3
 更详细的redis info
 127.0.0.1:6379> info
+
+ack命令进行搜索:
+ack get_pos_ktv_id mysql/
