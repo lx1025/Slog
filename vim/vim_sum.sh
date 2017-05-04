@@ -1,3 +1,18 @@
+vim transport
+0.cd ~; mkdir bundle
+1.git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/
+2.cp .vimrc
+3.:BundleInstall
+4.youcompleteme
+编译: cd ~/.vim/bundle/youcompleteme;
+http://valloric.github.io/YouCompleteMe/#ubuntu-linux-x64
+python install.py
+
+关于NERDTree插件的使用:
+http://www.jianshu.com/p/eXMxGx
+\f 绑定:NERDTree
+t s i gt gT
+
 ack.vim插件的使用:
 http://www.jianshu.com/p/2f1c140c7eb8
 
