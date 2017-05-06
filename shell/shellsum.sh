@@ -182,3 +182,5 @@ mem_allocator:jemalloc-4.0.3
 
 ack命令进行搜索:
 ack get_pos_ktv_id mysql/
+
+执行shell脚本传递参数

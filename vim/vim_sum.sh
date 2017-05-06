@@ -37,3 +37,17 @@ ctrl+r回复撤销
 ctrl w w 换屏
 ctrl w hjkl 换屏
 ctrl w q 关闭当前屏幕
+
+yy直接复制当前行, p直接粘贴
+可以yy+p看看效果
+nyy可以复制多行, 然后移动光标, p
+
+滚屏
+ctrl+e 向下一行
+ctrl+y 向上一行
+crtl+o 将光标移动到上次的位置
+z. 将光标所在行移动到屏幕中间
+
+标记跳转
+ma
+`a
