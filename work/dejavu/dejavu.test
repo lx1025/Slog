@@ -2,3 +2,9 @@ cent os: xinghang@101.254.157.124
 pyenv active scripy
 sudo yum install numpy scipy python-matplotlib ffmpeg portaudio-devel
 mac os
+
+rsync push xinghang@101.254.157.124 xinghangtest
+xinghang
+function (xinghang) {
+    var xinghang  = 'love feifei'
+}

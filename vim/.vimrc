@@ -26,6 +26,7 @@ let g:ctrlp_extensions = ['funky']
 Bundle 'scrooloose/nerdtree'
 nnoremap <F3> :NERDTreeMirror<CR>
 nnoremap <F3> :NERDTreeToggle<CR>
+map <leader>f :NERDTreeToggle<CR>
 
 "快速注释ctrl+c, \cc, 取消注释\cu
 Bundle 'scrooloose/nerdcommenter'

@@ -1,6 +1,6 @@
 vim transport
-0.cd ~; mkdir bundle
-1.git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/
+0.cd ~; mkdir bundle; cd bundle
+1.git clone http://github.com/gmarik/vundle.git 
 2.cp .vimrc
 3.:BundleInstall
 4.youcompleteme
