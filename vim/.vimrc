@@ -59,6 +59,9 @@ Bundle 'scrooloose/syntastic'
 let python_highlight_all=1
 syntax on
 
+"python indent
+Bundle 'vim-scripts/indentpython.vim'
+
 set nu
 syntax on
 set nowrap
@@ -70,13 +73,17 @@ set background=light
 set nocursorcolumn
 set showcmd
 set smartindent
-
-"tab和换行
-set tabstop=4                  " tab size eql 4 spaces
-set softtabstop=4
-set shiftwidth=4               " default shift width for indents
-set expandtab                  " replace tabs with ${tabstop} spaces
+set autoindent
 set smarttab
+
+"python聪明的缩进
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set textwidth=79
+set expandtab
+set autoindent
+set fileformat=unix
 if has("autocmd")
     filetype plugin indent on
     augroup vimrcEx
