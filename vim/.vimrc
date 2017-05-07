@@ -26,7 +26,6 @@ let g:ctrlp_extensions = ['funky']
 Bundle 'scrooloose/nerdtree'
 nnoremap <F3> :NERDTreeMirror<CR>
 nnoremap <F3> :NERDTreeToggle<CR>
-map <leader>f :NERDTreeToggle<CR>
 
 "快速注释ctrl+c, \cc, 取消注释\cu
 Bundle 'scrooloose/nerdcommenter'
@@ -59,9 +58,6 @@ Bundle 'scrooloose/syntastic'
 let python_highlight_all=1
 syntax on
 
-"python indent
-Bundle 'vim-scripts/indentpython.vim'
-
 set nu
 syntax on
 set nowrap
@@ -73,17 +69,13 @@ set background=light
 set nocursorcolumn
 set showcmd
 set smartindent
-set autoindent
-set smarttab
 
-"python聪明的缩进
-set tabstop=4
+"tab和换行
+set tabstop=4                  " tab size eql 4 spaces
 set softtabstop=4
-set shiftwidth=4
-set textwidth=79
-set expandtab
-set autoindent
-set fileformat=unix
+set shiftwidth=4               " default shift width for indents
+set expandtab                  " replace tabs with ${tabstop} spaces
+set smarttab
 if has("autocmd")
     filetype plugin indent on
     augroup vimrcEx
