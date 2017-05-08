@@ -44,7 +44,8 @@ python -m http.server <port_num>
 #一个制定端口号的scp命令:
 #通常意义上,P表示的是端口号,而p代表的是密码.
 scp -P 3026 xinghang@101.254.157.124:/home/xinghang/work/myktv_cms/wx_order.xlsx wx_order.xlsx
-
+#scp文件夹
+scp -r work@106.75.97.4:/home/work/dejavu .
 #服务器跳板:
 ssh work@106.75.34.22 -p 22
 

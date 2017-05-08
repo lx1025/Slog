@@ -201,3 +201,6 @@ KEY `o2o_spider_song_bthash` (`bthash`)
 
 #查询:
 select count(distinct(hash)) from kugou_by_cat
+
+#mysql插入date类型的数据:
+insert into table (name,date,value) values ('魂牵梦萦','2009-06-08 23:53:17','朝秦暮楚');
