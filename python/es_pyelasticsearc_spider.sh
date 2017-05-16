@@ -184,6 +184,166 @@ curl -X PUT http://localhost:9200/btsong -d'{
 }
 }'
 
+# search: query string as a parameter的形式
+curl -XGET 'localhost:9200/song/song/_search?q=name:nana'
+curl -XGET 'localhost:9200/_search?q=name:nana'
+
+# search: request body的形式
+curl -XGET 'localhost:9200/song/song/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+    "query" : {
+        "term" : { "name" : "nana" }
+    }
+}
+'
+
+# 关于from和size参数:
+# the from parameter defines the offset from the first result you want to fetch
+# The size parameter allows you to configure the maximum amount of hits to be returned
+curl -XGET 'localhost:9200/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+    "from" : 0, "size" : 10,
+    "query" : {
+        "term" : { "name" : "nana" }
+    }
+}
+'
+
+# 关于sort: sort list里是排序的优先级, 上级相等时比较下级
+curl -XGET 'localhost:9200/song/song/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+    "sort" : [
+        "_score",
+        { "duration" : "desc" }
+    ],
+    "query" : {
+        "term" : { "name" : "apple" }
+    }
+}
+'
+
+# 关于source参数, source参数默认是true, 设置为false时es只会返回id而不会返回hits的详细内容, 当然你也可以制定参数
+curl -XGET 'localhost:9200/song/song/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+    "_source": false,
+    "query" : {
+        "term" : { "name" : "nana" }
+    }
+}
+'
+curl -XGET 'localhost:9200/song/song/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+    "_source": [ "name", "artist"],
+    "query" : {
+        "term" : { "name" : "nana" }
+    }
+}
+'
+
+# 关于script, 会返回test1字段
+curl -XGET 'localhost:9200/song/song/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+    "query" : {
+        "term" : { "name" : "nana" }
+    },
+    "script_fields" : {
+        "test1" : {
+            "script" : {
+                "lang": "painless",
+                "inline": "doc[\"duration\"].value * 2"
+            }
+        }
+    }
+}
+'
+
+# 返回指定字段doc_value
+curl -XGET 'localhost:9200/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+    "query" : {
+        "term" : { "name" : "nana" }
+    },
+    "docvalue_fields" : ["duration"]
+}
+'
+
+# post filter and insert data
+curl -XPUT 'localhost:9200/shirts?pretty' -H 'Content-Type: application/json' -d'
+{
+    "mappings": {
+        "item": {
+            "properties": {
+                "brand": { "type": "keyword"},
+                "color": { "type": "keyword"},
+                "model": { "type": "keyword"}
+            }
+        }
+    }
+}
+'
+curl -XPUT 'localhost:9200/shirts/item/1?refresh&pretty' -H 'Content-Type: application/json' -d'
+{
+    "brand": "gucci",
+    "color": "red",
+    "model": "slim"
+}
+'
+
+# 关于highlight
+curl -XGET 'localhost:9200/song/song/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+    "query" : {
+        "match": { "name": "nana" }
+    },
+    "highlight" : {
+        "fields" : {
+            "name" : {}
+        }
+    }
+}
+'
+
+# 关于re, 这里并不是很清楚.
+curl -XPOST 'localhost:9200/song/song/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+   "query" : {
+      "match" : {
+         "name" : {
+            "operator" : "or",
+            "query" : "the quick brown"
+         }
+      }
+   },
+   "rescore" : {
+      "window_size" : 50,
+      "query" : {
+         "rescore_query" : {
+            "match_phrase" : {
+               "name" : {
+                  "query" : "the quick brown",
+                  "slop" : 2
+               }
+            }
+         },
+         "query_weight" : 0.7,
+         "rescore_query_weight" : 1.2
+      }
+   }
+}
+'
+curl -XPOST 'localhost:9200/song/song/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+   "query" : {
+      "match" : {
+         "name" : {
+            "operator" : "or",
+            "query" : "the quick brown"
+         }
+      }
+   },
+}
+'
+
 # an example of query clauses being used in query and filter context in the search API
 # https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html
 GET /_search

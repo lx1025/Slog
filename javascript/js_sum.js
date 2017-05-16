@@ -36,7 +36,7 @@
 //  *@file:
 //  *@class:
 // */
-// 一个函数的说明：
+// 一个函数的说明
 // /**
 //  * 函数描述
 //  *
@@ -60,13 +60,13 @@
 // JavaScript字符串 转义 + HTML 转义
 // var str = '<button onclick="check(\'' + htmlEncode(strLiteral(name)) + '\')">提交</button>';
 // 关于object：
-// 新建空对象 var obj = {},对象属性要么全加'',要么全不加'',使用.来访问对象属性
+// 新建空对象 var obj = {}, 对象属性要么全加'', 要么全不加'', 使用来访问对象属性
 // 关于array：
 // 新建空数组 var arr = []
 // 清空数组使用 arr.length = 0
 
 //关于js中的内存的分类:
-//js加载html文档, 会申请两种内存 , 栈内存, 堆内存
+//浏览器加载html文档, 会为js申请两种内存, 栈内存, 堆内存
 //栈内存: 用来执行js代码的环境(作用域). js作用域只有两种, 全局作用域, 和私有作用域
 //堆内存: 用来存储引用数据类型的内容, Object就是key-value, function就是函数字符串
 
@@ -81,6 +81,7 @@ console.log(a.concat(c));   //['a', 'b', 'c']
 var a = ['a', 'b', 'c']
 console.log(a.join());              //'abc'
 console.log(a.join('x'));           //'axbxcx'
+//注意同python语法的区别: 'x'.join(['a', 'b'])
 
 //array slice
 var a = ['a', 'b', 'c', 'd']
@@ -91,14 +92,16 @@ console.log(a.slice(-1));   //['d']
 
 //array map，array to array
 //es6
-vat test = [1, 2, 3].map(x => x+1)
+var test = [1, 2, 3].map(x => x+1)
 console.log(test)
 var a = state.map(todo => {
         if (todo.id === updatedTodo.id) {
           return { ...todo, ...updatedTodo };
-        } else {
+        }
+        else {
           return todo;
-      })
+        }
+})
 //es5 注意bind
 [1, 2, 3].map((function(x){
     return x+1
@@ -141,7 +144,7 @@ str = Number(str)
 // str转num，并期望忽略数字后的非数字字符串时使用parseInt(), 使用parseInt(必须指定进制)
 var width = '200px'
 a = parseInt(width, 10)
-// num,str装boolen：!!a
+// num,str转boolen：!!a
 var a = 3.14;
 console.log(!!a)         //ture
 var b = 0；
@@ -154,8 +157,10 @@ console.log(Math.floor(a))   //向上取整
 //四舍五入: <float>.toFixed(2) 2是保留位数
 console.log((1.2345.toFixed(2))) //js万物皆对象, 什么是对象? 有自己的属性和方法就是对象
 
-//使用for in 的方法来实现array或者object的迭代:
+//使用for in 的方法来实现数组或者对象的迭代:
 //在array中 i 相当于index, 在object中 i 相当于 key
+//实质是因为数组(array)和对象(object)都属于Object都是引用数据类型, 以key-value存在于堆内存中,
+//数组的key就是1234, 而对象的key是可以定义的
 var a = ['a', 'b', 1, 2]
 var b = {'a': 1, 3: 'b'}
 for (var i in a) {
@@ -171,7 +176,7 @@ for (var i in b) {
 //第一问 a is not defined的出现情况(直接使用未声明变量)
 console.log(a)     //VM1497:1 Uncaught ReferenceError: a is not defined.
 //第二问 出现undefined的情况
-//1.使用声明过但未定义, 默认值是nudefined
+//1.使用声明过但未定义, 默认值是undefined
 var a
 console.log(a)
 //2.未声明变量typeof会报undefined
@@ -184,11 +189,11 @@ alert(typeof(a));   //number
     b = '-----';
     var b;
 })();
-alert( typeof b); //undefined,未声明, 未定义.
+alert( typeof b); //undefined, 作用域不一样, 未声明, 未定义.
 //第三问 关于null
 a = null
 console.log(typeof(a))
-//object (null是特殊的object(指针), {}并不是null, typeof操作会返回"object")
+//object (null是特殊的object(本质是一个为初始化的指针), {}并不是null, typeof操作会返回"object")
 a = {}
 onsole.log(a == null)
 //false ({}并不是null)
@@ -204,8 +209,8 @@ b.name = 'xinghang'
 //0, '', boolen
 var a = '' or var a = 0 var a = false
 if (!a) {console.log('success')}
-var a = []
 //注意下面这个例子:
+//数组去重
 function test(arr) {
     var dic = {}
     var res = []
@@ -224,7 +229,7 @@ console.log(test(a))
 //关于array判空
 if (!a.length) {console.log('success')}
 //关于object判空:
-function objectIsEmpty(obj) {
+function IsEmpty(obj) {
     for (var i in obj) {
         return false
     }
@@ -237,13 +242,17 @@ console.log(isEmpty({}))       //true
 console.log(isEmpty(null))     //true
 
 //迭代数组的最佳方案：
-//对有序集合进行顺序无关的遍历时，使用逆序遍历：逆序遍历可以节省变量，代码比较优化
+//对有序集合进行顺序无关的遍历时, 使用逆序遍历: 逆序遍历可以节省变量, 代码比较优化
 var a = ['a', 'b', 'c', 1, 2]
 aLen = a.length
 while (aLen--) {
     console.log(a[aLen])
 }
-
+var a = ['a', 'b', 'c', 1, 2]
+aLen = a.length
+while (aLen--) {
+    console.log(a[aLen])
+}
 //对$()的理解
 $('#id').click() //表示选择器
 $(this).text('something')
@@ -255,8 +264,8 @@ $(function(){
 $(function(){
     var app = {
         a: 1,
-        test(){
-            console.log(app.a)
+        test() {
+            console.log(this.a)
         }
     }
     $('#someid').on('click', app.test())
@@ -264,8 +273,8 @@ $(function(){
 $(function() {
     var app = {
         a: 1,
-        test() {
-            console.log(a);
+        b() {
+            console.log(this.a);
         },
     }
     $('#someid').on('click', app.test())
@@ -289,7 +298,7 @@ $('button').on('click', function() {
 })
 
 //js Object's api
-//constructor, hasOwnProperty, keys, values
+//constructor(属性), hasOwnProperty, keys, values
 //判断类型
 console.log({}.constructor === Object)
 console.log([].constructor === Array)
@@ -302,7 +311,7 @@ var a = {x: 1, y: 2}
 var keys_arr = Object.keys(a)
 var values_arr = Object.values(a)
 //or
-var pt = { x: 1, y: 2, z: 'xing' };
+var pt = {x: 1, y: 2, z: 'xing'};
 console.log(pt);
 var keys_arr = []
 var values_arr = []
@@ -312,7 +321,7 @@ for (i in pt) {
 }
 console.log(keys_arr, values_arr)
 //or这里失效了！concat失效了！
-var pt = { x: 1, y: 2, z: 'xing' }
+var pt = {x: 1, y: 2, z: 'xing'}
 console.log(pt)
 var keys_arr = []
 var values_arr = []
@@ -333,6 +342,7 @@ for (i in pt) {
 console.log(keys_str, values_str);
 
 //编写一个数组去重的方法:
+//利用array的indexOf方法, 不在array中, 返回-1
 //way1
 function test(arr) {
     var res = []
@@ -374,6 +384,7 @@ function test(arr) {
 var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
 console.log(test(a))
 //way3 这种方法效率最高可是破坏了原数组的顺序
+//空间复杂度最优
 function test(arr) {
     var tmp = arr.sort()
     var key = 1
@@ -383,7 +394,7 @@ function test(arr) {
                 key++
             }
     }
-    return tmp.slice(0,key)
+    return tmp.slice(0, key)
 }
 var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
 console.log(test(a))
@@ -917,7 +928,7 @@ xmlhttp.send(null)
 // 这个例子中, this 指向 test 对象
 // 4.调用构造函数
 // new foo();
-// 如果函数倾向于和 new 关键词一块使用, 则我们称这个函数是 构造函数, 在函数内部, this指向新创建的对象。
+// 如果函数倾向于和 new 关键词一块使用, 则我们称这个函数是构造函数, 在函数内部, this指向新创建的对象。
 // 5.显式的设置 this
 // 比如call和apply函数
 

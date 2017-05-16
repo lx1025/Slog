@@ -146,3 +146,14 @@ CREATE TABLE `kugou_by_cat` (
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `hash` (`hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `sim_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `_id` int(11) NOT NULL,
+  `title` varchar(128) NOT NULL DEFAULT '' COMMENT '全称',
+  `duration` int(11) NOT NULL DEFAULT 0 COMMENT '时长',
+  `sim_list` text DEFAULT NULL,
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8

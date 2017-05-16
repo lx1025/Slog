@@ -1,6 +1,6 @@
 vim transport
 0.cd ~; mkdir bundle; cd bundle
-1.git clone http://github.com/gmarik/vundle.git 
+1.git clone http://github.com/gmarik/vundle.git
 2.cp .vimrc
 3.:BundleInstall
 4.youcompleteme
@@ -18,10 +18,6 @@ http://www.jianshu.com/p/2f1c140c7eb8
 
 一键运行python代码:
 au BufRead *.py map <buffer> <F5> :w<CR>:!/usr/bin/env python % <CR>
-
-ctrlp查找文件:
-ctrlp-funky查找函数:
-http://www.wklken.me/posts/2015/06/07/vim-plugin-ctrlp.html
 
 gd选中当前单词
 :noh取消选中
@@ -49,5 +45,7 @@ crtl+o 将光标移动到上次的位置
 z. 将光标所在行移动到屏幕中间
 
 标记跳转
-ma
-`a
+ma `a`
+
+整行选中:
+shift v
