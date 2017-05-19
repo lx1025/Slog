@@ -185,3 +185,5 @@ ack命令进行搜索:
 ack get_pos_ktv_id mysql/
 
 执行shell脚本传递参数
+
+load data infile '/var/lib/mysql-files/30W.csv' into table thunder_song fields terminated by ',' lines terminated by '\n' ignore 1 lines (thunder_id, name, artist1, artist2, artist3, artist4, download_link, has_krc);

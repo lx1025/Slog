@@ -204,3 +204,17 @@ select count(distinct(hash)) from kugou_by_cat
 
 #mysql插入date类型的数据:
 insert into table (name,date,value) values ('魂牵梦萦','2009-06-08 23:53:17','朝秦暮楚');
+
+#mysql导入csv文件
+load data infile '/var/lib/mysql-files/30W.csv' into table thunder_song set utf8
+fields terminated by '\t' lines terminated by '\n'
+(thunder_id, name, artist1, artist2, artist3, artist4, @duration, has_krc, download_link)
+set duration=NULLif(@duration,0)
+
+load data infile '/var/lib/mysql-files/1111.csv' into table thunder_song character set utf8
+fields terminated by '\t' lines terminated by '\n'
+(thunder_id, name, artist1, artist2, artist3, artist4, duration, has_krc, download_link)
+
+load data infile '/var/lib/mysql-files/o2o-140.csv' into table kugou_krc_song character set utf8
+fields terminated by '\t' lines terminated by '\n'
+(o2o_id, krc_link, download_link)

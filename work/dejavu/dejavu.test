@@ -8,3 +8,8 @@ xinghang
 function (xinghang) {
     var xinghang  = 'love feifei'
 }
+
+load data infile '/var/lib/mysql-files/30W.csv' into table thunder_song
+fields terminated by '\t' lines terminated by '\n'
+(thunder_id, name, artist1, artist2, artist3, artist4, @duration, has_krc, download_link)
+set duration=NULLif(@duration,0) 

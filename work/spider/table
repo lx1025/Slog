@@ -157,3 +157,34 @@ CREATE TABLE `sim_list` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8
+
+CREATE TABLE `thunder_song` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`thunder_id` varchar(32) NOT NULL,
+	`name` varchar(128) NOT NULL DEFAULT '' COMMENT '歌名',
+	`artist1` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+	`artist2` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+	`artist3` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+	`artist4` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+	`duration` int(11) DEFAULT 0 COMMENT '时长',
+	`download_link` varchar(128) NOT NULL DEFAULT '' COMMENT  '背景音乐链接',
+	`has_krc` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否有歌词',
+	`dejavu_list` text NOT NULL COMMENT  'dejavu聚类相关',
+	`re` varchar(256) NOT NULL DEFAULT '' COMMENT  '预留字段',
+	`re1` int(11) NOT NULL DEFAULT 0 COMMENT  '预留字段',
+	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `kugou_krc_song` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`o2o_id` int(11) NOT NULL,
+	`krc_link` varchar(128) NOT NULL DEFAULT '' COMMENT  '歌词链接',
+	`download_link` varchar(128) NOT NULL DEFAULT '' COMMENT  '下载链接',
+	`re` varchar(256) NOT NULL DEFAULT '' COMMENT  '预留字段',
+	`re1` int(11) NOT NULL DEFAULT 0 COMMENT  '预留字段',
+	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

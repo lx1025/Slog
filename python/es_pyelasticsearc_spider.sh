@@ -187,6 +187,7 @@ curl -X PUT http://localhost:9200/btsong -d'{
 # search: query string as a parameter的形式
 curl -XGET 'localhost:9200/song/song/_search?q=name:nana'
 curl -XGET 'localhost:9200/_search?q=name:nana'
+curl -XGET 'http://localhost:9200/song/song/1'
 
 # search: request body的形式
 curl -XGET 'localhost:9200/song/song/_search?pretty' -H 'Content-Type: application/json' -d'
@@ -410,4 +411,33 @@ GET /_search
             "query" : "this AND that OR thus"
         }
     }
+}
+
+{
+  "song" : {
+    "mappings" : {
+      "song" : {
+        "properties" : {
+          "artist" : {
+            "type" : "text",
+            "boost" : 8.0,
+            "analyzer" : "ik_smart",
+            "include_in_all" : true
+          },
+          "name" : {
+            "type" : "text",
+            "boost" : 8.0,
+            "analyzer" : "ik_smart",
+            "include_in_all" : true
+          },
+          "title" : {
+            "type" : "text",
+            "boost" : 8.0,
+            "analyzer" : "ik_smart",
+            "include_in_all" : true
+          }
+        }
+      }
+    }
+  }
 }
