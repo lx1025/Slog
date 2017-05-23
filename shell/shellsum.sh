@@ -184,6 +184,10 @@ mem_allocator:jemalloc-4.0.3
 ack命令进行搜索:
 ack get_pos_ktv_id mysql/
 
-执行shell脚本传递参数
-
 load data infile '/var/lib/mysql-files/30W.csv' into table thunder_song fields terminated by ',' lines terminated by '\n' ignore 1 lines (thunder_id, name, artist1, artist2, artist3, artist4, download_link, has_krc);
+
+关于sed命令
+sed是一种流编辑器，它是文本处理中非常中的工具
+sed -n '2p' file         #输出文件的指定行
+sed -e '5d,10d' file     #输出文件除了5,10,的其他行
+sed -ie '5d,10d' file    #输出文件除了5,10的其他行, 并且重定向到同名文件, 就像删除了一样

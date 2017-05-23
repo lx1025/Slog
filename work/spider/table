@@ -188,3 +188,17 @@ CREATE TABLE `kugou_krc_song` (
 	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `thunder_match` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`thunder_id` int(11) NOT NULL DEFAULT 0 COMMENT '雷石id',
+	`name` varchar(128) NOT NULL DEFAULT '' COMMENT '歌名',
+	`artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+	`o2o_id` int(11) NOT NULL DEFAULT 0 COMMENT 'o2o_id',
+	`t_duration` varchar(32) DEFAULT '' COMMENT 'thunder时长',
+	`o_duration` varchar(32) DEFAULT '' COMMENT 'o2o时长',
+	`d_duration` varchar(32) DEFAULT '' COMMENT '时长差',
+	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

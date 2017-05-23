@@ -144,6 +144,15 @@ download_url = data['data']['play_url']
 filename = song.get('name')
 # urlretrieve下载文件重定向:
 urllib.request.urlretrieve(download_url, '/data/songs/' + filename)
+# python2的jsong接口调用和文件下载:
+url = ''
+req = urllib2.Request(url)
+res = urllib2.urlopen(req)
+res = res.read()
+res = json.loads(res)
+download_link = res.get('result')
+print download_link
+urllib.urlretrieve(download_link,'/data/'+o2o_name+'.mp3')
 
 # tornado使用IOloop异步轮训的例子:
 async def pay_query(self, order_id, loop=5):

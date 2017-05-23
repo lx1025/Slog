@@ -441,3 +441,31 @@ GET /_search
     }
   }
 }
+
+#一个合适的中文分词mapping
+curl -X PUT http://localhost:9200/song -d'{
+"mappings": {
+    "song": {
+          	"properties": {
+                "artist" : {
+                    "type" : "text",
+                    "boost" : 8.0,
+                    "analyzer" : "ik_smart",
+                    "include_in_all" : true
+                },
+                "name" : {
+                    "type" : "text",
+                    "boost" : 8.0,
+                    "analyzer" : "ik_smart",
+                    "include_in_all" : true
+                },
+                "title" : {
+                    "type" : "text",
+                    "boost" : 8.0,
+                    "analyzer" : "ik_smart",
+                    "include_in_all" : true
+                }
+           }
+    }
+}
+}'

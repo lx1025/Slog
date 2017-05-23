@@ -1,9 +1,14 @@
 vim transport
-0.cd ~; mkdir bundle; cd bundle
-1.git clone http://github.com/gmarik/vundle.git
-2.cp .vimrc
-3.:BundleInstall
-4.youcompleteme
+cd ~/.vim
+mkdir bundle; mkdir colors
+cd bundle
+git clone http://github.com/gmarik/vundle.git
+cd colors
+scp work@106.75.97.4:/home/work/.vim/colors/SerialExperimentsLain.vim .c
+cp .vimrc
+:BundleInstall
+
+youcompleteme
 编译: cd ~/.vim/bundle/youcompleteme;
 http://valloric.github.io/YouCompleteMe/#ubuntu-linux-x64
 python install.py
