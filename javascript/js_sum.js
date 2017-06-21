@@ -60,7 +60,7 @@
 // JavaScript字符串 转义 + HTML 转义
 // var str = '<button onclick="check(\'' + htmlEncode(strLiteral(name)) + '\')">提交</button>';
 // 关于object：
-// 新建空对象 var obj = {}, 对象属性要么全加'', 要么全不加'', 使用来访问对象属性
+// 新建空对象 var obj = {}, 对象属性要么全加'', 要么全不加'', 使用.来访问对象属性
 // 关于array：
 // 新建空数组 var arr = []
 // 清空数组使用 arr.length = 0
@@ -106,6 +106,9 @@ var a = state.map(todo => {
 [1, 2, 3].map((function(x){
     return x+1
 }).bind(this))
+[1, 2, 3].map(function(x){
+    return x+1
+}.bind(this))
 //上边这个例子现在就可以清晰的看懂了: es5的语法, 没有使用箭头函数, 此时作用域指的是全局window, 必然x未声明, 所以需要绑定this.
 
 //array filter array to array
@@ -207,7 +210,7 @@ b.name = 'xinghang'
 
 //js基本数据类型判空的最佳实现
 //0, '', boolen
-var a = '' or var a = 0 var a = false
+var a = '' or var a = 0 or var a = false
 if (!a) {console.log('success')}
 //注意下面这个例子:
 //数组去重
@@ -227,6 +230,7 @@ console.log(test(a))
 
 //js引用数据类型判空的最佳实现
 //关于array判空
+a = []
 if (!a.length) {console.log('success')}
 //关于object判空:
 function IsEmpty(obj) {
@@ -248,20 +252,16 @@ aLen = a.length
 while (aLen--) {
     console.log(a[aLen])
 }
-var a = ['a', 'b', 'c', 1, 2]
-aLen = a.length
-while (aLen--) {
-    console.log(a[aLen])
-}
+
 //对$()的理解
 $('#id').click() //表示选择器
 $(this).text('something')
 $(document).ready()//表示文档加载完成，一般简写为：
-$(function(){
+$(function () {
     console.log('something')
 })
 //对于一个标准的js文件的结构，可以这样写
-$(function(){
+$(function () {
     var app = {
         a: 1,
         test() {
@@ -270,7 +270,7 @@ $(function(){
     }
     $('#someid').on('click', app.test())
 })
-$(function() {
+$(function () {
     var app = {
         a: 1,
         b() {
@@ -347,6 +347,18 @@ console.log(keys_str, values_str);
 function test(arr) {
     var res = []
     for (var i=0, len=arr.length; i<len; i++ ) {
+        if (res.indexOf(arr[i]) == -1) {
+            res.push(arr[i])
+        }
+    }
+    return res
+}
+var a = ['a', 'b', 'ac', 'a', 1, 1, 2]
+console.log(test(a))
+//way1.5
+function test(arr) {
+    var res = []
+    for (var i in arr) {
         if (res.indexOf(arr[i]) == -1) {
             res.push(arr[i])
         }
@@ -506,6 +518,11 @@ test = new Class2(2, 1)
 test.showSub()
 test.showAdd()
 
+function Class2(a, b) {
+    Class10.call(this, a, b)
+    Class10.call(this, a, b)
+}
+
 //js获取浏览器相关信息
 //appName, appVersion, appCodeName, userAgent
 function whatBrowser() {
@@ -624,13 +641,13 @@ $('#clickMe').click(function (event) {
     }
 })
 //0.JavaScript特殊数据类型:
-//对象, 带有属性和方法的特殊数据类型
-//JavaScript 中的所有事物都是对象：Number, Sting, undefined, null, Object, function
+//对象(object), 带有属性和方法的特殊数据类型
+//JavaScript 中的所有事物都是对象：Number, Sting, undefined, null, object, function
 //此外，JavaScript 允许自定义对象,
 //1.JavaScript一般数据类型:
 //基本数据类型: Number, String, Boolean, undefined, null
-//引用数据类型: 1.Object: {}(对象), [](数组), RegExp, Date
-//            2.function
+//引用数据类型: 1.object: {}(对象(Object)), [](Array), RegExp, Date
+//              2.function
 //基本数据类型操作的值本身,而引用数据类型操作的引用地址, 特别注意, fn变量本身存储的是一个内存地址, 这个地址指定的内存区域里存储的是这个函数定义的内容,是字符串.
 //eg.
 var a = 12
@@ -644,7 +661,7 @@ console.log(obj)
 console.log(fn)
 console.log(fn()) //fn会先执行.
 //2.javascript的本地对象，内置对象和宿主对象:
-//本地对象为 Array, Date, RegExp, Numberjjj
+//本地对象为 Num, Object, Array, Date, RegExp, Number等可以实例化的对象
 //内置对象为 Math等不可以实例化的, 可以直接使用其属性的对象
 //宿主为浏览器自带的document, window, navigator等
 //3.new 操作符具体干了什么:
@@ -876,7 +893,7 @@ var cookieA = cookies.repalce(/.*cookieA=([^;]*).*/, "$1")
 // 设置:
 document.cookie = 'cookie_example=123'+';expires='+expire+';path=/';
 // 关于localStorage:
-// 来自html5,实现本地存储, 突破了cookie 4k的限制, 最大的存储空间是5M, localStorage中所有的item都是str类型
+// 来自html5, 实现本地存储, 突破了cookie 4k的限制, 最大的存储空间是5M, localStorage中所有的item都是str类型
 // 用法:setItem(), getItem(), removeItem()
 var storage = window.localStorage
 var data = {
@@ -886,13 +903,13 @@ var data = {
 }
 var dataStr = JSON.stringify(data)
 storage.setItem('data', dataStr)
-var dataStr = storage.getItem('data'))
+var dataStr = storage.getItem('data')
 var dataJson = JSON.parse(dataStr)
 console.log(dataJson, typeof(dataJson))
 storage.removeItem('data')
 
 // 关于js原生XMLHttpRequest:
-var xml = new XMLHttpRequest()
+var xmlhttp = new XMLHttpRequest()
 xmlhttp.onreadystatechange = () => {
     document.getElementById('A1').innerHTML=xmlhttp.status;
     document.getElementById('A2').innerHTML=xmlhttp.statusText;
@@ -903,7 +920,7 @@ xmlhttp.send(null)
 
 // 关于js严格模式的一些限制:(use strict)
 // 消除JavaScript语法的一些不合理，不严谨，减少一些怪异行为
-// 1.全局变量必须显示声明
+// 1.全局变量必须显式声明
 // 2.禁止this指向全局对象(构造函数，必须加new)
 // 3.函数不能有重复的形参名
 // 4.保留字(let、interface、package、private、protected、public、static、yield、implements)
@@ -938,7 +955,6 @@ xmlhttp.send(null)
         <li><%= data[i] %></li>
     <%}%>
 </script>
-
 var data = ['a', 'b', 'c']
 var html = baidu.template('temp', {data: data})
 $('#result').html(html)
@@ -1028,6 +1044,7 @@ function test() {
 }
 test() //undefined
 
+//浏览器前进后退配合ajax
 //关于window.history.replaceState, window.history.pushState, window.addEventListener("popstate", function() {})
 //关于参数: 第一个参数是记录绑定的数据, 第二个参数是标题(很多浏览器都忽略了)，第三个参数是新的URL
 //效果如此(http://www.zhangxinxu.com/study/201306/ajax-page-html5-history-api.html?area=pudong)
@@ -1035,52 +1052,74 @@ test() //undefined
 window.onload = function() {
     window.history.replaceState({uri: '/test1'}, 'test1', '?key1=value1')
     $.get('/test1', function(data) {
-        //dom(data)
     })
 }
 //点击侧边栏:(先入state, 再ajax渲染dom)
 window.history.pushState({uri: '/test2'}, 'test2', '?key2=value2')
 $.get('test2', function(data) {
-    //dom(data)
 })
 //监听前进后退事件:
 window.addEventListener('popstate', function(e) {
     if (history.state) {
         uri = e.state.uri     //注意带上state
         $.get(uri, function(data) {
-            //dom(data)
         })
     }
 })
 
-//关于js中的prototype, __proto__, 原型继承, 以及原型链:
-//js中有两种引用数据类型, 分别是function和Object
-//js中的每个function都有prototype属性, 这是一个指针, 指向该函数的原型, 必然是一个Object
-//js中的每个Object都有prototype属性, 这也是一个指针, 指向该Object的原型, 同样是一个Object
-var a = function () {}
-console.log(a.prototype)
-//输出内容为:
-Object {
-    constructor: function (),
-    __proto__: Object
-}
-//我们可以为这个Object添加方法:
+//关于js中的__proto__, prototype, 原型继承, 以及原型链:
+//js中万物皆对象, 每个对象都具有__proto__属性, 称为隐式原型, 其值可能是, Num, String, Array, Object, function(), 一个对象的隐式原型指向构造该对象的构造函数的原型.
+//这也保证了实例能够访问在构造函数的原型中定义的属性和方法.
+//js中有两种引用数据类型, 分别是function和object
+//对于fucniotn而言, 除了__proto__属性, 还有prototype属性, 这是一个指针, 必然是一个Object
+//eg1
+var a = 0, '', [], {}
+console.log(a.__proto__) //Num, String, Array, Object
+console.log(typeof(a.__proto__)) //object
+//eg2
+var a = function () {} 
+console.log(a.__proto__) //function
+console.log(typeof(a.__proto__)) //function
+//eg3
+var b = {name: 'test'}
+a = Object.create(b)
+console.log(a.__proto__) //Object {name: "test"}
+//eg4
+a = function(){}
+console.log(a.prototype) //Object
+console.log(typeof(a.prototype)) // object
 a.prototype.say = function () {console.log('bingo')}
-//可以再console.log(a.prototype)对比结果:
-Object {
-    constructor: function (),
-    __proto__: Object,
-    say: function(),
-}
-//然后:
+//eg5
+var a = function () {}
 var b = new a()
+console.log(b.__proto__) //Object
 b.say()
 //输出: bingo
-//new的本质是:
-var p = {}
-p.__proto__ = Person.prototype
-Person.call(p)
+//本质其实是:
+var b = {}
+b.__proto__ = a.prototype
+a.call(b)
+//关于原型链
 //每个对象都会在其内部初始化一个属性, 就是__proto__, 当我们访问一个对象的属性时, 如果这个对象内部不存在这个属性, 那么他就会去__proto__(引用)里找这个属性
-//这个__proto__所指的Object也有自己的__proto__, 于是就这样一直找下去, 也就是我们平时所说的原型链的概念
+//这个__proto__所指的object也有自己的__proto__, 于是就这样一直找下去, 也就是我们平时所说的原型链的概念
 //问: 一个函数可以更改其原型的方法吗:
 //可以, 通过prototype属性
+//eg1:
+var Person = function () {}
+Persong.prototype.Say = function () {
+    console.log('aaa')
+}
+var Programer = function () {}
+Programer.prototype = new Person()
+Programer.prototype.WriteCode = function () {
+    console.log('bbb')
+}
+Programer.prototype.Salary = 500 
+var p = new Programer()
+p.Say()
+p.WriteCode()
+console.log(p.Salary)
+//aaa
+//bbb
+//500
+

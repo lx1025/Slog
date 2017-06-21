@@ -160,7 +160,7 @@ CREATE TABLE `sim_list` (
 
 CREATE TABLE `thunder_song` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`thunder_id` varchar(32) NOT NULL,
+	`thunder_id` varchar(11) NOT NULL,
 	`name` varchar(128) NOT NULL DEFAULT '' COMMENT '歌名',
 	`artist1` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
 	`artist2` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
@@ -169,9 +169,13 @@ CREATE TABLE `thunder_song` (
 	`duration` int(11) DEFAULT 0 COMMENT '时长',
 	`download_link` varchar(128) NOT NULL DEFAULT '' COMMENT  '背景音乐链接',
 	`has_krc` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否有歌词',
-	`dejavu_list` text NOT NULL COMMENT  'dejavu聚类相关',
-	`re` varchar(256) NOT NULL DEFAULT '' COMMENT  '预留字段',
-	`re1` int(11) NOT NULL DEFAULT 0 COMMENT  '预留字段',
+	`re1` varchar(256) NOT NULL DEFAULT '' COMMENT  '预留字段',
+	`re2` varchar(256) NOT NULL DEFAULT '' COMMENT  '预留字段',
+	`re3` varchar(256) NOT NULL DEFAULT '' COMMENT  '预留字段',
+	`re4` int(11) NOT NULL DEFAULT 0 COMMENT  '预留字段',
+	`re5` int(11) NOT NULL DEFAULT 0 COMMENT  '预留字段',
+	`re6` int(11) NOT NULL DEFAULT 0 COMMENT  '预留字段',
+	`re7` text NOT NULL COMMENT  '预留字段',
 	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
@@ -182,8 +186,11 @@ CREATE TABLE `kugou_krc_song` (
 	`o2o_id` int(11) NOT NULL,
 	`krc_link` varchar(128) NOT NULL DEFAULT '' COMMENT  '歌词链接',
 	`download_link` varchar(128) NOT NULL DEFAULT '' COMMENT  '下载链接',
-	`re` varchar(256) NOT NULL DEFAULT '' COMMENT  '预留字段',
 	`re1` int(11) NOT NULL DEFAULT 0 COMMENT  '预留字段',
+	`re2` int(11) NOT NULL DEFAULT 0 COMMENT  '预留字段',
+	`re3` varchar(128) NOT NULL DEFAULT '' COMMENT  '预留字段',
+	`re4` varchar(128) NOT NULL DEFAULT '' COMMENT  '预留字段',
+	`re5` text NOT NULL COMMENT  '预留字段',
 	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
@@ -202,3 +209,49 @@ CREATE TABLE `thunder_match` (
 	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+http://mac.kugou.com/v2/musicol/yueku/v1/singer/album/getData.js?cdn=cdn&sid=1573&p=1&s=10
+http://mac.kugou.com/v2/musicol/yueku/v1/home/collectionAjax/getData.js?cdn=cdn&c=2&id=1990647
+http://mobilecdnbj.kugou.com/api/v3/album/list?withpriv=1&sorttype=1&version=8800&apiver=1&plat=0&page=1&type=1&pagesize=5&with_res_tag=1
+
+the key_num: 322500
+id: 28417
+artist: 华少陈
+kugouid:
+1 row in set (0.00 sec)
+
+150718
+
+关于state的含义:
+0   默认值, 没有匹配结果
+999 es没有搜索结果
+# 酷狗存在带有krc的伴奏和原唱, 对应伴奏类型如下
+11  (伴奏)
+12  原版, - 伴奏
+13  KTV, ktv
+14  MV, mv
+15  电台
+16  升调, 降调
+17  男声, 女声
+18  自制
+19  DJ
+11O 现场版
+111 其他伴奏
+# 酷狗没有带有krc的伴奏, 但存在原唱
+20 	消音失败
+21  歌名歌手完全匹配, 消音成功
+22  歌名完全匹配, 歌手互相包含, 消音成功
+23  歌名互相包含, 歌手完全匹配, 消音成功
+24  歌名歌手互相包含, 消音成功
+
+1.歌手噪声
+2.英文大小写
+
+id:
+104345, (104344, 1939), 1998, 1997, 1983, 1979, 1932, 1911
+特殊字符~ \, kugou库aritst为空, 英文名大小写导致的不匹配, 酷狗歌手包含在雷石歌手, 歌词缺失, kugou歌手噪声</e, 歌曲确保一致歌手不匹配, 只有伴奏
+
+歌词缺失:
+1157517, 3756496,
+3500772, 3263761,
+3682957,

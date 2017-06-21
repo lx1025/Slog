@@ -92,7 +92,11 @@ cat_jump_url = 'http://m.www2.kugou.com/yueku/category/html/index.html?areaid=2'
 print re.search(r'/areaid=(\d+)/', cat_jump_url).group(0) # areaid=2
 print re.search(r'/areaid=(\d+)/', cat_jump_url).group(1) # 2
 print re.search(r'/areaid=\d+/', cat_jump_url).group(1)   # error
-
+# re.sub删除括号以及括号内的部分
+import re
+a = 'xinghang(test)xinghang'
+res = re.sub(r'\(.*\)', '', a)
+print res
 #match
 #match（）函数只检测RE是不是在string的开始位置匹配， search()会扫描整个string查找匹配,
 
@@ -217,3 +221,18 @@ a = [1, 2, 3]
 b = [2, 3, 5]
 print zip(a, b)
 # [(1, 2), (2, 3), (3, 5)]
+
+# python 多线程
+import multiprocessing
+import time
+def worker(interval):
+    print "worker"
+    time.sleep(interval)
+    print "end worker_" + str(interval)
+if __name__ == "__main__":
+    for arg in range(1, 10):
+        p = multiprocessing.Process(target=worker, args=(arg, ))
+        p.start()
+    for p in multiprocessing.active_children():
+        print("child   p.name:" + p.name + "\tp.id" + str(p.pid))
+    print "END!!!!!!!!!!!!!!!!!"

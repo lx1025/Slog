@@ -84,6 +84,9 @@ select count(id) from o2o_spider_song where name like '%纯音乐%' or name like
 # 铃声: 244051
 select count(id) from o2o_spider_song where name like '%铃声%'
 
+# 雷石缺失
+select count(id) from o2o_spider_song where name not like '%伴奏%' and name not like '%纯音乐%' and name not like '%铃声%' and name not like '%remix%' and name not like '%Concerto%' and lable = '伴奏' and (simhash_krc != '' or state = 1)
+
 #kugou mobile
 分类首页: http://mobilecdnbj.kugou.com/api/v3/tag/list?apiver=2&plat=0&pid=0
 儿童首页: http://m.www2.kugou.com/yueku/category/index.php?r=area/index&areaid=2&t=0.5147441825829446
