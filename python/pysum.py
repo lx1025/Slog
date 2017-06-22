@@ -239,4 +239,3 @@ if __name__ == "__main__":
 
 # 关于python的字符串format
 q = 'select * from thunder_song where create_time > "{create_time}" and state = {state}'.format(create_time=create_time, state=1)
-print p
