@@ -181,3 +181,5 @@ sed是一种流编辑器，它是文本处理中非常中的工具
 sed -n '2p' file         #输出文件的指定行
 sed -e '5d,10d' file     #输出文件除了5,10,的其他行
 sed -ie '5d,10d' file    #输出文件除了5,10的其他行, 并且重定向到同名文件, 就像删除了一样
+
+rsync -e 'ssh' -avr /Users/xinghang/file_name xinghang@101.254.157.124:~/

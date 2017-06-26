@@ -219,15 +219,21 @@ load data infile '/var/lib/mysql-files/30W.csv' into table thunder_song set utf8
 fields terminated by '\t' lines terminated by '\n'
 (thunder_id, name, artist1, artist2, artist3, artist4, @duration, has_krc, download_link)
 set duration=NULLif(@duration,0)
-
+#mysql导入csv文件
 load data infile '/var/lib/mysql-files/3333.csv' into table thunder_song character set utf8
 fields terminated by '\t' lines terminated by '\n'
 (thunder_id, name, artist1, artist2, artist3, artist4, duration, has_krc, download_link)
-
+#mysql导入csv文件
 load data infile '/var/lib/mysql-files/o2o-140.csv' into table kugou_krc_song character set utf8
 fields terminated by '\t' lines terminated by '\n'
 (o2o_id, krc_link, download_link)
-
+#mysql导入csv文件
 load data infile '/var/lib/mysql-files/match-all-time.txt' into table thunder_match character set utf8
 fields terminated by ';' lines terminated by '\n'
 (thunder_id, name, artist, o2o_id, t_duration, o_duration, d_duration)
+
+关于alter的本质:
+MySQL在被alter时是可以insert和update的，但是操作会被延迟。
+ALTER TABLE运行时会对原表进行临时复制, 在副本上进行更改, 然后删除原表, 再对新表进行重命名
+在执行ALTER TABLE时, 其它用户可以阅读原表, 但是对表的更新和修改的操作将被延迟, 直到新表生成为止
+新表生成后, 这些更新和修改信息会自动转移到新表上

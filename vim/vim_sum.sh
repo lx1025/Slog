@@ -4,7 +4,7 @@ mkdir bundle; mkdir colors
 cd bundle
 git clone http://github.com/gmarik/vundle.git
 cd colors
-scp work@106.75.97.4:/home/work/.vim/colors/SerialExperimentsLain.vim .c
+scp work@106.75.97.4:/home/work/.vim/colors/SerialExperimentsLain.vim .
 cp .vimrc
 :BundleInstall
 
