@@ -1,18 +1,30 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 
 <head>
-    <title>演示</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <link rel="stylesheet" href="../css/reset.css">
-    <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
-    <style>
-        
-    </style>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
 </head>
 
 <body>
-    <div id="meal-expense" class="a b c" data-drink="coffee" data-food="sushi" data-meal="lunch">¥20</div>
+    <div id="app">
+        <el-button @click="visible = true">按钮</el-button>
+        <el-dialog v-model="visible" title="Hello world">
+            <p>欢迎使用 Element</p>
+        </el-dialog>
+    </div>
 </body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                visible: false
+            }
+        }
+    })
+</script>
 
 </html>

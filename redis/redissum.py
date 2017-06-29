@@ -44,7 +44,7 @@ set:
     sinter key1 key2                       #交集
     sunion key1 key2                       #并集
 
-zset:     
+zset:
     zadd  key [score name]                 #新建一个zset并且插入值: zadd test_zset  10 xinghagn; zadd test_zset 1 lifeifei
     zrem key name                          #删除
     zcard key                              #长度
@@ -53,3 +53,7 @@ zset:
     zscore key name                        #返回这个name的score
     zrank key name                         #返回score排名的index
     zcount key min_score max_score         #返回在权值范围内的name个数
+
+
+关闭: ./redis-cli shutdown
+指定配置文件启动: ./redis-server ../redis-conf

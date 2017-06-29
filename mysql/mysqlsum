@@ -192,7 +192,8 @@ eg2.左连接的更新操作:
 update kugou_by_cat k1 left join o2o_spider_song o1 on k1.hash = o1.hash set k1.is_exist = 1 where o1.hash is not null;
 
 关于mysql增删改字段:
-添加字段: alter table kugou_by_cat add column is_exist int(11) not null default 0 comment '附加信息';
+添加字段: alter table kugou_by_cat add column is_exist int(11) not null default 0 comment '附加信息'
+添加多字段: alter table o2o_spider_song add album_id int(11) not null default 0 , add language int(11) not null default 0
 删除字段: alter table kugou_by_cat drop column is_exist;
 修改字段名称: alter table kugou_by_cat change re5 is_exist int(11);
 
@@ -237,3 +238,8 @@ MySQL在被alter时是可以insert和update的，但是操作会被延迟。
 ALTER TABLE运行时会对原表进行临时复制, 在副本上进行更改, 然后删除原表, 再对新表进行重命名
 在执行ALTER TABLE时, 其它用户可以阅读原表, 但是对表的更新和修改的操作将被延迟, 直到新表生成为止
 新表生成后, 这些更新和修改信息会自动转移到新表上
+
+查看表大小:
+mysql> use information_schema;
+Database changed
+mysql> select data_length, index_length from tables where table_schema='kugou' and table_name = 'o2o_spider_song';
