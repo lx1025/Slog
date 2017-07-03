@@ -157,6 +157,11 @@ res = json.loads(res)
 download_link = res.get('result')
 print download_link
 urllib.urlretrieve(download_link,'/data/'+o2o_name+'.mp3')
+# python2的post方式
+req = urllib2.Request(url=post_url, data=json.dumps(post_data))
+res = urllib2.urlopen(req2)
+res = res2.read()
+res = json.loads(res2)
 
 # tornado使用IOloop异步轮训的例子:
 async def pay_query(self, order_id, loop=5):
