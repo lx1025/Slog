@@ -1077,7 +1077,7 @@ var a = 0, '', [], {}
 console.log(a.__proto__) //Num, String, Array, Object
 console.log(typeof(a.__proto__)) //object
 //eg2
-var a = function () {} 
+var a = function () {}
 console.log(a.__proto__) //function
 console.log(typeof(a.__proto__)) //function
 //eg3
@@ -1114,7 +1114,7 @@ Programer.prototype = new Person()
 Programer.prototype.WriteCode = function () {
     console.log('bbb')
 }
-Programer.prototype.Salary = 500 
+Programer.prototype.Salary = 500
 var p = new Programer()
 p.Say()
 p.WriteCode()
@@ -1122,4 +1122,3 @@ console.log(p.Salary)
 //aaa
 //bbb
 //500
-

@@ -70,7 +70,26 @@ http://mobilecdn.kugou.com/api/v3/rank/song?ranktype=2&page=1&rankid=29606&pages
 select count(id) from o2o_spider_song where name like '%快三%' or name like '%慢四%' or name like '%快四%' or  name like '%DJ%' or name like '%舞曲%' or name like '%广场舞%' or name like '%串烧%' or name like '%电音%' or name like '%慢摇%' or name like '%MC%' or name like '%喊麦%' or name like '%慢三%' or name like '%伴奏%' or name like '%纯音乐%' or name like '%铃声%' or name like '%戏剧%' or name like '%粤剧%' or name like '%戏剧%' or name like '%黄梅戏%' or name like '%京剧%' or name like '%戏曲%' or name like '%庐剧%' or name like '%越剧%' or name like '%沪剧%' or name like '%吕剧%' or name like '%豫剧%' or name like '%曲剧%' or name like '%潮剧%' or name like '%锡剧%' or name like '%淮剧%' or name like '%评剧%' or name like '%婺剧%' or name like '%琼剧%' or name like '%甬剧%' or name like '%remix%' or name like '%现场%' or name like '%m c%' or name like '%m.c%' or name like 'd.j' or name like '演唱会' or name like '%Concerto%'
 
 # dj mc 喊麦: 128522
-select count(id) from o2o_spider_song where name like '%快三%' or name like '%慢四%' or name like '%快四%' or  name like '%DJ%' or name like '%舞曲%' or name like '%广场舞%' or name like '%串烧%' or name like '%电音%' or name like '%慢摇%' or name like '%MC%' or name like '%喊麦%' or name like '%慢三%' or name like '%车载%' or name like '%remix%' or name like '%m c%' or name like '%m.c%' or name like 'd.j'
+select count(id) from o2o_spider_song where
+label != '伴奏'
+and name not like '%伴奏%'
+and (name like '%快三%'
+or name like '%慢四%'
+or name like '%快四%'
+or name like '%DJ%'
+or name like '%舞曲%'
+or name like '%广场舞%'
+or name like '%串烧%'
+or name like '%电音%'
+or name like '%慢摇%'
+or name like '%MC%'
+or name like '%喊麦%'
+or name like '%慢三%'
+or name like '%车载%'
+or name like '%remix%'
+or name like '%m c%'
+or name like '%m.c%'
+or name like 'd.j')
 
 # 戏曲: 3996
 select count(id) from o2o_spider_song where name like '%戏剧%' or name like '%粤剧%' or name like '%戏剧%' or name like '%黄梅戏%' or name like '%京剧%' or name like '%戏曲%' or name like '%庐剧%' or name like '%越剧%' or name like '%沪剧%' or name like '%吕剧%' or name like '%豫剧%' or name like '%曲剧%' or name like '%潮剧%' or name like '%锡剧%' or name like '%淮剧%' or name like '%评剧%' or name like '%婺剧%' or name like '%琼剧%' or name like '%甬剧%'

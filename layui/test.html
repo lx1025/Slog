@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+</head>
+<body>
+    <div class="layui-inline">
+        <input id='select_date' class="layui-input" placeholder="自定义日期格式">
+    </div>
+    <div class="layui-form-pane" style="margin-top: 15px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">范围选择</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
+            </div>
+            <div class="layui-input-inline">
+                <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
+            </div>
+        </div>
+    </div>
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        layui.use(['laydate'], function() {
+            var laydate = layui.laydate;
+            $('#select_date_begin').on('click', function () {
+                laydate({
+                    elem: this,
+                    istime: true,
+                    format: 'YYYY-MM-DD hh'
+                })
+            })
+        });
+    </script>
+</body>
+</html>

@@ -27,7 +27,7 @@ select sum(total_fee)/100 as sum_total_fee, count(*) as cnt from archive_order w
 
 #导出mysql数据:
 mysql -u ktvsky -p098f6bcd4621d373cade4e832627b4f6 -P 3306 -h 10.9.192.10 ktv_bar -e 'select * from music_order where sp_id != 6 and state =1' > o.txt
-mysql -uroot -pthunder5166 songs -e 'select thunder_id, name, artist1, duration, state from thunder_song where state = 0 or state = 999' > o.txt
+mysql -uroot -pthunder5166 songs -e 'select thunder_id, name, artist1, ori_ks_url, bt_ks_url, krc_ks_url state from thunder_song where ori_ks_url !=''' > o.txt
 
 
 关于offset:
@@ -225,7 +225,7 @@ load data infile '/var/lib/mysql-files/3333.csv' into table thunder_song charact
 fields terminated by '\t' lines terminated by '\n'
 (thunder_id, name, artist1, artist2, artist3, artist4, duration, has_krc, download_link)
 #mysql导入csv文件
-load data infile '/var/lib/mysql-files/o2o-140.csv' into table kugou_krc_song character set utf8
+load data infile '/var/lib/mysql-files/179W.csv' into table kugou_krc_song character set utf8
 fields terminated by '\t' lines terminated by '\n'
 (o2o_id, krc_link, download_link)
 #mysql导入csv文件
