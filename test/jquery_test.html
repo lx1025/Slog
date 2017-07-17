@@ -4,35 +4,12 @@
     <meta charset="UTF-8">
     <title>jquery_test</title>
 </head>
-<link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
 <body>
-    <div class="test">
-        <div class="day_income">
-            <h3 id="increase">今日营收总览:</h3>
-            <table class="table table-bordered">
-                <thead>
-                    <th>类型</th>
-                    <th>营收金额</th>
-                    <th>同比昨天</th>
-                    <th>环比上周</th>
-                    <th>订单数</th>
-                    <th>日活</th>
-                    <th>日活率</th>
-                </thead>
-                <tbody>
-                <tr id="all"><tr/>
-                <tr id="sp_all"><tr/>
-                <tr id="sp_wx"><tr/>
-                <tr id="sp_ali"><tr/>
-                <tr id="pos_all"><tr/>
-                <tr id="pos_wx"><tr/>
-                <tr id="pos_ali"><tr/>
-                <tr id="pos_card"><tr/>
-                </tbody>
-            </table>
-    </div>
-    </div>
-<div></div>
 </body>
+<script>
+    $.get('http://106.75.97.4:8989/song/rank', function (data) {
+        console.log(data)
+    })
+</script>
 </html>

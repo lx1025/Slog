@@ -20,13 +20,13 @@ DockerFile是文件指令集，用来说明如何自动创建Docker镜像。
 
 ubuntu14.04安装docker:
 1.检查APT系统的HTTPS兼容性。如果usr/lib/apt/methods/https文件不存在，请安装apt-transport-https程序包
-$ sudo apt-get install apt-transport-https 
+$ sudo apt-get install apt-transport-https
 2.在本地添加Docker Repositor密钥
-$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9 
+$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
 3.添加Docker Repository到APT源列表
-$ sudo bash -c "echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list" 
+$ sudo bash -c "echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
 4.安装
-$ sudo apt-get update 
+$ sudo apt-get update
 $ sudo apt-get install lxc-docker
 
 检测是否安装成功:
@@ -36,8 +36,8 @@ docker -v
 xinghang@thunder:~$ sudo docker pull busybox
 Using default tag: latest
 latest: Pulling from library/busybox
-363a10951ae2: Pull complete 
-5356a35496ab: Pull complete 
+363a10951ae2: Pull complete
+5356a35496ab: Pull complete
 Digest: sha256:98a0bd48d22ff96ca23bfda2fe1cf72034ea803bd79e64a5a5f274aca0f9c51c
 Status: Downloaded newer image for busybox:latest
 
@@ -118,7 +118,7 @@ root@thunder:~# docker push ./job1
 登录:
 root@thunder:~# docker login
 Username: xinghanggogogo
-Password: 
+Password:
 Email: 826820032@qq.com
 WARNING: login credentials saved in /root/.docker/config.json
 Login Succeeded
@@ -140,7 +140,7 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 job1                    latest              8aa5586dae85        3 hours ago        1.093 MB
 <none>              <none>           597c8de78f80         7 days ago          693.5 MB
 busybox             latest              5356a35496ab        7 weeks ago       1.093 MB
-learn/tutorial    latest              2d13ac7ee948         3 years ago 
+learn/tutorial    latest              2d13ac7ee948         3 years ago
 
 打上标签:
 xinghang@thunder:~$ sudo docker tag 2d13ac7ee948 xinghanggogogo/tutorial
@@ -155,7 +155,7 @@ xinghang@thunder:~$ sudo docker push xinghanggogogo/tutorial
 先登录授权:
 xinghang@thunder:~$ sudo docker login
 Username: xinghanggogogo
-Password: 
+Password:
 Email: 826820032@qq.com
 WARNING: login credentials saved in /home/xinghang/.docker/config.json
 Login Succeeded
@@ -166,7 +166,7 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 job1                    latest              8aa5586dae85        3 hours ago        1.093 MB
 <none>              <none>           597c8de78f80         7 days ago          693.5 MB
 busybox             latest              5356a35496ab        7 weeks ago       1.093 MB
-learn/tutorial    latest              2d13ac7ee948         3 years ago 
+learn/tutorial    latest              2d13ac7ee948         3 years ago
 
 将镜像打上标签(tag):
 xinghang@thunder:~$ docker tag 8aa5586dae85 xinghanggogogo/job1
@@ -206,12 +206,12 @@ xinghang@thunder:~$ sudo docker run -i -t ubuntu /bin/bash
 (sudo docker run --name bob_the_container -i -t ubuntu /bin/bash 这条命令指定了容器姓名)
 Unable to find image 'ubuntu:latest' locally
 latest: Pulling from library/ubuntu
-594949f005fe: Pull complete 
-ed6ff6865688: Pull complete 
-2f5519d4ff74: Pull complete 
-67de889be945: Pull complete 
-0d2ba69dbe3e: Pull complete 
-bea8f41ae3e8: Pull complete 
+594949f005fe: Pull complete
+ed6ff6865688: Pull complete
+2f5519d4ff74: Pull complete
+67de889be945: Pull complete
+0d2ba69dbe3e: Pull complete
+bea8f41ae3e8: Pull complete
 Digest: sha256:d77a034159b39dbdbc93f98117413598ff93afb1d06ff1d968d3b8e1d675233b
 Status: Downloaded newer image for ubuntu:latest
 
@@ -250,7 +250,7 @@ You cannot attach to a stopped container, start it first
 xinghang@thunder:~$ sudo docker start stoic_lichterman
 stoic_lichterman
 xinghang@thunder:~$ sudo docker attach stoic_lichterman
-root@a4607a2cb63d:/# 
+root@a4607a2cb63d:/#
 
 -------------------------------------------
 eg1:
@@ -259,10 +259,10 @@ eg1:
 
 xinghang@thunder:~$ sudo docker pull centos:centos6
 centos6: Pulling from library/centos
-8aae2253a786: Pull complete 
-0e47cf6be18a: Pull complete 
-f1ee83ab02c6: Pull complete 
-9c95139afb21: Pull complete 
+8aae2253a786: Pull complete
+0e47cf6be18a: Pull complete
+f1ee83ab02c6: Pull complete
+9c95139afb21: Pull complete
 Digest: sha256:25c9860b98433bed7d8fc38dce059d7ccec7649371004705651a7d7c371f332b
 Status: Downloaded newer image for centos:centos6
 
@@ -275,8 +275,8 @@ xinghang@thunder:~$ sudo docker run --name container1 -it centos /bin/bash
 Unable to find image 'centos:latest' locally
 latest: Pulling from library/centos
 0b6751b19aed: Downloading [=>                                                 ] 2.156 MB/70.48 MB
-8a32e5155717: Download complete 
-0959a1e48323: Download complete 
+8a32e5155717: Download complete
+0959a1e48323: Download complete
 ^Z
 [1]+  已停止               sudo docker run --name container1 -it centos /bin/bash
 
@@ -284,12 +284,12 @@ latest: Pulling from library/centos
 xinghang@thunder:~$ sudo docker run --name container1 -it 9c95139afb21  /bin/bash
 
 #另起终端,发现我刚才定义的容器container已经在运行了,然后附着到该容器上
-xinghang@thunder:~$ sudo docker ps 
-[sudo] password for xinghang: 
+xinghang@thunder:~$ sudo docker ps
+[sudo] password for xinghang:
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 e08ef6829ea1        9c95139afb21        "/bin/bash"         2 minutes ago       Up 2 minutes                            container1
 xinghang@thunder:~$ sudo docker attach container1
-[root@e08ef6829ea1 /]# 
+[root@e08ef6829ea1 /]#
 
 #这时可以返回至之前的终端,也可以就在这个终端里操作:
 [root@e08ef6829ea1 /]# yum install wget
@@ -299,12 +299,12 @@ xinghang@thunder:~$ sudo docker attach container1
 [root@e08ef6829ea1 pip-1.5.5]# python setup.py install
 [root@e08ef6829ea1 pip-1.5.5]# pip install tornado
 #测试:
-[root@e08ef6829ea1 pip-1.5.5]# python 
-Python 2.6.6 (r266:84292, Aug 18 2016, 15:13:37) 
+[root@e08ef6829ea1 pip-1.5.5]# python
+Python 2.6.6 (r266:84292, Aug 18 2016, 15:13:37)
 [GCC 4.4.7 20120313 (Red Hat 4.4.7-17)] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import tornado
->>> 
+>>>
 
 #利用该容器commit出一个新的镜像,然后用该镜像run一个新的container,这个新的container包含了之前container的所有
 xinghang@thunder:~$ sudo docker ps -a
@@ -321,25 +321,25 @@ centos/v1_tornado   latest              7c8d2904b39f        15 seconds ago      
 centos              centos6             9c95139afb21        3 weeks ago         194.6 MB
 
 xinghang@thunder:~$ sudo docker run --name container3 -it 7c8d2904b39f /bin/bash
-[root@9e52f8600540 /]# 
+[root@9e52f8600540 /]#
 检测,确实,之前容器内安装的tornado这里可以使用了
-[root@9e52f8600540 /]# python 
-Python 2.6.6 (r266:84292, Aug 18 2016, 15:13:37) 
+[root@9e52f8600540 /]# python
+Python 2.6.6 (r266:84292, Aug 18 2016, 15:13:37)
 [GCC 4.4.7 20120313 (Red Hat 4.4.7-17)] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import tornado
->>> 
+>>>
 
 将刚才commit出的镜像打上xinghanggogogo/centos_tornado的tag,上传至我的docker hub
 xxinghang@thunder:~$ sudo docker tag 7c8d2904b39f xinghanggogogo/centos_tornado
-[sudo] password for xinghang: 
+[sudo] password for xinghang:
 xinghang@thunder:~$ sudo docker push xinghanggogogo/centos_tornado
 The push refers to a repository [docker.io/xinghanggogogo/centos_tornado] (len: 1)
 成功
 
 另:
 查看所有镜像:docker images
-查看正在运行的container:docker ps 
+查看正在运行的container:docker ps
 查看所有container:docker ps -a
 删除镜像:docker rmi <image_id>
 删除container:docker rm <container_id>
@@ -390,7 +390,7 @@ docker-machine version 0.8.2, build e18a919
 
 4.建立一个docker-machine,名字叫666
 $ docker-machine create --driver virtualbox 666
-这里出现的两个问题  
+这里出现的两个问题
 第一,可能提示没有安装virtualbox,安装即可
 第二,提示你的电脑没有许可启用虚拟机,此时进入bios开启即可
 
@@ -405,7 +405,7 @@ export DOCKER_TLS_VERIFY="1"
 export DOCKER_HOST="tcp://192.168.99.101:2376"
 export DOCKER_CERT_PATH="/home/xinghang/.docker/machine/machines/666"
 export DOCKER_MACHINE_NAME="666"
-# Run this command to configure your shell: 
+# Run this command to configure your shell:
 # eval $(docker-machine env 666)
 
 7.更改用户权限..不要sudo
