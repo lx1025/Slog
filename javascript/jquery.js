@@ -346,3 +346,24 @@ $('input[type="button"]')
     }, function() {
         $('.panel').show('slow');
     })
+
+//一个工作中的实例:
+//关于在ajax请求之后渲染出来的新的dom绑定事件
+$.post('/song/ktv/stat', {select_date: select_date, page: page, tp: tp}, function (data) {
+    ktvs = data.res
+    $('#ktv_stat').html('')
+    for (var item in ktvs) {
+        ktv = ktvs[item]
+        tr_str = `<tr><td>${ktv['rank']}</td><td class='ktv_id'>${ktv['id']}</td><td>${ktv['name']}</td></tr>`
+        $('#ktv_stat').append(tr_str)
+    }
+ })
+//这是错误的, 此时并没有找到'.ktv_id'这个节点, 必然绑定失败:
+$('.ktv_id').on('click', function () {
+    console.log($(this).text());
+})
+//正确写法如下:
+$(document).on('click', '.ktv_id', function () {
+    console.log($(this).text());
+})
+//注意:在jquery1.7 起版本用on替代了bind(), live(), delegate() 方法
