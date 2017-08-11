@@ -107,7 +107,7 @@ curl -X PUT 'localhost:9200/asdfasdf/asdfasdf/1?refresh=true' -d '{
         "suggest" : {
                 "input": [ "xinghang", "wenyi", "nanjing" ],
                 "output": "xinghang",
-                "weight" : 
+                "weight" :
         }
 }'
 >>>{"_index":"asdfasdf","_type":"asdfasdf","_id":"1","_version":1,"_shards":{"total":2,"successful":1,"failed":0},"created":true}
@@ -207,7 +207,7 @@ conn = pyes.ES(['127.0.0.1:9200'])#连接es，9200为默认端口
 conn.create_index(''test-index')#新建一个索引
 
 #定义索引中type的结构
-mapping = { 
+mapping = {
                             u'parsedtext': {
         'boost': 1.0,
         'index': 'analyzed',
@@ -288,7 +288,7 @@ es - python-suggest
 from elasticsearch import Elasticsearch
 
 es = Elasticsearch()
-text = 'anythingyouwant' 
+text = 'anythingyouwant'
 suggDoc = {
                      "entity-suggest" : { #这里已经指明了type：entity（实体）
                                 'text' : text,
@@ -305,11 +305,11 @@ print(res)
     sample_entity= {
                     'id' : 'test123',
                     'name': 'Ramtin Seraj',
-                    'title' : 'XYZ',    
+                    'title' : 'XYZ',
                     "suggest" : {
                             "input": [ 'Ramtin', 'Seraj', 'XYZ'],
                             "output": "Ramtin Seraj",
-                            "weight" : 34   # a prior weight 
+                            "weight" : 34   # a prior weight
                     }
                 }
 ----------------------------------------------------------
@@ -400,7 +400,7 @@ curl -X PUT http://localhost:9200/test -d'{
         "test": {
             "properties": {
                 "title": {
-                    "analyzer": "std_englis", 
+                    "analyzer": "std_englis",
                 }
             }
         }
@@ -435,7 +435,7 @@ curl -X PUT http://localhost:9200/test -d'{
         "test": {
             "properties": {
                 "title": {
-                    "analyzer": "std_englis", 
+                    "analyzer": "std_englis",
                 }
             }
         }
