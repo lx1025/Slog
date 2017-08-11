@@ -443,9 +443,9 @@ GET /_search
 }
 
 #一个合适的中文分词mapping
-curl -X PUT http://localhost:9200/has_krc_song -d'{
+curl -X PUT http://localhost:9200/aim_song -d'{
 "mappings": {
-    "has_krc_song": {
+    "aim_song": {
           	"properties": {
                 "artist" : {
                     "type" : "text",

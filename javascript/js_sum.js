@@ -647,7 +647,7 @@ $('#clickMe').click(function (event) {
 //1.JavaScript一般数据类型:
 //基本数据类型: Number, String, Boolean, undefined, null
 //引用数据类型: 1.object: {}(对象(Object)), [](Array), RegExp, Date
-//              2.function
+//            2.function
 //基本数据类型操作的值本身,而引用数据类型操作的引用地址, 特别注意, fn变量本身存储的是一个内存地址, 这个地址指定的内存区域里存储的是这个函数定义的内容,是字符串.
 //eg.
 var a = 12

@@ -331,8 +331,7 @@ $("p").toggle(
 });
 
 //关于jquery的链式语法:
-$('input[type="button"]')
-    .eq(0).click(function() {
+$('input[type="button"]') .eq(0).click(function() {
         alert('是第一个按钮的事件处理函数');
     }).end().eq(1)
     .click(function() {
@@ -346,6 +345,13 @@ $('input[type="button"]')
     }, function() {
         $('.panel').show('slow');
     })
+$('input[type="button"]').eq(0).click(function () {
+    alert('something')
+}).end().eq(1).click(function () {
+    alert('something')
+}).end().eq(2).click(function () {
+    alert('something')
+})
 
 //一个工作中的实例:
 //关于在ajax请求之后渲染出来的新的dom绑定事件

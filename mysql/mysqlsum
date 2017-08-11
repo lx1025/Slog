@@ -13,6 +13,7 @@ scp work@120.132.55.163:/home/work/archive_order.sql archive_order.sql
 !my
 use myktv
 source /home/xinghang/archive_order.sql
+mysqldump -uroot -h10.9.138.23 -p098f6bcd4621d373cade4e832627b4f6 kugou singer < qq_singer2.sql
 
 select ktv_id, sum(total_fee)/100 as sum_total_fee from archive_order \
 where state=2 and channel in (0, 1) and tp not in (1, 2, 7) and  \

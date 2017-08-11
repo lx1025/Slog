@@ -244,3 +244,21 @@ if __name__ == "__main__":
 
 # 关于python的字符串format
 q = 'select * from thunder_song where create_time > "{create_time}" and state = {state}'.format(create_time=create_time, state=1)
+
+# 关于python读取json文件然后正则替换转换字典的demo
+res = open('./mainpage.json').read()
+res = re.sub(r'"type": "\w*"', '"type": "unvalid"', res)
+res = json.loads(res)
+
+# python的基础语法, 向列表添加元素
+a = []
+b = ['xxx']
+a.append('xinghang')
+a.extend(['feifei'])
+a.insert(1, 'hah')
+a = a + b
+## 一定注意, 不能加等号
+a = []
+a = a.append('1')
+print a
+None
