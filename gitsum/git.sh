@@ -78,3 +78,7 @@ git merge test
 一次实例, 上线后发现代码有误:
 服务器运行代码版本回退: make thunder_online commit=e9cbc24aedd0d458d78069902d0adb0eb0bdca05
 服务器本地代码强制回退: git reset --hard e9cbc24aedd0d458d78069902d0adb0eb0bdca05
+
+强制拉取, 覆盖本地版本:
+git reset --hard
+git pull
