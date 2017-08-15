@@ -83,4 +83,6 @@ git merge test
 git reset --hard
 git pull
 
-something
+关于部分提交以及全部提交之后的部分回退版本:
+
+222
