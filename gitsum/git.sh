@@ -81,4 +81,20 @@ git merge test
 git reset --hard
 git pull
 
-关于部分提交以及全部提交之后的部分回退版本:
+全部提交之后的回退部分文件版本再次提交并且保存上次提交提交的修改:
+(http://blog.sina.com.cn/s/blog_68af3f090100rp5r.html)
+cd Slog
+echo '111' >> gitsum/git.sh
+echo '222' >> work/spider/table
+git add .
+git commit -m 'update'
+git push
+然后发现内容已经提交至github, 此时想撤销对gitsum/git.sh文件修改的提交, 并且在本地保存此次修改
+git log
+git reset **** -- gitsum/git.sh
+git diff
+发现gitsum/git.sh文件修改还在
+git commit -m 'update'
+注意这里没有使用add
+git push
+完成
