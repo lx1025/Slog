@@ -46,8 +46,6 @@ git checkout -b test origin/test
 或者:
 git fetch origin master:test
 
-
-
 删除本地分支：git branch -d name
 删除远端分支：git push origin :name
 
@@ -84,5 +82,3 @@ git reset --hard
 git pull
 
 关于部分提交以及全部提交之后的部分回退版本:
-
-222
