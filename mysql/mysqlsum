@@ -233,6 +233,13 @@ fields terminated by '\t' lines terminated by '\n'
 load data infile '/var/lib/mysql-files/match-all-time.txt' into table thunder_match character set utf8
 fields terminated by ';' lines terminated by '\n'
 (thunder_id, name, artist, o2o_id, t_duration, o_duration, d_duration)
+#将本地的txt文件导入远端远端远端远端的存储, 加上local...
+load data local infile '/home/work/all_singer.txt' into table test character set utf8
+fields terminated by ',' lines terminated by '\n'
+(thunder_id, name)
+#将本地的txt文件导入远端远端远端远端的存储, 加上local..., 默认字段对齐
+load data local infile '/home/work/o2omusicinfo.txt' into table test character set utf8
+fields terminated by '|' lines terminated by '\n'
 
 关于alter的本质:
 MySQL在被alter时是可以insert和update的，但是操作会被延迟。
@@ -244,3 +251,11 @@ ALTER TABLE运行时会对原表进行临时复制, 在副本上进行更改, �
 mysql> use information_schema;
 Database changed
 mysql> select data_length, index_length from tables where table_schema='kugou' and table_name = 'o2o_spider_song';
+
+一次工作中的实例查询:
+select * from (select * from test order by age desc) as b group by class;
+
+mysql批量执行命令:
+mysql -h localhost -u root -p xinghang < /home/xinghang/test.sql
+or source /home/xinghang/test.sql
+(http://database.51cto.com/art/201107/277687.htm)

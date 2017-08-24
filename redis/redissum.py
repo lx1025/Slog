@@ -57,3 +57,4 @@ zset:
 
 关闭: ./redis-cli shutdown
 指定配置文件启动: ./redis-server ../redis-conf
+远端连接: redis-cli -h 10.9.36.222

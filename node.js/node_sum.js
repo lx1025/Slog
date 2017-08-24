@@ -22,3 +22,25 @@ fs.readFile('input.txt', function (err, data) {
     console.log(data.toString())
 })
 console.log('test')
+
+//一个node.js后端调用公共接口,然后返回json的例子:
+var http = require('http')
+var request = require('request')
+var urllib = require('url')
+var data
+
+request('http://ip.taobao.com/service/getIpInfo.php?ip=106.75.97.4', function (error, response, body) {
+    data = JSON.parse(body)
+    console.log(data)
+})
+
+http
+.createServer(function(req, res){
+    var params = urllib.parse(req.url, true)
+    if (params.query && params.query.callback) {
+        var str =  params.query.callback + '(' + JSON.stringify(data) + ')'
+        res.end(str)
+    }
+    res.end(JSON.stringify(data))
+})
+.listen(8080)

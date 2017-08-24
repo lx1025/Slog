@@ -8,7 +8,7 @@ git status 查看目前版本库与origin master的版本对比
 
 git log 查看当前分支的版本日志
 
-git reset --hard b52a8fbeb4300a30fc4157c6323bebce71a720b3 本地版本强制回退,不保存工作区
+git reset --hard b52a8fbeb4300a30fc4157c6323bebce71a720b3 本地版本强制回退, 不保存工作区
 git reset --soft b52a8fbeb4300a30fc4157c6323bebce71a720b3 本地版本撤销, 保存工作区
 
 合并冲突的最合理规则：
@@ -81,4 +81,23 @@ git merge test
 git reset --hard
 git pull
 
-关于部分提交以及全部提交之后的部分回退版本:
+全部提交之后的回退部分文件版本再次提交并且保存上次提交提交的修改:
+(http://blog.sina.com.cn/s/blog_68af3f090100rp5r.html)
+cd Slog
+echo '111' >> gitsum/git.sh
+echo '222' >> work/spider/table
+git add .
+git commit -m 'update'
+git push
+然后发现内容已经提交至github, 此时想撤销对gitsum/git.sh文件修改的提交, 并且在本地保存此次修改
+git log
+git reset **** -- gitsum/git.sh (这里修改的版本库)
+git diff
+发现gitsum/git.sh文件修改还在,说明工作区没有被覆盖
+git commit -m 'update'
+注意这里没有使用add
+git push
+完成
+
+查看两个版本指定文件的差异:
+git diff 5381dc6c3 9416d240b -- handler/song.py
