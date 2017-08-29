@@ -190,10 +190,17 @@ python init.py --port=8989 --debug=false
 
 关于欢乐歌房的部署:
 ssh jump
-ssh deploy@123.59.49.2  密码： Deploy@Leishi7348
+ssh huanle (ssh deploy@123.59.49.2  密码： Deploy@Leishi7348
 代码路径： /data/app/TV_HuanleGeFang/
 上线： 执行 sh online.sh （这个脚本会自动更新代码并重启服务程序）
 多机自动部署：  在pyweb1-bjb (开头登录的那台服务器上） 执行 pupdate.sh TV_HuanleGeFang
 
 获取本机ip地址的接口:
 curl https://ipip.yy.com/get_ip_info.php
+
+在服务器上增加用户:
+1. useradd xinghang
+2. usermod -s /bin/bash xinghang (指定用户用的shell)
+3. usermod -s /home/xinghang xinghang (指定用户登入目录)
+4. passwd xinghang (输入密码)
+5. visudo (增加用户sudo权限)

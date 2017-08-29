@@ -255,6 +255,24 @@ CREATE TABLE `thunder_match` (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+CREATE TABLE `o2o_new_song` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`o2o_id` int(11) NOT NULL DEFAULT 0 COMMENT 'o2o_id',
+	`o2o_bt_id` int(11) NOT NULL DEFAULT 0 COMMENT 'o2o_bt_id',
+	`name` varchar(128) NOT NULL DEFAULT '' COMMENT '歌名',
+	`artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+	`duration` int(11) NOT NULL DEFAULT 0 COMMENT '时长',
+	`bitrate` int(11) NOT NULL DEFAULT 0 COMMENT '比特率',
+	`has_krc` varchar(512) NOT NULL DEFAULT '' COMMENT 'krc地址',
+	`size` int(11) NOT NULL DEFAULT 0 COMMENT '文件大小',
+	`label` varchar(32) NOT NULL DEFAULT '' COMMENT '来源内部音源标签',
+	`state` tinyint(1) NOT NULL DEFAULT 0 COMMENT '审核状态 0:未审核 1:已审核',
+	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `hash` (`o2o_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
 http://mac.kugou.com/v2/musicol/yueku/v1/singer/album/getData.js?cdn=cdn&sid=1573&p=1&s=10
 http://mac.kugou.com/v2/musicol/yueku/v1/home/collectionAjax/getData.js?cdn=cdn&c=2&id=1990647
 http://mobilecdnbj.kugou.com/api/v3/album/list?withpriv=1&sorttype=1&version=8800&apiver=1&plat=0&page=1&type=1&pagesize=5&with_res_tag=1

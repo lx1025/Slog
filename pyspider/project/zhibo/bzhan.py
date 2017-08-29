@@ -52,7 +52,7 @@ class Handler(BaseHandler):
         #yield result
 
     def on_result(self, result):
-            if not result:
-                return
-            sql = ToMysql()
-            sql.into('tvshow',**result)
+        if not result:
+            return
+        sql = ToMysql()
+        sql.into('tvshow',**result)
