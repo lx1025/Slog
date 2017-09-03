@@ -262,16 +262,26 @@ CREATE TABLE `o2o_new_song` (
 	`name` varchar(128) NOT NULL DEFAULT '' COMMENT '歌名',
 	`artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
 	`duration` int(11) NOT NULL DEFAULT 0 COMMENT '时长',
-	`bitrate` int(11) NOT NULL DEFAULT 0 COMMENT '比特率',
-	`has_krc` varchar(512) NOT NULL DEFAULT '' COMMENT 'krc地址',
-	`size` int(11) NOT NULL DEFAULT 0 COMMENT '文件大小',
-	`label` varchar(32) NOT NULL DEFAULT '' COMMENT '来源内部音源标签',
 	`state` tinyint(1) NOT NULL DEFAULT 0 COMMENT '审核状态 0:未审核 1:已审核',
 	`create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `hash` (`o2o_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+Create Table: CREATE TABLE `o2omusicinfo` (
+  `o2o_id` int(11) NOT NULL COMMENT 'o2o_id',
+  `music_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '歌曲编号',
+  `krc_url` varchar(256) NOT NULL COMMENT 'krc歌词URL',
+  `music_link` varchar(256) NOT NULL COMMENT '歌曲URL',
+  `bt_link` varchar(256) NOT NULL COMMENT '伴奏URL',
+  `down_state` int(11) NOT NULL COMMENT '是否下载完整',
+  `add_state` int(11) NOT NULL,
+  `create_time` datetime NOT NULL COMMENT '添加时间',
+  `bt_id` int(11) NOT NULL COMMENT '伴奏ID',
+  `ls_krc_url` varchar(256) NOT NULL COMMENT '处理后的krc歌词URL',
+  PRIMARY KEY (`music_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=24244669 DEFAULT CHARSET=utf8
 
 http://mac.kugou.com/v2/musicol/yueku/v1/singer/album/getData.js?cdn=cdn&sid=1573&p=1&s=10
 http://mac.kugou.com/v2/musicol/yueku/v1/home/collectionAjax/getData.js?cdn=cdn&c=2&id=1990647
