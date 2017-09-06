@@ -204,3 +204,7 @@ curl https://ipip.yy.com/get_ip_info.php
 3. usermod -s /home/xinghang xinghang (指定用户登入目录)
 4. passwd xinghang (输入密码)
 5. visudo (增加用户sudo权限)
+
+关于解压缩:
+tar -czvf a.tar.gz /home/work/onling/song/*
+tar -xzvf a.tar.gz
