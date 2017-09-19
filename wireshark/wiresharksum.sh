@@ -1,6 +1,6 @@
 安装:
 brew install wireshark --with-qt
 GUI:
-Wireshark
+sodo Wireshark
 命令行:
 tshark

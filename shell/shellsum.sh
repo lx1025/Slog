@@ -13,6 +13,7 @@ nohup python init.py --port=9503 &
 
 #线上环境日志:
 tail -f /data/torn_log/*coupon*  |grep "/namegame" -C 10
+tail -f /data/torn_log/ktvsky.thunder.7100.log*
 
 #查找文件或者路径的指令：
 find . -name 'pyspider'
@@ -39,9 +40,10 @@ scp -r work@106.75.97.4:/home/work/dejavu .
 #服务器跳板:
 ssh work@106.75.34.22 -p 22
 
-#查看所有相关进程
+#查看所有相关进程, 并杀死.
 ps -ef | grep pyspider | awk '{print $2}' | xargs kill -9
 ps -ef | grep phantonmjs | awk '{print $2}' | xargs kill -9
+
 #mac
 1、将光标移动到行首：ctrl + a
 2、将光标移动到行尾：ctrl + e

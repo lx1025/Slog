@@ -58,3 +58,16 @@ zset:
 关闭: ./redis-cli shutdown
 指定配置文件启动: ./redis-server ../redis-conf
 远端连接: redis-cli -h 10.9.36.222
+
+关于spider机(ubuntu) apt-get install方式安装redis更改配置的实例:
+启动client: /usr/bin/redis-cli
+更改配置文件: sudo vim /etc/redis/redis.conf
+指定最大内存: maxmemory 6gb
+重启server: sudo /usr/bin/redis-server /etc/redis/redis.conf
+
+关于spider机(ubuntu) 分别使用apt-get install 和 源码安装方式安装redis多实例更改配置的实例:
+位置: /home/work/redis-stable
+配置文件: /home/work/redis-server/redis.conf
+cli和server位置: /home/work/redis-server/src/redis-cli (redis-server)
+修改配置文件 指定端口, 启动: ./redis-server ../redis-conf
+外网连接: redis-cli -h 10..... -p 6380

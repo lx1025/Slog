@@ -132,6 +132,26 @@ CREATE TABLE `singer` (
   	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=525416 DEFAULT CHARSET=utf8
 
+CREATE TABLE `singer_hot_song` (
+  	`id` int(11) NOT NULL AUTO_INCREMENT,
+  	`singer_name` varchar(255) NOT NULL DEFAULT '' COMMENT '歌手名',
+  	`area` varchar(255) NOT NULL DEFAULT '' COMMENT '地区: 0港澳台, 1',
+  	`attribute_3` varchar(255) NOT NULL DEFAULT '',
+  	`attribute_4` varchar(255) NOT NULL DEFAULT '',
+  	`genre` varchar(255) NOT NULL DEFAULT '',
+  	`index` varchar(255) NOT NULL DEFAULT '',
+  	`other_name` varchar(255) NOT NULL DEFAULT '',
+  	`singer_id` varchar(255) NOT NULL DEFAULT '',
+  	`singer_mid` varchar(255) NOT NULL DEFAULT '',
+  	`singer_tag` varchar(255) NOT NULL DEFAULT '',
+  	`sort` varchar(255) NOT NULL DEFAULT '',
+  	`trend` varchar(255) NOT NULL DEFAULT '',
+  	`type` varchar(255) NOT NULL DEFAULT '' COMMENT '0男, 1女, 2组合',
+  	`voc` varchar(255) NOT NULL DEFAULT '',
+  	`qq_id` varchar(128) NOT NULL DEFAULT '',
+  	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=525416 DEFAULT CHARSET=utf8
+
 CREATE TABLE `test` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(128) NOT NULL DEFAULT '' COMMENT '',

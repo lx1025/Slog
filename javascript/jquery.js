@@ -373,3 +373,6 @@ $(document).on('click', '.ktv_id', function () {
     console.log($(this).text());
 })
 //注意:在jquery1.7 起版本用on替代了bind(), live(), delegate() 方法
+
+//一个很棒的激烈文档:
+//https://www.hellojava.com/article/84

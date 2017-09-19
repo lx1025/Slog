@@ -1,0 +1,17 @@
+CREATE TABLE `kugou_singer` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+	`kugouid` varchar(128) NOT NULL DEFAULT '' COMMENT '酷狗id',
+	`hot_songs` text NOT NULL DEFAULT '' COMMENT '热门歌曲',
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `song_spun` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`music_no` int(11) NOT NULL DEFAULT 0 COMMENT 'music_no',
+	`artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+	`start_time` varchar(128) NOT NULL DEFAULT '' COMMENT '高潮开始时间',
+	`end_time` varchar(128) NOT NULL DEFAULT '' COMMENT '高潮结束时间',
+	PRIMARY KEY (`id`),
+    UNIQUE KEY `music_no` (`music_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
