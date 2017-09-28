@@ -1091,7 +1091,7 @@ a.prototype.say = function () {console.log('bingo')}
 //eg5
 var a = function () {}
 var b = new a()
-console.log(b.__proto__) //Object
+console.log(b.__proto__) //object
 b.say()
 //输出: bingo
 //本质其实是:
