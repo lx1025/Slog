@@ -1,9 +1,15 @@
-CREATE TABLE `kugou_singer` (
-	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
-	`kugouid` varchar(128) NOT NULL DEFAULT '' COMMENT '酷狗id',
-	`hot_songs` text NOT NULL DEFAULT '' COMMENT '热门歌曲',
-	PRIMARY KEY (`id`)
+CREATE TABLE `singer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `artist` varchar(128) NOT NULL DEFAULT '' COMMENT '歌手',
+  `kugouid` varchar(128) NOT NULL DEFAULT '' COMMENT '酷狗id',
+  `hot_songs` text NOT NULL COMMENT '热门歌曲',
+  `spun_state` tinyint(4) NOT NULL DEFAULT '0' COMMENT '热门是否提取成功',
+  `hot_songs_num` int(11) NOT NULL DEFAULT '0' COMMENT '热门歌曲数量',
+  `music_link` varchar(256) NOT NULL DEFAULT '0' COMMENT '金山云地址',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `hash` (`artist`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 CREATE TABLE `song_spun` (

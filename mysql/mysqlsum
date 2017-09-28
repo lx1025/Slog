@@ -267,3 +267,16 @@ mysql批量执行命令:
 mysql -h localhost -u root -p xinghang < /home/xinghang/test.sql
 or source /home/xinghang/test.sql
 (http://database.51cto.com/art/201107/277687.htm)
+
+#一次工作实例, 从.txt中导入数据, 然后连表更新
+#导入数据
+load data local infile '/home/work/down_music_krc.txt' into table o2o_normal_song character set utf8
+fields terminated by '    ' lines terminated by '\n'
+(o2o_id, name, artist, music_link, krc_link)
+#做连接更新
+update o2o_normal_song k1 left join o2o_spider_song o1
+on k1.o2o_id = o1.id set k1.duration = o1.duration, k1.bitrate = o1.bitrate, k1.size = o1.size, k1.label = o1.label
+;
+update o2o_normal_song k1 left join o2omusicinfo o1
+on k1.o2o_id = o1.o2o_id set k1.music_no = o1.music_no
+;

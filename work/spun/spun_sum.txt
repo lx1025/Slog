@@ -23,3 +23,12 @@ ffmpeg -i "20025610.flac" -b:a 192k -acodec mp3 -ar 44100 -ac 2 "test.mp3"
 e.天黑 error flac
 rm krc/*.krc && rm lrc/* && rm mp3/* && rm mp3_s/*
 ls krc/ && ls lrc/ && ls mp3/&& ls mp3_s
+
+mysql -uroot -pthunder5166 songs -e
+'select artist, kugouid, hot_songs, spun_state, hot_songs_num, music_link from kugou_singer'
+> singer.txt
+;
+load data infile '/var/lib/mysql-files/singer.txt' into table singer character set utf8
+fields terminated by '\t' lines terminated by '\n'
+(artist, kugouid, hot_songs, spun_state, hot_songs_num, music_link)
+;
