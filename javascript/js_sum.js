@@ -880,7 +880,6 @@ document.getElementById('intro').onclick = () => {console.log('test')}
 //触发事件:
 document.getElementById('intro').click()
 document.getElementById('input').focus()
-
 // 使用document.cookie和window.localStorage实现页面通信
 // 关于cookie:
 // 各种后端框架都方便的封装了设置cookie的方法,比如(tonador), 本质上都是通过在响应报文的头部加入 Set-Cookie 字段来设置的, 形如:
