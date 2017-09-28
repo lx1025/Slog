@@ -30,9 +30,9 @@ class test():
 t = test()
 print(hasattr(t, name))     #True
 print(getattr(t, name))     #xinghang
-print(getattr(t, run))        #method
-setattr(t, 'age', '18')        #设置属性
-print(getattr(t, age))       #18
+print(getattr(t, run))      #method
+setattr(t, 'age', '18')     #设置属性
+print(getattr(t, age))      #18
 
 #微信api获取用户信息
 state = 'http://erp.statg.ktvsky.com/test?ktv_id=84579&date=20161010'
@@ -48,7 +48,7 @@ if '?' in state:
     print(state)                   # http://erp.statg.ktvsky.com/test?ktv_id=84579
 
 #关于日期的操作
-#使用when-module之前需要安装whenpy-lib pip install whenpy
+#使用when-module之前需要安装whenpy-lib(pip install whenpy)
 #时间运算
 import when
 import datetime
