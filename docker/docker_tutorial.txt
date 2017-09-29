@@ -371,7 +371,6 @@ yum repolist enabled | grep mysql
 [root@e08ef6829ea1 /]# mysql -u root -p
 建立一个数据库:
 
-
 ----------------------------------------------
 关于docker-machine,以及docker和pycharm的连接
 1.安装docker
