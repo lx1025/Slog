@@ -1,3 +1,4 @@
+// @ts-nocheck
 // https://github.com/ecomfe/spec/blob/master/javascript-style-guide.md 百度js编码规范
 // 百度js编码规范
 // utf8编码, 文件结尾处一个空行, 四个空格缩进, 二元运算符两侧必须有一个空格, 一元运算符与操作对象之间不允许有空格
@@ -150,7 +151,7 @@ a = parseInt(width, 10)
 // num,str转boolen：!!a
 var a = 3.14;
 console.log(!!a)         //ture
-var b = 0；
+var b = 0
 console.log(!!b)         //false
 // num去掉小数点使用Math.round(),不要使用parseInt():
 var a = 3.14
@@ -818,7 +819,7 @@ if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
 //一次工作的es6实践, 判断客户端类型:
 $(function () {
     if (navinator.userAgent.match(/(iPhone|Android|iPod|ios)/i)) {
-        $(.navi).hide()
+        $('.navi;').hide()
     }
     $.post('/stat/new', {}, function (data) {
         all = data.all
@@ -828,7 +829,7 @@ $(function () {
     $('.pos_follow_ktv_ids').each(
         ktv_id = $(this).attr('data-ktvid')
         var that = $(this)
-        $.get('/stat/following', {ktv_id = ktv_id} function (data) {
+        $.get('/stat/following', {ktv_id = ktv_id}, function (data) {
             that.text(data.res)
         })
     )
@@ -1105,7 +1106,7 @@ a.call(b)
 //可以, 通过prototype属性
 //eg1:
 var Person = function () {}
-Persong.prototype.Say = function () {
+Person.prototype.Say = function () {
     console.log('aaa')
 }
 var Programer = function () {}

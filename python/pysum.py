@@ -27,6 +27,7 @@ class test():
     name = 'xinghang'
     def run(self):
         return "helloworld"
+
 t = test()
 print(hasattr(t, name))     #True
 print(getattr(t, name))     #xinghang

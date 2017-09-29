@@ -1,6 +1,6 @@
 //JQ如何扩展插件？
-jQuery.extend():     //给JQuery对象本身扩展方法
-jQuery.fn.extend():  //给JQ元素扩展方法
+jQuery.extend()     //给JQuery对象本身扩展方法
+jQuery.fn.extend()  //给JQ元素扩展方法
 
 //AJAX全局事件处理函数
 $(document).ajaxSend(function() {
@@ -96,7 +96,7 @@ $('form input:checkbox').parent().css('border', '2px dotted green')
 $('input:checked').length()
 $('input:disabled')
 $('ul.topnavi > li').css('border'. '4px dotted green')
-$('div:contains('John')').css('text-decoration', 'underline')
+$('div:contains("John")').css('text-decoration', 'underline')
 $("td:empty").text("Was empty!").css('background', 'rgb(255,220,200)')
 $('td:eq(2)').css('color', 'red')                               //第二个
 $('td:gt(5)').css('color', 'red')                               //所有index大于5的, 相同用法, lt

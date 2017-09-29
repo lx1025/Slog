@@ -1,1 +1,3 @@
-console.log('xinghang');
+//@ts-nocheck
+let easy = 'abc'
+var xinghang = 'xinghang' 
