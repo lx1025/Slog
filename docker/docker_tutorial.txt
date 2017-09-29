@@ -361,9 +361,6 @@ yum repolist all | grep mysql
 yum repolist enabled | grep mysql
 用rpm安装(未尝试)http://www.linuxidc.com/Linux/2015-04/116003.htm,关键是三个包:
 
-
-
-
 启动mysql
 [root@e08ef6829ea1 /]# service mysqld start
 重启mysql
