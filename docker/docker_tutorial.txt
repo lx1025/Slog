@@ -18,6 +18,8 @@ Docker Containers负责应用程序的运行，包括操作系统、用户添加
 Docker Images是一个只读模板，用来运行Docker容器。
 DockerFile是文件指令集，用来说明如何自动创建Docker镜像。
 
+test vs code shift + esc
+
 ubuntu14.04安装docker:
 1.检查APT系统的HTTPS兼容性。如果usr/lib/apt/methods/https文件不存在，请安装apt-transport-https程序包
 $ sudo apt-get install apt-transport-https
@@ -434,4 +436,3 @@ http://www.cnblogs.com/xiaouisme/p/5327794.html
 --------------------------------------------------------
 sslocal -s 107.191.45.229  -p 27364  -k "xinghang" -l 1080 -t 600 -m rc4-md5
 sslocal -s jp06-17.ssv7.net  -p 36651  -k "pxQ9Lpm59DHy" -l 8080 -t 600 -m aes-256-cfb
-
