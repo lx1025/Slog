@@ -201,12 +201,14 @@ ssh huanle (ssh deploy@123.59.49.2  密码： Deploy@Leishi7348
 获取本机ip地址的接口:
 curl https://ipip.yy.com/get_ip_info.php
 
-在服务器上增加用户:
-1. useradd xinghang
-2. usermod -s /bin/bash xinghang (指定用户用的shell)
-3. usermod -s /home/xinghang xinghang (指定用户登入目录)
-4. passwd xinghang (输入密码)
+在服务器上增加用户并配置python虚拟环境:
+1. sudo useradd xinghang (不要在root下新建用户, 会导致无法登陆)
+2. sudo usermod -s /bin/bash xinghang (指定用户用的shell)
+3. sudo usermod -s /home/xinghang xinghang (指定用户登入目录)
+4. passwd xinghang (root下, 设置密码)
 5. visudo (增加用户sudo权限)
+6. 复制 .bashrc .bash_profile .pyenv 
+7. pyenv activate test(测试直接可用) 
 
 关于解压缩:
 tar -czvf a.tar.gz /home/work/onling/song/*
