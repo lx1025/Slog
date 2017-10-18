@@ -17,7 +17,7 @@ while (true) {
 console.log(name)//feifei
 //let块作用域
 let name = 'xinghang'
-while(true){
+while (true) {
     let name = 'feifei'
     console.log(name)//feifei
 }
@@ -27,10 +27,10 @@ const PI = Math.PI
 
 //class super extends
 class Animal {
-    constructor(){
+    constructor() {
         this.type = 'animal'
     },
-    says(text){
+    says(text) {
         console.log(this.type + ' says '+ text)
     }
 }
