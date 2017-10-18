@@ -271,3 +271,11 @@ server {
         proxy_pass 127.0.0.1:8990;
     }
 }
+
+http转https的跳转:
+http://www.cnblogs.com/yun007/p/3739182.html
+1.rewrite
+2.返回index.html, 然后实现跳转.
+<html>  
+    <meta http-equiv="refresh" content="0;url=https://test.com/">  
+</html> 
