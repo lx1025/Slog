@@ -254,3 +254,20 @@ server {
         proxy_pass http://127.0.0.1:10000;
     }
 }
+
+nginx监听80端口, 80下绑定多域名:
+listen后边去掉default_server.
+server {
+    listen 80;
+    server_name www.aaa.com;
+    location / {
+        proxy_pass 127.0.0.1:8989;
+    }
+}
+server {
+    listen 80;
+    server_name www.bbb.com;
+    location / {
+        proxy_pass 127.0.0.1:8990;
+    }
+}
