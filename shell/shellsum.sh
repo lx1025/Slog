@@ -193,10 +193,10 @@ python init.py --port=8989 --debug=false
 
 关于欢乐歌房的部署:
 ssh jump
-ssh huanle (ssh deploy@123.59.49.2  密码： Deploy@Leishi7348
-代码路径： /data/app/TV_HuanleGeFang/
-上线： 执行 sh online.sh （这个脚本会自动更新代码并重启服务程序）
-多机自动部署：  在pyweb1-bjb (开头登录的那台服务器上） 执行 pupdate.sh TV_HuanleGeFang
+ssh huanle (ssh deploy@123.59.49.2  密码： Deploy@Leishi7348)
+代码路径: /data/app/TV_HuanleGeFang/
+上线: 执行 sh online.sh （这个脚本会自动更新代码并重启服务程序）
+多机自动部署:  在pyweb1-bjb (开头登录的那台服务器上） 执行 pupdate.sh TV_HuanleGeFang
 
 获取本机ip地址的接口:
 curl https://ipip.yy.com/get_ip_info.php
@@ -207,9 +207,33 @@ curl https://ipip.yy.com/get_ip_info.php
 3. sudo usermod -s /home/xinghang xinghang (指定用户登入目录)
 4. passwd xinghang (root下, 设置密码)
 5. visudo (增加用户sudo权限)
-6. 复制 .bashrc .bash_profile .pyenv 
-7. pyenv activate test(测试直接可用) 
+6. 复制 .bashrc .bash_profile .pyenv
+7. pyenv activate test(测试直接可用)
 
 关于解压缩:
 tar -czvf a.tar.gz /home/work/onling/song/*
 tar -xzvf a.tar.gz
+
+nano是一个字符终端的文本编辑器, 有点像DOS下的editor程序。
+它比vi/vim要简单得多，比较适合Linux初学者使用。某些Linux发行版的默认编辑器就是nano。
+nano test/py.py
+^ = ctrl
+
+测试机nginx位置: /usr/local/nginx/sbin/nginx
+lab nginx测试配置: /usr/local/nginx/conf/lab_test.conf
+检测语法: /usr/local/nginx/sbin/nginx -t
+热加载: /usr/local/nginx/sbin/nginx -s reload
+
+命令不问人:
+man apt-get | grep reinsta -A2
+
+你正在使用的linux版本:
+cat /etc/redhat-release
+
+关于yum:
+列出可以安装的程序:
+yum list
+列出已经安装的程序:
+yum list installed |grep php
+卸载:
+yum remove php5*

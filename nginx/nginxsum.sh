@@ -6,8 +6,8 @@ sudo service nginx restart
 sudo service nginx stop
 检查：
 访问http://localhost,出现欢迎页
-默认配置文件：
-/etc/niginx/nginx.conf
+默认配置文件
+/etc/nginx/nginx.conf
 这个配置文件的末尾行：
 include /etc/nginx/sites-enabled/*;
 这一行加载了一个外部的配置文件，sites-enabled文件夹下只有一个default文件，这个外部的配置文件就是默认的nginx的配置文件
@@ -17,7 +17,7 @@ server {
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
     location / {
-        proxy_pass http://127.0.0.1:8000 #实现反向代理这里的意思是从80->8000，这个端口运行着工程  8000是非常关键的，涉及到微信的认证
+        proxy_pass http://127.0.0.1:8989 #实现反向代理这里的意思是从80->8000，这个端口运行着工程  8000是非常关键的，涉及到微信的认证
     }
 }
 文件的另外一个末尾行：
@@ -216,5 +216,41 @@ http {                              # Nginx的Http服务器配置,Gzip配置
             proxy_pass_header Server;                 # It's telling the nginx service to pass the upstream's Server header instead of putting its own in the response.
             proxy_redirect false;                     # 这条命令的含义是不显示upsteam服务器返回报文的location字段???(具体请参考:http://blog.csdn.net/u010391029/article/details/50395680)
         }
+    }
+}
+
+nginx + https的配置
+(阿里云https免费证书, 申请下载配置参考阿里云文档)
+server {
+    listen 80 default_server;
+    server_name flowerhears.com;
+
+    location / {
+        root /home/xinghang/;
+        autoindex on;
+        autoindex_exact_size off;
+        autoindex_localtime on;
+        charset utf-8,gbk;
+    }
+}
+
+server {
+
+    listen 443;
+    server_name flowerhears.com;
+    ssl on;
+
+    ssl_certificate   /etc/nginx/cert/214290500790053.pem;
+    ssl_certificate_key /etc/nginx/cert/214290500790053.key;
+    ssl_session_timeout 5m;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+
+    location  / {
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://127.0.0.1:10000;
     }
 }
