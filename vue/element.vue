@@ -23,7 +23,7 @@ export default {
             console.log(total)
         },
         handlerCurrentChange(page) {
-            this.$store.dispatch('fetchshow' {cat: this.cat, page: page})
+            this.$store.dispatch('fetchshow', {cat: this.cat, page: page})
         }
     }
 }

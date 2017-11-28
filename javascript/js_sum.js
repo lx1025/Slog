@@ -1122,3 +1122,8 @@ console.log(p.Salary)
 //aaa
 //bbb
 //500
+
+//判断一个数是否是整数:
+if (Number.isInteger(a) && a >= 0) {
+
+}

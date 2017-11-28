@@ -203,6 +203,7 @@ update kugou_by_cat k1 left join o2o_spider_song o1 on k1.hash = o1.hash set k1.
 添加多字段: alter table o2o_spider_song add album_id int(11) not null default 0 , add language int(11) not null default 0
 删除字段: alter table kugou_by_cat drop column is_exist;
 修改字段名称: alter table kugou_by_cat change re5 is_exist int(11);
+修改注释: alter table o2o_new_song modify column state tinyint(1) comment '0:未合成LS 1:合成失败 2:未审核 3:已审核 4:审核失败 5:下载完成';
 
 一次实例:
 o2o_spider_song这个表, 建表时, 我为了避免重复爬取, 将hash值设定成了unique key
@@ -266,12 +267,12 @@ mysql -h localhost -u root -p xinghang < /home/xinghang/test.sql
 or source /home/xinghang/test.sql
 (http://database.51cto.com/art/201107/277687.htm)
 
-#一次工作实例, 从.txt中导入数据, 然后连表更新
-#导入数据
+# 一次工作实例, 从.txt中导入数据, 然后连表更新
+# 导入数据
 load data local infile '/home/work/down_music_krc.txt' into table o2o_normal_song character set utf8
 fields terminated by '    ' lines terminated by '\n'
 (o2o_id, name, artist, music_link, krc_link)
-#做连接更新
+# 做连接更新
 update o2o_normal_song k1 left join o2o_spider_song o1
 on k1.o2o_id = o1.id set k1.duration = o1.duration, k1.bitrate = o1.bitrate, k1.size = o1.size, k1.label = o1.label
 ;

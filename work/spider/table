@@ -154,8 +154,6 @@ CREATE TABLE `singer_hot_song` (
 
 CREATE TABLE `test` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`name` varchar(128) NOT NULL DEFAULT '' COMMENT '',
-	`time` datetime NOT NULL DEFAULT '' COMMENT '',
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
