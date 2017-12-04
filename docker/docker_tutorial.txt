@@ -1,22 +1,20 @@
-Docker是一个新的容器化的技术，它轻巧，且易移植
+Docker是一个新的容器化的技术, 它轻巧, 且易移植
 build once, configure once and run anywhere
 
 特点:
-速度飞快以及优雅的隔离框架
-物美价廉
+速度飞快以及优雅的隔离框架, 快速开/关机
 CPU/内存的低消耗
-快速开/关机
 跨云计算基础构架
 
 Docker有三个组件和三个基本元素
 三个组件:
-Docker Client 是用户界面，它支持用户与Docker Daemon之间通信。
-Docker Daemon运行于主机上，处理服务请求。
-Docker Index是中央registry，支持拥有公有与私有访问权限的Docker容器镜像的备份。
-三个基本要素分别是：
-Docker Containers负责应用程序的运行，包括操作系统、用户添加的文件以及元数据。
-Docker Images是一个只读模板，用来运行Docker容器。
-DockerFile是文件指令集，用来说明如何自动创建Docker镜像。
+Docker Client 是用户界面, 它支持用户与Docker Daemon之间通信
+Docker Daemon运行于主机上, 处理服务请求
+Docker Index是中央registry, 支持拥有公有与私有访问权限的Docker容器镜像的备份
+三个基本要素分别是
+Docker Containers负责应用程序的运行, 包括操作系统、用户添加的文件以及元数据
+Docker Images是一个只读模板, 用来运行Docker容器
+DockerFile是文件指令集, 用来说明如何自动创建Docker镜像
 
 test vs code shift + esc
 
@@ -33,6 +31,9 @@ $ sudo apt-get install lxc-docker
 
 检测是否安装成功:
 docker -v
+
+启动docker-deamon:
+sudo service docker start
 
 此时你的操作系统当中并没有容器和镜像,现在,pull一个docker自带的容器busybox,一个最简单的linux内核.
 xinghang@thunder:~$ sudo docker pull busybox
@@ -314,9 +315,6 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 cd90248437b2        9c95139afb21        "/bin/bash"         6 minutes ago       Up 6 minutes                                   container2
 e08ef6829ea1        9c95139afb21        "/bin/bash"         About an hour ago   Exited (1) 4 minutes ago                       container1
 
-xinghang@thunder:~$ sudo docker commit e08ef6829ea1 centos/v1_tornado
-7c8d2904b39f0b288c1c26b7e4e65910a7dff531663c696895e8adb03e961042
-
 xinghang@thunder:~$ sudo docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 centos/v1_tornado   latest              7c8d2904b39f        15 seconds ago      295.2 MB
@@ -371,68 +369,4 @@ yum repolist enabled | grep mysql
 [root@e08ef6829ea1 /]# mysqladmin -u root password 'xinghang'
 登录:
 [root@e08ef6829ea1 /]# mysql -u root -p
-建立一个数据库:
 
-----------------------------------------------
-关于docker-machine,以及docker和pycharm的连接
-1.安装docker
-见上
-
-2.安装docker-machine
-$ curl -L https://github.com/docker/machine/releases/download/v0.8.2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
-chmod +x /usr/local/bin/docker-machine
-
-3.检查版本
-$ docker-machine version
-docker-machine version 0.8.2, build e18a919
-
-4.建立一个docker-machine,名字叫666
-$ docker-machine create --driver virtualbox 666
-这里出现的两个问题
-第一,可能提示没有安装virtualbox,安装即可
-第二,提示你的电脑没有许可启用虚拟机,此时进入bios开启即可
-
-5.ls
- $ docker-machine ls
-NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
-666   *        virtualbox   Running   tcp://192.168.99.187:2376           v1.9.1
-
-6.Get the environment commands for your new VM.(As noted in the output of the docker-machine create command, you need to tell Docker to talk to the new machine. You can do this with the docker-machine env command.)
-xinghang@thunder:~$ docker-machine env 666
-export DOCKER_TLS_VERIFY="1"
-export DOCKER_HOST="tcp://192.168.99.101:2376"
-export DOCKER_CERT_PATH="/home/xinghang/.docker/machine/machines/666"
-export DOCKER_MACHINE_NAME="666"
-# Run this command to configure your shell:
-# eval $(docker-machine env 666)
-
-7.更改用户权限..不要sudo
-xinghang@thunder:~$ sudo chown "xinghang":"xinghang" /home/"$USER"/.docker -R
-xinghang@thunder:~$ sudo chmod g+rw "/home/xinghang/.docker" -R
-
-8.Connect your shell to the new machine.
-xinghang@thunder:~$ eval $(docker-machine env 666)
-
-9.在此machine下,pull一个镜像当做你的程序的interpreter,这里我们pull minimum/docker-django-mysite,来当我们django工程的interpreter
-docker pull minimum/docker-django-mysite
-
-10.配置pycharm
-http://www.cnblogs.com/xiaouisme/p/5327794.html
-
-另: 启动一个docker-machine
-      $ docker-machine stop 666
-      Stopping "default"....
-      Machine "default" was stopped.
-
-      $ docker-machine start 666
-      Starting "default"...
-      (default) Waiting for an IP...
-      Machine "default" was started.
-      Started machines may have new IP addresses.  You may need to re-run the `docker-machine env` command.
-
-      $ eval $(docker-machine env)
-
-      $ docker-machine ip
---------------------------------------------------------
-sslocal -s 107.191.45.229  -p 27364  -k "xinghang" -l 1080 -t 600 -m rc4-md5
-sslocal -s jp06-17.ssv7.net  -p 36651  -k "pxQ9Lpm59DHy" -l 8080 -t 600 -m aes-256-cfb

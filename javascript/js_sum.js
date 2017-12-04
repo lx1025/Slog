@@ -1,4 +1,3 @@
-// @ts-nocheck
 // https://github.com/ecomfe/spec/blob/master/javascript-style-guide.md 百度js编码规范
 // 百度js编码规范
 // utf8编码, 文件结尾处一个空行, 四个空格缩进, 二元运算符两侧必须有一个空格, 一元运算符与操作对象之间不允许有空格

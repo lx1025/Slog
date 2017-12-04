@@ -19,11 +19,9 @@
 
 <a href="http://www.baidu.com">baidu</a>
 <!-- 属性值应该始终被包括在引号内。双引号是最常用的，不过使用单引号也没有问题,百度前端规范规定使用双引号. -->
-<a href="http://www.baidu.com">baidu</a>
 <h1> 定义最大的标题。<h6> 定义最小的标题。
 <hr /> 创建水平线
 <br />换行
-<!--  -->
 如果您希望在不产生一个新段落的情况下进行换行（新行），请使用 <br /> 标签:
 <p>This is<br />a para<br />graph with line breaks</p>
 在 XHTML、XML 以及未来的 HTML 版本中，不允许使用没有结束标签（闭合标签）的 HTML 元素。
@@ -44,24 +42,25 @@ eg:下面的代码输出内容？
 
 <!-- font-family样式, 多重的内联样式引号分号 -->
 <p style="font-family:arial;color:red;font-size:20px;">A paragraph.</p>
-This text is in Verdana and red</p>
 
 应该避免使用下面这些标签和属性：
 标签  描述
 <font> 和 <basefont> 定义 HTML 字体。
 <u> 定义下划线文本
 <b> 定义粗体文本。
-<center>    定义居中的内容。
+<i> 定义斜体
+<center> 定义居中的内容。
 <s> 和 <strike>  定义删除线文本
 <s><center><p style="font-size:30px">This text is 30 pixels high</p></center></s>
 <font size="3" color="red">This is some text!</font>
 
 文字格式：
 <big>   定义大号字。
-<em>    定义着重(斜体)文字。虽然这个标签广泛用于显示小的图标, 本意却是emphasize
-<i>     定义斜体字。
 <small> 定义小号字。
-<strong>定义加重语气。
+<em>    定义着重(斜体)文字(不用i)。虽然这个标签广泛用于显示小的图标, 本意却是emphasize
+<i>     定义斜体字(不推荐使用)。
+<strong>定义加重语气(不用b)。
+<b>     定义加重字体.(不推荐使用)
 <sub>   定义下标字。
 <sup>   定义上标字。
 <ins>   定义插入字。
@@ -134,29 +133,29 @@ eg:
 
 <!-- 关于块元素和内联元素 -->
 可以通过 <div> 和 <span> 将 HTML 元素组合起来。
-一个是块级元素，一个是内联元素
-大多数 HTML 元素被定义为块级元素或内联元素。
-“块级元素”译为 block level element，“内联元素”译为 inline element。
-块级元素在浏览器显示时，通常会以新行来开始（和结束）,可以设置宽高。
-内联元素在显示时通常不会以新行开始,不能设置宽高。
-块元素：
+一个是块级元素, 一个是内联元素
+块级元素译为block level element, 内联元素译为 inline element。
+块级元素在浏览器显示时, 通常会以新行来开始(和结束), 可以设置宽高
+内联元素在显示时通常不会以新行开始, 不能设置宽高。
+块元素:
 <div></div>
 <h></h>
 <p></p>
 <ol></ol>
 <ul></ul>
+<li></li>
 <form action=""></form>
 <table></table>
-内联元素：
+内联元素:
+各种文本格式化元素
 <span></span>
 <a href=""></a>
-各种文本格式化元素
-<br>(试想span标签内部包含<br>)
-<img src="" alt="">
 <label for=""></label>
-<input type="text">
+<br>(试想span标签内部包含<br>)
 <iframe src="" frameborder="0"></iframe>
-可变元素：
+内联块状元素:
+<img src="" alt="">
+<input type="text">
 <button></button>
 
 <!-- 关于html文档的head -->
@@ -177,12 +176,12 @@ eg:
 DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现
 在兼容模式中, 页面以向后兼容的方式显示, 模拟老式浏览器的行为以防止站点无法工作, 简单的说，就是尽可能的显示能显示的东西给用户看
 几个差别, 浏览器处理元素的差别:
-1.width不同, 标准模式默认content-box, 交融模式默认width为全部宽度(不同于content-box同border-box)
+1.width不同, 标准模式默认content-box, 兼容模式默认width为全部宽度(不同于content-box同border-box)
 2.兼容模式下可设置百分比的高度和行内元素的高宽
 3.用margin:0 auto设置水平居中在IE下会失效
 
 <!-- 彻底掌握表单last time -->
-HTML 表单用于搜集不同类型的用户输入。
+form表单用于搜集不同类型的用户输入。
 <form action=""></form>定义一个表单
 表单包含表单元素指的是不同类型的 input元素、复选框、单选按钮、提交按钮等等
 <input> 元素是最重要的表单元素, 包含属性: type name value, 根据不同的 type 属性, 它有多种类型.
@@ -304,25 +303,26 @@ checked 属性设置或返回 checkbox 是否应被选中。
 7,拖放API: drag drop
 8.地理位置: Geolocation
 
-<!-- 关于html中的classlist和dataset:
+<!-- 关于html中的classlist和dataset: -->
 css:
 .d {
     background-color: #aaa;
 }
 html:
 <div id="meal-expense" class="a b c" data-drink="coffee" data-food="sushi" data-meal="lunch">¥20</div>
+<script>
 var node = document.getElementById('meal-expense')
 console.log(node.dataset)
-{drink: "coffee", food: "sushi", meal: "lunch"}
+//{drink: "coffee", food: "sushi", meal: "lunch"}
 console.log(node.dataset.drink)
-"coffee"
+//"coffee"
 console.log(node.classList)
 ["a", "b", "c", value: "a b c"]
 node.classList.add('d')
 node.classList.remove('d')
 node.classList.toggle('d')
+</script>
 看到样式改变
--->
 
 <!-- 关于ifream标签
 1.iframe会阻塞主页面的加载, 阻碍dom树的生成

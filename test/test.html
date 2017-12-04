@@ -1,3 +1,40 @@
-<html>  
-    <meta http-equiv="refresh" content="0;url=https://test.com/">  
-</html> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #outter1{
+    position:relative;
+    background:black;
+}
+
+#outter1 .inner1{
+    display:inline-block;
+    width:400px;
+    height:400px;
+    background:red;
+}
+
+#outter1 .inner2{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    background:blue;
+}
+
+    </style>
+</head>
+<body>
+        <div id="outter1">
+                <div class="inner1"></div>
+                <div style='color:yellow'>asdfasdfasdfasdfasdf</div>
+                <div class="inner2">
+                    <span>这里自适应,我不需要设定高度,也不需要知道父容器高度。。</span>
+                </div>
+            </div>
+</body>
+</html>

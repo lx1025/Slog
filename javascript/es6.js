@@ -6,6 +6,7 @@
 // destruction
 // function default, rest arguments
 // Promise
+
 //var全局作用域
 var name = 'xinghang'
 while (true) {
@@ -46,6 +47,15 @@ class Cat extends Animal {
 }
 cat = new Cat()
 cat.says('hello')//cat says hello
+// class static methods
+class Animals {
+    static says (text) {
+        console.log(text)        
+    }
+}
+Animals.says('something') //something
+let animals = new Animals()
+animals.says('something') //error
 
 //arrow function
 class Animal {
@@ -59,7 +69,7 @@ class Animal {
     }
 }
 let animal = new Animal()
-animal.says('hi')//!报错，此时的this只指向类而不是实例
+animal.says('hi')//!报错，此时的this只指向Timeout{}而不是实例
 
 class Animal {
     constructor(){

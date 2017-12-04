@@ -2,7 +2,7 @@
 
 git commit -a -m 'update' 将所有修改放进暂存区,这个命令在涉及文件路径或者文件名改变的前提下格外有用
 
-git diff 查看工作区与当前版本库的差别，commmit至版本库之后显示自然为空
+git diff 查看工作区与当前版本区的差别, 把修改后的文件add至版本区之后显示自然为空
 
 git status 查看目前版本库与origin master的版本对比
 
@@ -11,6 +11,7 @@ git log 查看当前分支的版本日志
 git reset --hard b52a8fbeb4300a30fc4157c6323bebce71a720b3 版本区强制回退, 不保存工作区
 git reset --soft b52a8fbeb4300a30fc4157c6323bebce71a720b3 版本区强制回退, 保存工作区
 
+git pull 是将本地版本区和远端版本区合并, 不影响工作区
 合并冲突的最合理规则：
 <<<head 表示远端版本
 ===分割冲突内容
@@ -30,7 +31,7 @@ git stash
 git diff(显示没有差别)
 4.恢复代码
 git stash list
-git stash apply stash@{0} or git stash pop
+git stash apply stash@{0} or git stash pop (这一步可能会冲突, 直接根据提示修改冲突文件即可)
 git stash clear 命令用于清空stash-list
 
 关于git branch命令:
@@ -108,3 +109,4 @@ git push
 
 查看两个版本指定文件的差异:
 git diff 5381dc6c3 9416d240b -- handler/song.py
+

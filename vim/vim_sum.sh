@@ -54,3 +54,5 @@ ma `a`
 
 整行选中:
 shift v
+
+centOS更换yum源:

@@ -214,6 +214,9 @@ curl https://ipip.yy.com/get_ip_info.php
 关于解压缩:
 tar -czvf a.tar.gz /home/work/onling/song/*
 tar -xzvf a.tar.gz
+以上命令会包含路径, 这种方法可以忽视路径:
+tar -cjf 1.tar -C /home/work/song .
+tar -xvf 1.tar
 
 nano是一个字符终端的文本编辑器, 有点像DOS下的editor程序。
 它比vi/vim要简单得多，比较适合Linux初学者使用。某些Linux发行版的默认编辑器就是nano。
@@ -227,17 +230,21 @@ lab nginx测试配置: /usr/local/nginx/conf/lab_test.conf
 
 命令不问人:
 man apt-get | grep reinsta -A2
-你正在使用的linux版本:
-cat /etc/redhat-release
 
 关于yum:
-列出可以安装的程序:
-yum list
-列出已经安装的程序:
-yum list installed |grep php
-卸载:
-yum remove php5*
+更换yum源: http://blog.csdn.net/chavo0/article/details/51939362
+列出可以安装的程序: yum list
+列出已经安装的程序: yum list installed |grep php
+卸载: yum remove php5*
+升级: yum update ***
 
-切换用户:
-su huiying
-密码: thunder5166
+进入根目录: sudo -s
+切换用户: su huiying
+
+显示当前linux主机版本信息:
+lsb_release -a
+
+非常奇怪的service命令:
+输入service可以补全, sudo service 竟然不能补全...
+http://blog.csdn.net/chavo0/article/details/51939362
+servise mysqld start
