@@ -1,24 +1,36 @@
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
 <style type="text/css">
-.test {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+img
+{
+    float:right
 }
-.test1 {
-    background-color: red;
+.test1::after {
+    content: '.';
+    display: block;
+    visibility: hidden;
+    height: 0;
+    clear: both;
 }
 </style>
 </head>
 <body>
-<div class='test'>
-    <div class="test2"></div>
-    <div class='test1'>
-        xinghangtest
-    </div>
+<p>在下面的段落中，我们添加了一个样式为 <b>float:right</b> 的图像。结果是这个图像会浮动到段落的右侧。</p>
+<div class='test1'>
+    <img src="http://www.w3school.com.cn/i/eg_cute.gif" />
 </div>
+<p>
+This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text.
+</p>
 </body>
+
 </html>
