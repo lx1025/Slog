@@ -1,52 +1,52 @@
-css书写规范：https://github.com/fex-team/styleguide/blob/master/css.md*/
+/*css书写规范: https://github.com/fex-team/styleguide/blob/master/css.md*/
 
 /*所有的样式会根据下面的规则层叠于一个新的虚拟样式表中
-由低到高依次是：
+内联样式(在HTML元素内部, 双引号, 分号)
+内部样式表(位于<head>标签内部的style标签)
+外部样式表(位于<head>标签内部的link标签)
 浏览器缺省设置
-外部样式表(位于<head> 标签内部的link标签)
-内部样式表(位于 <head> 标签内部的style标签)
-内联样式(在 HTML 元素内部)双引号, 分号*/
+*/
 
-/*关于多重样式：如果某些属性在不同的样式表中被同样的选择器定义，那么属性值将从更具体的样式表中被继承过来,例如*/
-/*外部样式表拥有针对 h3 选择器的三个属性：*/
+/*内联样式表*/
+<p style="color: sienna; margin-left: 20px">This is a paragraph</p>
+
+/*内部样式表*/
+<head>
+    <style type="text/css">  /*type可省*/
+        hr {color: sienna;}
+        p {margin-left: 20px;}
+        body {background-image: url("images/back40.gif");}
+    </style>
+</head>
+
+/*外部样式表*/
+<head>
+    <link rel="stylesheet" type="text/css" href="./mystyle.css" />
+</head>
+
+/*关于多重样式的继承规则: 优先级规则, 多样性规则
+/*外部样式表拥有针对h3选择器的三个属性*/
 h3 {
     color:red;
     text-align:left;
     font-size:8px;
 }
-/*而内部样式表拥有针对 h3 选择器的两个属性：*/
+/*而内部样式表拥有针对 h3 选择器的两个属性*/
 h3 {
     text-align:right;
     font-size:20px;
 }
-/*假如拥有内部样式表的这个页面同时与外部样式表链接，那么 h3 得到的样式是：*/
+/*假如拥有内部样式表的这个页面同时与外部样式表链接那么h3得到的样式是:*/
 h3 {
 color:red;
 text-align:right;
 font-size:20pt;
 }
 
-/*外部样式表：*/
-<head>
-<link rel="stylesheet" type="text/css" href="./mystyle.css" />
-</head> 
-/*内部样式表：*/
-<head>
-<style type="text/css">  type可省
-  hr {color: sienna;}
-  p {margin-left: 20px;}
-  body {background-image: url("images/back40.gif");}
-</style>
-</head>
-/*内联样式表：*/
-<p style="color: sienna; margin-left: 20px">
-This is a paragraph
-</p>
-
 /*文本属性：
-font              字体属性
+font              字体属性(font:italic bold 12px/20px arial,sans-serif;)
 color             设置文本颜色
-direction         设置文本方向。
+direction         设置文本方向
 letter-spacing    设置字符间距
 line-height       设置行高
 text-align        对齐元素中的文本
@@ -55,7 +55,7 @@ text-indent       缩进元素中文本的首行
 text-shadow       设置文本阴影
 */
 
-/*有序无序list元素的序号风格：*/
+/*有序无序list元素的序号风格:*/
 ul.a {list-style-type:circle;}
 ul.b {list-style-type:square;}
 ol.c {list-style-type:upper-roman;}
@@ -71,10 +71,8 @@ p {color: gray;}
 body, h2, p, table, th, td, pre, strong, em {color: gray;}
 /*通配符选择器*/
 * {color: red;}
-/*类选择器
-<p class="important warning">
-This paragraph is a very important warning.
-</p>*/
+/*类选择器*/
+/*<p class="important warning">This paragraph is a very important warning.</p>*/
 .important {font-weight: bold;}
 .warning {font-style: italic;}
 .important .warning {background: silver;}
@@ -95,31 +93,33 @@ h1 + p {margin-top: 50px;}
 /*读作，将li元素之后的的兄弟li元素巴拉巴拉*/
 li + li {font-weight: bold;} /*第一个li元素没有样式*/
 /*伪类选择器*/
-a:link {color: #FF0000;text-decoration:none;background-color:#B2FF99;}
-a:visited {color: #00FF00;}
+a:link {color: #FF0000;}
 a:hover {color: #FF00FF;}
 a:active {color: #0000FF;}
+a:visited {color: #00FF00;}
 /*伪元素选择器*/
 p:first-letter {color: #ff0000;} /*http://www.w3school.com.cn/cssref/pr_pseudo_first-child.asp*/
-/*关于选择器的属性*/
+
 /*彻底理解行高line-height*/
-http://www.w3school.com.cn/tiy/t.asp?f=csse_dim_line-height_percent
+/*http://www.w3school.com.cn/tiy/t.asp?f=csse_dim_line-height_percent
 /*根据百度前端规范，line-height应该用数值倍数替换例如百分比,像素值的表示.
-这个倍数表示行高对字体大小的倍数*/
+/*这个倍数表示行高对字体大小的倍数
 /*line_height:1.0本身就会形成间距，而大部分的浏览器的行高默认为1.1,1.2*/
 p {font-size: 20px}
-/*默认*/p {line-height: 1.2;}
+p {line-height: 1.2;} /*默认*/
 p.small {line-height: 1}
 p.big {line-height: 2}
+/*
 http://m.studyofnet.com/news/273.html
 你知道原因吗？https://zhidao.baidu.com/question/425857126386532692.html
 浏览器显示最小字体是12px（百度前端规范），行高为10px，所以重叠。
+*/
 
 /*理解em
-px是绝对单位，不支持IE的缩放，em是相对单位。
-1em指的是一个字体的大小，它会继承父级元素的字体大小，因此并不是一个固定的值。
-不仅仅是字体，将行距line-height，和纵向高度的单位都用em。保证缩放时候的整体性。
-em指字体高，任意浏览器的默认字体高都是16px。所以,未经调整的浏览器都符合:1em=16px。那么12px=0.75em,10px=0.625em。
+px是绝对单位, 不支持IE的缩放, em是相对单位.
+1em指的是一个字体的大小, 它会继承父级元素的字体大小, 因此并不是一个固定的值.
+不仅仅是字体, 将行距line-height和纵向高度的单位都用em, 保证缩放时候的整体性.
+em指字体高, 任意浏览器的默认字体高都是16px, 所以, 未经调整的浏览器都符合: 1em=16px, 那么12px=0.75em, 10px=0.625em
 https://segmentfault.com/q/1010000004704818/a-1020000004705715
 */
 
@@ -132,10 +132,10 @@ https://segmentfault.com/q/1010000004704818/a-1020000004705715
 /*http://www.cnblogs.com/zhongxinWang/archive/2013/03/27/2984764.html
 前五种
 1.父元素手动定义height, 或者父级元素定义display: table, 这两种方式都能获取子元素的宽高
-2.结尾处加空div标签 clear:both
+2.内部浮动结尾处加空div标签 clear:both
 3.父级div定义 伪类::after 和 zoom
 4.父级div定义 overflow:hidden
-4.父级div定义 overflow:auto*/
+5.父级div定义 overflow:auto*/
 /*最常用的方式伪类的方式*/
 .clearfix::after {
     content: '.';
@@ -393,7 +393,7 @@ http://www.runoob.com/cssref/css3-pr-mediaquery.html
 }
 
 /*关于字体大小的设定
-主标题: 20px;
+大标题: 20px;
 标题: 18px;
 小标题: 16px;
 正文: 14px;
@@ -455,9 +455,9 @@ border-box: 元素指定的任何内边距和边框都将在已设定的宽度�
 
 /*eg.解决ie6的双边距问题*/
 .box {
-    _display: inline;            /* fix double margin */
     float: left;
     margin-left: 20px;
+    _display: inline;            /* fix double margin */
 }
 
 /*css3 新属性
@@ -472,6 +472,7 @@ border-box: 元素指定的任何内边距和边框都将在已设定的宽度�
 2D、3D变换: transform / transform-origin
 用户界面属性添加: box-sizing / outline-offset / cursor
 */
+
 /*关于css3中的transtion, animation, transform属性
 transtion: 处理过渡效果
 animation: css3动画, 配合keyframe一起使用
@@ -479,9 +480,70 @@ transform: 处理元素的形变, 比如位移, 旋转, 缩放, 倾斜
 */
 
 /*关于居中*/
+/*
+1.行内元素的水平居中(test-align: center)
+2.定宽的块状元素的水平居中(margin: auto)
+3.不定宽的块状元素的水平居中(table, inline)
+4.父元素高度未知的垂直居中(absolute)
+5.父元素高度已知的垂直居中(reletive)
+6.定宽高元素的垂直水平居中(margin-left, translate, 0, flex)
+7.不定宽高元素的垂直水平居中(translate, flex)
+*/
 /*水平居中*/
+/*行内元素的水平居中: 设置文本, 图片等行内元素水平居中时, 可以通过父元素设置text-align:center来实现, 即给需要设置的元素添加一个父元素的容器, 然后设置这个父元素（容器）的text-align属性即可*/
+.test {
+    text-align: center;
+    background-color: red;
+}
+<div class="test">
+    <span>xinghantest</span>
+</div>
+/*定宽的块状元素的水平居中: margin: 0 auto*/
+.test {
+    width: 1000px;
+    margin: 0 auto:
+}
+<div class='test'>test</div>
+/*不定宽的块状元素水平居中:*/
+/*1.使用table标签*/
+table {
+    margin: 0 auto;
+}
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <a href="#">Prev</a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">Next</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+/*2.使用display: inline, 将其转换为行内标签的问题*/
+.container {
+    text-align: center;
+}
+.container li {
+    display: inline;
+}
+<div class="container">
+    <ul>
+        <li><a href="#">Prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">Next</a></li>
+    </ul>
+</div>
 /*垂直居中*/
-/*父元素高度未知*/
+/*父元素高度未知的垂直居中*/
 parentElement {
     position: relative;
 }
@@ -501,10 +563,125 @@ childElement {
 }
 /*flex布局一劳永逸*/
 parentElement {
-    display: flex;/*Flex布局*/
-    display: -webkit-flex; /* Safari */
-    align-items: center;/*指定垂直居中*/
+    display: flex;
+    align-items: center;
 }
+/*水平垂直居中*/
+/*已知宽高, 父元素设置relative, 此元素设置absolute, 然后left和top都设置为50%, 再根据margin的负值来调正*/
+.test {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background-color: red;
+}
+.test1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 100px;
+    margin-left: -100px;
+    margin-top: -50px;
+    background-color: green;
+}
+<div class='test'>
+    <div class='test1'></div>
+</div>
+/*已知宽高, 父元素设置relative, 此元素设置absolute, 然后left和top都设置为50%, transform: translate(-50%, -50%)*/
+.test {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background-color: red;
+}
+.test1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 100px;
+    transform: tranlate(-50%, -50%)
+    background-color: green;
+}
+<div class='test'>
+    <div class='test1'></div>
+</div>
+/*父元素设置relative, 此元素设置absolute, 然后left, top, right, bottom都设置为0, 然后设置宽高, 然后margin: auto*/
+.test {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background-color: red;
+}
+.test1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 200px;
+    height: 100px;
+    margin: auto;
+    background-color: green;
+}
+<div class='test'>
+    <div class='test1'></div>
+</div>
+/*宽高未知的div水平垂直居中, 父元素宽高未知皆可*/
+/*常规方法*/
+.test {
+    position: relative;
+    height:600px;
+}
+.test1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: red;
+    transform: translate(-50%, -50%);
+}
+<div class='test'>
+    <div class='test1'>
+        xinghangtest
+    </div>
+</div>
+/*常规方法*/
+.test {
+    position: relative;
+}
+.test2 {
+    width: 300px;
+    height: 300px;
+    background-color: red;
+}
+.test1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: red;
+    transform: translate(-50%, -50%);
+}
+<div class='test'>
+    <div class="test2"></div>
+    <div class='test1'>
+        xinghangtest
+    </div>
+</div>
+/*弹性盒子模型, 父元素高度已知未知都使用*/
+.test {
+    display: flex;
+    height: 600px;
+    align-items: center;
+    justify-content: center;
+}
+.test1 {
+    background-color: red;
+}
+<div class='test'>
+    <div class='test1'>
+        xinghangtest
+    </div>
+</div>
 
 /*关于display: inline-block显示缝隙问题
 1.float
