@@ -449,3 +449,17 @@ d=collections.OrderedDict()
 # 输出1~n的全排列
 # for 循环
 
+# 有序数组去重
+def delSame(seq):
+    k = 1
+    for i in range(1, len(seq)):
+        if seq[i] != seq[i-1]:
+            seq[k] = seq[i]
+            k += 1
+    return seq[:k]
+
+if __name__ == '__main__':
+     seq = [0, 1, 3, 3, 4, 5, 5, 5, 8, 9]
+     print delSame(seq)
+
+

@@ -1,7 +1,7 @@
 // https://github.com/ecomfe/spec/blob/master/javascript-style-guide.md 百度js编码规范
 // 百度js编码规范
 // utf8编码, 文件结尾处一个空行, 四个空格缩进, 二元运算符两侧必须有一个空格, 一元运算符与操作对象之间不允许有空格
-// 语句结束加, 函数定义结束不加, //可是我一个分号也不想加
+// 语句结束加; 函数定义结束不加; //可是我一个分号也不想加
 // 用作代码块起始的左花括号 { 前必须有一个空格
 // if / else / for / while / switch / do / function / try / catch / finally 关键字后，必须有一个空格
 // 创建对象时, 属性中的: 之后必须有空格, : 之前不允许有空格
@@ -50,7 +50,8 @@
 // 使用严格的===避免等于判断中隐式的类型转换，但是有的时候==也是好用的
 // 对有序集合进行顺序无关的遍历时，使用逆序遍历：逆序遍历可以节省变量，代码比较优化，
 // 关于字符串：
-// 单引号, 字符串拼接使用数组和'+', '+'效率更高，而数组兼容老版本的浏览器
+// 单引号, 字符串拼接使用数组和'+', '+'效率更高，而数组兼容老版本的浏览器(['a', 'b', 'c'].join(''))
+// split
 // 字符转转义，要有印象
 // HTML 转义
 // var str = '<p>' + htmlEncode(content) + '</p>';
@@ -70,6 +71,7 @@
 //栈内存: 用来执行js代码的环境(作用域). js作用域只有两种, 全局作用域, 和私有作用域
 //堆内存: 用来存储引用数据类型的内容, Object就是key-value, function就是函数字符串
 
+//array concat, push, join, slice, map, filter, indexOf ,sort
 //array concat
 var a = ['a']
 var b = ['b']
@@ -109,7 +111,7 @@ var a = state.map(todo => {
 [1, 2, 3].map(function(x){
     return x+1
 }.bind(this))
-//上边这个例子现在就可以清晰的看懂了: es5的语法, 没有使用箭头函数, 此时作用域指的是全局window, 必然x未声明, 所以需要绑定this.
+//上边这个例子现在就可以清晰的看懂了: es5的语法, 没有使用箭头函数, 此时this指的是全局window, 必然x未声明, 所以需要绑定this.
 
 //array filter array to array
 var a = [1, 2, 3, 4].filter(item => item%2===0)
@@ -134,8 +136,8 @@ $.getJSON('/test', {param1: value1}, function(response) {
     })
 })
 
-// 关于js中 num str bollen 等基本数据类型的转换：
-// num转str, 使用第一种
+// 关于js中 num, str, bollen 等基本数据类型的转换:
+// num转str, 共三种使用第一种
 var num = 1
 num = num + ''
 num = String(num)
@@ -152,6 +154,8 @@ var a = 3.14;
 console.log(!!a)         //ture
 var b = 0
 console.log(!!b)         //false
+var c = ''
+console.log(!!c)         //false
 // num去掉小数点使用Math.round(),不要使用parseInt():
 var a = 3.14
 console.log(Math.round(a)    //四舍五入
@@ -175,6 +179,25 @@ for (var i in b) {
     console.log(b[i])
 }
 
+//关于js中的预解释
+//变量声明的提前规则:
+//解析器将当前作用域内所有变量和函数(带var和带function)的声明提前到作用域的开始处
+//不同点是, var会仅仅声明, 而function声明, 并定义, 空间存的是字符串
+var a = 1
+function test() {
+    console.log(a)
+    var a = 1
+}
+test() //undefined
+//等同于:
+var a = 1
+function test() {
+    var a
+    console.log(a)
+    a = 1
+}
+test() //undefined
+
 //关于undefined, null的差别:
 //第一问 a is not defined的出现情况(直接使用未声明变量)
 console.log(a)     //VM1497:1 Uncaught ReferenceError: a is not defined.
@@ -185,14 +208,14 @@ console.log(a)
 //2.未声明变量typeof会报undefined
 console.log(typeof(a))
 //一个相关的面试题:
-var a = 1;
-var a;
-alert(typeof(a));   //number
+var a = 1
+var a
+alert(typeof(a))   //number
 (function() {
-    b = '-----';
-    var b;
-})();
-alert( typeof b); //undefined, 作用域不一样, 未声明, 未定义.
+    b = '-----'
+    var b
+})()
+alert(typeof(b)) //undefined, 作用域不一样, 未声明, 未定义.
 //第三问 关于null
 a = null
 console.log(typeof(a))
@@ -442,6 +465,33 @@ if (typeof Array.prototype.quickSort !== 'function') {
 var arr = [5, 2, 3, 1, 4]
 arr.quickSort()
 console.log(arr)
+//简洁版的js快排
+function quickSort(seq, low, high) {
+    if (low < high) {
+        console.log(seq)
+        pivot = partition(seq, low, high)
+        quickSort(seq, low, pivot-1)
+        quickSort(seq, pivot+1, high)
+    }
+}
+function partition(seq, low, high) {
+    tmp = seq[low]
+    while (low < high) {
+        while (low < high && seq[high] >= tmp) {
+            high--
+        }
+        seq[low] = seq[high]
+        while (low < high && seq[low] < tmp) {
+            low++
+        }
+        seq[high] = seq[low]
+    }
+    seq[low] = tmp
+    return low
+}
+var seq = [8, 2, 3, 1, 4, 5, 7, 6]
+quickSort(seq, 0, seq.length-1)
+console.log(seq)
 
 //关于call和apply
 //用来方便的实现方法的继承
@@ -517,13 +567,56 @@ function Class2(a, b) {
 test = new Class2(2, 1)
 test.showSub()
 test.showAdd()
-
 function Class2(a, b) {
     Class10.call(this, a, b)
     Class10.call(this, a, b)
 }
 
-//js获取浏览器相关信息
+//分别用es5和es6实现方法的继承:
+//es5:
+function Animal(name){
+    this.name = name;
+    this.showName = function(){
+        alert(this.name)
+    }
+}
+function Cat(name){
+    Animal.call(this, name)
+}
+var cat = new Cat("Black Cat")
+cat.showName()
+//es6:
+class Animal {
+    constructor() {
+        this.palce = 'earth'
+        this.type = 'animal'
+    }
+    says(text) {
+        console.log(this.type + ' says '+ text)
+    }
+    static go(text) {
+        console.log(this.type + ' static says ' + text)
+    }
+}
+class Cat extends Animal {
+    constructor(){
+        super()
+        this.type = 'cat'
+        this.name = 'kitty'
+    }
+    talk(text) {
+        super.says(text)
+        console.log(this.name + ' talk ' + text)
+    }
+}
+cat = new Cat()
+console.log(cat.palce);
+cat.says('hello')
+cat.talk('hello')
+cat.go('hello')
+Animal.go('hello')
+
+//js获取浏览器相关信息, navigator
 //appName, appVersion, appCodeName, userAgent
 function whatBrowser() {
     let appName =  navigator.appName;
@@ -554,7 +647,7 @@ whatBrowser()
 
 //关于闭包
 //闭包是一个概念
-//在js中, 一个函数可以访问到函数外部定义的变量, 可是外部缺无法访问到函数内部定义的变量,
+//在js中, 一个函数可以访问到函数外部定义的变量, 可是外部却无法访问到函数内部定义的变量,
 //为了访问到函数内部定义的变量, 且保证这个变量不被稀释掉, 这就是闭包的作用
 //定义一个函数, 在这个函数中定义一个函数并返回它, 内部的定义函数操作变量
 //一个最简单直接的闭包的例子
@@ -585,7 +678,7 @@ for (var i = 0; i < 10; i++) {
             console.log(e)
         }, 1000)
     })(i)
-}//1,2,3... 这叫做匿名括号函数
+}//1,2,3...这就叫加了一层闭包
 //demo2 http://blog.csdn.net/gaoshanwudi/article/details/7355794
 //demo3
 function a() {
@@ -600,6 +693,22 @@ function a() {
 var b = a()
 for (var i=0; i<b.length; i++){
     console.log(b[i]())
+}
+//用闭包的方式解决demo3
+function a() {
+    var result = []
+    for (var i=0; i<10; i++) {
+        (function (e) {
+            result[e] = function () {
+                return e
+            }
+        })(i)
+    }
+    return result
+}
+var b = a()
+for (var i=0; i<b.length; i++) {
+    console.log(b[i]());
 }
 
 //关于js事件冒泡和事件捕获
@@ -620,8 +729,8 @@ $(function(){
         alert('baby')
     })
 })
-//事件冒泡,当点击button2时,依次弹出hello baby,事件从子节点蔓延到父节点,触发了绑定在父节点的事件,就叫做事件冒泡
-//事件捕获,当点击任意位置,会弹出baby,这就叫时间事件捕获,通过时间的选择器可以避免发生意料之外的事件捕获
+//事件冒泡, 当点击button2时,依次弹出hello baby,事件从子节点蔓延到父节点,触发了绑定在父节点的事件,就叫做事件冒泡
+//事件捕获, 当点击任意位置, 会弹出baby, 这就叫事件捕获, 通过事件的选择器可以避免发生意料之外的事件捕获
 //从内向外冒泡, 然后从外到内捕获
 //如何解决冒泡:
 //demo1 return false方法
@@ -640,10 +749,11 @@ $('#clickMe').click(function (event) {
         window.event.cancelBubble = true     //兼容IE的方式来取消事件冒泡
     }
 })
+
 //0.JavaScript特殊数据类型:
 //对象(object), 带有属性和方法的特殊数据类型
-//JavaScript 中的所有事物都是对象：Number, Sting, undefined, null, object, function
-//此外，JavaScript 允许自定义对象,
+//JavaScript 中的所有事物都是对象: Number, Sting, undefined, null, object, function
+//此外，JavaScript 允许自定义对象
 //1.JavaScript一般数据类型:
 //基本数据类型: Number, String, Boolean, undefined, null
 //引用数据类型: 1.object: {}(对象(Object)), [](Array), RegExp, Date
@@ -677,7 +787,7 @@ Base.call(obj)
 .       .                   匹配除换行符之外的任何一个字符
 \d    [0-9]                 匹配数字
 \D    [^0-9]                匹配非数字字符
-\s    [\n\r\t\f\x0B]        匹配一个空白字符
+\s    [\n\r\t\f\x0B]        匹配一个空白字符 //n换行;r行首;t指标;x0Btab
 \S    [^\n\r\t\f\x0B]       匹配一个非空白字符
 \w    [a-zA-Z0-9_]          匹配字母数字和下划线
 \W    [^a-zA-Z0-9_]         匹配除字母数字下划线之外的字符
@@ -690,7 +800,7 @@ Base.call(obj)
 {n,}  n 是一个非负整数。至少匹配n次。'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。
 {n,m} m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。 "o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
 用贪婪量词进行匹配时叫做贪婪匹配, 即力争最大匹配, 以上量词都是贪婪量词
-用惰性量词进行匹配时，贪婪量词后加?变成惰性匹配, 即力争最小匹配
+用惰性量词进行匹配时, 贪婪量词后加?变成惰性匹配, 即力争最小匹配
 var str = "abc";
 var re = /\w+/;//将匹配abc
 re = /\w+?/;//将匹配a
@@ -729,18 +839,13 @@ re = /\d+/g;
 console.log(str.search(re));//10
 //match 返回一个array
 //另:这里的一个坑,关于正则中^$的用法(https://zhidao.baidu.com/question/581570451.html)
-var str = 'My age is 18.Golden age!'
-var str1 = 'My age is Golden age!'
-var str2 = 'My age is Golden age!'
+var str = 'My age is 18.Golden age!, 123, 123'
 var res1 = str.match(/^\d+$/)          //null
-var res2 = str1.match(/^\d+$/)         //null
-var res3 = str.match(/\d+/)            //["18", index: 10, input: "My age is 18.Golden age!"]
-var res4 = str1.match(/\d+/)           //null
+var res3 = str.match(/\d+/ig)          //["18", "123", "123"]
 //replace, 返回一个新的字符串
 //利用repalce取cookie的指定值:可以延伸为截取某字符串
 //取出指定cookie
 cookies = document.cookie
-var cookieA = ''
 cookieA = cookies.repalce(/.*cookieA=([^;]*).*/, "$1")
 //eg2.加粗所有数字
 var str = 'asdf123qwer456jkl789'
@@ -814,7 +919,6 @@ console.log(str)
 if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
     window.location.href = "wow.html" //相对路径
 }
-
 //一次工作的es6实践, 判断客户端类型:
 $(function () {
     if (navinator.userAgent.match(/(iPhone|Android|iPod|ios)/i)) {
@@ -880,15 +984,17 @@ document.getElementById('intro').onclick = () => {console.log('test')}
 //触发事件:
 document.getElementById('intro').click()
 document.getElementById('input').focus()
+
 // 使用document.cookie和window.localStorage实现页面通信
 // 关于cookie:
-// 各种后端框架都方便的封装了设置cookie的方法,比如(tonador), 本质上都是通过在响应报文的头部加入 Set-Cookie 字段来设置的, 形如:
+// 各种后端框架都方便的封装了设置cookie的方法,比如(tonador), 本质上都是通过在响应报文的头部加入Set-Cookie字段来设置的, 形如:
 // Set-Cookie: NAME=VALUE; expires=DATE; path=PATH; domain=DOMAIN
-// expires是过期时间戳，通常用当前时间的毫秒数加上一段时间： new Date().getTime()+30*24*60*60*1000)(这就能解释清理cookie的时候, 将expire设置成一个过去的时间就能删除cookie)
-// 如果不设置expires，在浏览器中这个cookie将被当做session对待, 也就是关闭了浏览器cookie就消失(注意在tornado中的用法, 不设置过期时间关闭浏览器cookie就会消失.)
+// expires是过期时间戳, 通常用当前时间的毫秒数加上一段时间： new Date().getTime()+30*24*60*60*1000)(这就能解释清理cookie的时候, 将expire设置成一个过去的时间就能删除cookie)
+// 如果不设置expires, 在浏览器中这个cookie将被当做session对待, 也就是关闭了浏览器cookie就消失(注意在tornado中的用法, 不设置过期时间关闭浏览器cookie就会消失.)
 // 读取:
 var cookies = document.cookie //这一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie)
-var cookieA = cookies.repalce(/.*cookieA=([^;]*).*/, "$1")
+var cookieA = cookies.repalce(/.*cookieA=([^;]*).*/, '$1')
+console.log(cookieA)
 // 设置:
 document.cookie = 'cookie_example=123'+';expires='+expire+';path=/';
 // 关于localStorage:
@@ -924,8 +1030,8 @@ xmlhttp.send(null)
 // 3.函数不能有重复的形参名
 // 4.保留字(let、interface、package、private、protected、public、static、yield、implements)
 
-// 关于js的作用域已经作用域链:
-// js作用域的范围是函数，函数嵌套函数，查找变量从内层函数依次向外层找，最后找不到在window上找
+// 关于js的作用域以及作用域链:
+// js作用域的范围是函数, 函数嵌套函数, 查找变量从内层函数依次向外层找, 最后找不到在window上找
 
 // 关于this
 // this是JavaScript的一个关键字, 它只可能存在于函数中, 随着函数使用场合的不同, this的值会发生变化
@@ -963,7 +1069,6 @@ $('#result').html(html)
 //注意这个问题有四种解决:1.constructor绑定 2.constructor es7绑定 3.直接把函数定义成箭头函数 4.调用函数时传递this 5.答案的最后一句话也是一种方法, 可以衡量你时候真正的理解了this
 //当浏览器渲染这个组件的时候, 执行到map函数, 此时的this指的是全局, 必然没有例子中的函数
 //然后发现了这个问题:http://stackoverflow.com/questions/32317154/uncaught-typeerror-cannot-read-property-setstate-of-undefined?rq=1
-//当触发点击事件时, <button onClick={this.delta}>+</button>中的this指的是虽然是组件, 可是函delta函数定义中this指的就是点击事件, 必然没有setState这个函数
 //所以es6中函数绑定的意义非常重要, 使指定函数的this永远不变, 在react es6组件写法的例子中, 调用构建函数, this就永远指向了组件本身
 //最后看一下当你绑定函数的时候, bind函数具体做了什么呢: http://blog.csdn.net/jutal_ljt/article/details/53381670
 //eg1:
@@ -1011,7 +1116,7 @@ $('.sp_follow_ktv_id').each(function () {
 //应该改成:
 $('.sp_follow_ktv_id').each(function () {
     var that = $(this);
-    ktv_id = $(this).attr('data-ktvid')
+    ktv_id = that.attr('data-ktvid')
     $.get('/stat/following', {ktv_id:ktv_id, tp:'sp'}, function (data) {
         that.text(data.res)
     })
@@ -1023,25 +1128,6 @@ $('.sp_follow_ktv_id').each(function () {
         this.text(data.res)
     }).bind(this)
 })
-
-//关于js中的预解释
-//变量声明的提前规则:
-//解析器将当前作用域内所有变量和函数(带var和带function)的声明提前到作用域的开始处
-//不同点是, var会仅仅声明, 而function声明, 并定义, 空间存的是字符串
-var a = 1
-function test() {
-    console.log(a)
-    var a = 1
-}
-test() //undefined
-//等同于:
-var a = 1
-function test() {
-    var a
-    console.log(a)
-    a = 1
-}
-test() //undefined
 
 //浏览器前进后退配合ajax
 //关于window.history.replaceState, window.history.pushState, window.addEventListener("popstate", function() {})
@@ -1067,7 +1153,7 @@ window.addEventListener('popstate', function(e) {
 })
 
 //关于js中的__proto__, prototype, 原型继承, 以及原型链:
-//js中万物皆对象, 每个对象都具有__proto__属性, 称为隐式原型, 其值可能是, Num, String, Array, Object, function(), 一个对象的隐式原型指向构造该对象的构造函数的原型.
+//js中万物皆对象, 每个对象都具有__proto__属性, 称为隐式原型, 其值可能是, Num, String, Array, Object, function, 一个对象的隐式原型指向构造该对象的构造函数的原型.
 //这也保证了实例能够访问在构造函数的原型中定义的属性和方法.
 //js中有两种引用数据类型, 分别是function和object
 //对于fucniotn而言, 除了__proto__属性, 还有prototype属性, 这是一个指针, 必然是一个Object
@@ -1101,28 +1187,11 @@ a.call(b)
 //关于原型链
 //每个对象都会在其内部初始化一个属性, 就是__proto__, 当我们访问一个对象的属性时, 如果这个对象内部不存在这个属性, 那么他就会去__proto__(引用)里找这个属性
 //这个__proto__所指的object也有自己的__proto__, 于是就这样一直找下去, 也就是我们平时所说的原型链的概念
-//问: 一个函数可以更改其原型的方法吗:
-//可以, 通过prototype属性
-//eg1:
-var Person = function () {}
-Person.prototype.Say = function () {
-    console.log('aaa')
-}
-var Programer = function () {}
-Programer.prototype = new Person()
-Programer.prototype.WriteCode = function () {
-    console.log('bbb')
-}
-Programer.prototype.Salary = 500
-var p = new Programer()
-p.Say()
-p.WriteCode()
-console.log(p.Salary)
-//aaa
-//bbb
-//500
-
-//判断一个数是否是整数:
-if (Number.isInteger(a) && a >= 0) {
-
-}
+//eg1: https://www.zhihu.com/question/34158992?sort=created
+var animal = function () {}
+var dog = function () {}
+animal.price = 100
+dog.prototype = animal
+JB = new dog()
+console.log(dog.price)
+console.log(JB.price)

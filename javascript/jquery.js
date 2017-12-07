@@ -9,14 +9,14 @@ $(document).ajaxSend(function() {
 $(document).ajaxStart(function() {
     /* Stuff to do when an AJAX call is started and no other AJAX calls are in progress */
 })
-$(document).ajaxStop((function() {
-     /*stuff to do when all AJAX calls have completed*/
-})
 $(document).ajaxSuccess(function() {
     /* executes whenever an AJAX request completes successfully */
 })
 $(document).ajaxComplete(function(event, xhr, settings) {
     /* executes whenever an AJAX request completes */
+})
+$(document).ajaxStop((function() {
+     /*stuff to do when all AJAX calls have completed*/
 })
 $(document).ajaxError(function(event, xhr, settings, thrownError) {
     /* Stuff to do when an AJAX call returns an error */
@@ -76,36 +76,43 @@ $.ajax({
     }
 })
 
-//JQUERY 选择器
+//JQUERY选择器
+//通配符选择器
 $('*')
-$('div')
-$('p')[0]                                                       //第一个p标签
+//元素选择器
+$('div'), $('button')
+$('p')[0]
+//class, id选择器
 $('div#div_id')
 $('div.div_class')
+//属性选择器
 $('div[id]')                                                    //所有包含id属性的div
-$('form input').css('border', '9px solid red')                  //后代元素, 这是设置css的方法
-$('a[hreflang |= "en"]').css('border', '3px dotted green')      //选择指定属性值等于给定字符串或以该字符串为前缀（该字符串后跟一个连字符“-” ）的元素
+$('input[name="man"]').val('some text')                         //选择指定属性是给定值的元素
+$('input[name^="man"]').val('some test')                        //选择指定属性是以给定值开头的元素。
+$('input[name$="man"]').val('some text')                        //选择指定属性是以给定值结尾的元素
 $('input[name*="man"]').val('some text')                        //选择指定属性具有包含一个给定的子字符串的元素。（选择给定的属性是以包含某些值的元素）
 $('input[name~="man"]').val('some text')                        //选择指定属性用空格分隔的值中包含一个给定值的元素
-$('input[name$="man"]').val('some text')                        //选择指定属性是以给定值结尾的元素
-$('input[name^="man"]').val('some test')                        //选择指定属性是以给定值开头的元素。
-$('input[name="man"]').val('some text')                         //选择指定属性是给定值的元素
 $('input[name!="man"]').val('some text')                        //选择不存在指定属性，或者指定的属性值不等于给定值的元素
-$(':button').addClass('class_name')
+//后代元素选择器
+$('form input').css('border', '9px solid red')                  //后代元素, 这是设置css的方法
 $('form input:checkbox').parent().css('border', '2px dotted green')
-$('input:checked').length()
-$('input:disabled')
+//子元素选择器
 $('ul.topnavi > li').css('border'. '4px dotted green')
-$('div:contains("John")').css('text-decoration', 'underline')
-$("td:empty").text("Was empty!").css('background', 'rgb(255,220,200)')
+//伪类属性选择器
+$(':button').addClass('class_name')
+$('input:disabled')
+$('input:checked').length()
+$('input:file').css('color', 'red')                             //选择属性为file的的input
+$('a:hover').css('color', 'res')
+$('a:active').css('color', 'res')
+$('td:empty').text("Was empty!").css('background', 'rgb(255,220,200)')
 $('td:eq(2)').css('color', 'red')                               //第二个
 $('td:gt(5)').css('color', 'red')                               //所有index大于5的, 相同用法, lt
 $('td:gt(-1)').css('color', 'red')                              //支持倒数
 $('td:even').css('color', 'red')                                //even odd 奇偶
-$('input:file').css('color', 'red')                             //选择属性为file的的input
-$('div span:last-child').css('text-decoration', 'underline')
-$('div span:first-of-type').addClass('class_name')
 $('div:has(p)').addClass('class_name')
+$('div:contains("John")').css('text-decoration', 'underline')
+$('div>span:last-child').css('text-decoration', 'underline')
 $('div:animated')                                               //'http://www.css88.com/jqapi-1.9/animated-selector/'
 
 //JQUERY 属性相关

@@ -28,29 +28,32 @@ const PI = Math.PI
 //class super extends
 class Animal {
     constructor() {
+        this.palce = 'earth'
         this.type = 'animal'
-    },
+    }
     says(text) {
         console.log(this.type + ' says '+ text)
     }
 }
-let animal = new Animal()
-animal.says('hello')//animal says hello
 class Cat extends Animal {
     constructor(){
         super()
         this.type = 'cat'
-    },
-    says(text){
-        console.log(this.type + ' says ' + text);
+        this.name= 'kitty'
+    }
+    talk(text) {
+        super.says(text)
+        console.log(this.name + ' talk ' + text)
     }
 }
 cat = new Cat()
-cat.says('hello')//cat says hello
+console.log(cat.palce)
+cat.says('hello')
+cat.talk('hello')
 // class static methods
 class Animals {
     static says (text) {
-        console.log(text)        
+        console.log(text)
     }
 }
 Animals.says('something') //something

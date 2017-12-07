@@ -12,7 +12,7 @@ sudo apt-get update
 sudo apt-get install mysql-server
 
 How to Install Latest MySQL 5.7.9 on RHEL/CentOS 7/6/5
-RedHat是免费的, 而centos是它的拷贝, 是免费的 
+RedHat是免费的, 而centos是它的拷贝, 是免费的
 RHEL(Red Hat Enterprise Linux)
 centos(community ENTerprise Operating System)
 https://www.tecmint.com/install-latest-mysql-on-rhel-centos-and-fedora/
