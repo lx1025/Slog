@@ -256,6 +256,7 @@ console.log(test(a))
 a = []
 if (!a.length) {console.log('success')}
 //关于object判空:
+//自定义方法
 function IsEmpty(obj) {
     for (var i in obj) {
         return false
@@ -267,6 +268,9 @@ a.name = 'something'
 console.log(isEmpty(a))        //false
 console.log(isEmpty({}))       //true
 console.log(isEmpty(null))     //true
+//jquery自带方法
+console.log(isEmptyObject({})) //true
+
 
 //迭代数组的最佳方案：
 //对有序集合进行顺序无关的遍历时, 使用逆序遍历: 逆序遍历可以节省变量, 代码比较优化
@@ -904,16 +908,21 @@ function getParam(param) {
 }
 var id = getParam('id')
 console.log(id)
-
 //写出'www.bitland.com'的正则
 //一个最简单的面试题
 var reg = /^w{3}\.\w+\.\w+$/
-
 //将字符串中的所有的数字加上<em>标签
 var str = 'asdf123qwer456jkl789'
 var reg = /(\d+)/g
 str = str.replace(reg, ($1) => `<em>${$1}</em>`)
 console.log(str)
+//字符串去掉空格
+//去除所有, 两头, 左, 右空格:
+str = str.replace(/\s+/g, '')
+str = str.replace(/^\s+|\s+$/g, '')
+str = str.replace( /^\s*/, '')
+str = str.replace(/(\s*$)/g, '')
+//or juquery自带方法
 
 //根据请求端是否是手机端来判断跳转:
 if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {

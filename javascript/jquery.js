@@ -76,7 +76,7 @@ $.ajax({
     }
 })
 
-//JQUERY选择器
+//选择器
 //通配符选择器
 $('*')
 //元素选择器
@@ -115,15 +115,26 @@ $('div:contains("John")').css('text-decoration', 'underline')
 $('div>span:last-child').css('text-decoration', 'underline')
 $('div:animated')                                               //'http://www.css88.com/jqapi-1.9/animated-selector/'
 
-//JQUERY 属性相关
-//attr, prop, removeAttr, removeProp(增删查)
-$('p').attr('data', 'testdata')     //attr用于自定义属性
-$("input:text:eq(2)").attr("disabled") = false     //设置disabled属性
+//属性相关
+//attr(自定义属性), prop(元素自带属性), removeAttr, removeProp(增删查)
+//增, 改
+$('p').attr('data', 'testdata')
+$('p').attr({data: 'testdata', data1: 'testdata1'})
+$("input:text:eq(2)").prop('disabled', true)
+$("input:text:eq(2)").prop({disabled: true})
+//删
+$('p').removeAttr('attribute_name')
+$('p').removeProp('property_name')
+//查
 var data = $('p').attr('data-test')
-var p_title = $('p').prop('class')  //prop用于自带属性
-$('div').text(p_title)
-$('p').removeAttr('attribute name')
-$('p').removeProp('property name')
+var data = $('p').prop('class')
+
+//class相关
+//增
+$('').addClass('class_name')
+//删
+$('').removeClass('class_name')
+//改
 $('div.foo').toggleClass(function(){
     if ($(this).parent().is('.bar')){
         return 'happy'
@@ -131,21 +142,17 @@ $('div.foo').toggleClass(function(){
         return 'sad'
     }
 });
-
-//JQUERY class相关
-$('').addClass('class_name')
-$('').removeClass('class_name')
-$('').toggleClass('class_name')
+//查
 $('').hasClass('className')
 
-//JQUERY css相关
+//css相关
 $('').css()
 
-//JQUERY dom相关
+//dom相关
 //隐藏显示
 $('').show()
 $('').hide()
-//插入或者返回值
+//插入或者返回内容
 $('').text('some text')
 $('').html()
 $('').val()
@@ -155,15 +162,14 @@ $('p').first().after(function(){
     return '<div>'+this.className+'</div>'
 })
 //移除替换
-$('p').detach() //删除所有p元素
-$('p').remove() //同上
-$('p#id').empty() //删除选择匹配元素下的的所有子元素包含文本
-
-//JQUERY clone
+$('p').detach()     //删除所有p元素
+$('p').remove()     //同上
+$('p#id').empty()   //删除选择匹配元素下的的所有子元素包含文本
+//clone
 $('').clone().appendTo('selector')
 
-// jquery判空
-// JavaScript判断object/json 是否为空，可以使用jQuery的isEmptyObject()方法。
+//jquery判空
+//JavaScript判断object/json 是否为空，可以使用jQuery的isEmptyObject()方法。
 console.log(isEmptyObject());           //true
 console.log(isEmptyObject({}));         //true
 console.log(isEmptyObject(null));       //true
@@ -171,9 +177,9 @@ console.log(isEmptyObject(23));         //false
 console.log(isEmptyObject({"te": 2}));  //false
 
 //jquery的常用方法
-//trim, map, each, inArray, extend, data, param, serialize
+//trim, map, each, isEmptyObject, inArray, extend, data, param, serialize
 //$.trim() 去掉空格
-console.log($.trim('  something '))
+var str = $.trim('  something ')
 //$.map() 返回一个新list, 接收两个参数.
 var a = ['a', 'b']
 a = $.map(a, function (value, index){
@@ -210,23 +216,60 @@ $.extend(a, b)
 console.log(a)
 var c = $.extend({}, a, b)
 console.log(c)
-//$.data()　在DOM节点出写入数据, 这里并没有写入属性, 但是确实是写进去了....
+//$.data()　
 $('div.test').data('data', 'something')//...then
 var a =$('div.test').data('data')
-//注：添加属性可使用$('div.test').attr('data', 'test')
-//$.param()将一个object转化为url参数
-var params = {a:3; b:4}
-new_params = $.param(params)
+//$.param()
+var params = {a: 3, b: 4}
+params = $.param(params)
 //$(this).serialize()将一个form表单提交内容转化为url参数
 $('form').submit(function() {
     console.log($(this).serialize())
 })
 
-//鼠标的动作
+//监听(on)or绑定(bind)的事件类型 $().on('xxx', function () {}):
+//blur, focus, focusin, focusout 失去, 获得, 子元素获取, 子元素失去焦点
+//click, dbclick 点击, 双击
+//keydown, keyup 键盘按下, 键盘谈起
+//mouseover, mousemove, mouseleave 鼠标放上, 鼠标移动, 鼠标移开
+//submit 表单提交
+//resize 窗口改变大小 $(window).on('resize', function () {})
+//另: 以上事件也都可以写成:$().blur(function () {})这种格式
+//eg.
 $('.money').on('mouseover', function(evt) {
-    console.log('test')
     $('.real-money').show()
 })
+//问:on和bind有什么区别呢?
+//on多了一个selector:
+$('').bind(events [,eventData], handler)
+$('')on(events [,selector]  [,data], handler)
+//这个selector具体有什么用呢?关键是事件冒泡(https://www.cnblogs.com/ranyonsue/p/6226222.html)
+//如果一个document原本的js这么写:
+$('ul li').on('click', function () {console.log('click')})
+$('ul li').bind('click', function () {console.log('click')})
+//我通过js给ul添加了一个li
+$('ul').append('<li>something<li>'))
+//以上两种方法都无法在新加的li节点绑定事件, 如果这样写就可以:
+$(ul).on('click', li, function () {console.log('click')})
+//一个工作中的实例:
+//关于在ajax请求之后渲染出来的新的dom绑定事件
+$.post('/song/ktv/stat', {select_date: select_date, page: page, tp: tp}, function (data) {
+    ktvs = data.res
+    $('#ktv_stat').html('')
+    for (var item in ktvs) {
+        ktv = ktvs[item]
+        tr_str = `<tr><td>${ktv['rank']}</td><td class='ktv_id'>${ktv['id']}</td><td>${ktv['name']}</td></tr>`
+        $('#ktv_stat').append(tr_str)
+    }
+ })
+$('.ktv_id').on('click', function () {
+    console.log($(this).text());
+})
+//这是错误的, 此时并没有找到'.ktv_id'这个节点, 必然绑定失败, 正确写法如下:
+$(document).on('click', '.ktv_id', function () {
+    console.log($(this).text());
+})
+//注意:在jquery1.7 起版本用on替代了bind(), live(), delegate() 方法
 
 //一个checkbox表单提交的例子:
 //html
@@ -258,7 +301,7 @@ return;
 type = type.join('')
 
 //关于wow用户反馈的跨域解决
-//jsonp并不支持post方式,会自动转换为get
+//注意, jsonp并不支持post方式,会自动转换为get
 $.ajax({
     type: 'get',
     url: 'URL',
@@ -270,7 +313,7 @@ $.ajax({
     jsonpCallback: 'func'
 })
 
-//一段远古时期的jquery代码,来自myktv_cms
+//一段远古时期的jquery代码, 来自myktv_cms, 关于监听回车键的写法
 //html
 ktv名字(回车进行搜索): <input id='ktv_name' placeholder='回车进行搜索' hint='回车进行搜索' />
 //js
@@ -283,8 +326,7 @@ $('#ktv_name').bind('keypress', function (event) {
 })
 
 //一个抽象的jquery查询
-alert($(this).parent().parent('tr').find('td:first-child').text());
-alert($(this).parent().parent('tr').find('td:first-child').text());
+alert($(this).parent().parent('tr').find('td:first-child').text())
 
 //一个each方法丢失了this的实例:
 //var that = $(this)
@@ -311,75 +353,38 @@ $('.order-item').each(function () {
     $(this).find('.date').text(datetime.substring(0, 10))
 })
 
-// 关于jquery同zepto的区别:
-// Zepto更加的轻量级，专为移动端开发
-// Zepto并不是包含JQ所有的功能，只是封装JQ常用的一些方法
-// Zepto内部划分模块，不同的功能放到了不同的文件中，需要使用的时候引入，否则不引入
-// JQ则是所有功能都放到一个文件中。JQ会更加占用项目体积，而Zepto的使用率更高
+//关于jquery同zepto的区别(移动端, 模块化, 轻量级, 不是全部功能分装了常用方法):
+//Zepto更加的轻量级，专为移动端开发
+//Zepto并不是包含JQ所有的功能，只是封装JQ常用的一些方法
+//Zepto内部划分模块，不同的功能放到了不同的文件中，需要使用的时候引入，否则不引入
+//JQ则是所有功能都放到一个文件中。JQ会更加占用项目体积，而Zepto的使用率更高
 
-// jquery的优势:
-// 简介 简单
-// 强大的选择器支持
-// 封装了常用功能，例如：slideUp()、$.each()等等
-// 丰富强大的插件库
-// 完善的AJAX
-// 链式语法
+//jquery的优势:
+//简介 简单
+//强大的选择器支持
+//封装了常用功能, 例如, slideUp()、$.each()等等
+//丰富强大的插件库
+//完善的AJAX
+//链式语法
 
-// 关于toggle
-$("p").toggle(
-    function() {
-        $("body").css("background-color", "green")
-    },
-    function() {
-        $("body").css("background-color", "red")
-    },
-    function(){
-        $("body").css("background-color", "yellow")
-});
+//关于toggle: 用来切换一个元素是否可见('http://www.w3school.com.cn/tiy/t.asp?f=jquery_effect_toggle')
+//html:
+<p>This is a paragraph.</p>
+<button class="btn1">Toggle</button>
+//js
+$('button').on('click', function () {
+    $('p').toggle()
+})
 
 //关于jquery的链式语法:
-$('input[type="button"]') .eq(0).click(function() {
-        alert('是第一个按钮的事件处理函数');
-    }).end().eq(1)
-    .click(function() {
-        $('input[type="button"]:eq(0)').trigger('click');
-    }).end().eq(2)
-    .click(function() {
-        $('input[type="button"]:eq(0)').unbind('click');
-    }).end().eq(3)
-    .toggle(function() {
-        $('.panel').hide('slow');
-    }, function() {
-        $('.panel').show('slow');
-    })
-$('input[type="button"]').eq(0).click(function () {
-    alert('something')
-}).end().eq(1).click(function () {
-    alert('something')
-}).end().eq(2).click(function () {
-    alert('something')
+//选择器只写一个, 但是后边可以跟多个jquery的方法的灵活拼接
+$('#mybtn').css('width', '100px').css('height', '100px').css('background', 'red')
+//等价于
+$('#mybtn').css({
+    width: 200,
+    height: 200,
+    background-color: 'red'
 })
-
-//一个工作中的实例:
-//关于在ajax请求之后渲染出来的新的dom绑定事件
-$.post('/song/ktv/stat', {select_date: select_date, page: page, tp: tp}, function (data) {
-    ktvs = data.res
-    $('#ktv_stat').html('')
-    for (var item in ktvs) {
-        ktv = ktvs[item]
-        tr_str = `<tr><td>${ktv['rank']}</td><td class='ktv_id'>${ktv['id']}</td><td>${ktv['name']}</td></tr>`
-        $('#ktv_stat').append(tr_str)
-    }
- })
-//这是错误的, 此时并没有找到'.ktv_id'这个节点, 必然绑定失败:
-$('.ktv_id').on('click', function () {
-    console.log($(this).text());
-})
-//正确写法如下:
-$(document).on('click', '.ktv_id', function () {
-    console.log($(this).text());
-})
-//注意:在jquery1.7 起版本用on替代了bind(), live(), delegate() 方法
 
 //一个很棒的jquery文档:
 //https://www.hellojava.com/article/84

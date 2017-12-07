@@ -5,29 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style media="screen">
-        .test {
-            position: relative;
-            width: 500px;
-            height: 500px;
-            background-color: red;
-        }
-        .test1 {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            width: 200px;
-            height: 100px;
-            margin: auto;
-            background-color: green;
-        }
-    </style>
+    <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $("p").toggle(
+        function() {
+            $("body").css("background-color", "green")
+        },
+        function() {
+            $("body").css("background-color", "red")
+        },
+        function(){
+            $("body").css("background-color", "yellow")
+    })
+    </script>
 </head>
 <body>
-    <div class="test">
-        <div class='test1'>xinghantest<span>xinghangtest</span></div>
-    </div>
+    <button id="xinghang">gogogo</button>
+    <p>xinghangtest</p>
 </body>
 </html>
