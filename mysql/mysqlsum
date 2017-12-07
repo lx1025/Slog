@@ -1,4 +1,4 @@
-本机mysql用户密码:
+fullStack本机mysql用户密码:
 mysql -uroot -pxinghang
 使用brew安装:
 mysql路径: /usr/local/Cellar/mysql/5.7.17/
@@ -17,32 +17,64 @@ RHEL(Red Hat Enterprise Linux)
 centos(community ENTerprise Operating System)
 https://www.tecmint.com/install-latest-mysql-on-rhel-centos-and-fedora/
 
-#表的导出与导入
-mysqldump:
-mysqldump  -u ktvsky -p098f6bcd4621d373cade4e832627b4f6 -P 3306 -h 10.10.146.167 myktv archive_order > archive_order.sql
-scp work@120.132.55.163:/home/work/archive_order.sql archive_order.sql
-(scp -p 3026 stage@101.254.157.124:/home/stage/o2o_spider_song.sql o2o_spider_song.sql)
+mysql版本
+mysql -V
+
+查看当前mysql所在端口号:
+show global variables like 'port'
+
+查看表大小:
+mysql> use information_schema;
+Database changed
+mysql> select data_length, index_length from tables where table_schema='kugou' and table_name = 'o2o_spider_song';
+
+表的导出与导入(mysqldump)
+mysqldump  -uktvsky -p098f6bcd4621d373cade4e832627b4f6 -P3306 -h10.10.146.167 myktv archive_order > archive_order.sql
+scp work@120.132.55.163:/home/work/archive_order.sql .
+scp -p 3026 stage@101.254.157.124:/home/stage/o2o_spider_song.sql
 !my
 use myktv
 source /home/xinghang/archive_order.sql
 mysqldump -uroot -h10.9.138.23 -p098f6bcd4621d373cade4e832627b4f6 kugou singer < qq_singer2.sql
 
-select ktv_id, sum(total_fee)/100 as sum_total_fee from archive_order \
-where state=2 and channel in (0, 1) and tp not in (1, 2, 7) and  \
-finish_time >= '2016-02-16 00:00:00' and finish_time <= '2016-02-16 23:59:59' \
-group by ktv_id order by sum_total_fee desc limit 10;
-
-select ktv_id, MIN(finish_time) as first_order_time from archive_order group by ktv_id order by first_order_time desc limit 10;
-
-select sum(total_fee)/100 as sum_total_fee from archive_order where ktv_id = 87603 and state = 2 and channel in (0, 1) and tp not in (1, 2, 7) and finish_time >= '2017-02-19 00:00:00' and finish_time <= '2017-02-19 23:59:59'
-
-select sum(total_fee)/100 as sum_total_fee, count(*) as cnt from archive_order where tp in (1, 2, 7) group by tp
-
-#导出mysql数据:
-mysql -u ktvsky -p098f6bcd4621d373cade4e832627b4f6 -P 3306 -h 10.9.192.10 ktv_bar -e 'select * from music_order where sp_id != 6 and state =1' > o.txt
+导出mysql数据:
+mysql -uktvsky -p098f6bcd4621d373cade4e832627b4f6 -P3306 -h10.9.192.10 ktv_bar -e 'select * from music_order where sp_id != 6 and state =1' > o.txt
 mysql -uroot -pthunder5166 songs -e 'select thunder_id, name, artist1, ori_ks_url, bt_ks_url, krc_ks_url state from thunder_song where ori_ks_url !=''' > o.txt
 
-关于offset:
+mysql导入数据(load data infile)
+mysql导入csv文件
+load data infile '/var/lib/mysql-files/30W.csv' into table thunder_song set utf8
+fields terminated by '\t' lines terminated by '\n'
+(thunder_id, name, artist1, artist2, artist3, artist4, @duration, has_krc, download_link)
+set duration=NULLif(@duration, 0)
+mysql导入csv文件
+load data infile '/var/lib/mysql-files/3333.csv' into table thunder_song character set utf8
+fields terminated by '\t' lines terminated by '\n'
+(thunder_id, name, artist1, artist2, artist3, artist4, duration, has_krc, download_link)
+mysql导入csv文件
+load data infile '/var/lib/mysql-files/179W.csv' into table kugou_krc_song character set utf8
+fields terminated by '\t' lines terminated by '\n'
+(o2o_id, krc_link, download_link)
+mysql导入csv文件
+load data infile '/var/lib/mysql-files/match-all-time.txt' into table thunder_match character set utf8
+fields terminated by ';' lines terminated by '\n'
+(thunder_id, name, artist, o2o_id, t_duration, o_duration, d_duration)
+将本地的txt文件导入远端远端远端远端的存储, 加上local...
+load data local infile '/home/work/all_singer.txt' into table test character set utf8
+fields terminated by ',' lines terminated by '\n'
+(thunder_id, name)
+将本地的txt文件导入远端远端远端远端的存储, 加上local..., 默认字段对齐
+load data local infile '/home/work/o2omusicinfo.txt' into table test character set utf8
+fields terminated by '|' lines terminated by '\n'
+
+查看mysql所有进程:
+show processlist
+
+未完成事务导致locktable:
+select * from information_schema.innodb_trx \G
+kill sid
+
+关于offset, offset用在offset之后, 应该尽量避免使用offset:
 select * from kugou_singer limit 10 offset 0  #从1开始
 select * from kugou_singer limit 10 offset 10 #从11开始
 以上的效率极差, 对于大表而言, 应该先where, 在limit
@@ -50,40 +82,25 @@ eg:
 select * from o2o_spider_song where id>1000000 limit 100;
 它的效率远远高于 select * from o2o_spider_song limit 1000 offset 1000000;
 
-#查看mysql所有进程:
-show processlist
+清空表:
+delete from 5sing (保留表结构和自增, 可以回滚)
+truncate table 5sing (保留表结构)
+drop table 5sing (完全删除表相关的一切)
 
-#未完成事务导致locktable:
-select * from information_schema.innodb_trx\G
-kill sid
-
-#关于表连接:
-http://huaxia524151.iteye.com/blog/1423614
-两个表R, S
-select * from R,S #笛卡尔积, 相乘
-select * from R cross join S 同上
+update多字段
+update o2o_spider_song set bthash = '', btname = '' where bthash != ''
 
 建立索引:
 create index o2o_spider_song_artist on o2o_spider_song(artist)
-create unique index hash on o2o_spider_song(hash) (效果等同于建表时候的UNIQUE KEY `hash` (`hash`))
 create index o2o_spider_song_artist_bthash on o2o_spider_song(artist, bthash)
+create unique index hash on o2o_spider_song(hash) (效果等同于建表时候的UNIQUE KEY `hash` (`hash`))
 查看表的索引:
 show index from o2o_spider_song
 删除表的索引:
 drop index index_name on table_name
 
-清空表:
-delete from 5sing
-truncate table 5sing
-
-查看当前mysql所在端口号:
-show global variables like 'port'
-
-update多字段!妈的这你都不会
-update o2o_spider_song set bthash = '', btname = '' where bthash != ''
-
-mysql版本
-mysql -V
+#关于index的关键字:
+mysql的字段名字竟然不能用index!我真是的醉了.!
 
 mysql的初步.http://blog.csdn.net/javazejian/article/details/61614366
 desc <table_name>
@@ -92,18 +109,9 @@ float(6, 1) 最大长度6位, 小数点位1位
 group by and having:
 select sex ,count(id) from user group by sex having sex is not null
 关于concat:
-select Concat(username,'(',birthday,')') AS name_birthday  from user where birthday is not null;
 一次内连接:
-select tm.name, tm.price, od.items_num, (tm.price * od.items_num) AS sum_price from orderdetail AS od inner join items AS tm on od.items_id = tm.id;
 
-#关于index的关键字:
-mysql的字段名字竟然不能用index!我真是的醉了.!
-
-关于表连接的一次实例
-关于表连接的一次实例
-关于表连接的一次实例
-关于表连接的一次实例
-
+关于表连接
 select * from table1
 +------+-------+
 | id   | name  |
@@ -204,15 +212,15 @@ eg2.左连接的更新操作:
 update kugou_by_cat k1 left join o2o_spider_song o1 on k1.hash = o1.hash set k1.is_exist = 1 where o1.hash is not null;
 
 关于mysql增删改字段:
-添加字段: alter table kugou_by_cat add column is_exist int(11) not null default 0 comment '附加信息'
-添加多字段: alter table o2o_spider_song add album_id int(11) not null default 0 , add language int(11) not null default 0
-删除字段: alter table kugou_by_cat drop column is_exist;
-修改字段名称: alter table kugou_by_cat change re5 is_exist int(11);
-修改注释: alter table o2o_new_song modify column state tinyint(1) comment '0:未合成LS 1:合成失败 2:未审核 3:已审核 4:审核失败 5:下载完成';
+添加字段: alter table table_name add column column_name int(11) not null default 0 comment '附加信息'
+删除字段: alter table table_name drop column column_name
+添加多字段: alter table table_name add column column_name int(11) not null default 0 comment '附加信息', add column column_name int(11) not null default 0 comment '附加信息'
+修改字段名称: alter table table_name change column old_column new_column int(11)
+修改字段: alter table table_name modify column column_name tinyint(1) comment '';
 
-一次实例:
+一次实例, 关于索引:
 o2o_spider_song这个表, 建表时, 我为了避免重复爬取, 将hash值设定成了unique key
-后来制定hash进行查询时候, 发现速度缓慢, 然后用create index o2o_spider_song_artist on o2o_spider_song(hash)的方式建立了索引
+后来制定hash进行查询时候, 发现速度缓慢, 然后用create index o2o_spider_song_hash on o2o_spider_song(hash)的方式建立了索引
 查询速度果然大增, 可是当我接下show createtable的时候, hash的unique_key的表示没有了, 取而代之的是一个key(KEY `o2o_spider_song_artist_bthash` (`bthash`), o2o_spider_song_hash这个名字是我起的)的标识
 这是不是意味着, key和index中间的某种关联呢?
 1.建表的时候, key会自动建立index, 无论是PRIMARY KEY, 试试UNIQUE KEY, 还是KEY, index的名字都是定义, 比如
@@ -222,55 +230,11 @@ KEY `o2o_spider_song_bthash` (`bthash`)
 --说道这里为什么刚开始的时候, hash查询会缓慢, 我并不清楚.
 2.而当你建立index时, 如果跟建表时候的key的名称发生冲突, 则key类型会被index类型覆盖
 
-#查询:
-select count(distinct(hash)) from kugou_by_cat
-
-#mysql插入date类型的数据:
-insert into table (name,date,value) values ('魂牵梦萦','2009-06-08 23:53:17','朝秦暮楚');
-
-#mysql导入csv文件
-load data infile '/var/lib/mysql-files/30W.csv' into table thunder_song set utf8
-fields terminated by '\t' lines terminated by '\n'
-(thunder_id, name, artist1, artist2, artist3, artist4, @duration, has_krc, download_link)
-set duration=NULLif(@duration,0)
-#mysql导入csv文件
-load data infile '/var/lib/mysql-files/3333.csv' into table thunder_song character set utf8
-fields terminated by '\t' lines terminated by '\n'
-(thunder_id, name, artist1, artist2, artist3, artist4, duration, has_krc, download_link)
-#mysql导入csv文件
-load data infile '/var/lib/mysql-files/179W.csv' into table kugou_krc_song character set utf8
-fields terminated by '\t' lines terminated by '\n'
-(o2o_id, krc_link, download_link)
-#mysql导入csv文件
-load data infile '/var/lib/mysql-files/match-all-time.txt' into table thunder_match character set utf8
-fields terminated by ';' lines terminated by '\n'
-(thunder_id, name, artist, o2o_id, t_duration, o_duration, d_duration)
-#将本地的txt文件导入远端远端远端远端的存储, 加上local...
-load data local infile '/home/work/all_singer.txt' into table test character set utf8
-fields terminated by ',' lines terminated by '\n'
-(thunder_id, name)
-#将本地的txt文件导入远端远端远端远端的存储, 加上local..., 默认字段对齐
-load data local infile '/home/work/o2omusicinfo.txt' into table test character set utf8
-fields terminated by '|' lines terminated by '\n'
-
 关于alter的本质:
 MySQL在被alter时是可以insert和update的，但是操作会被延迟。
 ALTER TABLE运行时会对原表进行临时复制, 在副本上进行更改, 然后删除原表, 再对新表进行重命名
 在执行ALTER TABLE时, 其它用户可以阅读原表, 但是对表的更新和修改的操作将被延迟, 直到新表生成为止
 新表生成后, 这些更新和修改信息会自动转移到新表上
-
-查看表大小:
-mysql> use information_schema;
-Database changed
-mysql> select data_length, index_length from tables where table_schema='kugou' and table_name = 'o2o_spider_song';
-
-一次工作中的实例查询:
-select * from (select * from test order by age desc) as b group by class;
-
-mysql批量执行命令:
-mysql -h localhost -u root -p xinghang < /home/xinghang/test.sql
-or source /home/xinghang/test.sql
-(http://database.51cto.com/art/201107/277687.htm)
 
 # 一次工作实例, 从.txt中导入数据, 然后连表更新
 # 导入数据
@@ -281,6 +245,40 @@ fields terminated by '    ' lines terminated by '\n'
 update o2o_normal_song k1 left join o2o_spider_song o1
 on k1.o2o_id = o1.id set k1.duration = o1.duration, k1.bitrate = o1.bitrate, k1.size = o1.size, k1.label = o1.label
 ;
-update o2o_normal_song k1 left join o2omusicinfo o1
-on k1.o2o_id = o1.o2o_id set k1.music_no = o1.music_no
-;
+
+mysql插入date类型的数据:
+insert into table (name,date,value) values ('魂牵梦萦','2009-06-08 23:53:17','朝秦暮楚');
+
+查询实例:
+select distinct(hash) from kugou_by_cat
+
+select count(distinct(hash)) from kugou_by_cat
+
+select * from (select * from test order by age desc) as b group by class;
+
+select Concat(username,'(',birthday,')') AS name_birthday  from user where birthday is not null;
+
+select tm.name, tm.price, od.items_num, (tm.price * od.items_num) AS sum_price from orderdetail AS od inner join items AS tm on od.items_id = tm.id;
+
+select ktv_id, sum(total_fee)/100 as sum_total_fee
+from archive_order
+where state=2 and channel in (0, 1) and tp not in (1, 2, 7) and finish_time >= '2016-02-16 00:00:00' and finish_time <= '2016-02-16 23:59:59'
+group by ktv_id
+order by sum_total_fee desc
+limit 10;
+
+select ktv_id, MIN(finish_time) as first_order_time
+from archive_order
+group by ktv_id
+order by first_order_time desc
+limit 10;
+
+select sum(total_fee)/100 as sum_total_fee
+from archive_order
+where ktv_id = 87603 and state = 2 and channel in (0, 1) and tp not in (1, 2, 7) and finish_time >= '2017-02-19 00:00:00'
+
+select sum(total_fee)/100 as sum_total_fee, count(*) as cnt
+from archive_order
+where tp in (1, 2, 7)
+group by tp
+order by cnt desc
