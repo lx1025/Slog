@@ -254,24 +254,24 @@ select distinct(hash) from kugou_by_cat
 
 select count(distinct(hash)) from kugou_by_cat
 
-select * from (select * from test order by age desc) as b group by class;
+select * from (select * from test order by age desc) as b group by class
 
-select Concat(username,'(',birthday,')') AS name_birthday  from user where birthday is not null;
+select Concat(username,'(',birthday,')') AS name_birthday  from user where birthday is not null
 
-select tm.name, tm.price, od.items_num, (tm.price * od.items_num) AS sum_price from orderdetail AS od inner join items AS tm on od.items_id = tm.id;
+select tm.name, tm.price, od.items_num, (tm.price * od.items_num) AS sum_price from orderdetail AS od inner join items AS tm on od.items_id = tm.id
 
 select ktv_id, sum(total_fee)/100 as sum_total_fee
 from archive_order
 where state=2 and channel in (0, 1) and tp not in (1, 2, 7) and finish_time >= '2016-02-16 00:00:00' and finish_time <= '2016-02-16 23:59:59'
 group by ktv_id
 order by sum_total_fee desc
-limit 10;
+limit 10
 
 select ktv_id, MIN(finish_time) as first_order_time
 from archive_order
 group by ktv_id
 order by first_order_time desc
-limit 10;
+limit 10
 
 select sum(total_fee)/100 as sum_total_fee
 from archive_order
