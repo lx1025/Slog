@@ -66,8 +66,9 @@ sudo vim /etc/enviorment
 apt-get 安装java:
 https://tecadmin.net/install-oracle-java-8-ubuntu-via-ppa/#
 
-echo写入文件内容
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+关于echo:
+写入文件内容:
+echo 'something you like' >> ~/.bash_profile
 几个文件查看命令:
 当前目录下单个文件大小,目录只显示目录本身大小: ls -alh
 当前主机磁盘状态: df -h
@@ -78,7 +79,7 @@ ubuntu添加环境变量:
 2.在.bashrc或者.bash_profile中添加环境变量: export PATH="/home/work/elasticsearch-5.2.2/bin":$PATH
 3.直接在终端输入: export PATH="/home/work/elasticsearch-5.2.2/bin":$PATH, 缺点是终端一旦关闭会失效!
 
-关于ffpeg取在线音乐的时长:
+关于ffmpeg取在线音乐的时长:
 ffprobe -v quiet -print_format json -show_streams http://data.5sing.kgimg.com/G030/M01/05/01/voYBAFXu8KKIa89FAAtg5wen4k8AABb6ABvYVgAC2D_146.m4a | jq  .streams[0].duration
 
 last -n 5
@@ -114,10 +115,10 @@ move 用于文件移动或者重命名
 文件改名: mv test.log test.txt
 移动文件: mv test.txt test1
 批量移动文件: mv log1.txt log2.txt log3.txt test1
-          : mv -t /opt/soft/test/test4/ log1.txt log2.txt  log3.txt
-文件改名,询问是否覆盖: mv -i text.log text.txt
-文件改名,强制覆盖: mv -f text.log text.txt
-目录改名或者移动: mv dir1 dir2 若dir2存在,就是移动目录, 否则就是改名
+            : mv -t /opt/soft/test/test4/ log1.txt log2.txt  log3.txt
+文件改名, 询问是否覆盖: mv -i text.log text.txt
+文件改名, 强制覆盖: mv -f text.log text.txt
+目录改名或者移动: mv dir1 dir2 若dir2存在, 就是移动目录, 否则就是改名
 将当前目录下所有文件移动到上级目录: mv * ../
 文件重命名做备份: mv text.log -b text.txt
 
@@ -248,3 +249,6 @@ lsb_release -a
 输入service可以补全, sudo service 竟然不能补全...
 http://blog.csdn.net/chavo0/article/details/51939362
 servise mysqld start
+
+查看根目录下体积最大的前十个文件:
+find / -printf '%s %p\n'| sort -nr | head -10

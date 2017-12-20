@@ -1,44 +1,49 @@
 <!-- 常用那几种浏览器测试 有哪些内核(Layout Engine)
 Ie(Ie)
-FireFox(Gecko)
-opear(Presto)
-chrome(webkit)
-safari(webkit) -->
+Chrome(webkit)
+Safari(webkit) 
+FireFox(Gecko )-->
 
 <!-- 介绍一下你对浏览器内核的理解？
-主要分成两部分：渲染引擎(layout engineer或Rendering Engine)和JS引擎。
-渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要内核。
-JS引擎则：解析和执行javascript来实现网页的动态效果。
-xinghan
-xinghagn
-最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎。-->
+主要分成两部分, 渲染引擎(layout engineer或Rendering Engine)和JS引擎。
+渲染引擎:
+负责取得网页的内容(HTML、XML、图像等等)、整理讯息(例如加入CSS等), 以及计算网页的显示方式, 然后会输出至显示器或打印机, 浏览器的内核的不同对于网页的语法解释会有不同, 所以渲染的效果也不相同。
+JS引擎则:
+解析和执行javascript来实现网页的动态效果
+最开始渲染引擎和JS引擎并没有区分的很明确, 后来JS引擎越来越独立, 内核就倾向于只指渲染引擎 -->
+
+<!-- 写出几种IE6-BUG的解决方法
+1.float引起的双边距BUG: 第一个浮动元素的css属性加上display: inline属性就可以了 
+2.使用float引起的3像素问题: _margin-right: -3px; 记住, 前边加上一下划线 
+3.<a>标签hover伪类点击后失效: 使用正确的伪类书写顺序link, visited, hover, active
+4.select 在ie6下遮盖 使用iframe嵌套
+5.PNG24位的图片在iE6浏览器上出现背景, 解决方案是做成PNG8
+-->
 
 <!-- HTTP状态码
-100 Continue  继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
-200 OK   正常返回信息
+100 Continue  继续  一般在发送post请求时, 已发送了http header之后服务端将返回此信息, 表示确认, 之后发送具体参数信息
+200 OK  正常返回信息
 30* Redirect  请求的网页已永久移动到新位置
 40* Client 出错
-400 Bad Request  服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求
+400 Bad Request  服务器无法理解请求的格式, 客户端不应当尝试再次使用相同的内容发起请求
 401 Unauthorized  授权出错
 403 Forbidden  禁止访问
-404 Not Found  找不到如何与 URI 相匹配的资源
+404 Not Found  找不到如何与URI相匹配的资源
 405 Method Not Allowed 请求方法错误
 50* Server 出错
 500 Internal Server Error  最常见的服务器端错误
-503 Service Unavailable 服务器端暂时无法处理请求（可能是过载或维护） -->
+503 Service Unavailable 服务器端暂时无法处理请求, 可能是过载或维护 -->
 
-<!-- 关于优化. -->
-<!-- 先了解以下内容
+<!-- 关于优化
+先了解以下内容:
 1.关于gzip(http://www.cnblogs.com/sunhk/p/5189425.html):
 一个100KB的Javascript文件, 正常的下载量就是100KB, 把文件在服务端压缩一下, 压缩成30kb, 下载到客户端再进行解压,
 这样就减少了大量的HTTP的传输时间，这就是GZIP的作用
-
 2.关于同步加载与异步加载, 懒加载与预加载:
 同步加载:
 <script src="http://XXX.com/script.js"></script>, 这就是一个典型的同步加载.
 同步加载会发生阻塞, 会阻止浏览器的后续行为, 比如生成dom树, cssdom树.
 例如在head中添加一个script, 但这个script下载时网络不稳定, 很长时间没有下载完成对应的js文件, 那么浏览器此时一直等待这个js文件下载, 此时浏览器并不能开始生成dom树和cssdom树
-
 异步加载:
 在body内部加入下列代码实现异步加载.
 <script></script>
@@ -51,7 +56,6 @@ xinghagn
      x.parentNode.insertBefore(s, x)
  })()</strong>
 这样就能跟dom树和cssdom树的生成异步进行啦
-
 懒加载(需要的时候再加载):
 js的懒加载: 也就是将js切分成许多模块，页面初始化时只加载需要立即执行的js, 然后其它js的加载延迟到第一次需要用到的时候再加载。
 图片的懒加载: 在图片出现在可视区域内时（在滚动条下拉）才加载显示图片
@@ -112,14 +116,6 @@ link之所已效率更高,是因为在dom树生成时, link会同时被加载,�
 因为我们建议把link标签放在最前边,包括script的前边
 -->
 
-<!-- 写出几种IE6 BUG的解决方法
-1.float引起的双边距BUG 使用display
-2.使用float引起的3像素问题  使用dislpay:inline -3px
-3.a标签hover伪类点击后失效 使用正确的书写顺序 link visited hover active
-4.select 在ie6下遮盖 使用iframe嵌套
-5.png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8
--->
-
 <!-- 关于CDN
 http://baike.baidu.com/link?url=y78p7c2IFG6s2Xt4205GbGSbRbEgNiL9bMv9jql0uuXe-bVWfd9FV9Vk7AKBHNTtvFTc2Cbg_zvTuHFwOJ7eLKDgldfRvk-eB6SXv8qSdTPT6WGeAP73EQZr6NhiV4IkDTAqzh7SD7ls9lXM-DwKxa
 全称: content delivery network 内容分发网络
@@ -129,42 +125,8 @@ http://baike.baidu.com/link?url=y78p7c2IFG6s2Xt4205GbGSbRbEgNiL9bMv9jql0uuXe-bVW
 
 <!-- 常见的兼容性问题
 1.浏览器默认的margin和padding不同。解决方案是加一个全局的 * {margin:0;padding:0;}来统一
-2.Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示, 可通过加入 CSS 属性 -webkit-text-size-adjust:none; 解决. 如果这一属性也不成 使用 transform:scale 来解决
-3.IE下,既可以使用获取常规属性的方法来获取自定义属性, 又可以使用getAttribute()获取自定义属性;Firefox下,只能使用getAttribute()获取自定义属性. 解决方法:统一通过getAttribute()获取自定义属性.
--->
-
-<!-- 关于cookie或者localStorage, 实现多个标签页之间同域页面的通信
-关于cookie:
-各种后端框架都方便的封装了设置cookie的方法,比如(tonador), 本质上都是通过在响应报文的头部加入 Set-Cookie 字段来设置的
-Set-Cookie: NAME=VALUE; expires=DATE; path=PATH; domain=DOMAIN
-expires是过期时间戳，通常用当前时间的毫秒数加上一段时间： new Date().getTime()+30*24*60*60*1000)(这就能解释清理cookie的时候, 将expire设置成一个过去的时间就能删除cookie)
-如果不设置expires，在浏览器中这个cookie将被当做session对待，也就是关闭了浏览器cookie就消失
-关于js对cookie的方法:
-读取:
-var cookies = document.cookie (这一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie)
-var cookieA = cookies.repalce(/.*cookieA=([^;]*).*/, "$1")
-设置:
-document.cookie = 'cookie_example=123'+';expires='+expire+';path=/';
-关于localStorage:
-来自html5,实现本地存储, 突破了cookie 4k的限制, 最大的存储空间是5M, localStorage中所有的item都是str类型
-用法:setItem, getItem, removeItem
-if (!window.localStorage) {
-    alert("浏览器支持localstorage")
-}
-else{
-    var storage=window.localStorage
-    var data = {
-        name: 'xiecanyong',
-        sex: 'man',
-        hobby: 'program'
-    }
-    var dataStr = JSON.stringify(data)
-    storage.setItem('data', dataStr)
-    var dataStr = storage.getItem('data'))
-    var dataJson = JSON.parse(dataStr)
-    console.log(dataJson, typeof(dataJson))
-    storage.removeItem('data')
-}
+2.Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示, 可通过加入 CSS 属性 -webkit-text-size-adjust:none; 解决. 如果这一属性也不成 使用 transform: scale 来解决
+3.IE下, 既可以使用获取常规属性的方法来获取自定义属性, 又可以使用getAttribute()获取自定义属性;Firefox下,只能使用getAttribute()获取自定义属性. 解决方法:统一通过getAttribute()获取自定义属性.
 -->
 
 <!-- 实现跨域的三种方案
@@ -173,10 +135,12 @@ else{
 3. 使用后台代理
 JSONP(最常用):
 利用了script标签src属性没有域的限制而完成
-需要前端、后台配合完成
+需要前端、后台配合完成.
 后台设置访问源限制:
 只需后台做访问源(Access-Control-Allow-Origin)的设置, 修改报文头, 前端就可以正常访问跨域的数据
-使用服务器端通信
+self.set_header("Access-Control-Allow-Origin", "*")
+self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
 使用后台代理:
 前端不直接访问跨域的数据, 而是交给服务器去做
 服务器去请求别的站点的数据, 后台服务器是没有域的限制的

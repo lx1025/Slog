@@ -90,7 +90,6 @@ class ToMysql():
                 print "记录已经存在: ", e
                 return False
 
-
         # if self.connection:
         #     tablename = self.escape(tablename)
         #     if values:

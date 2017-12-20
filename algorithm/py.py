@@ -86,18 +86,18 @@ if __name__ == '__main__':
     print seq
 
 # 快速排序:
-def qsort(seq):
-    if seq==[]:
-        return []
-    else:
-        pivot=seq[0]
-        lesser=qsort([x for x in seq[1:] if x<pivot])
-        greater=qsort([x for x in seq[1:] if x>=pivot])
-        return lesser+[pivot]+greater
+def quickSort(seq):
+    if len(seq) <= 1:
+        return seq
+    pivot = seq[0]
+    left = quickSort([i for i in seq[1:] if i <= pivot])
+    right = quickSort([i for i in seq[1:] if i > pivot])
+    return left + [pivot] + right
 
-if __name__=='__main__':
-    seq=[5,6,78,9,0,-1,2,3,-65,12]
-    print(qsort(seq))
+if __name__ == '__main__':
+    seq = [5, 6, 78, 9, 0, -1, 2, 3, -65, 12]
+    l = quickSort(seq)
+    print l
 
 # 基础版本的快速排序:
 def quickSort(seq, low, high):

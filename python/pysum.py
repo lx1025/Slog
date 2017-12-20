@@ -189,7 +189,7 @@ async def pay_query(self, order_id, loop=5):
         logging.error(e)
         if loop>0:
             IOLoop.current().add_timeout(time.time()+60, self.pay_query, order_id, loop-1)
-        raise utils.APIError(errcode=19004, errmsg='查单失败')
+        raise utils.APIError(errcode=19004, errmsg='Find Order Error')
 
 # python中的的class与继承和super的作用:
 class A(object):
@@ -265,3 +265,36 @@ print a
 None
 
 # python unit_test
+
+# python 深浅拷贝 python list本质上引用数据类型
+# 浅拷贝
+a = [1, 2, 3]
+b = a
+b[1] = 1
+print a, b
+# 浅拷贝
+a = [1, 2, 3]
+b = a
+a[1] = 1
+print a, b
+# 浅拷贝
+a =[1, 2, 3]
+b = a
+a = [4, 5, 6]
+print a, b
+# 这是深拷贝
+a = [1, 2, 3]
+b = [i for i in a]
+a[1] = 1
+print a, b
+# 这是浅拷贝, python list引用数据类型
+a = [1, 2, [3, 3]]
+b = [i for i in a]
+a[2][0] = 1
+print a, b
+# 实现深拷贝
+import copy
+a = [1, 2, [3, 3]]
+b = copy.deepcopy(a)
+a[2][0] = 1
+print a, b
