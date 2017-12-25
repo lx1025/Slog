@@ -281,11 +281,9 @@ if __name__ == '__main__':
     res2 = search(l1, l3, n)
     print res1, res2
 
-
-
 # 优化有序数组的二分查找:
 # 递归解法.
-# 这个写法真是错完了! 
+# 这个写法真是错完了!
 # 第一, 找到了无论如何都会返回0! 因为seq在变.
 # 第二, 怎么能用seq(index)呢? 那你的查找还有什么意义?
 def search(seq, key):
@@ -380,10 +378,10 @@ afterList = []
 
 def findAfterLis(preList, midList, afterList):
     if len(preList) == 0:
-        return 
+        return
     if len(preList) == 1:
         afterList.append(preList[0])
-        return 
+        return
 
     root = preList[0]
     n = midList.index(root)
@@ -461,5 +459,3 @@ def delSame(seq):
 if __name__ == '__main__':
      seq = [0, 1, 3, 3, 4, 5, 5, 5, 8, 9]
      print delSame(seq)
-
-

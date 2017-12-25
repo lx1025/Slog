@@ -71,3 +71,6 @@ zset:
 cli和server位置: /home/work/redis-server/src/redis-cli (redis-server)
 修改配置文件 指定端口, 启动: ./redis-server ../redis-conf
 外网连接: redis-cli -h 10..... -p 6380
+
+关于redis集群配置:
+http://blog.csdn.net/shy_snow/article/details/50466767

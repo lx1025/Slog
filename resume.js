@@ -4,7 +4,7 @@ Web后端:
  python, tornado, django 
  php, thinkphp
  Docker, Dockerhub(xinghanggogogo)
- mysql, redis, memorycache, python ORM(peewee, sqlalchemy)
+ mysql(主从), redis(集群), memorycache, mongodb, python ORM(peewee, sqlalchemy)
  elasticsearch, 可视化
  nginx, lighttpd
  http/https/http2.0/tcp/ip 计算机网络
@@ -16,7 +16,7 @@ Web前端:
  html(html5, markdown), 
  css(css3, sass), 
  js(es6, jquery), 插件animate, fullpage, swiper, highchart
- bootstrap, layui
+ layui, bootstrap
  vue, element.vue, wx.vue, 开源vue脚手架(govue)
  react, antd, 开源react脚手架(goreact)
  ps
