@@ -38,10 +38,10 @@ class MainHanlder(tornado.web.RequestHandler):
         self.write(my_future)
 
 # 4.彻底的避免回调不简洁的写法, 就用gen.croutin这个装饰器:
-#   在tornado3发布之后, 强化了coroutine的概念, 在异步编程中, 替代了原来的gen.engine, 
-#   变成现在的gen.coroutine, 这个装饰器与异步本身没有关系, 异步的具体操作是tornado的AsyncHTTPClinet的实现的, 本质是IOloop()
-#   它为了简化在tornado中的异步编程, 避免写回调函数.
-#   在 gen.coroutin装饰器中, 调用get, 因为包含yield, 返回值是一个生成器(generator). 需要通过调用 next 或 send 来执行.
+# 在tornado3发布之后, 强化了coroutine的概念, 在异步编程中, 替代了原来的gen.engine, 
+# 变成现在的gen.coroutine, 这个装饰器与异步本身没有关系, 异步的具体操作是tornado的AsyncHTTPClinet的实现的, 本质是IOloop()
+# 它为了简化在tornado中的异步编程, 避免写回调函数.
+# 在 gen.coroutin装饰器中, 调用get, 因为包含yield, 返回值是一个生成器(generator). 需要通过调用 next 或 send 来执行.
 from tornado.httpclient import AsyncHTTPClient
 class MainHanlder(tornado.web.RequestHandler):
     @gen.coroutine

@@ -74,3 +74,15 @@ cli和server位置: /home/work/redis-server/src/redis-cli (redis-server)
 
 关于redis集群配置:
 http://blog.csdn.net/shy_snow/article/details/50466767
+redis是单线程的, 集群, 然后一个端口一个实例, 可以保证分流, 不阻塞, 这就是redis集群的意义
+
+redis为什么是单线程的?
+说白了就是一个取舍问题.
+https://www.cnblogs.com/yuyutianxia/p/6346723.html
+对内存的操作是同步的, 可是io是异步的, 每秒60000次.
+
+redis为什么很快速?
+总体来说快速的原因如下:
+1）绝大部分请求是纯粹的内存操作(非常快速).
+2）采用单线程, 避免了不必要的上下文切换和竞争条件
+3）非阻塞IO, 内部实现采用epoll，采用了自己实现的简单的事件框架, epoll中的读、写、关闭、连接都转化成了事件, 然后利用epoll的多路复用特性, 绝不在io上浪费一点时间.
