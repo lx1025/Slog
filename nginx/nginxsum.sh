@@ -17,7 +17,7 @@ server {
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
     location / {
-        proxy_pass http://127.0.0.1:8989 #实现反向代理这里的意思是从80->8000，这个端口运行着工程  8000是非常关键的，涉及到微信的认证
+        proxy_pass http://127.0.0.1:8000 #实现反向代理这里的意思是从80->8000，这个端口运行着工程  8000是非常关键的，涉及到微信的认证
     }
 }
 文件的另外一个末尾行：
