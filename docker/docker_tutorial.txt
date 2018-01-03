@@ -369,4 +369,3 @@ yum repolist enabled | grep mysql
 [root@e08ef6829ea1 /]# mysqladmin -u root password 'xinghang'
 登录:
 [root@e08ef6829ea1 /]# mysql -u root -p
-
