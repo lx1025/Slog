@@ -85,3 +85,47 @@ redis为什么很快速?
 1）绝大部分请求是纯粹的内存操作(非常快速).
 2）采用单线程, 避免了不必要的上下文切换和竞争条件
 3）非阻塞IO, 内部实现采用epoll，采用了自己实现的简单的事件框架, epoll中的读、写、关闭、连接都转化成了事件, 然后利用epoll的多路复用特性, 绝不在io上浪费一点时间.
+
+bitdance:
+-----
+1.关于key和五种数据类型及其操作:
+key: get key
+     del key
+     ttl eky
+     keys key
+     exist key
+string: get key
+        set key
+        strlen key
+list: rpush key value
+      rpop key 
+      lrange key 0 -1
+      llen len 
+hash: hset key name value
+      hget key name 
+      hdel key name
+set: sadd key value
+     srem key value
+     smember key
+     sinter key1 key1
+     sunion key1 key2
+zet: zadd key score name
+     zrem key name
+     zrange key index1 index2
+     zrange key index1 index2 withscores
+其中, srting是最常用的, list适合于数据结构中的的list(即先进先出), hash完美适合于对象, set可以求交并集, 而zset完美适合于排行榜
+2.redis为什么这么快:
+三点. 单线程避免上下文切换, 在内存操作(同步的), 异步io采用epoll实现多路复用 
+3.redis为什么采用单线程:
+这是一个取舍问题, 在多线程中操作, 必然涉及到锁的问题, 这会使程序的逻辑严重复杂化
+所以使用多线程可以提高性能, 但是每个线程的效率严重下降了
+单线程的的单次操作非常快速(见上), 但是多线程自然是可以比单线程有更高的性能上限
+但是在今天的计算环境中, 即使是单机多线程的上限也往往不能满足需要了, 需要进一步摸索的是多服务器集群化的方案, 讨论单线程和多线程的意义就不大了
+4.关于redis的集群:
+单例的redis业务量较大的时候, 就会发生性能的问题, 比如请求过多索引速度慢, 集群就是把所有的数据分开存放在多个redis服务器上
+所以就需要将一堆的键值对'均分'存储到多个redis服务器,  即hash散列算法, 这里的hash算法很多, 经典的是一致性hash算法
+http://blog.csdn.net/u014490157/article/details/52244378
+5.redis做主从也是有意义的, 虽然redis是单进程的
+主redis可以读写, 从redis只管读
+-----
+

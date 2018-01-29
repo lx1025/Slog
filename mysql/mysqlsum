@@ -282,3 +282,81 @@ from archive_order
 where tp in (1, 2, 7)
 group by tp
 order by cnt desc
+
+bitdance:
+-----
+关于mysql事务:
+事务用来管理insert, update, delete语句
+事务保证成批的sql语句要么全部执行, 要么全部不执行, 即回退
+MySQL事务主要用于处理操作量大, 复杂度高的数据操作
+比如说, 比如一个消费系统, 用户完成消费, 需要同时更新几张表, 这些操作是互相绑定必须同时成功, 这就可以看做是一个事务
+在mysql中只有使用了Innodb(早期MyISAM普遍运用, 可是因为对事务的流行和对并发要求越来越高, 逐渐退出了)数据库引擎的数据库或表才支持事务
+一般来说, 事务是必须满足4个条件(ACID): Atomicity(原子性), Consistency（稳定性), Isolation(隔离性), Durability(可靠性)
+1.原子性: 一组事务, 要么成功, 要么撤回
+2.稳定性: 有非法数据(外键约束之类), 事务撤回
+3.隔离性: 事务的隔离性是分等级的(https://www.cnblogs.com/ws-astrologer/p/6681089.html). 默认是'REPEATABLE READ', 事事务串行化执行, 隔离级别最高, 牺牲了系统的并发性, 可以解决并发事务的所有问题
+4.可靠性: 软硬件崩溃后, InnoDB数据表驱动会利用日志文件重构修改, 事务在mysql容灾经常会用到
+
+使用begin和commit显式开启一个事务: http://www.runoob.com/mysql/mysql-transaction.html
+sqlalcmy rollback:
+def update_wow_coupon_consume_order(self, data):
+    ...
+    try:
+        self.master.query(MusicOrder).filter_by(pay_order_id=pay_order_id).update(_mo)
+        self.master.add(WowCouponOrder(**data))
+        self.master.commit()
+        return 1
+    except Exception as e:
+        logging.error(e)
+        self.master.rollback()
+
+-----
+关于mysql的外键:
+http://www.runoob.com/sql/sql-foreignkey.html
+1.一个表中的外键必然是一个表中的主键
+2.外键约束用于预防破坏表之间连接的行为
+3.外键约束也能防止非法数据插入外键列, 因为它必须是它指向的那个表中的值之一
+
+-----
+关于以innodb为引擎的mysql表的锁:
+https://www.2cto.com/database/201508/429967.html
+数据库锁定机制简单来说, 就是数据库为了保证数据的一致性.
+而使各种共享资源在被并发访问时不会影响到数据的一致性.
+innodb共有两种行级锁, 分别是共享锁和排他锁
+如果一个事务获得了某行的共享锁, 那么其他事务可以加上共享锁, 不可以加上排他锁
+如果一个事务获得了某行的排他锁, 那么她不允许其他任何事物对本行加锁, 只允许读, 不允许写
+对于insert, update, delete, InnoDB会自动给涉及的数据加排他锁(X), 对于一般的Select语句, InnoDB不会加任何锁, 事务可以通过以下语句给显示加共享锁或排他锁
+
+-----
+mysql是像redis一样单线程吗?
+mysql是可以配置多线程执行的, 多线程必然涉及到共享资源的的一致性问题, 这就是mysql锁的意义所在, 排他锁共享锁. 另, 如果你的库涉及到大量的读操作, 多线程的配置是极有成效的.
+每个线程的执行具有原子性
+
+-----
+关于mysql主从以及数据一致性:
+关于mysql的主从:
+1.主从复制
+建立一个和主数据库完全一样的数据库环境, 称为从数据库
+从数据库作为后备数据库, 主数据库服务器故障后, 可切换到从数据库继续工作, 也可以在在从数据库作备份、数据统计等工作, 这样不影响主数据库的性能
+2.读写分离
+是指读与写分别使用不同的数据库, 因为mysql是有最大并发数(可以设置成cpu核数*2, 注意区别最大连接数(默认100)http://blog.csdn.net/czhphp/article/details/41644351)
+一般读写的数据库环境配置为, 一个写入的数据库, 一个或多个读的数据库各个数据库分别位于不同的服务器上, 充分利用服务器性能和数据库性能, 提高吞吐量, 因为写比读慢的多, 当然, 其中会涉及到如何保证读写数据库的数据一致，这个就可以利用主从复制技术来完成
+一般应用场合为, 业务吞吐量很大, 读数据库(可简单理解为select语句的 比例和影响)的负载较大
+主从复制的过程:
+在master上提交事务后(增改删), 并且写入主log, 返回事务成功标记
+将主log发送到slave, 转储成从log
+在slave上再将从log读取出来应用
+以上是一个异步的过程, 必然会发生数据不一致的情况
+如果发生了数据不一致:
+1.从新从0开始同步, 对主库的使用影响不大(可能增加读的任务量)
+2.dump主, 锁库, dumpin从, 影响线上业务 
+3.percona-toolkit 中的工具来校验和同步, 从介绍上来看是符合现在的情况的, 使用上还需要学习和认识才行
+
+-----
+思考一个问题, mysql的的线程数是4, 为什么读写分离会快?
+如果碰巧这4个线程中的的写操作全在读操作之前, 那么读操作只能等待, 这就影响了mysql的吞吐量
+
+-----
+mysql的线程数设置成1, 会不会发生数据不一致?
+不会, 就像redis一样
+

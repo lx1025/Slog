@@ -337,39 +337,93 @@ if __name__ == '__main__':
     index = search(l, key, 0, len(l)-1)
     print index
 
-# python实现二叉树的遍历:
+# python实现二叉树的各种遍历和深度, 最短路径和最长路径:
 class Node:
-    def __init__(self, value=None, left=None, right=None):
-        self.value = value
-        self.left = left
-        self.right = right
+    def __init__(self, data, left=None, right=None):
+        self.data = data
+        self.left = left 
+        self.right = right 
 
-def preTraverse(root):
-    if not root:
-        return
-    print root.value
-    preTraverse(root.left)
-    preTraverse(root.right)
+def preTraverse(tree):
+    if not tree:
+        return None
+    print tree.data
+    preTraverse(tree.left)
+    preTraverse(tree.right)
 
-def midTraverse(root):
-    if not root:
-        return
-    midTraverse(root.left)
-    print root.value
-    midTraverse(root.right)
+def midTraverse(tree):
+    if not tree:
+        return None
+    midTraverse(tree.left)
+    print tree.data
+    midTraverse(tree.right)
 
-def afterTraverse(root):
-    if not root:
-        return
-    afterTraverse(root.left)
-    afterTraverse(root.right)
-    print root.value
+def afterTraverse(tree):
+    if not tree:
+        return None
+    afterTraverse(tree.left)
+    afterTraverse(tree.right)
+    print tree.data
+
+def levelTraverse(tree):
+    if not tree:
+        return None
+    stack = []
+    stack.append(tree)
+    while stack:
+        current = stack.pop()
+        print current.data
+        if current.left:
+            stack.append(current.left)
+        if current.right:
+            stack.append(current.right)
+
+def deepTraverse(tree):
+    if not tree:
+        return None
+    print tree.data 
+    deepTraverse(tree.left)
+    deepTraverse(tree.right)
+
+def getDepth(tree):
+    if not tree:
+        return 0
+    return max(getDepth(tree.left), getDepth(tree.right)) + 1
+
+def getMinPath(tree):
+    if not tree:
+        return 0
+    if tree.left and tree.right:
+        return min(getMinPath(tree.left), getMinPath(tree.right)) + tree.data
+    if tree.left:
+        return getMinPath(tree.left) + tree.data
+    if tree.right:
+        return getMinPath(tree.right) + tree.data
+    else:
+        return tree.data
+
+def getMaxPath(tree):
+    if not tree:
+        return 0
+    if tree.left and tree.right:
+        return max(getMaxPath(tree.left), getMaxPath(tree.right)) + tree.data
+    if tree.left:
+        return getMaxPath(tree.left) + tree.data
+    if tree.right:
+        return getMaxPath(tree.right) + tree.data
+    else:
+        return tree.data
 
 if __name__ == '__main__':
-    tree = Node('D', Node('B', Node('A'), Node('C')), Node('E'
+    tree = Node(1, Node(3, Node(7, Node(0)), Node(6)), Node(2, Node(5), Node(4)))
     preTraverse(tree)
     midTraverse(tree)
     afterTraverse(tree)
+    levelTraverse(tree)
+    deepTraverse(tree)
+    print getDepth(tree)
+    print getMaxPath(tree)
+    print getMinPath(tree)
 
 # 经典的根据先序和中序遍历, 求解后序遍历:
 preList = list('DBACEGF')
@@ -394,7 +448,40 @@ def findAfterLis(preList, midList, afterList):
 findAfterLis(preList, midList, afterList)
 print afterList
 
+# 判断两个树是否相同
+def isSameTree(p, q):
+    if not p  and not q:
+        return True
+    elif p and q :
+        return p.data == q.data and isSameTree(p.left,q.left) and isSameTree(p.right,q.right)
+    else:
+        return False
+
+# 单链表逆置:
+class Node:
+    def __init__(self, data=None, next=None):
+        self.data = data
+        self.next = next
+link = Node(1, Node(2, Node(3, Node(4, Node(5, Node(6, Node(7, Node(8, Node(9)))))))))
+
+def rev(link):
+    pre = link
+    cur = link.next
+    pre.next = None
+    while cur:
+        tmp = cur.next
+        cur.next = pre
+        pre = cur
+        cur = tmp
+    return pre
+ 
+root = rev(link)
+while root:
+    print root.data
+    root = root.next
+
 # 给定1到n, 按照字典序排序, 求第k大的数字:
+# 更优秀的解法是与快速排序结合, 这是使用了插入排序
 def lesser(a, b):
     a = list(str(a))
     b = list(str(b))
@@ -461,3 +548,4 @@ def delSame(seq):
 if __name__ == '__main__':
      seq = [0, 1, 3, 3, 4, 5, 5, 5, 8, 9]
      print delSame(seq)
+

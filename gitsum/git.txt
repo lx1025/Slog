@@ -109,3 +109,8 @@ git push
 
 查看两个版本指定文件的差异:
 git diff 5381dc6c3 9416d240b -- handler/song.py
+
+.gitignore失效的例子:
+git rm -r --cached .
+git add .
+git commit -m 'update .gitignore'
