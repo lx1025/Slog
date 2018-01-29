@@ -377,8 +377,10 @@ midList = list('ABCDEFG')
 afterList = []
 
 def findAfterLis(preList, midList, afterList):
+
     if len(preList) == 0:
         return
+
     if len(preList) == 1:
         afterList.append(preList[0])
         return

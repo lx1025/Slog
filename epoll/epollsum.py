@@ -1,7 +1,7 @@
 '''
 什么是epoll(或者kqueue-key queue 一个是liunx的内核, 一个是mac的模型):
 epoll是一个io模型, 说白了就是select的改进版本, 从很笨的轮训方式升级成多路复用, 实现单线程或者进程下的多路io的并发.
-它自己维护了一套事件模型, 读, 写, 连接, 关闭, 都有自己的事件符号, 根据这种符号来区别处理, 实现io效率的最大化. 
+它自己维护了一套事件模型, 读, 写, 连接, 关闭, 都有自己的事件符号, 根据这种符号来区别处理, 实现io效率的最大化.
 
 1.首先我们来定义流(stream)的概念:
 一个流可以是文件, socket, pipe等可以进行I/O操作的内核对象. 不管是文件, 还是套接字(socket), 还是管道(pipe), 我们都可以把他们看作流。
@@ -16,22 +16,22 @@ epoll是一个io模型, 说白了就是select的改进版本, 从很笨的轮训
 阻塞I/O模式下, 一个线程只能处理一个流的I/O事件(重要).
 
 3.如果想要阻塞模式下同时处理多个流也就是多个IO, 要么多进程要么多线程(pthread_create), 很不幸这两种方法效率都不高. 于是再来考虑非阻塞忙轮询的I/O方式, 单进程或线程轮询流队列来处理多个流, 伪代码如下:
-while true {  
-    for i in stream[]; {  
-        if i has data  
-        read until unavailable  
-    }  
-}  
+while true {
+    for i in stream[]; {
+        if i has data
+        read until unavailable
+    }
+}
 我们只要不停的把所有在流队列中的流从头到尾问一遍, 又从头开始. 这样就单线程或者单进程可以处理多个流了, 但这样的做法显然不好, 因为如果所有的流都没有数据, 那么只会白白浪费CPU
 
 4.为了避免CPU空转, 我们引进一个代理, 一开始有一位叫做select的代理.
 这个代理比较厉害, 可以同时观察许多流的I/O事件, 在空闲的时候, 会把当前线程阻塞掉, 当有一个或多个流有I/O事件时, 就从阻塞态中醒来, 于是我们的程序就会轮询一遍所有的流, 伪代码如下:
-while true {  
-    select(streams[])  
-    for i in streams[] {  
-        if i has data  
-        read until unavailable  
-    }  
+while true {
+    select(streams[])
+    for i in streams[] {
+        if i has data
+        read until unavailable
+    }
 }
 如果没有I/O事件产生, 我们的程序就会阻塞在select处. 但是依然有个问题, 我们从select那里仅仅知道了, 有I/O事件发生了, 但却并不知道是那几个流(可能有一个, 多个, 甚至全部), 我们只能无差别轮询所有流, 找出能读出数据，或者写入数据的流, 对他们进行操作
 
@@ -123,6 +123,7 @@ while True:
 epoll.unregister(serversocket.fileno())
 epoll.close()
 serversocket.close()
+
 #客户端:
 import socket
 clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -134,4 +135,3 @@ while True:
     server_data = clientsocket.recv(1024)
     print '客户端收到的数据:'server_data
     clientsocket.close()
-

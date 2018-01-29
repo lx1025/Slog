@@ -14,6 +14,7 @@
 #include <algorithm>
 #define MAX 101
 using namespace std;
+
 int D[MAX][MAX];
 int n;
 int MaxSum(int i, int j){

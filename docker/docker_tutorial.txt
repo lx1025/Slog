@@ -166,10 +166,10 @@ Login Succeeded
 查看所有image(镜像):
 xinghang@thunder:~$ sudo docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-job1                    latest              8aa5586dae85        3 hours ago        1.093 MB
-<none>              <none>           597c8de78f80         7 days ago          693.5 MB
-busybox             latest              5356a35496ab        7 weeks ago       1.093 MB
-learn/tutorial    latest              2d13ac7ee948         3 years ago
+job1                latest              8aa5586dae85        3 hours ago         1.093 MB
+<none>              <none>              597c8de78f80        7 days ago          693.5 MB
+busybox             latest              5356a35496ab        7 weeks ago         1.093 MB
+learn/tutorial      latest              2d13ac7ee948        3 years ago
 
 将镜像打上标签(tag):
 xinghang@thunder:~$ docker tag 8aa5586dae85 xinghanggogogo/job1

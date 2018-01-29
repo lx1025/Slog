@@ -75,7 +75,7 @@ cli和server位置: /home/work/redis-server/src/redis-cli (redis-server)
 http://blog.csdn.net/shy_snow/article/details/50466767
 redis是单线程的, 集群, 然后一个端口一个实例, 可以保证分流, 不阻塞, 这就是redis集群的意义
 
-redis为什么是单线程的:
+redis为什么是单线程的?
 说白了就是一个取舍问题.
 https://www.cnblogs.com/yuyutianxia/p/6346723.html
 对内存的操作是同步的, 可是io是异步的, 每秒60000次.

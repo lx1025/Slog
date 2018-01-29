@@ -275,9 +275,9 @@ http转https的跳转:
 http://www.cnblogs.com/yun007/p/3739182.html
 1.rewrite
 2.返回index.html, 然后实现跳转.
-<html>  
-    <meta http-equiv="refresh" content="0;url=https://test.com/">  
-</html> 
+<html>
+    <meta http-equiv="refresh" content="0;url=https://test.com/">
+</html>
 
 https原理:
 1.前提是服务器像认证机构申请证书, 认证机构向其颁发证书.
@@ -291,11 +291,16 @@ https原理:
 以上验证过程, 其实就是ssl和tls协议的大致内容(两种加密方式公用, 公开密钥加密, 共享秘钥加密), 协议栈无非是http->ssl/tls-tcp-ip.
 身份验证, 信息加密, 信息完整性的检验
 
-
-
-
-
-
-
-
-
+指向静态文件
+server {
+        listen  80;
+        server_name  www.kuailezhua.com;
+        location / {
+            root /home/work/xinghang/crane_machine;
+            index MP_verify_NWZchCaulHbYWCHN.txt;
+            autoindex on;
+            autoindex_exact_size off;
+            autoindex_localtime on;
+            charset utf-8,gbk;
+        }
+}
