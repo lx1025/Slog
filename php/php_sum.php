@@ -104,9 +104,9 @@ $$a = 'world';
 echo($a $hello);
 一个用法:
 <?php
-$nameTypes  = array("first", "last", "company");
-$name_first  = "John";
-$name_last  = "Doe";
+$nameTypes = array("first", "last", "company");
+$name_first = "John";
+$name_last = "Doe";
 $name_company = "PHP.net";
 foreach($nameTypes as $type)
  print ${"name_$type"} . "\n";
@@ -247,4 +247,31 @@ echo "Study " . $_GET['subject'] . " at " . $_GET['web'];
 关于php中的域名空间: PHP 命名空间可以解决以下两类问题:
 做项目时 ,一个文件可能会引入多个文件. 如果不使用命名空间, 引入的多个文件中可能存在同名的类, 函数, 常量, 就会报错(重复定义的错误)
 问: 如果在一个文件中, 使用不同命名空间下的同名函数呢? 前面加上命名空间即可, 类似于: namespace/func()
+
+php快速排序:
+<?php
+    seq = array(1, 4, 0, 3, 2)
+    function quickSort ($seq) {
+        if (count($seq) <= 1) {
+            return 
+        }
+        $left = array()
+        $right = array()
+        $pivot = $seq[0]
+        for ($i=1; $i<count($seq); i++) {
+            if ($seq[$i] >= $pivot) {
+               $right[] = $seq[$i] 
+            }
+            else {
+               $left[] = $seq[$i] 
+            }
+        }
+
+        $left = quickSort($left)
+        $right = quickSort($right)
+
+        return merge_array($left, array($pivot), $right)
+    }
+?>
+
 

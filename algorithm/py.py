@@ -1,10 +1,22 @@
 # coding: utf-8
 
+# 首先写一个最简单的递归:
+def digui(n):
+    if n <= 1:
+        return n
+    else: 
+        return n + digui(n-1)
+
+if __name__ == '__main__':
+    print digui(10)
+
+
 # 基于比较的插入排序:
+# 第二个for循环必然这样写, 不能for(i-1, -1, 0), 你知道为什么吗?
 def inserSort(seq):
     for i in range(1, len(seq)):
         tmp = seq[i]
-        for j in range(i, -1, -1):
+        for j in range(i, 0, -1):
             if seq[j-1] > tmp:
                 seq[j] = seq[j-1]
             else:
@@ -17,6 +29,7 @@ if __name__ == '__main__':
     print seq
 
 # 基于交换的插入排序:
+# 更简单
 def insertSort(seq):
     for i in range(1, len(seq)):
         for j in range(i, 0, -1):
@@ -32,13 +45,12 @@ if __name__ == '__main__':
 
 # 选择排序:
 def selectSort(seq):
-    for i in range(len(seq)):
-        mini = seq[i]
+    for i in range(0, len(seq)):
+        mini = i
         for j in range(i+1, len(seq)):
-            if seq[j] < mini:
-                mini = seq[j]
-        mini_index = seq.index(mini)
-        seq[i], seq[mini_index] = seq[mini_index], seq[i]
+            if seq[j] < seq[mini]:
+                mini = j
+        seq[i], seq[mini] = seq[mini], seq[i]
 
 if __name__ == '__main__':
     seq = [2, 3, -6, 1, 5, 4, 0]
@@ -46,11 +58,16 @@ if __name__ == '__main__':
     print seq
 
 # 冒泡排序:
+# n-1趟, j的范围, 优化
 def bubbleSort(seq):
-    for i in range(len(seq)-1):
+    for i in range(0, len(seq)-1):
+        flag = False
         for j in range(len(seq)-1, i, -1):
-            if seq[j] < seq[j-1]:
-                seq[j], seq[j-1] = seq[j-1], seq[j]
+            if seq[j-1] > seq[j]:
+                seq[j-1], seq[j] = seq[j], seq[j-1]
+                flag = True
+        if not flag:
+           break
 
 if __name__ == '__main__':
     seq = [2, 3, -6, 1, 5, 4, 0]
@@ -58,6 +75,7 @@ if __name__ == '__main__':
     print seq
 
 # 归并排序:
+# 1.return, merge, left、right
 def mergeSort(seq):
     if len(seq) <= 1:
         return seq
@@ -100,10 +118,11 @@ if __name__ == '__main__':
     print l
 
 # 基础版本的快速排序:
+# 原地, quickSort里边可不是while而是if
 def quickSort(seq, low, high):
     if low < high:
         pivot = partition(seq, low, high)
-        quickSort(seq, low, pivot)
+        quickSort(seq, low, pivot-1)
         quickSort(seq, pivot+1, high)
 
 def partition(seq, low, high):
@@ -114,7 +133,7 @@ def partition(seq, low, high):
         seq[low] = seq[high]
         while high > low and seq[low] <= tmp:
             low += 1
-        seq[high] += seq[low]
+        seq[high] = seq[low]
     seq[low] = tmp
     return low
 
@@ -549,3 +568,249 @@ if __name__ == '__main__':
      seq = [0, 1, 3, 3, 4, 5, 5, 5, 8, 9]
      print delSame(seq)
 
+# 约瑟夫环:
+class Node:
+
+    def __init__(self, value, next=None):
+        self.value = value
+        self.next = next
+
+def josephus(n, k):
+
+    root = Node(1)
+    tmp = root
+    for i in range(2, n+1):
+        tmp.next = Node(i)
+        tmp = tmp.next
+    tmp.next = root
+
+    tmp = root
+    while True:
+        for i in range(0, k-1):
+            tmp = tmp.next
+        tmp.next = tmp.next.next
+        tmp = tmp.next
+        if tmp.next == tmp:
+            break
+
+    print('survive: ', tmp.value)
+
+if __name__ == '__main__':
+    josephus(10, 4)
+
+# 动态规划问题:
+# python的动态规划问题: 求一个路径从第一行到最后一行的最大值
+n = 3
+m = 4
+a = [[1, 4, 5, 10], [2, 3, 7, 9], [6, 9, 10, 8]]
+sum_a = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+sum_a[n-1] = a[n-1]
+for i in range(n-2, -1, -1):
+    for j in range(0, m):
+        if j != m-1:
+            sum_a[i][j] = a[i][j] + max(sum_a[i+1][j], sum_a[i+1][j+1])
+        sum_a[i][j] = a[i][j] + max(sum_a[i+1][j], sum_a[i+1][j-1])
+print sum_a
+
+# 动态规划问题
+# 给出一个长度为n的序列A1, A2,...,An, 求最大连续和
+def getMax(seq):
+    Max = seq[0]
+    preMax = 0
+    for i in seq:
+        if preMax < 0:
+            preMax = i 
+        else:
+            preMax += i
+        Max = max(Max, preMax)
+        return Max
+
+if __name__ == '__main__':
+    seq = [6, -3, 1, -2, 7, -15, 1, 2, 2]
+    print getMax(seq)
+
+# 动态规划
+# 求两个字符串的最大公共子序列, 算法问题->数学问题->代码 
+def lcs(a, b):
+
+    lena = len(a)
+    lenb = len(b)
+
+    c=[[0 for i in range(lenb + 1)] for j in range(lena + 1)]
+    flag=[[0 for i in range(lenb + 1)] for j in range(lena + 1)]
+
+    for i in range(lena):
+        for j in range(lenb):
+            if a[i]== b[j]:
+                c[i+1][j+1] = c[i][j]+1
+                flag[i+1][j+1] = 'ok'
+
+            elif c[i+1][j] > c[i][j+1]:
+                c[i+1][j+1] = c[i+1][j]
+                flag[i+1][j+1] = 'left'
+
+            else:
+                c[i+1][j+1] = c[i][j+1]
+                flag[i+1][j+1] = 'up'
+
+    return c, flag
+
+def printLcs(flag, a, i, j):
+    if i == 0 or j == 0:
+        return
+
+    if flag[i][j] == 'ok':
+        printLcs(flag, a, i-1, j-1)
+        print a[i-1]
+
+    elif flag[i][j] == 'left':
+        printLcs(flag, a, i, j-1)
+
+    else:
+        printLcs(flag, a, i-1, j)
+
+if __name__ == '__main__':
+
+    a = 'ABCBDAB'
+    b = 'BDCABA'
+    c, flag = lcs(a, b)
+
+    for i in c:
+        print i
+    print ''
+
+    for j in flag:
+        print j
+    print ''
+
+    printLcs(flag, a, len(a), len(b))
+    print ''
+
+# 动态规划
+# 求两个字符串的最大公共子串, 算法问题->数学问题->代码
+def lcs(a, b):
+
+    lena = len(a)
+    lenb = len(b)
+
+    c=[[0 for i in range(lenb + 1)] for j in range(lena + 1)]
+    flag=[[0 for i in range(lenb + 1)] for j in range(lena + 1)]
+
+    maxlen = 0
+    for i in range(lena):
+        for j in range(lenb):
+            if a[i]== b[j]:
+                c[i+1][j+1] = c[i][j]+1
+		if c[i+1][j+1] > maxlen
+                    maxlen = c[i+1][j+1]
+                    p = i+1
+
+    return c, a[p-maxlen:p]
+
+if __name__ == '__main__':
+
+    a = 'ABCBDAB'
+    b = 'BDCABA'
+    c, s = lcs(a, b)
+
+    for i in c:
+        print i
+
+    print s 
+
+# 使用python实现一个双向的队列
+class Node:
+    def __init__(self, data, pre=None, next=None):
+        self.data = data
+        self.pre = pre
+        self.next = next
+
+class Dqueue:
+    def __init__(self, lis=[], left=None, right=None):
+        self.left = Node(lis[0])
+        tmp = self.left
+        for i in lis[1:]:
+           new =  Node(i)
+           tmp.next = new
+           new.pre = tmp
+           tmp = new
+           if lis.index(i) == len(lis)-1:
+               self.right = tmp
+
+    def showFromleft(self):
+        tmp = self.left
+        while tmp:
+            print tmp.data
+            tmp = tmp.next
+
+    def showFromright(self):
+        tmp = self.right
+        while tmp:
+            print tmp.data
+            tmp = tmp.pre
+
+    def leftIn(self, key):
+        node = Node(key)
+        node.next = self.left
+        self.left.pre = node
+
+        self.left = node
+
+    def rightIn(self, key):
+        node = Node(key)
+        self.right.next = node
+        node.pre = self.right
+
+        self.right = node
+
+
+if __name__ == '__main__':
+    lis = [1, 2, 3, 4]
+    dqueue = Dqueue(lis)
+    dqueue.showFromleft()
+    print ''
+    dqueue.showFromright()
+    print ''
+    dqueue.leftIn(0)
+    dqueue.rightIn(5)
+    dqueue.showFromleft()
+    print ''
+    dqueue.showFromright()
+    print ''
+
+# 递归输出全排列:
+def perms(seq):
+    if len(seq) <= 1:
+        return [seq]
+    res = []
+    for i in range(0, len(seq)):
+        tmp = seq[:i] + seq[i+1:]
+        p = perms(tmp)
+        for x in p:
+            res.append(seq[i:i+1]+x)
+    return res
+
+if __name__ == '__main__':
+    seq = [1, 2, 3]
+    res = perms(seq)
+    for i in res:
+        print i
+
+# 输出一个list中, 加和为m的所有可能:
+def perms(seq, m, path):
+    for i in range(0, len(seq)):
+        m -= seq[i]
+        path.append(seq[i])
+        if m == 0:
+            print path
+        elif m > 0:
+            perms(seq[i+1:], m, path)
+        m += seq[i]
+        path.pop()
+
+if __name__ == '__main__':
+
+    seq = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    m = 10
+    path = []
+    perms(seq, m, path)

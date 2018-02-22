@@ -132,7 +132,7 @@ https://segmentfault.com/q/1010000004704818/a-1020000004705715
 /*http://www.cnblogs.com/zhongxinWang/archive/2013/03/27/2984764.html
 前五种
 1.父元素手动定义height, 或定义display: table, 这两种方式都能获取子元素的宽高, 可以解决父元素坍塌.
-2.内部浮动结尾处加空div标签 clear:both
+2.内部浮动平级结尾处加空div标签 clear:both
 3.父级div定义 伪类::after 和 zoom
 4.父级div定义 overflow:hidden or auto
 /*最常用的方式伪类的方式*/
@@ -566,7 +566,7 @@ parentElement {
     align-items: center;
 }
 /*水平垂直居中*/
-/*已知宽高, 父元素设置relative, 此元素设置absolute, 然后left和top都设置为50%, 再根据margin的负值来调正*/
+/*父子元素已知宽高, 父元素设置relative, 此元素设置absolute, 然后left和top都设置为50%, 再根据margin的负值来调正*/
 .test {
     position: relative;
     width: 500px;
@@ -586,26 +586,7 @@ parentElement {
 <div class='test'>
     <div class='test1'></div>
 </div>
-/*已知宽高, 父元素设置relative, 此元素设置absolute, 然后left和top都设置为50%, transform: translate(-50%, -50%)*/
-.test {
-    position: relative;
-    width: 500px;
-    height: 500px;
-    background-color: red;
-}
-.test1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    height: 100px;
-    transform: tranlate(-50%, -50%)
-    background-color: green;
-}
-<div class='test'>
-    <div class='test1'></div>
-</div>
-/*父元素设置relative, 此元素设置absolute, 然后left, top, right, bottom都设置为0, 然后设置宽高, 然后margin: auto*/
+/*父子元素都已知宽高, 父元素设置relative, 此元素设置absolute, 然后left, top, right, bottom都设置为0, 然后设置宽高, 然后margin: auto*/
 .test {
     position: relative;
     width: 500px;
@@ -630,7 +611,6 @@ parentElement {
 /*常规方法*/
 .test {
     position: relative;
-    height:600px;
 }
 .test1 {
     position: absolute;
@@ -640,28 +620,6 @@ parentElement {
     transform: translate(-50%, -50%);
 }
 <div class='test'>
-    <div class='test1'>
-        xinghangtest
-    </div>
-</div>
-/*常规方法*/
-.test {
-    position: relative;
-}
-.test2 {
-    width: 300px;
-    height: 300px;
-    background-color: red;
-}
-.test1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background-color: red;
-    transform: translate(-50%, -50%);
-}
-<div class='test'>
-    <div class="test2"></div>
     <div class='test1'>
         xinghangtest
     </div>
