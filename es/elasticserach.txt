@@ -1,8 +1,15 @@
-&&&&&&&&&&&&&&&&&&&&&&&&
-建立一个索引并且插入数据：
+es和mysql的对应:
+MySQL                       elasticsearch
+database                    index
+table                       type
+table schema                mapping
+row                         document
+field                       field
+
+建立一个index并且插入数据:
 curl -X PUT localhost:9200/test/test/1 -d'{"name":"asdf"}'  #id=1  注：es中有关于自动建立索引的配置，默认为true
 
-按照id查询：
+按照id查询:
 curl localhost:9200/test/test/1
 >>>{"_index":"test","_type":"test","_id":"1","_version":2,"found":true,"_source":{"name":"asdf"}}
 
@@ -17,12 +24,12 @@ suggestion查询：
 建立索引结构：
 curl -X PUT localhost:9200/test/test/_mapping -d '{
  "test" : {
-                "properties" : {
+            "properties" : {
                         "name" : { "type" : "string" },
                         "suggest" : { "type" : "completion",
-                                                                 "analyzer" : "simple",
-                                                                 "search_analyzer" : "simple",
-                                                                 "payloads" : true
+                        "analyzer" : "simple",
+                        "search_analyzer" : "simple",
+                        "payloads" : true
                         }
                 }
         }
@@ -70,18 +77,17 @@ curl -X PUT localhost:9200/test1/test_suggest/_mapping -d '{
                 "properties" : {
                         "name" : { "type" : "string" },
                         "suggest" : { "type" : "completion",
-                                                                 "analyzer" : "simple",
-                                                                 "search_analyzer" : "simple",
-                                                                 "payloads" : true
+                                      "analyzer" : "simple",
+                                      "search_analyzer" : "simple",
+                                      "payloads" : true
                         }
                 }
         }
 }'
 >>>exception
 
-真·初始化
-&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
+----------
+初始化
 建立一个默认配置的索引：
 curl -X PUT localhost:9200/asdfasdf -d'{}'
 >>>{"acknowledged":true}
@@ -89,14 +95,14 @@ curl -X PUT localhost:9200/asdfasdf -d'{}'
 定义索引内部type结构：
 curl -X PUT localhost:9200/asdfasdf/_mapping/asdfasdf?pretty -d '{
                  "properties":{
-                                     "name":{"type":"string"},
+                                            "name":{"type":"string"},
                                      "published":{"type":"string"},
-             "suggest" : {
-                     "type" : "completion",
-                     "analyzer" : "simple",
-                     "search_analyzer" : "simple",
-                     "payloads" : true
-                        }
+                 "suggest" : {
+                 "type" : "completion",
+                 "analyzer" : "simple",
+                 "search_analyzer" : "simple",
+                 "payloads" : true
+                 }
                  }
 }'
 

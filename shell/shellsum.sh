@@ -229,7 +229,7 @@ lab nginx测试配置: /usr/local/nginx/conf/lab_test.conf
 检测语法: /usr/local/nginx/sbin/nginx -t
 热加载: /usr/local/nginx/sbin/nginx -s reload
 
-命令不问人:
+命令查询:
 man apt-get | grep reinsta -A2
 
 关于yum:

@@ -1,10 +1,8 @@
-Docker是一个新的容器化的技术, 它轻巧, 且易移植
-build once, configure once and run anywhere
-
+什么是Docker:
+Docker是一个容器化的技术
 特点:
-速度飞快以及优雅的隔离框架, 快速开/关机
-CPU/内存的低消耗
-跨云计算基础构架
+它轻巧, CPU/内存的低消耗低, 且易移植
+build once, configure once and run anywhere
 
 Docker有三个组件和三个基本元素
 三个组件:
@@ -15,8 +13,6 @@ Docker Index是中央registry, 支持拥有公有与私有访问权限的Docker�
 Docker Containers负责应用程序的运行, 包括操作系统、用户添加的文件以及元数据
 Docker Images是一个只读模板, 用来运行Docker容器
 DockerFile是文件指令集, 用来说明如何自动创建Docker镜像
-
-test vs code shift + esc
 
 ubuntu14.04安装docker:
 1.检查APT系统的HTTPS兼容性。如果usr/lib/apt/methods/https文件不存在，请安装apt-transport-https程序包
@@ -34,6 +30,10 @@ docker -v
 
 启动docker-deamon:
 sudo service docker start
+另: linux启动服务的几种方法:
+sudo service mysqld start
+sudo /etc/init.d/nginx start
+sudo systemctl start nginx
 
 此时你的操作系统当中并没有容器和镜像,现在,pull一个docker自带的容器busybox,一个最简单的linux内核.
 xinghang@thunder:~$ sudo docker pull busybox
@@ -179,7 +179,25 @@ xinghang@thunder:~$ sudo docker push xinghang/job1
 
 --------------------------------------------------------
 
-Docker提供了Dockerfile来解决自动化的问题,下面讨论什么是Dockerfile，它能够做到的事情以及Dockerfile的一些基本语法
+Docker提供了Dockerfile来解决自动化的问题, 下面讨论什么是Dockerfile, 它能够做到的事情以及Dockerfile的一些基本语法
+DockerFile其实就是一个文件, 里边你可以指定镜像, 维护者, 需要安装的应用等等, 然后用build执行创建镜像. 这个文件必须遵循特定的文件格式:
+# 1.基础镜像
+FROM centos:6.8
+# 2.维护者信息
+MAINTAINER hylexus "hylexus@163.com"
+# 3.拷贝下载源文件, 将Dockerfile上下文中的nginx.repo复制到容器中的yum源位置
+COPY ./nginx.repo /etc/yum.repos.d/nginx.repo
+RUN yum makecache
+# 安装nginx
+RUN yum install -y nginx
+# 修改nginx首页信息
+RUN echo "home page of container niginx server" > /usr/share/nginx/html/index.html
+# 暴露80端口
+EXPOSE 80
+这里举个例子: 用docker file来创建一个镜像, 装上ng, 完成映射
+http://blog.csdn.net/hylexus/article/details/52854497
+知道一个命令:
+docker run -p 80:80 --name mynginx -v $PWD/www:/www -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf -v $PWD/logs:/wwwlogs  -d nginx
 
 --------------------------------------------------------
 制作一个ubuntu_scrapy的镜像:

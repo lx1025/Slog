@@ -205,7 +205,7 @@ if __name__  == '__main__':
     print res
 
 # 用两个栈来实现一个队列:
-# bitdance面试:
+# bytedance面试:
 class Queue:
     def __init__(self):
         self.stack1 = []
@@ -552,9 +552,6 @@ if __name__ == '__main__':
 import collections
 d=collections.OrderedDict()
 
-# 输出1~n的全排列
-# for 循环
-
 # 有序数组去重
 def delSame(seq):
     k = 1
@@ -622,7 +619,7 @@ def getMax(seq):
             preMax = i 
         else:
             preMax += i
-        Max = max(Max, preMax)
+    Max = max(Max, preMax)
         return Max
 
 if __name__ == '__main__':
